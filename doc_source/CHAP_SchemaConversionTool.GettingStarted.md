@@ -1,6 +1,19 @@
 # Getting Started with the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.GettingStarted"></a>
 
-Following, you can find procedures that help you get started using the AWS Schema Conversion Tool \(AWS SCT\)\. AWS SCT provides a project\-based user interface\. Almost all work you do with AWS SCT starts with the following three steps: 
+Following, you can find procedures that help you get started using the AWS Schema Conversion Tool \(AWS SCT\)\.
+
+
++ [Before You Begin](#CHAP_SchemaConversionTool.GettingStarted.Before)
++ [Starting the AWS Schema Conversion Tool](#CHAP_SchemaConversionTool.GettingStarted.Launching)
++ [Creating an AWS Schema Conversion Tool Project](#CHAP_SchemaConversionTool.GettingStarted.Project)
++ [Connecting to Your Source Database](#CHAP_SchemaConversionTool.Converting.CreateProject)
++ [Connecting to Your Target Database](#CHAP_SchemaConversionTool.GettingStarted.Target)
++ [Converting Your Schema](#CHAP_SchemaConversionTool.GettingStarted.Next)
++ [Required Database Privileges for Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.Privs.md)
++ [Getting Started Converting Database Schema with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.Rel.md)
++ [Getting Started Converting Data Warehouse Schema with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.DW.md)
+
+AWS SCT provides a project\-based user interface\. Almost all work you do with AWS SCT starts with the following three steps:
 
 1. Create an AWS SCT project\.
 
@@ -12,7 +25,7 @@ Following, you can find procedures that help you get started using the AWS Schem
 
 Before you complete the procedures in this topic, you must first do the following: 
 
-+ Install the AWS Schema Conversion Tool\. For more information, see [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)\. 
++ Install the AWS Schema Conversion Tool\. For more information, see [Installing, Verifying, and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)\. 
 
    
 
@@ -76,7 +89,7 @@ The following topics show you how to connect to your source database\. Choose th
 
 + [Connecting to a PostgreSQL Source Database](CHAP_SchemaConversionTool.GettingStarted.Source.Postgres.md)
 
-+ [Connecting to a Teradata Source Database](CHAP_SchemaConversionTool.GettingStarted.Source.Teradata.md)
++ [ Connecting to a Teradata Source Database](CHAP_SchemaConversionTool.GettingStarted.Source.Teradata.md)
 
 + [Connecting to a Vertica Source Database](CHAP_SchemaConversionTool.GettingStarted.Source.Vertica.md)
 
@@ -105,7 +118,3 @@ After you get started by using the procedures in this topic, you can continue wo
 + [Getting Started Converting Database Schema with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.Rel.md)
 
 + [Getting Started Converting Data Warehouse Schema with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.DW.md)
-
-## Storing Database Passwords<a name="CHAP_SchemaConversionTool.StoringPasswords"></a>
-
-You can store a database password or SSL certificate in the AWS SCT cache\. To store a password, select **Store Password** when you create a connection\. The password is encrypted using the randomly generated token in the `seed.dat` file\. The password is then stored with the username in the cache file\. If you lose or corrupt the `seed.dat` file, the database password could be unencrypted incorrectly and the connection will fail\. 

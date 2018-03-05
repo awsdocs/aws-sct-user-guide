@@ -14,11 +14,11 @@ After you have converted the schema from your source database, you can choose sc
 
 ![\[Choose source schema item\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_schema_item.png)
 
-After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.UpdateRefresh.md)\. 
+After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [ Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.UpdateRefresh.md)\. 
 
 You can create a database migration assessment report of the items that can't be converted automatically\. The assessment report is useful for identifying and resolving schema items that can't be converted automatically\. For more information, see [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.AssessmentReport.md)\. 
 
-When AWS SCT generates a converted schema, it doesn't immediately apply it to the target database\. Instead, the converted schema is stored locally until you are ready to apply it to the target database\. For more information, see [Applying Your Converted Schema](CHAP_SchemaConversionTool.DW.SaveAndApply.md#CHAP_SchemaConversionTool.DW.Applying)\. 
+When AWS SCT generates a converted schema, it doesn't immediately apply it to the target database\. Instead, the converted schema is stored locally until you are ready to apply it to the target database\. For more information, see [ Applying Your Converted Schema](CHAP_SchemaConversionTool.DW.SaveAndApply.md#CHAP_SchemaConversionTool.DW.Applying)\. 
 
 ## Editing Converted Schema<a name="CHAP_SchemaConversionTool.DW.Convert.Edit"></a>
 

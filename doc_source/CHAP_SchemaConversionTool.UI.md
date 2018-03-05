@@ -2,6 +2,15 @@
 
 The following sections help you work with the AWS Schema Conversion Tool \(AWS SCT\) user interface\. 
 
+
++ [The Project Window](#CHAP_SchemaConversionTool.Overview.ProjectWindow)
++ [Using Tree Filters](#CHAP_SchemaConversionTool.UI.TreeFilters)
++ [Hiding Schemas in the AWS SCT Tree View](#CHAP_SchemaConversionTool.HidingSchemas)
++ [Keyboard Shortcuts for the AWS Schema Conversion Tool](#CHAP_SchemaConversionTool.KeyboardShortcuts)
++ [Creating and Reviewing the Database Migration Assessment Report](#CHAP_SchemaConversionTool.GettingStarted.Rel.Report)
++ [Using AWS Service Profiles in the AWS Schema Conversion Tool](#CHAP_SchemaConversionTool.Profiles)
++ [Storing Database Passwords](#CHAP_SchemaConversionTool.StoringPasswords)
+
 ## The Project Window<a name="CHAP_SchemaConversionTool.Overview.ProjectWindow"></a>
 
 The illustration following is what you see in the AWS Schema Conversion Tool when you create a schema migration project, and then convert a schema\. 
@@ -20,23 +29,23 @@ The illustration following is what you see in the AWS Schema Conversion Tool whe
 
 ## Using Tree Filters<a name="CHAP_SchemaConversionTool.UI.TreeFilters"></a>
 
- To migrate data from a source to a target, AWS Schema Conversion Tool \(AWS SCT\) loads all metadata from source and target databases into a tree structure\. This is displayed in the AWS SCT UI as the tree view on the Main window\. Because some databases can have a large number of objects in the tree structure, AWS SCT uses filters to lets you search for objects in the source and target tree structures\. When you use tree filters, you don't change the objects that are converted when you convert your database\. The filter only changes what you see in the tree\.
+To migrate data from a source to a target, AWS Schema Conversion Tool \(AWS SCT\) loads all metadata from source and target databases into a tree structure\. This structure appears in AWS SCT as the tree view in the main project window\. 
 
-Tree filters work with objects that AWS SCT has preloaded; it does not load objects from the database during searches\. This means the tree structure contains fewer objects than are actually present in the database\.
+Some databases can have a large number of objects in the tree structure\. You can use *tree filters* in AWS SCT to search for objects in the source and target tree structures\. When you use a tree filter, you don't change the objects that are converted when you convert your database\. The filter only changes what you see in the tree\.
 
-There are several important things to know about tree filters\. These include:
+Tree filters work with objects that AWS SCT has preloaded\. In other words, AWS SCT doesn't load objects from the database during searches\. This approach means that the tree structure generally contains fewer objects than are present in the database\.
 
-+ The filter default is ANY, which means the filter uses name search to find objects\.
+For tree filters, keep the following in mind:
 
-+ When you select one or more object types, you will see only those objects in the tree\.
++ The filter default is ANY, which means that the filter uses a name search to find objects\.
 
-+ The filter mask can be used to show different types of symbols, including Unicode, spaces, and special characters\. The “%” character is the wildcard for any symbol\.
++ When you select one or more object types, you see only those types of objects in the tree\.
+
++ You can use the filter mask to show different types of symbols, including Unicode, spaces, and special characters\. The “%” character is the wildcard for any symbol\.
 
 + After you apply a filter, the count shows only the number of filtered objects\.
 
 ### <a name="CHAP_SchemaConversionTool.UI.TreeFilters.Console"></a>
-
-You can use the AWS SCT UI to filter your tree view\. 
 
 **To create a tree filter**
 
@@ -44,14 +53,16 @@ You can use the AWS SCT UI to filter your tree view\.
 
 1. Connect to the database you want to apply the tree filter to\.
 
-1. Choose the filter icon\. Note that the undo filter icon is grayed out since you currently do not have a filter applied\.  
+1. Choose the filter icon\.
+**Note**  
+ The undo filter icon is grayed out because no filter is currently applied\.  
 ![\[The filter icon for the schema tree\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/filter-source-tree.png)
 
-1. Enter the following information in the **Tree Filter** dialog box\. Note that the fields in the dialog box are different for each database engine\.  
+1. Enter the following information in the **Tree Filter** dialog box\. Options in the dialog box are different for each database engine\.  
 ![\[The filter icon for the schema tree\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/filter-tree-db.png)    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_SchemaConversionTool.UI.html)
 
-1. Choose **Apply**\. Once you select **Apply**, the undo filter icon \(next to the filter icon\) is enabled\. Use this icon if you want to remove the filters you applied\.
+1. Choose **Apply**\. After you choose **Apply**, the undo filter icon \(next to the filter icon\) is enabled\. Use this icon if you want to remove the filters you applied\.
 
 1. Choose **Close** to close the dialog box\.
 
@@ -59,37 +70,55 @@ When you filter the schema that appears in the tree, you don't change the object
 
 ### Importing a File List for the Tree Filter<a name="CHAP_SchemaConversionTool.UI.TreeFilters.ImportingFileList"></a>
 
-You can import a file that contains names or values that you want the tree filter to use\. Object is type of object you want to find, Database is the name of database where this object exist, and Schema is the name of schema where this object exist, Name is the object name\. The file to import should have the following format:
+You can import a file that contains names or values that you want the tree filter to use\. In this file, the following convention is used:
 
-+ Object;Database;Schema;Name \- This is a mandatory format for the following SQL dialects: Microsoft SQL Server, Netezza, Microsoft SQL Server DW\.
++ `Object` is the type of object that you want to find\. 
 
-+ Object;Schema;Name – Use this format for other SQL dialects\.
++ `Database` is the name of database where this object exists\.
 
-1. Choose the filter icon\.  
++ `Schema` is the name of schema where this object exists\.
+
++ `Name` is the object name\. 
+
+The file to import should have the following format:
+
++ `Object;Database;Schema;Name` – This format is mandatory for the Microsoft SQL Server, SQL Data Warehouse, and Netezza dialects of SQL\.
+
++ `Object;Schema;Name` – Use this format for other SQL dialects\.
+
+**To import a file list for the tree filter**
+
+1. Open an existing AWS SCT project, connect to the database you want to apply the tree filter to, and then choose the filter icon\.  
 ![\[The filter icon for the schema tree\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/filter-source-tree.png)
 
-1. Select the Import File List tab\.
+1. Choose the **Import File List** tab\.
 
 1. Choose **Import File**\.
 
-1. Select a file to import and choose **Open**\.
+1. Choose a file to import, and then choose **Open**\.
 
-1. Choose **Apply** and then **Close**\.
+1. Choose **Apply**, and then choose **Close**\.
 
 ## Hiding Schemas in the AWS SCT Tree View<a name="CHAP_SchemaConversionTool.HidingSchemas"></a>
 
-In **Tree View Settings**, you can hide empty schemas, empty databases, system databases, and user defined databases and schemas\. You specify what schemas and databases you want to see in the AWS SCT tree view\.
+By using tree view settings, you specify what schemas and databases you want to see in the AWS SCT tree view\. You can hide empty schemas, empty databases, system databases, and user\-defined databases and schemas\. 
 
 **To hide databases and schemas in tree view**
 
 1. Open an AWS SCT project\.
 
-1. Connect to the data store you want to show in tree view\.
+1. Connect to the data store that you want to show in tree view\.
 
-1. Select **Settings**, then **Global Settings**, then **Tree View**\.  
-![\[The tree view dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/treeview-hide.png)
+1. Choose **Settings**, **Global Settings**, **Tree View**\.  
+![\[The Tree View Settings section of the Global Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/treeview-hide.png)
 
-1. Choose the databases and schemas you want to hide\. Choose system databases or schemas to hide them\. Choose **Add** and type the name of user defined schemas or databases that you want to hide\. The names are case insensitive\. To reset the tree view to default settings, choose **Reset to Default**\. 
+1. In the **Tree View Settings** section, do the following:
+
+   + For **Hide System Databases/Schemas**, choose system databases and schemas by name to hide them\. 
+
+   + For **Hide User Defined Databases/Schemas**, type the names of user\-defined schemas and databases that you want to hide, and then choose **Add**\. The names are case insensitive\.
+
+   + Choose **Reset to Default** to reset the tree view to default settings\.
 
 1. Choose **OK**\.
 
@@ -109,8 +138,113 @@ The following are the keyboard shortcuts that you can use with the AWS Schema Co
 | Ctrl\+L | Connect to the source database\. | 
 | Ctrl\+R | Connect to the target database\. | 
 
-## Related Topics<a name="CHAP_SchemaConversionTool.UI.Related"></a>
+## Creating and Reviewing the Database Migration Assessment Report<a name="CHAP_SchemaConversionTool.GettingStarted.Rel.Report"></a>
 
-+ [What Is the AWS Schema Conversion Tool?](Welcome.md)
+The *database migration assessment report* summarizes all of the action items for schema that can't be converted automatically to the engine of your target Amazon RDS DB instance\. The report also includes estimates of the amount of effort that it will take to write the equivalent code for your target DB instance\. 
 
-+ [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)
+You can create \(or update\) a database migration assessment report in your project at any time by using the following procedure\. 
+
+**To create and view the database migration assessment report**
+
+1. In the left panel that displays the schema from your source database, choose a schema object to create an assessment report for\. Open the context \(right\-click\) menu for the object, and then choose **Create Report**\.   
+![\[Create database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/create_assessment_report.png)
+
+   The assessment report view opens\.
+
+1. Choose the **Action Items** tab\. 
+
+   The **Action Items** tab displays a list of items that describe the schema that can't be converted automatically\. Select one of the action items from the list\. AWS SCT highlights the item from your schema that the action item applies to, as shown following\.   
+![\[Action items tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/action_items_tab.png)
+
+1. Choose the **Summary** tab\. 
+
+   The **Summary** tab displays the summary information from the database migration assessment report\. It shows the number of items that were converted automatically, and the number of items that were not converted automatically\. The summary also includes an estimate of the time that it will take to create schema in your target DB instance that are equivalent to those in your source database\. 
+
+   The section **License Evaluation and Cloud Support** contains information about moving your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. For example, if you want to change license types, this section of the report tells you which features from your current database should be removed\. 
+
+   An example of an assessment report summary is shown following\.   
+![\[Assessment report summary\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/summary_tab.png)
+
+1. Choose the **Summary** tab, and then choose **Save to PDF**\. The database migration assessment report is saved as a PDF file\. The PDF file contains both the summary and action item information\. 
+
+   You can also choose **Save to CSV** to save the report as a comma\-separated values \(CSV\) file\. The CSV file contains only action item information\.   
+![\[Database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/assessment_report.png)
+
+For more information, see [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.AssessmentReport.md)\. 
+
+## Using AWS Service Profiles in the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Profiles"></a>
+
+You can store your AWS credentials in the AWS Schema Conversion Tool \(AWS SCT\)\. AWS SCT uses your credentials when you use features that integrate with AWS services\. For example, AWS SCT integrates with Amazon S3, AWS Lambda, Amazon Relational Database Service, and AWS Database Migration Service\. 
+
+AWS SCT asks you for your AWS credentials when you access a feature that requires them\. You can store your credentials in the global application settings\. When AWS SCT asks for your credentials, you can select the stored credentials\. 
+
+You can store different sets of AWS credentials in the global application settings\. For example, you can store one set of credentials that you use in test scenarios, and a different set of credentials that you use in production scenarios\. You can also store different credentials for different AWS Regions\. 
+
+### Storing AWS Credentials<a name="CHAP_SchemaConversionTool.Profiles.Storing"></a>
+
+Use the following procedure to store AWS credentials globally\. 
+
+**To store AWS credentials**
+
+1. Start the AWS Schema Conversion Tool\.
+
+1. Open the **Settings Menu**, and then choose **Global Settings**\. The **Global Settings** dialog box appears\. 
+
+   Choose **AWS Service Profiles**, as shown following\.   
+![\[The Global Settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings.png)
+
+1. Choose **Add new AWS Service Profile**\. 
+
+1. Enter your AWS information as follows\.     
+[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_SchemaConversionTool.UI.html)
+
+   1. For **Profile name**, type a name for your profile\. 
+
+   1. For **AWS Access Key**, type your AWS access key\. 
+
+   1. For **AWS Secret Key**, type your AWS secret key\. 
+
+   1. For **Region**, choose the region for your profile\. 
+
+   1. For **S3 Bucket**, choose the Amazon S3 bucket for your profile\. You need to specify a bucket only if you are using a feature that connects to S3\. 
+
+   1. Choose **Use FIPS endpoint for S3** if you need to comply with the security requirements for the Federal Information Processing Standard \(FIPS\)\. FIPS endpoints are available in the following AWS Regions: 
+
+      + US East \(N\. Virginia\) Region
+
+      + US East \(Ohio\) Region
+
+      + US West \(N\. California\) Region
+
+      + US West \(Oregon\) Region
+
+1. Choose **Test Connection** to verify that your credentials are correct and active\. 
+
+   The **Test Connection** dialog box appears\. You can see the status for each of the services connected to your profile\. **Pass** indicates that the profile can successfully access the service\.   
+![\[The Global Settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings-Test.png)
+
+1. After you have configured your profile, choose **Save** to save your profile or **Cancel** to cancel your changes\. 
+
+1. Choose **OK** to close the **Global Settings** dialog box\. 
+
+### Setting the Default Profile for a Project<a name="CHAP_SchemaConversionTool.Profiles.Project"></a>
+
+You can set the default profile for an AWS SCT project\. Doing this associates the AWS credentials stored in the profile with the project\. With your project open, use the following procedure to set the default profile\. 
+
+**To set the default profile for a project**
+
+1. Start the AWS Schema Conversion Tool\.
+
+1. Open the **Settings Menu**, and then choose **Project Settings**\. The **Current project settings** dialog box appears\. 
+
+1. Choose the **Project Environment** tab\. 
+
+1. For **AWS Service Profile**, choose the profile that you want to associate with the project\. 
+
+1. Choose **OK** to close the **Current project settings** dialog box\. You can also choose **Cancel** to cancel your changes\. 
+
+## Storing Database Passwords<a name="CHAP_SchemaConversionTool.StoringPasswords"></a>
+
+You can store a database password or SSL certificate in the AWS SCT cache\. To store a password, choose **Store Password** when you create a connection\. 
+
+The password is encrypted using the randomly generated token in the `seed.dat` file\. The password is then stored with the user name in the cache file\. If you lose the `seed.dat` file or it becomes corrupted, the database password might be unencrypted incorrectly\. In this case, the connection fails\. 

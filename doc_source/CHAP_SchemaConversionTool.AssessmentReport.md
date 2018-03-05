@@ -1,8 +1,8 @@
 # Creating and Using the Assessment Report in the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.AssessmentReport"></a>
 
-The AWS Schema Conversion Tool \(AWS SCT\) creates a *database migration assessment report* to help you convert your schema\. The database migration assessment report provides important information about the conversion of the schema from your source database to your target Amazon RDS DB instance\. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target DB instance\. The report also includes estimates of the amount of effort that it will take to write the equivalent code in your target DB instance that can't be converted automatically\. 
+The AWS Schema Conversion Tool \(AWS SCT\) creates a *database migration assessment report* to help you convert your schema\. The database migration assessment report provides important information about the conversion of the schema from your source database to your target Amazon RDS DB instance\. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target DB instance\. The report includes estimates of the amount of effort that it will take to write the equivalent code in your target DB instance that can't be converted automatically\. This Estimated Complexity field is exported in the PDF version of the assessment report, but it is not included in the CSV version\. 
 
-If you are using AWS SCT to copy your existing on\-premises database schema to an Amazon RDS DB instance running the same engine, the report can help you analyze requirements for moving to the cloud and for changing your license type\. 
+If you are using AWS SCT to copy your existing on\-premises database schema to an Amazon RDS DB instance running the same engine, the report can help you analyze requirements for moving to the AWS Cloud and for changing your license type\. 
 
 ## Creating a Database Migration Assessment Report<a name="CHAP_SchemaConversionTool.AssessmentReport.Create"></a>
 
@@ -21,15 +21,15 @@ After you create an assessment report, the assessment report view opens, showing
 
 ![\[Assessment report summary\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/summary_tab.png)
 
-For schema items that can't be converted automatically to the target database engine, the summary includes an estimate of the effort that it takes to create schema items in your target DB instance that are equivalent to those in your source database\. 
+For schema items that can't be converted automatically to the target database engine, the summary includes an estimate of the effort required to create schema items in your target DB instance that are equivalent to those in your source\. 
 
 The report categorizes the estimated time to convert these schema items as follows: 
 
-+ **Simple** – Actions that can be completed in less than 1 hour\. 
++ **Simple** – Actions that can be completed in less than one hour\. 
 
-+ **Medium** – Actions that are more complex and can be completed in 1 to 4 hours\. 
++ **Medium** – Actions that are more complex and can be completed in one to four hours\. 
 
-+ **Significant** – Actions that are very complex and take more than 4 hours to complete\. 
++ **Significant** – Actions that are very complex and take more than four hours to complete\. 
 
 The section **License Evaluation and Cloud Support** contains information about moving your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. For example, if you want to change license types, this section of the report tells you which features from your current database should be removed\. 
 

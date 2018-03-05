@@ -16,9 +16,9 @@ If you have not created an AWS SCT project yet, see [Getting Started with the AW
 
 Because the SQL code in your application interacts with your database schema, you need to convert your database schema before you can convert your application SQL\. To convert your database schema, use the procedures in one of the following topics: 
 
-+ [Converting Database Schema to Amazon RDS by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)
++ [Converting Database Schemas Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)
 
-+ [Converting Data Warehouse Schema to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)
++ [ Converting Data Warehouse Schemas to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)
 
 ## Overview of Converting Application SQL<a name="CHAP_SchemaConversionTool.Converting.App.Overview"></a>
 

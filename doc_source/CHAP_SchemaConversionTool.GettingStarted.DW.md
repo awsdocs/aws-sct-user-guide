@@ -46,7 +46,7 @@ To optimize how AWS SCT converts your data warehouse schema, you can choose the 
 
       
 
-   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions about derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
+   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions about derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [ Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
 
       
 
@@ -74,7 +74,7 @@ To optimize how AWS SCT converts your data warehouse schema, you can provide sta
 
 **To provide and review statistics**
 
-1. Connect to your source database\. For more information, see [Connecting to Your Source Database](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.Converting.CreateProject)\. 
+1. Connect to your source database\. For more information, see [ Connecting to Your Source Database](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.Converting.CreateProject)\. 
 
 1. Choose a schema object from the left panel of your project, and open the context \(right\-click\) menu for the object\. Choose **Collect Statistics** or **Upload Statistics** as shown following\.   
 ![\[Context menu with collect statistics\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/collect-statistics.png)
@@ -82,7 +82,7 @@ To optimize how AWS SCT converts your data warehouse schema, you can provide sta
 1. Choose a schema object from the left panel of your project, and then choose the **Statistics** tab\. You can review the statistics for the object\.   
 ![\[Statistics tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/statistics.png)
 
-For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
+For more information, see [ Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
 
 ## Converting Your Schema<a name="CHAP_SchemaConversionTool.GettingStarted.DW.Convert"></a>
 
@@ -115,39 +115,9 @@ To manage keys, select a table in your target database, and then choose the **Ke
 
 The left pane contains key suggestions, and includes the confidence rating for each suggestion\. You can choose one of the suggestions, or you can customize the key by editing it in the right pane\. 
 
-If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing Optimization Strategies and Rules](#CHAP_SchemaConversionTool.GettingStarted.DW.Strategy)\. 
+If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [ Choosing Optimization Strategies and Rules](#CHAP_SchemaConversionTool.GettingStarted.DW.Strategy)\. 
 
-For more information, see [Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
-
-## Creating and Reviewing the Database Migration Assessment Report<a name="CHAP_SchemaConversionTool.GettingStarted.DW.Report"></a>
-
-The *database migration assessment report* summarizes all of the action items for schema that can't be converted automatically to the engine of your target database\. The report also includes estimates of the amount of effort that it will take to write the equivalent code for your target database\. 
-
-You can create \(or update\) a database migration assessment report in your project at any time by using the following procedure\. 
-
-**To create and view the database migration assessment report**
-
-1. In the left panel that displays the schema from your source database, choose a schema object to create an assessment report for\. Open the context \(right\-click\) menu for the object, and then choose **Create Report**\.   
-![\[Create database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/create_assessment_report.png)
-
-   The assessment report view opens\.
-
-1. Choose the **Action Items** tab\. 
-
-   The **Action Items** tab displays a list of items that describe the schema that can't be converted automatically\. Select one of the action items from the list\. AWS SCT highlights the item from your schema that the action item applies to, as shown following\.   
-![\[Action items tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/action_items_tab.png)
-
-1. Choose the **Summary** tab\. 
-
-   The **Summary** tab displays the summary information from the database migration assessment report\. It shows the number of items that were converted automatically, and the number of items that were not converted automatically\. The summary also includes an estimate of the time that it will take to create schema in your target database that are equivalent to those in your source database\. An example is shown following\.   
-![\[Assessment report summary\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/summary_tab.png)
-
-1. Choose the **Summary** tab, and then choose **Save to PDF**\. The database migration assessment report is saved as a PDF file\. The PDF file contains both the summary and action item information\. 
-
-   You can also choose **Save to CSV** to save the report as a comma\-separated values \(CSV\) file\. The CSV file contains only action item information\.   
-![\[Database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/assessment_report.png)
-
-For more information, see [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.AssessmentReport.md)\. 
+For more information, see [ Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
 
 ## Applying the Converted Schema to Your Target Database<a name="CHAP_SchemaConversionTool.GettingStarted.DW.Apply"></a>
 
@@ -165,8 +135,4 @@ This procedure overwrites the existing target schema\. Be careful not to overwri
 
    The converted schema is applied to the target database\.
 
-For more information, see [Saving and Applying Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.SaveAndApply.md)\. 
-
-## Related Topics<a name="CHAP_SchemaConversionTool.GettingStarted.DW.Related"></a>
-
-+ [Converting Data Warehouse Schema to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)
+For more information, see [ Saving and Applying Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.SaveAndApply.md)\. 

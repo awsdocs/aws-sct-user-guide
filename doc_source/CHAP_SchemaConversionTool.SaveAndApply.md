@@ -34,4 +34,4 @@ The extension pack schema is named according to your source database as follows:
 
 + PostgreSQL: `AWS_POSTGRESQL_EXT`
 
-For more information, see [Using the AWS Schema Conversion Tool Extension Pack AWS Lambda Functions](CHAP_SchemaConversionTool.ExtensionPack.OLTP.md)\. 
+For more information, see [Using the AWS Lambda Functions from the AWS SCT Extension Pack](CHAP_SchemaConversionTool.ExtensionPack.OLTP.md)\. 

@@ -872,4 +872,4 @@ MySQL doesn't support hints\. Try using MySQL performance tuning methods or perf
 
 + [Getting Started with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.md)
 
-+ [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)
++ [Installing, Verifying, and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)

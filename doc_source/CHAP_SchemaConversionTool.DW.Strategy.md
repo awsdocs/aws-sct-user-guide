@@ -14,7 +14,7 @@ To optimize how the AWS Schema Conversion Tool \(AWS SCT\) converts your data wa
 
       
 
-   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions are derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
+   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions are derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [ Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
 
       
 
@@ -32,9 +32,9 @@ To optimize how the AWS Schema Conversion Tool \(AWS SCT\) converts your data wa
 
    + **Find the most used tables and columns from QueryLog table**
 
-   For each rule, you can enter a weight for the sort key and a weight for the distribution key\. AWS SCT uses the weights you choose when it converts your schema\. Later, when you review the suggested keys, if you are not satisfied with the results, you can return here and change your settings\. For more information, see [Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
+   For each rule, you can enter a weight for the sort key and a weight for the distribution key\. AWS SCT uses the weights you choose when it converts your schema\. Later, when you review the suggested keys, if you are not satisfied with the results, you can return here and change your settings\. For more information, see [ Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
 
-## Related Topics<a name="w3ab1c17c17c21b7"></a>
+## Related Topics<a name="w3ab1c17c25b7"></a>
 
 + [Choose the Best Sort Key](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 

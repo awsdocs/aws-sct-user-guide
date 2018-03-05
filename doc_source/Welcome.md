@@ -1,8 +1,8 @@
 # What Is the AWS Schema Conversion Tool?<a name="Welcome"></a>
 
-You can use the AWS Schema Conversion Tool \(AWS SCT\) to convert your existing database schema from one database engine to another\. You can convert relational OLTP schema, or data warehouse schema\. Your converted schema is suitable for an Amazon Relational Database Service \(Amazon RDS\) MySQL DB instance, an Amazon Aurora DB cluster, an Amazon RDS PostgreSQL DB instance, or an Amazon Redshift cluster\. 
+You can use the AWS Schema Conversion Tool \(AWS SCT\) to convert your existing database schema from one database engine to another\. You can convert relational OLTP schema, or data warehouse schema\. Your converted schema is suitable for an Amazon Relational Database Service \(Amazon RDS\) MySQL DB instance, an Amazon Aurora DB cluster, an Amazon RDS PostgreSQL DB instance, or an Amazon Redshift cluster\. The converted schema can also be used with a database on an Amazon EC2 instance or stored as data on an Amazon S3 bucket\.
 
-AWS SCT supports several industry standards, including Federal Information Processing Standards \(FIPS\) when connecting to an Amazon S3 bucket or other AWS resource\. AWS SCT is also Federal Risk and Authorization Management Program \(FedRAMP\) compliant\. For more information on using FIPS when accessing AWS resources, see 
+AWS SCT supports several industry standards, including Federal Information Processing Standards \(FIPS\) when connecting to an Amazon S3 bucket or another AWS resource\. AWS SCT is also compliant with Federal Risk and Authorization Management Program \(FedRAMP\)\.
 
 AWS SCT supports the following OLTP conversions\. 
 
@@ -30,27 +30,25 @@ AWS SCT supports the following data warehouse conversions\.
 |  Teradata \(version 13 and later\)  | Amazon Redshift | 
 |  Vertica \(version 7\.2\.2 and later\)  | Amazon Redshift | 
 
-## Converting Your Schema<a name="CHAP_SchemaConversionTool.Overview.Converting"></a>
+## Schema Conversion Overview<a name="CHAP_SchemaConversionTool.Overview.Converting"></a>
 
 AWS SCT provides a project\-based user interface to automatically convert the database schema of your source database into a format compatible with your target Amazon RDS instance\. If schema from your source database can't be converted automatically, AWS SCT provides guidance on how you can create equivalent schema in your target Amazon RDS database\. 
 
-For information about how to install AWS SCT, see [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)\. 
+For information about how to install AWS SCT, see [Installing, Verifying, and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)\. 
 
 To get started with AWS SCT, and create your first project, see [Getting Started with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.md)\. 
 
-To start converting your schema, see [Converting Database Schema to Amazon RDS by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md) or [Converting Data Warehouse Schema to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)\. 
-
-## Additional Features of the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Overview.AdditionalFeatures"></a>
+To start converting your schema, see [Converting Database Schemas Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md) or [ Converting Data Warehouse Schemas to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)\. 
 
 In addition to converting your existing database schema from one database engine to another, AWS SCT has some additional features that help you move your data and applications to the cloud: 
 
 + You can use data extraction agents to extract data from your data warehouse to prepare to migrate it to Amazon Redshift\. To manage the data extraction agents, you can use AWS SCT\. For more information, see [Using Data Extraction Agents](Agents.DW.md)\. 
 
-+ You can use AWS SCT to create AWS DMS endpoints and tasks\. You can run and monitor these tasks from AWS SCT\. For more information, see [Working with the AWS Database Migration Service Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DMSIntegration.md)\. 
++ You can use AWS SCT to create AWS DMS endpoints and tasks\. You can run and monitor these tasks from AWS SCT\. For more information, see [ Working with the AWS Database Migration Service Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DMSIntegration.md)\. 
 
-+ In some cases, database features can't be converted to equivalent Amazon RDS or Amazon Redshift features\. The AWS SCT extension pack wizard can help you install AWS Lambda functions and Python libraries to emulate the features that can't be converted\. For more information, see [Using the AWS Schema Conversion Tool Extension Pack AWS Lambda Functions](CHAP_SchemaConversionTool.ExtensionPack.OLTP.md) and [Using the AWS Schema Conversion Tool Extension Pack Custom Python Library](CHAP_SchemaConversionTool.ExtensionPack.DW.md)\. 
++ In some cases, database features can't be converted to equivalent Amazon RDS or Amazon Redshift features\. The AWS SCT extension pack wizard can help you install AWS Lambda functions and Python libraries to emulate the features that can't be converted\. For more information, see [Using the AWS Lambda Functions from the AWS SCT Extension Pack](CHAP_SchemaConversionTool.ExtensionPack.OLTP.md) and [ Using the Custom Python Library for the AWS SCT Extension Pack](CHAP_ExtensionPack.md#CHAP_SchemaConversionTool.ExtensionPack.DW)\. 
 
-+ You can use AWS SCT to optimize your existing Amazon Redshift database\. AWS SCT recommends sort keys and distribution keys to optimize your database\. For more information, see [Optimizing Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.RedshiftOpt.md)\. 
++ You can use AWS SCT to optimize your existing Amazon Redshift database\. AWS SCT recommends sort keys and distribution keys to optimize your database\. For more information, see [ Optimizing Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.RedshiftOpt.md)\. 
 
 + You can use AWS SCT to copy your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. You can use this feature to analyze potential cost savings of moving to the cloud and of changing your license type\. 
 

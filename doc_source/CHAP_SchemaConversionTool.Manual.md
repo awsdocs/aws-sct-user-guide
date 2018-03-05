@@ -24,11 +24,3 @@ The schema that are written to your target DB instance don't contain the items t
 If you manually create schema in your target DB instance, save a copy of any manual work that you do\. If you apply the converted schema from your project to your target DB instance again, it overwrites the manual work you have done\. 
 
 In some cases, you can't create equivalent schema in your target DB instance\. You might need to rearchitect a portion of your application and database to use the functionality that is available from the DB engine for your target DB instance\. In other cases, you can simply ignore the schema that can't be converted automatically\. 
-
-## Related Topics<a name="w3ab1c15c15c29c13"></a>
-
-+ [Converting Your Schema by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Convert.md)
-
-+ [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.AssessmentReport.md)
-
-+ [Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.UpdateRefresh.md)

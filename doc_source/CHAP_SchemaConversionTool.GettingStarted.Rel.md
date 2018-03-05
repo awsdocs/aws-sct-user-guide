@@ -49,40 +49,6 @@ Use the following procedure to convert schema\.
 
 For more information, see [Converting Your Schema by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Convert.md)\. 
 
-## Creating and Reviewing the Database Migration Assessment Report<a name="CHAP_SchemaConversionTool.GettingStarted.Rel.Report"></a>
-
-The *database migration assessment report* summarizes all of the action items for schema that can't be converted automatically to the engine of your target Amazon RDS DB instance\. The report also includes estimates of the amount of effort that it will take to write the equivalent code for your target DB instance\. 
-
-You can create \(or update\) a database migration assessment report in your project at any time by using the following procedure\. 
-
-**To create and view the database migration assessment report**
-
-1. In the left panel that displays the schema from your source database, choose a schema object to create an assessment report for\. Open the context \(right\-click\) menu for the object, and then choose **Create Report**\.   
-![\[Create database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/create_assessment_report.png)
-
-   The assessment report view opens\.
-
-1. Choose the **Action Items** tab\. 
-
-   The **Action Items** tab displays a list of items that describe the schema that can't be converted automatically\. Select one of the action items from the list\. AWS SCT highlights the item from your schema that the action item applies to, as shown following\.   
-![\[Action items tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/action_items_tab.png)
-
-1. Choose the **Summary** tab\. 
-
-   The **Summary** tab displays the summary information from the database migration assessment report\. It shows the number of items that were converted automatically, and the number of items that were not converted automatically\. The summary also includes an estimate of the time that it will take to create schema in your target DB instance that are equivalent to those in your source database\. 
-
-   The section **License Evaluation and Cloud Support** contains information about moving your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. For example, if you want to change license types, this section of the report tells you which features from your current database should be removed\. 
-
-   An example of an assessment report summary is shown following\.   
-![\[Assessment report summary\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/summary_tab.png)
-
-1. Choose the **Summary** tab, and then choose **Save to PDF**\. The database migration assessment report is saved as a PDF file\. The PDF file contains both the summary and action item information\. 
-
-   You can also choose **Save to CSV** to save the report as a comma\-separated values \(CSV\) file\. The CSV file contains only action item information\.   
-![\[Database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/assessment_report.png)
-
-For more information, see [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.AssessmentReport.md)\. 
-
 ## Applying the Converted Schema to Your Target DB Instance<a name="CHAP_SchemaConversionTool.GettingStarted.Rel.Apply"></a>
 
 You can apply the converted database schema to your target Amazon RDS DB instance\. After the schema has been applied to your target DB instance, you can update the schema based on the action items in the database migration assessment report\. 
@@ -103,4 +69,4 @@ For more information, see [Saving and Applying Your Converted Schema in the AWS 
 
 ## Related Topics<a name="CHAP_SchemaConversionTool.GettingStarted.Rel.Related"></a>
 
-+ [Converting Database Schema to Amazon RDS by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)
++ [Converting Database Schemas Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)

@@ -20,4 +20,4 @@ Following, you can find reference material for the AWS Schema Conversion Tool \(
 
 + [Getting Started with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.md)
 
-+ [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)
++ [Installing, Verifying, and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)

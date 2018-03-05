@@ -9,9 +9,3 @@ To manage keys, select a table in your target database, and then choose the **Ke
 The left pane contains key suggestions, and includes the confidence rating for each suggestion\. You can choose one of the suggestions, or you can customize the key by editing it in the right pane\. 
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing Optimization Strategies and Rules for Use with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Strategy.md)\. 
-
-## Related Topics<a name="w3ab1c17c17c29c13"></a>
-
-+ [Choose the Best Sort Key](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
-
-+ [Choose the Best Distribution Style](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)

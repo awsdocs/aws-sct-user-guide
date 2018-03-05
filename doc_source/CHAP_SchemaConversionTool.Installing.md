@@ -1,20 +1,28 @@
-# Installing and Updating the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Installing"></a>
+# Installing, Verifying, and Updating the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Installing"></a>
 
 The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, macOS, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. AWS SCT also installs the Java Runtime Environment \(JRE\) version 8u45\. 
+
+To ensure that you get the correct version of the AWS SCT distribution file, we provide verification steps after you download the compressed file\. You can verify the file using the steps provided\.
+
+
++ [Installing the AWS Schema Conversion Tool](#CHAP_SchemaConversionTool.Installing.Procedure)
++ [Verifying the AWS Schema Conversion Tool File Download](#CHAP_SchemaConversionTool.InstallValidation.Procedure)
++ [Installing the Required Database Drivers](#CHAP_SchemaConversionTool.Installing.JDBCDrivers)
++ [Updating the AWS Schema Conversion Tool](#CHAP_SchemaConversionTool.Installing.Updating)
 
 ## Installing the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Installing.Procedure"></a>
 
 **To install the AWS Schema Conversion Tool**
 
-1. Download the \.zip file that contains the AWS SCT installer, using the link for your operating system, shown following: 
+1. Download the compressed file that contains the AWS SCT installer, using the link for your operating system, shown following: 
 
-   + [Fedora Linux download](https://s3.amazonaws.com/publicsctdownload/Fedora/aws-schema-conversion-tool-1.0.latest.zip)
+   + [Microsoft Windows](https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip)
 
-   + [macOS download](https://s3.amazonaws.com/publicsctdownload/MacOS/aws-schema-conversion-tool-1.0.latest.zip)
+   + [Apple macOS](https://s3.amazonaws.com/publicsctdownload/MacOS/aws-schema-conversion-tool-1.0.latest.zip)
 
-   + [Microsoft Windows download](https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip)
+   + [Ubuntu Linux \(\.deb\)](https://s3.amazonaws.com/publicsctdownload/Ubuntu/aws-schema-conversion-tool-1.0.latest.zip)
 
-   + [Ubuntu Linux version 15\.04 download](https://s3.amazonaws.com/publicsctdownload/Ubuntu/aws-schema-conversion-tool-1.0.latest.zip)
+   + [Fedora Linux \(\.rpm\)](https://s3.amazonaws.com/publicsctdownload/Fedora/aws-schema-conversion-tool-1.0.latest.zip)
 
 1. Extract the AWS SCT installer file for your operating system, shown following\.   
 ****    
@@ -26,11 +34,147 @@ The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that prov
 
 1. Install the Java Database Connectivity \(JDBC\) drivers for your source and target database engines\. For instructions and download links, see [Installing the Required Database Drivers](#CHAP_SchemaConversionTool.Installing.JDBCDrivers)\. 
 
+## Verifying the AWS Schema Conversion Tool File Download<a name="CHAP_SchemaConversionTool.InstallValidation.Procedure"></a>
+
+There are several ways you can verify the distribution file of the AWS Schema Conversion Tool\. The simplest is to compare the checksum of the file with the published checksum from AWS\. As an additional level of security, you can use the procedures below to verify the distribution file, based on the operating system where you installed the file\. 
+
+
++ [Verifying the Checksum of the AWS Schema Conversion Tool File](#CHAP_SchemaConversionTool.InstallValidation.Checksum.Procedure)
++ [Verifying the AWS Schema Conversion Tool RPM Files on Fedora](#CHAP_SchemaConversionTool.InstallValidation.RPM.Procedure)
++ [Verifying the AWS Schema Conversion Tool DEB Files on Ubuntu](#CHAP_SchemaConversionTool.InstallValidation.DEB.Procedure)
++ [Verifying the AWS Schema Conversion Tool MSI File on Microsoft Windows](#CHAP_SchemaConversionTool.InstallValidation.MSI.Procedure)
++ [Verifying the AWS Schema Conversion Tool Application on Mac OS](#CHAP_SchemaConversionTool.InstallValidation.Mac.Procedure)
+
+### Verifying the Checksum of the AWS Schema Conversion Tool File<a name="CHAP_SchemaConversionTool.InstallValidation.Checksum.Procedure"></a>
+
+In order to detect any errors that could have been introduced when downloading or storing the AWS Schema Conversion Tool compressed file, you can compare the file checksum with a value provided by AWS\. AWS uses the SHA256 algorithm for the checksum\.
+
+**To verify the AWS Schema Conversion Tool distribution file using a checksum**
+
+1. Download the AWS Schema Conversion Tool distribution file using the links in the Installing section\.
+
+1. Download the latest checksum file, called [sha256Check\.txt](https://d2fk11eyrwr7ob.cloudfront.net/sha256Check.txt)\. For example, the file can appear like the following:
+
+   ```
+   Fedora   b4f5f66f91bfcc1b312e2827e960691c269a9002cd1371cf1841593f88cbb5e6
+   Ubuntu   4315eb666449d4fcd95932351f00399adb6c6cf64b9f30adda2eec903c54eca4
+   Windows  6e29679a3c53c5396a06d8d50f308981e4ec34bd0acd608874470700a0ae9a23
+   MacOs    ed56d3ab49309e92ac4d2ef439d35449ac1326f470c23dc5866e1bf0a60b0e67
+   ```
+
+1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, the command to run on the Mac operating system is the following:
+
+   ```
+   shasum -a 256 aws-schema-conversion-tool-1.0.latest.zip
+   ```
+
+1. Compare the results of the command with the value shown in the sha256Check\.txt file\. The two values should match\.
+
+### Verifying the AWS Schema Conversion Tool RPM Files on Fedora<a name="CHAP_SchemaConversionTool.InstallValidation.RPM.Procedure"></a>
+
+AWS provides another level of validation in addition to the distribution file checksum\. All RPM files in the distribution file are signed by an AWS private key\. The public GPG key can be viewed at [amazon\.com\.public\.gpg\-key](https://d2fk11eyrwr7ob.cloudfront.net/aws-dms-team@amazon.com.public.gpg-key)\.
+
+**To verify the AWS Schema Conversion Tool RPM files on Fedora**
+
+1. Download the AWS Schema Conversion Tool distribution file using the links in the Installing section\.
+
+1. Verifying the checksum of the AWS Schema Conversion Tool distribution file\.
+
+1. Extract the contents of the distribution file\. Locate the RPM file you want to verify\.
+
+1. Download GPG public key from [ amazon\.com\.public\.gpg\-key ](https://d2fk11eyrwr7ob.cloudfront.net/aws-dms-team@amazon.com.public.gpg-key)
+
+1. Import the public key to your RPM DB \(make sure you have the appropriate permissions\) by using the following command:
+
+   ```
+   sudo rpm --import aws-dms-team@amazon.com.public.gpg-key
+   ```
+
+1. Check that the import was successful by running the following command:
+
+   ```
+   rpm -q --qf "%{NAME}-%{VERSION}-%{RELEASE} \n %{SUMMARY} \n" gpg-pubkey-ea22abf4-5a21d30c
+   ```
+
+1. Check the RPM signature by running the following command:
+
+   ```
+   rpm --checksig -v aws-schema-conversion-tool-1.0.build number-1.x86_64.rpm
+   ```
+
+### Verifying the AWS Schema Conversion Tool DEB Files on Ubuntu<a name="CHAP_SchemaConversionTool.InstallValidation.DEB.Procedure"></a>
+
+AWS provides another level of validation in addition to the distribution file checksum\. All DEB files in the distribution file are signed by a GPG detached signature\.
+
+**To verify the AWS Schema Conversion Tool DEB files on Ubuntu**
+
+1. Download the AWS Schema Conversion Tool distribution file using the links in the Installing section\.
+
+1. Verifying the checksum of the AWS Schema Conversion Tool distribution file\.
+
+1. Extract the contents of the distribution file\. Locate the DEB file you want to verify\.
+
+1. Download the detached signature from [aws\-schema\-conversion\-tool\-1\.0\.latest\.deb\.asc](https://d2fk11eyrwr7ob.cloudfront.net/Ubuntu/signatures/aws-schema-conversion-tool-1.0.latest.deb.asc)\.
+
+1. Download the GPG public key from [amazon\.com\.public\.gpg\-key](https://d2fk11eyrwr7ob.cloudfront.net/aws-dms-team@amazon.com.public.gpg-key)\.
+
+1. Import the GPG public key by running the following command:
+
+   ```
+   gpg --import aws-dms-team@amazon.com.public.gpg-key
+   ```
+
+1. Verify the signature by running the following command:
+
+   ```
+   gpg --verify aws-schema-conversion-tool-1.0.latest.deb.asc aws-schema-conversion-tool-1.0.build number.deb
+   ```
+
+### Verifying the AWS Schema Conversion Tool MSI File on Microsoft Windows<a name="CHAP_SchemaConversionTool.InstallValidation.MSI.Procedure"></a>
+
+AWS provides another level of validation in addition to the distribution file checksum\. The MSI file has a digital signature you can check to ensure it was signed by AWS\.
+
+**To verify the AWS Schema Conversion Tool MSI file on Windows**
+
+1. Download the AWS Schema Conversion Tool distribution file using the links in the Installing section\.
+
+1. Verifying the checksum of the AWS Schema Conversion Tool distribution file\.
+
+1. Extract the contents of the distribution file\. Locate the MSI file you want to verify\.
+
+1. In Windows Explorer, right\-click the MSI file and select **Properties**\.
+
+1. Choose the **Digital Signatures** tab\.
+
+1. Verify that the digital signature is from Amazon Services LLC\.
+
+### Verifying the AWS Schema Conversion Tool Application on Mac OS<a name="CHAP_SchemaConversionTool.InstallValidation.Mac.Procedure"></a>
+
+AWS provides another level of validation in addition to the distribution file checksum\. Once you have installed the AWS Schema Conversion Tool on the Mac OS, you can verify the application using the following procedure\.
+
+**To verify the AWS Schema Conversion Tool Application on Mac OS**
+
+1. Download the AWS Schema Conversion Tool distribution file using the links in the Installing section\.
+
+1. Verifying the checksum of the AWS Schema Conversion Tool distribution file\.
+
+1. Extract the contents of the distribution file\. 
+
+1. Double\-click the DMG file\.
+
+1. Install the AWS Schema Conversion Tool\. 
+
+1. Verify the application by running the following command:
+
+   ```
+   codesign -dvvv /Applications/AWS\ Schema\ Conversion\ Tool.app/
+   ```
+
 ## Installing the Required Database Drivers<a name="CHAP_SchemaConversionTool.Installing.JDBCDrivers"></a>
 
 For the AWS Schema Conversion Tool to work correctly, you must install the JDBC drivers for your source and target database engines\. 
 
-After you download the drivers, you give the location of the driver files\. For more information, see [Storing Driver Paths in the Global Settings](#CHAP_SchemaConversionTool.Installing.JDBCDrivers.Settings)\. 
+After you download the drivers, you give the location of the driver files\. For more information, see [ Storing Driver Paths in the Global Settings](#CHAP_SchemaConversionTool.Installing.JDBCDrivers.Settings)\. 
 
 You can download the database drivers from the following locations\. 
 
@@ -88,4 +232,12 @@ For Teradata, you specify two drivers separated by a semicolon\.
 
 ## Updating the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Installing.Updating"></a>
 
-To check whether new version of AWS SCT is available, choose **Help**, and then choose **Check for Updates**\. If there is a newer version of AWS SCT available, you are prompted to download and install the newer version\. 
+AWS periodically updates the AWS SCT with new features and functionality\. If you are updating from a previous version, create a new AWS SCT project and reconvert any database objects you are using\.
+
+You can check to see if updates exist for the AWS SCT\.
+
+**To check for updates to AWS SCT**
+
+1. When in the AWS SCT, choose **Help** and then choose **Check for Updates**\.
+
+1. In the **Check for Updates dialog box**, choose **What's New**\. If the link does not appear, you have the latest version\.

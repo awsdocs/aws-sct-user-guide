@@ -1,8 +1,22 @@
-# Converting Data Warehouse Schema to Amazon Redshift by Using the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Converting.DW"></a>
+# Converting Data Warehouse Schemas to Amazon Redshift by Using the AWS Schema Conversion Tool<a name="CHAP_SchemaConversionTool.Converting.DW"></a>
 
 The AWS Schema Conversion Tool \(AWS SCT\) automates much of the process of converting your data warehouse schema to a Amazon Redshift database schema\. The source and target database engines contain many different features and capabilities, and AWS SCT attempts to create an equivalent schema in your target database wherever possible\. If no direct conversion is possible, AWS SCT provides a list of possible actions for you to take\. 
 
-AWS SCT supports the following data warehouse conversions\. 
+This section covers the following topics\.
+
+
++ [Choosing Optimization Strategies and Rules for Use with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Strategy.md)
++ [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)
++ [Creating Mapping Rules in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Mapping.md)
++ [Converting Your Schema by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Convert.md)
++ [Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)
++ [Creating and Using the Assessment Report in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.AssessmentReport.md)
++ [Handling Manual Conversions in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Manual.md)
++ [Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.UpdateRefresh.md)
++ [Saving and Applying Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.SaveAndApply.md)
++ [Optimizing Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.RedshiftOpt.md)
+
+AWS SCT supports the following data warehouse conversions\.
 
 
 ****  
@@ -16,7 +30,7 @@ AWS SCT supports the following data warehouse conversions\.
 |  Teradata \(version 13 and later\)  | Amazon Redshift | 
 |  Vertica \(version 7\.2\.2 and later\)  | Amazon Redshift | 
 
-If you want to convert an online transaction processing \(OLTP\) database schema, see [Converting Database Schema to Amazon RDS by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)\. 
+If you want to convert an online transaction processing \(OLTP\) database schema, see [Converting Database Schemas Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)\. 
 
 Almost all work you do with AWS SCT starts with the following three steps: 
 
@@ -38,13 +52,13 @@ To convert your data warehouse schema to Amazon RDS, you take the following high
 
 + **Collect statistics** – To optimize how AWS SCT converts your data warehouse schema, you can provide statistics from your source database that the tool can use\. You can either collect statistics directly from the database, or upload an existing statistics file\. 
 
-  For more information, see [Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
+  For more information, see [ Collecting or Uploading Statistics for the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Statistics.md)\. 
 
    
 
 + **Create mapping rules** – Before you convert your schema with AWS SCT, you can set up rules that change the data type of columns, move objects from one schema to another, and change the names of objects\. 
 
-  For more information, see [Creating Mapping Rules in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Mapping.md)\. 
+  For more information, see [ Creating Mapping Rules in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Mapping.md)\. 
 
    
 
@@ -56,7 +70,7 @@ To convert your data warehouse schema to Amazon RDS, you take the following high
 
 + **Manage and customize keys** – After you convert your schema, you can manage and edit your keys\. Key management is the heart of a data warehouse conversion\. 
 
-  For more information, see [Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
+  For more information, see [ Managing and Customizing Keys in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Keys.md)\. 
 
    
 
@@ -68,18 +82,18 @@ To convert your data warehouse schema to Amazon RDS, you take the following high
 
 + **Decide how to handle manual conversions** – If you have schema elements that can't be converted automatically, you have two choices: update the source schema and then convert again, or create equivalent schema elements in your target database\. 
 
-  For more information, see [Handling Manual Conversions in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Manual.md)\. 
+  For more information, see [ Handling Manual Conversions in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.Manual.md)\. 
 
    
 
 + **Update and refresh the schema in your AWS SCT project** – You can update your AWS SCT project with the most recent schema from your source database\. 
 
-  For more information, see [Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.UpdateRefresh.md)\. 
+  For more information, see [ Updating and Refreshing Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.UpdateRefresh.md)\. 
 
    
 
 + **Apply the converted schema to your target database** – When you are ready, have AWS SCT apply the converted schema in your local project to your target database\. 
 
-  For more information, see [Saving and Applying Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.SaveAndApply.md)\. 
+  For more information, see [ Saving and Applying Your Converted Schema in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.DW.SaveAndApply.md)\. 
 
    

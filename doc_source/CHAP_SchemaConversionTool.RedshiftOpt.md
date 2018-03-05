@@ -6,11 +6,11 @@ You can use the AWS Schema Conversion Tool \(AWS SCT\) to optimize your Amazon R
 
 Almost all work you do with AWS SCT starts with the same three steps\. Complete the following steps before you optimize your Amazon Redshift database: 
 
-1. Create an AWS SCT project\. For more information, see [Creating an AWS Schema Conversion Tool Project](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.GettingStarted.Project)\. 
+1. Create an AWS SCT project\. For more information, see [ Creating an AWS Schema Conversion Tool Project](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.GettingStarted.Project)\. 
 
 1. Connect to your source database\. For more information, see [Connecting to an Amazon Redshift Source Database](CHAP_SchemaConversionTool.GettingStarted.Source.Redshift.md)\. 
 
-1. Connect to your target database\. For more information, see [Connecting to Your Target Database](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.GettingStarted.Target)\. 
+1. Connect to your target database\. For more information, see [ Connecting to Your Target Database](CHAP_SchemaConversionTool.GettingStarted.md#CHAP_SchemaConversionTool.GettingStarted.Target)\. 
 **Important**  
 Don't use the same cluster for both the source and target of your optimization\. 
 
@@ -18,7 +18,7 @@ Before you optimize your Amazon Redshift database, you should also choose your o
 
 ## Optimizing Your Amazon Redshift Database<a name="CHAP_SchemaConversionTool.RedshiftOpt.Opt"></a>
 
-Use the following procedure to optimize your Amazon Redshift database\. 
+Use the following procedure to optimize your Amazon Redshift database\.
 
 **To optimize your Amazon Redshift database**
 
@@ -48,13 +48,3 @@ Use the following procedure to optimize your Amazon Redshift database\.
    1. You can save a local copy of the optimization report as either a PDF file or a comma\-separated values \(CSV\) file\. The CSV file contains only action item information\. The PDF file contains both the summary and action item information\. 
 
 1. To apply suggested optimizations to your database, choose an object in the right panel of your project\. Open the context \(right\-click\) menu for the object, and then choose **Apply to database**\. 
-
-## Related Topics<a name="CHAP_SchemaConversionTool.RedshiftOpt.Related"></a>
-
-+ [Choose the Best Sort Key](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
-
-+ [Choose the Best Distribution Style](http://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
-
-+ [Converting Data Warehouse Schema to Amazon Redshift by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.DW.md)
-
-+ [Installing and Updating the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Installing.md)

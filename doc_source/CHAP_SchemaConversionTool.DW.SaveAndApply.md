@@ -38,8 +38,8 @@ The extension pack schema is named according to your source database as follows:
 
 + Vertica: `AWS_VERTICA_EXT`
 
-For more information, see [Using the AWS Schema Conversion Tool Extension Pack Custom Python Library](CHAP_SchemaConversionTool.ExtensionPack.DW.md)\. 
+For more information, see [ Using the Custom Python Library for the AWS SCT Extension Pack](CHAP_ExtensionPack.md#CHAP_SchemaConversionTool.ExtensionPack.DW)\. 
 
 ## Python Libraries<a name="CHAP_SchemaConversionTool.DW.SaveAndApply.Py"></a>
 
-To create custom functions in Amazon Redshift, you use the Python language\. Use the AWS SCT extension pack to install python libraries for your Amazon Redshift database\. For more information, see [Using the AWS Schema Conversion Tool Extension Pack Custom Python Library](CHAP_SchemaConversionTool.ExtensionPack.DW.md)\. 
+To create custom functions in Amazon Redshift, you use the Python language\. Use the AWS SCT extension pack to install python libraries for your Amazon Redshift database\. For more information, see [ Using the Custom Python Library for the AWS SCT Extension Pack](CHAP_ExtensionPack.md#CHAP_SchemaConversionTool.ExtensionPack.DW)\. 

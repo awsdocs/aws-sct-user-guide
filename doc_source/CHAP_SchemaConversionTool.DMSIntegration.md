@@ -2,6 +2,15 @@
 
 AWS Database Migration Service \(AWS DMS\) is a web service that you can use to migrate data to and from most widely used commercial and open\-source databases\. You can use the AWS Schema Conversion Tool \(AWS SCT\) to create AWS DMS endpoints and tasks\. You can run and monitor the tasks from AWS SCT\. For more information about AWS DMS, see [What Is AWS Database Migration Service?](http://docs.aws.amazon.com/dms/latest/userguide/Welcome.html) in the *AWS DMS User Guide\.*\. 
 
+This section covers the following topics:
+
+
++ [Before You Begin](#CHAP_SchemaConversionTool.DMSIntegration.Before)
++ [Credentials for Working with AWS DMS](#CHAP_SchemaConversionTool.DMSIntegration.Credentials)
++ [Creating an AWS DMS Task](#CHAP_SchemaConversionTool.DMSIntegration.Create)
++ [Running and Monitoring an AWS DMS Task](#CHAP_SchemaConversionTool.DMSIntegration.Run)
++ [Using an AWS SCT Replication Agent with AWS DMS](#CHAP_SchemaConversionTool.DMSIntegration.ReplicationAgent)
+
 ## Before You Begin<a name="CHAP_SchemaConversionTool.DMSIntegration.Before"></a>
 
 Almost all work you do with AWS SCT starts with the following three steps: 
@@ -14,11 +23,11 @@ Almost all work you do with AWS SCT starts with the following three steps:
 
 If you have not created an AWS SCT project yet, see [Getting Started with the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.GettingStarted.md)\. 
 
-Because AWS DMS interacts with the target schema, you need to convert your database schema before you can integrate with AWS DMS\. To convert your database schema, see [Converting Database Schema to Amazon RDS by Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)\. 
+Because AWS DMS interacts with the target schema, you need to convert your database schema before you can integrate with AWS DMS\. To convert your database schema, see [Converting Database Schemas Using the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Converting.md)\. 
 
 ## Credentials for Working with AWS DMS<a name="CHAP_SchemaConversionTool.DMSIntegration.Credentials"></a>
 
-To create AWS DMS tasks, AWS SCT must connect to AWS DMS with your credentials\. You can use credentials that you previously stored in a profile in the global application settings and associated with the project\. For more information, see [Using AWS Service Profiles in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.Profiles.md)\. 
+To create AWS DMS tasks, AWS SCT must connect to AWS DMS with your credentials\. You can use credentials that you previously stored in a profile in the global application settings and associated with the project\. For more information, see [Using AWS Service Profiles in the AWS Schema Conversion Tool](CHAP_SchemaConversionTool.UI.md#CHAP_SchemaConversionTool.Profiles)\. 
 
 ## Creating an AWS DMS Task<a name="CHAP_SchemaConversionTool.DMSIntegration.Create"></a>
 
@@ -72,10 +81,10 @@ After you create AWS DMS tasks, you can run and monitor them in the data migrati
 
 1. Choose **Show Log** to see the task log\. If you selected **Enable logging** when you created the task, the task log shows log information\. 
 
-## Related Topics<a name="CHAP_SchemaConversionTool.DMSIntegration.Related"></a>
+## Using an AWS SCT Replication Agent with AWS DMS<a name="CHAP_SchemaConversionTool.DMSIntegration.ReplicationAgent"></a>
 
-+ [What Is the AWS Schema Conversion Tool?](Welcome.md)
+For very large database migrations, you can use a AWS SCT replication agent to copy data from your on\-premises database to Amazon S3 or an Amazon Snowball device\. The replication agent works in conjunction with AWS DMS, and the replication agent can work in the background while AWS SCT is closed\. 
 
-+ [Working with AWS Database Migration Service Replication Tasks](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.html)
+When working with Amazon Snowball, the AWS SCT agent extracts data to the Amazon Snowball device\. The device is then sent to AWS and the data is loaded to an Amazon S3 bucket\. During this time, the AWS SCT agent continues to run\. The agent then takes the data on Amazon S3 and copies the data to the target endpoint\.
 
-+ [Monitoring AWS Database Migration Service Tasks](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_Monitoring.html)
+For more information, see the [ AWS DMS documentation](http://docs.aws.amazon.com/dms/latest/userguide/CHAP_LargeDBs.html)\.
