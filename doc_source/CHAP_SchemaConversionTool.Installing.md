@@ -190,6 +190,7 @@ Install the latest version of the driver available\. The versions in the table f
 | Amazon Aurora \(PostgreSQL compatible\) | postgresql\-9\.4\-1204\-jdbc42\.jar |   [https://jdbc\.postgresql\.org/download\.html](https://jdbc.postgresql.org/download.html)   | 
 | Amazon Redshift | RedshiftJDBC41\-1\.1\.10\.1010\.jar |   [http://docs\.aws\.amazon\.com/redshift/latest/mgmt/configure\-jdbc\-connection\.html](http://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html)   | 
 | Greenplum Database | postgresql\-9\.4\-1204\-jdbc42\.jar |  [https://jdbc\.postgresql\.org/](https://jdbc.postgresql.org/)   | 
+| IBM DB2 (LUW) | db2jcc4\.jar (JDBC 4.0 Driver) |  [https://www-01\.ibm\.com/support/docview\.wss?uid=swg21363866](https://www-01.ibm.com/support/docview.wss?uid=swg21363866)   | 
 | Microsoft SQL Server | sqljdbc4\.jar |   [https://www\.microsoft\.com/en\-us/download/details\.aspx?displaylang=en&id=11774](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774)   | 
 | MySQL | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
 | Netezza |  nzjdbc\.jar Use the client tools software\. Install driver version 7\.2\.1, which is backwards compatible with data warehouse version 7\.2\.0\.   |   [http://www\.ibm\.com/support/knowledgecenter/SSULQD\_7\.2\.1/com\.ibm\.nz\.datacon\.doc/c\_datacon\_plg\_overview\.html](http://www.ibm.com/support/knowledgecenter/SSULQD_7.2.1/com.ibm.nz.datacon.doc/c_datacon_plg_overview.html)   | 
