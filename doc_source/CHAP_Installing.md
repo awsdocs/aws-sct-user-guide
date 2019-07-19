@@ -68,10 +68,10 @@ In order to detect any errors that could have been introduced when downloading o
 1. Download the latest checksum file, called [sha256Check\.txt](https://d2fk11eyrwr7ob.cloudfront.net/sha256Check.txt)\. For example, the file can appear like the following:
 
    ```
-   Fedora   b4f5f66f91bfcc1b312e2827e960691c269a9002cd1371cf1841593f88cbb5e6
-   Ubuntu   4315eb666449d4fcd95932351f00399adb6c6cf64b9f30adda2eec903c54eca4
-   Windows  6e29679a3c53c5396a06d8d50f308981e4ec34bd0acd608874470700a0ae9a23
-   MacOs    ed56d3ab49309e92ac4d2ef439d35449ac1326f470c23dc5866e1bf0a60b0e67
+   Fedora   fa0d485a6abc0ba30a8b98a059efab782044df6370fbc58315743f5795e2275a
+   Ubuntu   f3ac75a6f54fcd41212b8c8ae62326baeb4bcad31da7e0593de43263e76e9285
+   Windows  4fe8f361f0217fd6cb315a561911d7a044b35ccc4da90008192f0682c3f92cf7
+   MacOs    db1934fa75599f56b80d8b51ea9c862931fd603b7cefef06e4c88a8252013d36   
    ```
 
 1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, the command to run on the Mac operating system is the following:
