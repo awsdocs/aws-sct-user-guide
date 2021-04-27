@@ -24,3 +24,17 @@ grant connect to min_privs;
 grant select_catalog_role to min_privs;  
 grant select any dictionary to min_privs;
 ```
+
+
+You might encounter an additional error even with a privileged account\.
+
+```
+ORA-01031: insufficient privileges
+```
+In this case following permissions may be required\.
+
+```
+grant select on sys.cdef$ to min_privs;
+grant select on sys.con$  to min_privs;
+grant select on sys.user$ to min_privs;
+```
