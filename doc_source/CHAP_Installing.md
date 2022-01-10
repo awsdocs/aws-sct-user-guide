@@ -1,24 +1,23 @@
-# Installing, Verifying, and Updating the AWS Schema Conversion Tool \(AWS SCT\)<a name="CHAP_Installing"></a>
+# Installing, verifying, and updating AWS SCT<a name="CHAP_Installing"></a>
 
-The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, macOS, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. AWS SCT also installs the Java Runtime Environment \(JRE\) version 8u45\. 
+The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. AWS SCT also installs Amazon Corretto JDK 11\. 
 
-To ensure that you get the correct version of the AWS SCT distribution file, we provide verification steps after you download the compressed file\. You can verify the file using the steps provided\.
+To ensure that you get the correct version of the AWS SCT distribution file we provide verification steps after you download the compressed file\. You can verify the file using the steps provided\.
 
 **Topics**
-+ [Installing the AWS SCT](#CHAP_Installing.Procedure)
-+ [Verifying the AWS SCT File Download](#CHAP_Installing.InstallValidation)
-+ [Installing the Required Database Drivers](#CHAP_Installing.JDBCDrivers)
++ [Installing AWS SCT](#CHAP_Installing.Procedure)
++ [Verifying the AWS SCT file download](#CHAP_Installing.InstallValidation)
++ [Installing the required database drivers](#CHAP_Installing.JDBCDrivers)
 + [Updating the AWS SCT](#CHAP_Installing.Updating)
 
-## Installing the AWS SCT<a name="CHAP_Installing.Procedure"></a>
+## Installing AWS SCT<a name="CHAP_Installing.Procedure"></a>
 
 **To install the AWS SCT**
 
 1. Download the compressed file that contains the AWS SCT installer, using the link for your operating system\. All compressed files have a \.zip extension\. When you extract the AWS SCT installer file, it will be in the appropriate format for your operating system\. 
-   + [Microsoft Windows](https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip)
-   + [Apple macOS](https://s3.amazonaws.com/publicsctdownload/MacOS/aws-schema-conversion-tool-1.0.latest.zip)
-   + [Ubuntu Linux \(\.deb\)](https://s3.amazonaws.com/publicsctdownload/Ubuntu/aws-schema-conversion-tool-1.0.latest.zip)
-   + [Fedora Linux \(\.rpm\)](https://s3.amazonaws.com/publicsctdownload/Fedora/aws-schema-conversion-tool-1.0.latest.zip)
+   + [Microsoft Windows](https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip) 
+   + [Ubuntu Linux \(\.deb\)](https://s3.amazonaws.com/publicsctdownload/Ubuntu/aws-schema-conversion-tool-1.0.latest.zip) 
+   + [Fedora Linux \(\.rpm\)](https://s3.amazonaws.com/publicsctdownload/Fedora/aws-schema-conversion-tool-1.0.latest.zip) 
 
 1. Extract the AWS SCT installer file for your operating system, shown following\.   
 ****    
@@ -28,36 +27,38 @@ To ensure that you get the correct version of the AWS SCT distribution file, we 
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html)
 
-1. Install the Java Database Connectivity \(JDBC\) drivers for your source and target database engines\. For instructions and download links, see [ Installing the Required Database Drivers](#CHAP_Installing.JDBCDrivers)\. 
+1. Install the Java Database Connectivity \(JDBC\) drivers for your source and target database engines\. For instructions and download links, see [Installing the required database drivers](#CHAP_Installing.JDBCDrivers)\. 
 
-### Installing Previous Versions of the AWS SCT<a name="CHAP_Installing.PreviousVersions"></a>
+ Now, you have completed the setup of the AWS SCT application\. Double\-click the application icon to run AWS SCT\. 
 
- You can download and install previous versions of the AWS SCT\. Use the following format to download a previous version\. You must provide the version and OS information using this format\. 
+### Installing previous versions of AWS SCT<a name="CHAP_Installing.PreviousVersions"></a>
+
+You can download and install previous versions of the AWS SCT starting from 1\.0\.625\. Use the following format to download a previous version\. You must provide the version and OS information using this format\. 
 
 ```
 https://d211wdu1froga6.cloudfront.net/builds/1.0/<version>/<OS>/aws-schema-conversion-tool-1.0.zip
 ```
 
-For example, to download AWS SCT version 607, do the following:
-+ MacOS \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/607/MacOS/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/607/MacOS/aws-schema-conversion-tool-1.0.zip)
-+ Windows \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/607/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/607/Windows/aws-schema-conversion-tool-1.0.zip)
-+ Ubuntu \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/607/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/607/Ubuntu/aws-schema-conversion-tool-1.0.zip)
-+ Fedora \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/607/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/607/Fedora/aws-schema-conversion-tool-1.0.zip)
+For example, to download AWS SCT version 632, do the following:
++ Windows \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Windows/aws-schema-conversion-tool-1.0.zip)
++ Ubuntu \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Ubuntu/aws-schema-conversion-tool-1.0.zip)
++ Fedora \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Fedora/aws-schema-conversion-tool-1.0.zip)
 
-## Verifying the AWS SCT File Download<a name="CHAP_Installing.InstallValidation"></a>
+ 
 
-There are several ways you can verify the distribution file of the AWS SCT\. The simplest is to compare the checksum of the file with the published checksum from AWS\. As an additional level of security, you can use the procedures below to verify the distribution file, based on the operating system where you installed the file\. 
+## Verifying the AWS SCT file download<a name="CHAP_Installing.InstallValidation"></a>
+
+There are several ways you can verify the distribution file of the AWS SCT\. The simplest is to compare the checksum of the file with the published checksum from AWS\. As an additional level of security, you can use the procedures following to verify the distribution file, based on the operating system where you installed the file\. 
 
 This section includes the following topics\.
 
 **Topics**
-+ [Verifying the Checksum of the AWS SCT File](#CHAP_Installing.InstallValidation.Checksum)
-+ [Verifying the AWS SCT RPM Files on Fedora](#CHAP_Installing.InstallValidation.RPM)
-+ [Verifying the AWS SCT DEB Files on Ubuntu](#CHAP_Installing.InstallValidation.DEB)
-+ [Verifying the AWS SCT MSI File on Microsoft Windows](#CHAP_Installing.InstallValidation.MSI)
-+ [Verifying the AWS SCT Application on Mac OS](#CHAP_Installing.InstallValidation.Mac)
++ [Verifying the checksum of the AWS SCT file](#CHAP_Installing.InstallValidation.Checksum)
++ [Verifying the AWS SCT RPM files on Fedora](#CHAP_Installing.InstallValidation.RPM)
++ [Verifying the AWS SCT DEB files on Ubuntu](#CHAP_Installing.InstallValidation.DEB)
++ [Verifying the AWS SCT MSI file on Microsoft Windows](#CHAP_Installing.InstallValidation.MSI)
 
-### Verifying the Checksum of the AWS SCT File<a name="CHAP_Installing.InstallValidation.Checksum"></a>
+### Verifying the checksum of the AWS SCT file<a name="CHAP_Installing.InstallValidation.Checksum"></a>
 
 In order to detect any errors that could have been introduced when downloading or storing the AWS SCT compressed file, you can compare the file checksum with a value provided by AWS\. AWS uses the SHA256 algorithm for the checksum\.
 
@@ -71,10 +72,9 @@ In order to detect any errors that could have been introduced when downloading o
    Fedora   b4f5f66f91bfcc1b312e2827e960691c269a9002cd1371cf1841593f88cbb5e6
    Ubuntu   4315eb666449d4fcd95932351f00399adb6c6cf64b9f30adda2eec903c54eca4
    Windows  6e29679a3c53c5396a06d8d50f308981e4ec34bd0acd608874470700a0ae9a23
-   MacOs    ed56d3ab49309e92ac4d2ef439d35449ac1326f470c23dc5866e1bf0a60b0e67
    ```
 
-1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, the command to run on the Mac operating system is the following:
+1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, the command to run on the Linux operating system is the following:
 
    ```
    shasum -a 256 aws-schema-conversion-tool-1.0.latest.zip
@@ -82,7 +82,7 @@ In order to detect any errors that could have been introduced when downloading o
 
 1. Compare the results of the command with the value shown in the sha256Check\.txt file\. The two values should match\.
 
-### Verifying the AWS SCT RPM Files on Fedora<a name="CHAP_Installing.InstallValidation.RPM"></a>
+### Verifying the AWS SCT RPM files on Fedora<a name="CHAP_Installing.InstallValidation.RPM"></a>
 
 AWS provides another level of validation in addition to the distribution file checksum\. All RPM files in the distribution file are signed by an AWS private key\. The public GPG key can be viewed at [amazon\.com\.public\.gpg\-key](https://d2fk11eyrwr7ob.cloudfront.net/aws-dms-team@amazon.com.public.gpg-key)\.
 
@@ -90,7 +90,7 @@ AWS provides another level of validation in addition to the distribution file ch
 
 1. Download the AWS SCT distribution file using the links in the Installing section\.
 
-1. Verifying the checksum of the AWS SCT distribution file\.
+1. Verify the checksum of the AWS SCT distribution file\.
 
 1. Extract the contents of the distribution file\. Locate the RPM file you want to verify\.
 
@@ -114,7 +114,7 @@ AWS provides another level of validation in addition to the distribution file ch
    rpm --checksig -v aws-schema-conversion-tool-1.0.build number-1.x86_64.rpm
    ```
 
-### Verifying the AWS SCT DEB Files on Ubuntu<a name="CHAP_Installing.InstallValidation.DEB"></a>
+### Verifying the AWS SCT DEB files on Ubuntu<a name="CHAP_Installing.InstallValidation.DEB"></a>
 
 AWS provides another level of validation in addition to the distribution file checksum\. All DEB files in the distribution file are signed by a GPG detached signature\.
 
@@ -142,7 +142,7 @@ AWS provides another level of validation in addition to the distribution file ch
    gpg --verify aws-schema-conversion-tool-1.0.latest.deb.asc aws-schema-conversion-tool-1.0.build number.deb
    ```
 
-### Verifying the AWS SCT MSI File on Microsoft Windows<a name="CHAP_Installing.InstallValidation.MSI"></a>
+### Verifying the AWS SCT MSI file on Microsoft Windows<a name="CHAP_Installing.InstallValidation.MSI"></a>
 
 AWS provides another level of validation in addition to the distribution file checksum\. The MSI file has a digital signature you can check to ensure it was signed by AWS\.
 
@@ -160,58 +160,41 @@ AWS provides another level of validation in addition to the distribution file ch
 
 1. Verify that the digital signature is from Amazon Services LLC\.
 
-### Verifying the AWS SCT Application on Mac OS<a name="CHAP_Installing.InstallValidation.Mac"></a>
-
-AWS provides another level of validation in addition to the distribution file checksum\. Once you have installed the AWS SCT on the Mac OS, you can verify the application using the following procedure\.
-
-**To verify the AWS SCT Application on Mac OS**
-
-1. Download the AWS SCT distribution file using the links in the Installing section\.
-
-1. Verifying the checksum of the AWS SCT distribution file\.
-
-1. Extract the contents of the distribution file\. 
-
-1. Double\-click the DMG file\.
-
-1. Install the AWS SCT\. 
-
-1. Verify the application by running the following command:
-
-   ```
-   codesign -dvvv /Applications/AWS\ Schema\ Conversion\ Tool.app/
-   ```
-
-## Installing the Required Database Drivers<a name="CHAP_Installing.JDBCDrivers"></a>
+## Installing the required database drivers<a name="CHAP_Installing.JDBCDrivers"></a>
 
 For the AWS SCT to work correctly, you must install the JDBC drivers for your source and target database engines\. 
 
-After you download the drivers, you give the location of the driver files\. For more information, see [ Storing Driver Paths in the Global Settings](#CHAP_Installing.JDBCDrivers.Settings)\. 
+After you download the drivers, you give the location of the driver files\. For more information, see [Storing driver paths in the global settings](#CHAP_Installing.JDBCDrivers.Settings)\. 
 
 You can download the database drivers from the following locations\. 
 
 **Important**  
-Install the latest version of the driver available\. The versions in the table following are example version numbers\. 
+Install the latest version of the driver available\. The following table includes the lowest version of database driver supported by AWS SCT\. 
 
 
 ****  
 
-| Database Engine | Drivers | Download Location | 
+| Database engine | Drivers | Download location | 
 | --- | --- | --- | 
 | Amazon Aurora \(MySQL compatible\) | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
-| Amazon Aurora \(PostgreSQL compatible\) | postgresql\-9\.4\-1204\-jdbc42\.jar |   [https://jdbc\.postgresql\.org/download\.html](https://jdbc.postgresql.org/download.html)   | 
-| Amazon Redshift | RedshiftJDBC41\-1\.1\.10\.1010\.jar |   [http://docs\.aws\.amazon\.com/redshift/latest/mgmt/configure\-jdbc\-connection\.html](http://docs.aws.amazon.com/redshift/latest/mgmt/configure-jdbc-connection.html)   | 
-| Greenplum Database | postgresql\-9\.4\-1204\-jdbc42\.jar |  [https://jdbc\.postgresql\.org/](https://jdbc.postgresql.org/)   | 
-| IBM DB2 (LUW) | db2jcc4\.jar (JDBC 4.0 Driver) |  [https://www-01\.ibm\.com/support/docview\.wss?uid=swg21363866](https://www-01.ibm.com/support/docview.wss?uid=swg21363866)   | 
-| Microsoft SQL Server | sqljdbc4\.jar |   [https://www\.microsoft\.com/en\-us/download/details\.aspx?displaylang=en&id=11774](https://www.microsoft.com/en-us/download/details.aspx?displaylang=en&id=11774)   | 
-| MySQL | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
+| Amazon Aurora \(PostgreSQL compatible\) | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| Amazon Redshift | redshift\-jdbc42\-2\.0\.0\.1\.jar |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.0\.0\.1/redshift\-jdbc42\-2\.0\.0\.1\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.0.0.1/redshift-jdbc42-2.0.0.1.zip)   | 
+| Azure SQL | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Azure Synapse | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Greenplum Database | postgresql\-42\.2\.19\.jar |  [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| Maria DB |  mariadb\-java\-client\-2\.4\.1\.jar  |  [https://downloads\.mariadb\.com/Connectors/java/connector\-java\-2\.4\.1/mariadb\-java\-client\-2\.4\.1\.jar](https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar)   | 
+| Microsoft SQL Server | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| MySQL | mysql\-connector\-java\-8\.0\.15\.jar |   [https://dev\.mysql\.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)   | 
 | Netezza |  nzjdbc\.jar Use the client tools software\. Install driver version 7\.2\.1, which is backwards compatible with data warehouse version 7\.2\.0\.   |   [http://www\.ibm\.com/support/knowledgecenter/SSULQD\_7\.2\.1/com\.ibm\.nz\.datacon\.doc/c\_datacon\_plg\_overview\.html](http://www.ibm.com/support/knowledgecenter/SSULQD_7.2.1/com.ibm.nz.datacon.doc/c_datacon_plg_overview.html)   | 
-| Oracle |  ojdbc7\.jar Driver versions 7 and later are supported\.   |   [http://www\.oracle\.com/technetwork/database/features/jdbc/jdbc\-drivers\-12c\-download\-1958347\.html](http://www.oracle.com/technetwork/database/features/jdbc/jdbc-drivers-12c-download-1958347.html)   | 
-| PostgreSQL | postgresql\-9\.4\-1204\-jdbc42\.jar |   [https://jdbc\.postgresql\.org/download\.html](https://jdbc.postgresql.org/download.html)   | 
+| Oracle |  ojdbc8\.jar Driver versions 8 and later are supported\.   |   [https://www\.oracle\.com/database/technologies/jdbc\-ucp\-122\-downloads\.html](https://www.oracle.com/database/technologies/jdbc-ucp-122-downloads.html)   | 
+| PostgreSQL | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| SAP ASE \(Sybase ASE\) | jconn4\.jar | Available as part of the SDK for SAP Adaptive Server Enterprise 16 provided with SAP ASE product\. You can download the trial version of the SDK at [https://www\.sap\.com/developer/trials\-downloads/additional\-downloads/sdk\-for\-sap\-adaptive\-server\-enterprise\-16\-13351\.html](https://www.sap.com/developer/trials-downloads/additional-downloads/sdk-for-sap-adaptive-server-enterprise-16-13351.html) | 
 | Teradata |  terajdbc4\.jar tdgssconfig\.jar  |   [https://downloads\.teradata\.com/download/connectivity/jdbc\-driver ](https://downloads.teradata.com/download/connectivity/jdbc-driver)   | 
-| Vertica |  vertica\-jdbc\-7\.2\.3\-0\_all Driver versions 7\.2\.0 and later are supported\.  |   [https://my\.vertica\.com/download/vertica/client\-drivers/](https://my.vertica.com/download/vertica/client-drivers/)   | 
+| Vertica |  vertica\-jdbc\-9\.1\.1\-0\.jar Driver versions 7\.2\.0 and later are supported\.  |   [https://www\.vertica\.com/client\_drivers/9\.1\.x/9\.1\.1\-0/vertica\-jdbc\-9\.1\.1\-0\.jar](https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-jdbc-9.1.1-0.jar)   | 
+| IBM DB2 LUW |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/node/382667](https://www.ibm.com/support/pages/node/382667)   | 
+| Snowflake |  snowflake\-jdbc\-3\.9\.2\.jar For more information, see [https://docs.snowflake.com/en/user-guide/jdbc-download.html](https://docs.snowflake.com/en/user-guide/jdbc-download.html)   |   [ https://repo1\.maven\.org/maven2/net/snowflake/snowflake\-jdbc/3\.9\.2/snowflake\-jdbc\-3\.9\.2\.jar]( https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.9.2/snowflake-jdbc-3.9.2.jar)   | 
 
-### Installing JDBC Drivers on Linux<a name="CHAP_Installing.JDBCDrivers.Linux"></a>
+### Installing JDBC drivers on Linux<a name="CHAP_Installing.JDBCDrivers.Linux"></a>
 
 You can use the following steps to install the JDBC drivers on your Linux system for use with AWS SCT\. 
 
@@ -227,7 +210,7 @@ You can use the following steps to install the JDBC drivers on your Linux system
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Installing.html)
 
-### Storing Driver Paths in the Global Settings<a name="CHAP_Installing.JDBCDrivers.Settings"></a>
+### Storing driver paths in the global settings<a name="CHAP_Installing.JDBCDrivers.Settings"></a>
 
 After you have downloaded and installed the required JDBC drivers, you can set the location of the drivers globally in the AWS SCT settings\. If you don't set the location of the drivers globally, the application asks you for the location of the drivers when you connect to a database\. 
 
@@ -236,9 +219,7 @@ After you have downloaded and installed the required JDBC drivers, you can set t
 1. In the AWS SCT, choose **Settings**, and then choose **Global Settings**\.   
 ![\[Choose global settings\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_global_settings.png)
 
-1. For **Global settings**, choose **Drivers**\. Add the file path to the JDBC driver for your source database engine and your target Amazon RDS DB instance database engine\. 
-**Note**  
-For Teradata, you specify two drivers separated by a semicolon\.  
+1. For **Global settings**, choose **Drivers**\. Add the file path to the JDBC driver for your source database engine and your target Amazon RDS DB instance database engine\.   
 ![\[Global settings\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/driver-settings.png)
 
 1. When you are finished adding the driver paths, choose **OK**\. 

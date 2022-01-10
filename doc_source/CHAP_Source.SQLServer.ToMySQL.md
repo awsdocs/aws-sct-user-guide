@@ -1,6 +1,6 @@
 # Converting SQL Server to MySQL<a name="CHAP_Source.SQLServer.ToMySQL"></a>
 
-Some things to consider when migrating a SQL Server schema to MySQL: 
+Some things to consider when migrating a SQL Server schema to MySQL:
 + MySQL doesn’t support the MERGE statement\. However, AWS SCT can emulate the MERGE statement during conversion by using the INSERT ON DUPLICATE KEY clause and the UPDATE FROM and DELETE FROM statements\. 
 
   For correct emulation using INSERT ON DUPLICATE KEY, make sure that a unique constraint or primary key exists on the target MySQL database\.

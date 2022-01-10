@@ -1,14 +1,13 @@
-# Converting DB2 LUW to Amazon RDS for PostgreSQL or Amazon Aurora \(PostgreSQL\)<a name="CHAP_Source.DB2LUW.ToPostgreSQL"></a>
+# Converting DB2 LUW to Amazon RDS for PostgreSQL or Amazon Aurora PostgreSQL\-Compatible Edition<a name="CHAP_Source.DB2LUW.ToPostgreSQL"></a>
 
-Some things to consider when migrating IBM Db2 LUW to ToPostgreSQL: 
-+ AWS SCT can convert various trigger statements used with Db2 LUW\. These trigger statements include the following:
-  +  Trigger events \- INSERT, DELETE, and UPDATE trigger events specify that the triggered action runs whenever the event is applied to the subject table or subject view\. You can specify any combination of the INSERT, DELETE, and UPDATE events, but you can specify each event only once\. AWS SCT supports single and multiple trigger events\. For events, PostgreSQL has practically the same functionality\. 
-  + Event OF COLUMN \- You can specify a column name from a base table\. The trigger is activated only by the update of a column that is identified in the column\-name list\. PostgreSQL has the same functionality\.
-  + Statement triggers – These specify that the triggered action is applied only once for the whole statement\. You can’t specify this type of trigger granularity for a BEFORE trigger or an INSTEAD OF trigger\. If specified, an UPDATE or DELETE trigger is activated, even if no rows are affected\. PostgreSQL also has this functionality and trigger declaration for statement triggers is identical for PostgreSQL and Db2 LUW\.
-  + Referencing clauses – These specify the correlation names for transition variables and the table names for transition tables\. Correlation names identify a specific row in the set of rows affected by the triggering SQL operation\. Table names identify the complete set of affected rows\. Each row affected by a triggering SQL operation is available to the triggered action by qualifying columns with specified correlation\-names\. PostgreSQL doesn’t support this functionality, and only uses a NEW or OLD correlation name\.
-  + AWS SCT supports INSTEAD OF triggers\.
+When you migrate IBM Db2 LUW to PostgreSQL, AWS SCT can convert various trigger statements used with Db2 LUW\. These trigger statements include the following:
++ **Trigger events** – INSERT, DELETE, and UPDATE trigger events specify that the triggered action runs whenever the event is applied to the subject table or subject view\. You can specify any combination of the INSERT, DELETE, and UPDATE events, but you can specify each event only once\. AWS SCT supports single and multiple trigger events\. For events, PostgreSQL has practically the same functionality\. 
++ **Event OF COLUMN** – You can specify a column name from a base table\. The trigger is activated only by the update of a column that is identified in the column\-name list\. PostgreSQL has the same functionality\.
++ **Statement triggers** – These specify that the triggered action is applied only once for the whole statement\. You can’t specify this type of trigger granularity for a BEFORE trigger or an INSTEAD OF trigger\. If specified, an UPDATE or DELETE trigger is activated, even if no rows are affected\. PostgreSQL also has this functionality and trigger declaration for statement triggers is identical for PostgreSQL and Db2 LUW\.
++ **Referencing clauses** – These specify the correlation names for transition variables and the table names for transition tables\. Correlation names identify a specific row in the set of rows affected by the triggering SQL operation\. Table names identify the complete set of affected rows\. Each row affected by a triggering SQL operation is available to the triggered action by qualifying columns with specified correlation\-names\. PostgreSQL doesn’t support this functionality, and only uses a NEW or OLD correlation name\.
++ **INSTEAD OF triggers** – AWS SCT supports these\.
 
-## Converting DB2 LUW Partitioned Tables to PostgreSQL Version 10 Partitioned Tables<a name="CHAP_Source.DB2LUW.ToPostgreSQL.PartitionedTables"></a>
+## Converting DB2 LUW partitioned tables to PostgreSQL version 10 partitioned tables<a name="CHAP_Source.DB2LUW.ToPostgreSQL.PartitionedTables"></a>
 
 AWS SCT can convert Db2 LUW tables to partitioned tables in PostgreSQL 10\. There are several restrictions when converting a Db2 LUW partitioned table to PostgreSQL:
 + You can create a partitioned table with a nullable column in Db2 LUW, and you can specify a partition to store NULL values\. However, PostgreSQL doesn’t support NULL values for RANGE partitioning\.

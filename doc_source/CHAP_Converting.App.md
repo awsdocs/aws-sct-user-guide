@@ -1,20 +1,20 @@
-# Converting Application SQL Using the AWS Schema Conversion Tool<a name="CHAP_Converting.App"></a>
+# Converting application SQL using the AWS SCT<a name="CHAP_Converting.App"></a>
 
 When you convert your database schema from one engine to another, you also need to update the SQL code in your applications to interact with the new database engine instead of the old one\. You can view, analyze, edit, and save the converted SQL code\.
 
 You can use the AWS Schema Conversion Tool \(AWS SCT\) to convert the SQL code in your C\+\+, C\#, Java, or other application code\. For an Oracle to PostgreSQL conversion, you can use AWS SCT to convert SQL\*Plus code to PSQL\. 
 
-## Overview of Converting Application SQL<a name="CHAP_Converting.App.Overview"></a>
+## Overview of converting application SQL<a name="CHAP_Converting.App.Overview"></a>
 
 To convert the SQL code in your application, you take the following high\-level steps: 
-+ **Create an application conversion project** – The application conversion project is a child of the database schema conversion project\. Each database schema conversion project can have one or more child application conversion projects\. For more information, see [ Creating Application Conversion Projects in the AWS Schema Conversion Tool](#CHAP_Converting.App.Project)\. 
-+ **Analyze and convert your SQL code** – AWS SCT analyzes your application, extracts the SQL code, and creates a local version of the converted SQL for you to review and edit\. The tool doesn't change the code in your application until you are ready\. For more information, see [Analyzing and Converting Your SQL Code by Using the AWS Schema Conversion Tool](#CHAP_Converting.App.Convert)\. 
-+ **Create an application assessment report** – The application assessment report provides important information about the conversion of the application SQL code from your source database schema to your target database schema\. For more information, see [Creating and Using the Assessment Report](#CHAP_Converting.App.AssessmentReport)\. 
-+ **Edit, apply changes to, and save your converted SQL code** – The assessment report includes a list of SQL code items that can't be converted automatically\. For these items, you can edit the SQL code manually to perform the conversion\. For more information, see [ Editing and Saving Your Converted SQL Code with the AWS Schema Conversion Tool](#CHAP_Converting.App.Edit)\. 
++ **Create an application conversion project** – The application conversion project is a child of the database schema conversion project\. Each database schema conversion project can have one or more child application conversion projects\. For more information, see [Creating application conversion projects in the AWS SCT](#CHAP_Converting.App.Project)\. 
++ **Analyze and convert your SQL code** – AWS SCT analyzes your application, extracts the SQL code, and creates a local version of the converted SQL for you to review and edit\. The tool doesn't change the code in your application until you are ready\. For more information, see [Analyzing and converting your SQL code using the AWS SCT](#CHAP_Converting.App.Convert)\. 
++ **Create an application assessment report** – The application assessment report provides important information about the conversion of the application SQL code from your source database schema to your target database schema\. For more information, see [Creating and using the AWS SCT assessment report](#CHAP_Converting.App.AssessmentReport)\. 
++ **Edit, apply changes to, and save your converted SQL code** – The assessment report includes a list of SQL code items that can't be converted automatically\. For these items, you can edit the SQL code manually to perform the conversion\. For more information, see [Editing and saving your converted SQL code with the AWS SCT](#CHAP_Converting.App.Edit)\. 
 
-## Creating Application Conversion Projects in the AWS Schema Conversion Tool<a name="CHAP_Converting.App.Project"></a>
+## Creating application conversion projects in the AWS SCT<a name="CHAP_Converting.App.Project"></a>
 
-In the AWS Schema Conversion Tool \(AWS SCT\), the application conversion project is a child of the database schema conversion project\. Each database schema conversion project can have one or more child application conversion projects\. Use the following procedure to create an application conversion project\. 
+In the AWS Schema Conversion Tool, the application conversion project is a child of the database schema conversion project\. Each database schema conversion project can have one or more child application conversion projects\. Use the following procedure to create an application conversion project\. 
 
 **To create an application conversion project**
 
@@ -38,9 +38,9 @@ In the AWS Schema Conversion Tool \(AWS SCT\), the application conversion projec
 
 1. You can add additional application conversion projects by choosing **New Application** from the **Applications** menu, or by selecting the **Applications** node in the source tree, opening the context \(right\-click\) menu, and then choosing **Add application**\. 
 
-## Analyzing and Converting Your SQL Code by Using the AWS Schema Conversion Tool<a name="CHAP_Converting.App.Convert"></a>
+## Analyzing and converting your SQL code using the AWS SCT<a name="CHAP_Converting.App.Convert"></a>
 
-Use the following procedure to analyze and convert your SQL code by using the AWS Schema Conversion Tool \(AWS SCT\)\. 
+Use the following procedure to analyze and convert your SQL code by using the AWS Schema Conversion Tool\. 
 
 **To analyze and convert your SQL code**
 
@@ -53,11 +53,11 @@ Use the following procedure to analyze and convert your SQL code by using the AW
 You can edit the converted SQL code in a later procedure\.   
 ![\[SQL code to analyze\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/applications-project-analyze.png)
 
-## Creating and Using the Assessment Report<a name="CHAP_Converting.App.AssessmentReport"></a>
+## Creating and using the AWS SCT assessment report<a name="CHAP_Converting.App.AssessmentReport"></a>
 
 The *application assessment report* provides important information about converting the application SQL code from your source database schema to your target database schema\. The report details all of the SQL extracted from the application, all of the SQL converted, and action items for SQL that can't be converted\. The report also includes estimates of the amount of effort that it will take to manually convert the SQL code that can't be converted automatically\. 
 
-### Creating an Application Assessment Report<a name="CHAP_Converting.App.AssessmentReport.Create"></a>
+### Creating an application assessment report<a name="CHAP_Converting.App.AssessmentReport.Create"></a>
 
 Use the following procedure to create an application assessment report\.
 
@@ -74,12 +74,12 @@ Use the following procedure to create an application assessment report\.
 
 1. Choose the **SQL Conversion Actions** tab and review the information\. 
 
-   The **SQL Conversion Actions** tab contains a list of SQL code items that can't be converted automatically\. There are also recommendations for how to manually convert the SQL code\. You edit your converted SQL code in a later step\. For more information, see [ Editing and Saving Your Converted SQL Code with the AWS Schema Conversion Tool](#CHAP_Converting.App.Edit)\.   
+   The **SQL Conversion Actions** tab contains a list of SQL code items that can't be converted automatically\. There are also recommendations for how to manually convert the SQL code\. You edit your converted SQL code in a later step\. For more information, see [Editing and saving your converted SQL code with the AWS SCT](#CHAP_Converting.App.Edit)\.   
 ![\[SQL Conversion Actions tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/applications-actions.png)
 
 1. You can save a local copy of the application assessment report as either a PDF file or a comma\-separated values \(CSV\) file\. The PDF file contains both the summary and action item information\. The CSV file contains only action item information\. 
 
-## Editing and Saving Your Converted SQL Code with the AWS Schema Conversion Tool<a name="CHAP_Converting.App.Edit"></a>
+## Editing and saving your converted SQL code with the AWS SCT<a name="CHAP_Converting.App.Edit"></a>
 
 The assessment report includes a list of SQL code items that can't be converted automatically\. For each item that can't be converted, there is an action item on the **SQL Conversion Actions** tab\. For these items, you can edit the SQL code manually to perform the conversion\. 
 

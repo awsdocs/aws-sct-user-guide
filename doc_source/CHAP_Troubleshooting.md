@@ -1,4 +1,4 @@
-# Troubleshooting Issues with the AWS Schema Conversion Tool<a name="CHAP_Troubleshooting"></a>
+# Troubleshooting issues with the AWS SCT<a name="CHAP_Troubleshooting"></a>
 
 Following, you can find information about troubleshooting issues with the AWS Schema Conversion Tool \(AWS SCT\)\.
 
@@ -25,16 +25,9 @@ grant select_catalog_role to min_privs;
 grant select any dictionary to min_privs;
 ```
 
+## Assessment report warning message<a name="CHAP_Troubleshooting.WarningMessage"></a>
 
-You might encounter an additional error even with a privileged account\.
-
-```
-ORA-01031: insufficient privileges
-```
-In this case following permissions may be required\.
-
-```
-grant select on sys.cdef$ to min_privs;
-grant select on sys.con$  to min_privs;
-grant select on sys.user$ to min_privs;
-```
+To assess the complexity of converting to another database engine, AWS SCT requires access to objects in your source database\. When SCT can’t perform an assessment because problems were encountered during scanning, a warning message is issued that indicates overall conversion percentage is reduced\. Following are reasons why AWS SCT might encounter problems during scanning:
++ The user account connected to the database doesn’t have access to all of the needed objects\. For more information about SCT required security permissions and privileges for your database, see [Sources for AWS SCT](CHAP_Source.md) for the appropriate source database section in this guide\.
++ An object cited in the schema no longer exists in the database\. To help resolve the issue, you can connect with SYSDBA permissions and check if the object is present in the database\. 
++ SCT is trying to assess an object that is encrypted\. 

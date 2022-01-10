@@ -1,14 +1,14 @@
-# Optimizing Amazon Redshift by Using the AWS Schema Conversion Tool<a name="CHAP_Converting.DW.RedshiftOpt"></a>
+# Optimizing Amazon Redshift by using the AWS SCT<a name="CHAP_Converting.DW.RedshiftOpt"></a>
 
-You can use the AWS Schema Conversion Tool \(AWS SCT\) to optimize your Amazon Redshift database\. Using your Amazon Redshift database as a source, and a test Amazon Redshift database as the target, AWS SCT recommends sort keys and distribution keys to optimize your database\. 
+You can use the AWS Schema Conversion Tool to optimize your Amazon Redshift database\. Using your Amazon Redshift database as a source, and a test Amazon Redshift database as the target, AWS SCT recommends sort keys and distribution keys to optimize your database\. 
 
-## Optimizing Your Amazon Redshift Database<a name="CHAP_Converting.DW.RedshiftOpt.Opt"></a>
+## Optimizing your Amazon Redshift database<a name="CHAP_Converting.DW.RedshiftOpt.Opt"></a>
 
 Use the following procedure to optimize your Amazon Redshift database\.
 
 **To optimize your Amazon Redshift database**
 
-1. Take a manual snapshot of your Amazon Redshift cluster as a backup\. You can delete the snapshot after you are done optimizing your Amazon Redshift cluster and testing any changes that you make\. For more information, see [Amazon Redshift Snapshots](http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)\. 
+1. Take a manual snapshot of your Amazon Redshift cluster as a backup\. You can delete the snapshot after you are done optimizing your Amazon Redshift cluster and testing any changes that you make\. For more information, see [Amazon Redshift snapshots](https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)\. 
 
 1. Choose a schema object to convert from the left panel of your project\. Open the context \(right\-click\) menu for the object, and then choose **Collect Statistics**\. 
 

@@ -1,4 +1,4 @@
-# Using the AWS Schema Conversion Tool Extension Pack<a name="CHAP_ExtensionPack"></a>
+# Using the AWS SCT extension pack<a name="CHAP_ExtensionPack"></a>
 
 The AWS SCT Extension Pack is an add\-on module that emulates functions present in the source database that are required when converting objects to the target database\. Before you can install the AWS SCT Extension Pack, you need to convert your database schema\. 
 
@@ -6,15 +6,15 @@ The AWS SCT Extension Pack includes the following components:
 + DB schema – Includes SQL functions, procedures, and tables for emulating some OLTP and OLAP objects \(for example, sequence\) or unsupported built\-in\-functions from the source database\. This schema is named in the format `aws_<database engine name>_ext`\. 
 + Custom Python library \(for select OLAP databases\) – Includes a set of Python functions that emulate unsupported built\-in database functions\. Use this library when you migrate from one of the supported databases to Amazon Redshift\. 
 
-  For more information on this library, see [ Using the Custom Python Library for the AWS SCT Extension Pack](#CHAP_ExtensionPack.DW)\.
+  For more information on this library, see [Using the custom Python library for the AWS SCT extension pack](#CHAP_ExtensionPack.DW)\.
 + AWS Lambda functions \(for select OLTP databases\) – Includes AWS Lambda functions that emulate complex database functionality, such as job scheduling and sending emails\. 
 
 The following sections discuss the AWS SCT Extension Pack\.
 
 **Topics**
-+ [Using the Extension Pack Schema](#CHAP_ExtensionPack.Schema)
-+ [Using the Custom Python Library for the AWS SCT Extension Pack](#CHAP_ExtensionPack.DW)
-+ [Using the AWS Lambda Functions from the AWS SCT Extension Pack](#CHAP_ExtensionPack.OLTP)
++ [Using the extension pack schema](#CHAP_ExtensionPack.Schema)
++ [Using the custom Python library for the AWS SCT extension pack](#CHAP_ExtensionPack.DW)
++ [Using the AWS Lambda functions from the AWS SCT extension pack](#CHAP_ExtensionPack.OLTP)
 
 You can apply the AWS SCT Extension Pack in two ways:
 + AWS SCT automatically applies the extension pack when you apply a target database script by choosing **ApplyToTarget** from the context menu\. AWS SCT applies the extension pack before it applies all other schema objects\.
@@ -22,9 +22,9 @@ You can apply the AWS SCT Extension Pack in two ways:
 
 Each time the AWS SCT Extension Pack is applied to a target data store, the components are overwritten\. Each component has a version number, and AWS SCT warns you if the current component version is older than the one being applied\. You can control these notifications in the **Notification Settings** in the **Global Settings** section of **Settings**\.
 
-## Using the Extension Pack Schema<a name="CHAP_ExtensionPack.Schema"></a>
+## Using the extension pack schema<a name="CHAP_ExtensionPack.Schema"></a>
 
-When you convert your database or data warehouse schema, the AWS Schema Conversion Tool \(AWS SCT\) adds an additional schema to your target database\. This schema implements SQL system functions of the source database that are required when writing your converted schema to your target database\. This additional schema is called the extension pack schema\.
+When you convert your database or data warehouse schema, AWS SCT adds an additional schema to your target database\. This schema implements SQL system functions of the source database that are required when writing your converted schema to your target database\. This additional schema is called the extension pack schema\.
 
 The extension pack schema for OLTP databases is named according to the source database as follows: 
 + Microsoft SQL Server: `AWS_SQLSERVER_EXT`
@@ -40,21 +40,21 @@ The extension pack schema for OLAP data warehouse applications is named accordin
 + Teradata: `AWS_TERADATA_EXT`
 + Vertica: `AWS_VERTICA_EXT`
 
-## Using the Custom Python Library for the AWS SCT Extension Pack<a name="CHAP_ExtensionPack.DW"></a>
+## Using the custom Python library for the AWS SCT extension pack<a name="CHAP_ExtensionPack.DW"></a>
 
-In some cases, AWS Schema Conversion Tool \(AWS SCT\) can't convert source database features to equivalent Amazon Redshift features\. The AWS SCT Extension Pack contains a custom Python library that emulates some source database functionality on Amazon Redshift\. 
+In some cases, AWS Schema Conversion Tool can't convert source database features to equivalent Amazon Redshift features\. The AWS SCT Extension Pack contains a custom Python library that emulates some source database functionality on Amazon Redshift\. 
 
-If you are converting a transactional database, instead see [Using the AWS Lambda Functions from the AWS SCT Extension Pack](#CHAP_ExtensionPack.OLTP)\. 
+If you are converting a transactional database, instead see [Using the AWS Lambda functions from the AWS SCT extension pack](#CHAP_ExtensionPack.OLTP)\. 
 
 In two cases, you might want to install the extension pack manually: 
 + You accidentally delete the extension pack schema from your target database\. 
 + You want to upload custom Python libraries to emulate database functionality\. 
 
-### Using AWS Services to Upload Custom Python Libraries<a name="CHAP_ExtensionPack.DW.Services"></a>
+### Using AWS services to upload custom Python libraries<a name="CHAP_ExtensionPack.DW.Services"></a>
 
 The AWS SCT extension pack wizard helps you install the custom Python library\. 
 
-### Applying the Extension Pack<a name="CHAP_ExtensionPack.DW.Installing"></a>
+### Applying the extension pack<a name="CHAP_ExtensionPack.DW.Installing"></a>
 
 Use the following procedure to apply the extension pack\. 
 
@@ -69,7 +69,7 @@ Use the following procedure to apply the extension pack\.
 
 1. On the **AWS Services Settings** page, do the following: 
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 
-   + If you are uploading the Python library, provide the credentials to connect to your AWS account\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Using AWS Service Profiles in the AWS Schema Conversion Tool](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+   + If you are uploading the Python library, provide the credentials to connect to your AWS account\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 1. On the **Python Library Upload** page, do the following: 
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 
@@ -81,17 +81,17 @@ Use the following procedure to apply the extension pack\.
 
    When you are done, choose **Finish**\. 
 
-## Using the AWS Lambda Functions from the AWS SCT Extension Pack<a name="CHAP_ExtensionPack.OLTP"></a>
+## Using the AWS Lambda functions from the AWS SCT extension pack<a name="CHAP_ExtensionPack.OLTP"></a>
 
-The AWS Schema Conversion Tool \(AWS SCT\) extension pack contains Lambda functions that provide email, job scheduling, and other features to databases hosted on the Amazon EC2 platform\.
+The AWS Schema Conversion Tool extension pack contains Lambda functions that provide email, job scheduling, and other features to databases hosted on the Amazon EC2 platform\.
 
-### Using AWS Lambda Functions to Emulate Database Functionality<a name="CHAP_ExtensionPack.OLTP.Services"></a>
+### Using AWS Lambda functions to emulate database functionality<a name="CHAP_ExtensionPack.OLTP.Services"></a>
 
 In some cases, database features can't be converted to equivalent Amazon RDS features\. For example, Oracle sends email calls that use `UTL_SMTP`, and Microsoft SQL Server can use a job scheduler\. If you host and self\-manage a database on Amazon EC2, you can emulate these features by substituting AWS services for them\. 
 
 The AWS SCT extension pack wizard helps you install, create, and configure Lambda functions to emulate email, job scheduling, and other features\. 
 
-### Applying the Extension Pack<a name="CHAP_ExtensionPack.OLTP.Installing"></a>
+### Applying the extension pack<a name="CHAP_ExtensionPack.OLTP.Installing"></a>
 
 Use the following procedure to apply the extension pack\. 
 
@@ -109,7 +109,7 @@ The AWS service emulation features are supported only for databases installed an
 
 1. On the **AWS Services Settings** page, do the following: 
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 
-   + If you are installing AWS services, provide the credentials to connect to your AWS account\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Using AWS Service Profiles in the AWS Schema Conversion Tool](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+   + If you are installing AWS services, provide the credentials to connect to your AWS account\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 1. On the **Email Sending Service** page, do the following: 
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 
@@ -122,3 +122,6 @@ The AWS service emulation features are supported only for databases installed an
 1. On the **Functions Emulation** page, choose **Create Extension Pack**\. Messages appear with the status of the extension pack operations\. 
 
    When you are done, choose **Finish**\. 
+
+**Note**  
+To update an extension pack and overwrite the old extension pack components, be sure to use the latest version of AWS SCT\.

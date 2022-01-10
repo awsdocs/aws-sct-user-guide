@@ -1,6 +1,6 @@
 # Converting SQL Server to PostgreSQL<a name="CHAP_Source.SQLServer.ToPostgreSQL"></a>
 
-Some things to consider when migrating a SQL Server schema to ToPostgreSQL: 
+Some things to consider when migrating a SQL Server schema to PostgreSQL: 
 + In PostgreSQL, all object’s names in a schema must be unique, including indexes\. Index names must be unique in the schema of the base table\. In SQL Server, an index name can be the same for different tables\.
 
   To ensure the uniqueness of index names, AWS SCT gives you the option to generate unique index names if your index names are not unique\. To do this, choose the option **Generate unique index names** in the project properties\. By default, this option is enabled\. If this option is enabled, unique index names are created using the format IX\_table\_name\_index\_name\. If this option is disabled, index names aren’t changed\.
@@ -22,13 +22,15 @@ Some things to consider when migrating a SQL Server schema to ToPostgreSQL:
   + SUSER\_SNAME\(\) CURRENT\_USER – Returns the user name of the current execution context\.
   + SUSER\_SNAME\(NULL\) – Returns NULL\.
 + Converting table\-valued functions is supported\. Table\-valued functions return a table and can take the place of a table in a query\.
-+ PATINDEX returns the starting position of the first occurrence of a pattern in a specified expression, or zeros if the pattern is not found, on all valid text and character data types\. When converting from SQL Server to Amazon RDS for PostgreSQL, AWS SCT replaces application code that uses PATINDEX with aws\_sqlserver\_ext\.patindex\(<pattern character>, <expression character varying>\) \.
-+ In SQL Server , a user\-defined table type is a type that represents the definition of a table structure\. You use a user\-defined table type to declare table\-value parameters for stored procedures or functions, or to declare table variables that you want to use in a batch or in the body of a stored procedure or function\. AWS SCT emulated this type in PostgreSQL by creating a temporary table\.
++ PATINDEX returns the starting position of the first occurrence of a pattern in a specified expression on all valid text and character data types\. It returns zeros if the pattern is not found\. When converting from SQL Server to Amazon RDS for PostgreSQL, AWS SCT replaces application code that uses PATINDEX with aws\_sqlserver\_ext\.patindex\(<pattern character>, <expression character varying>\) \.
++ In SQL Server, a user\-defined table type is a type that represents the definition of a table structure\. You use a user\-defined table type to declare table\-value parameters for stored procedures or functions\. You can also use a user\-defined table type to declare table variables that you want to use in a batch or in the body of a stored procedure or function\. AWS SCT emulated this type in PostgreSQL by creating a temporary table\.
 
 When converting from SQL Server to PostgreSQL, AWS SCT converts SQL Server system objects into recognizable objects in PostgreSQL\. The following table shows how the system objects are converted\. 
 
+ 
 
-| >MS SQL Server Use Cases | PostgreSQL Substitution | 
+
+| >MS SQL Server use cases | PostgreSQL substitution | 
 | --- | --- | 
 | SYS\.SCHEMAS | AWS\_SQLSERVER\_EXT\.SYS\_SCHEMAS | 
 | SYS\.TABLES | AWS\_SQLSERVER\_EXT\.SYS\_TABLES | 
@@ -64,7 +66,7 @@ When converting from SQL Server to PostgreSQL, AWS SCT converts SQL Server syste
 | SYS\.SYSPROCESSES | AWS\_SQLSERVER\_EXT\.SYS\_SYSPROCESSES | 
 | sys\.system\_objects | AWS\_SQLSERVER\_EXT\.SYS\_SYSTEM\_OBJECTS | 
 
-## Converting SQL Server Partitions to PostgreSQL Version 10 Partitions<a name="CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions"></a>
+## Converting SQL Server partitions to PostgreSQL version 10 partitions<a name="CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions"></a>
 
 In SQL Server, you create partitions with partition functions\. When converting from a SQL Server portioned table to a PostgreSQL version 10 partitioned table, be aware of several potential issues:
 + SQL Server allows you to partition a table using a column without a NOT NULL constraint\. In that case, all NULL values go to the leftmost partition\. PostgreSQL doesn’t support NULL values for RANGE partitioning\.
