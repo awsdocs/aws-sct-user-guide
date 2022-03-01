@@ -12,7 +12,7 @@ Almost all work you do with AWS SCT starts with the following steps:
 
 1. Create an AWS SCT project\. Connect to your source and target databases\. For more information about connecting to your source database, see [Sources for AWS SCT](CHAP_Source.md)\.
 
-1. Create mapping rules\. For more information about mapping rules, see [Creating mapping rules in AWS SCT](CHAP_Source.md)\.
+1. Create mapping rules\. For more information about mapping rules, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\.
 
 1. Run and then review the Database Migration Assessment Report\. For more information about the assessment report, see [Creating and reviewing the database migration assessment report](CHAP_UserInterface.md#CHAP_UserInterface.AssessmentReport)\.
 

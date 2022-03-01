@@ -7,7 +7,7 @@ You can use AWS SCT to convert schemas, code objects, and application code from 
 + Amazon Aurora PostgreSQL\-Compatible Edition
 + Amazon RDS for MariaDB
 
-## Permissions needed when using Db2 LUW as a source<a name="CHAP_Source.DB2LUW.Permissions"></a>
+## Privileges for Db2 LUW as a source<a name="CHAP_Source.DB2LUW.Permissions"></a>
 
 The privileges needed to connect to a DB2LUW database, to check available privileges and read schema metadata for a source are listed following: 
 + Privilege needed to establish a connection:
@@ -104,10 +104,19 @@ Use the following procedure to connect to your Db2 LUW source database with the 
 
 1. Choose **DB2 LUW**, then choose **Next**\. 
 
-   The **Add source** dialog box appears\.  
-![\[Db2 LUW connection information\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/source-db2luw.png)
+   The **Add source** dialog box appears\.
 
-1. Provide the Db2 LUW source database connection information\. Use the instructions in the following table\.   
+1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
+
+1. Use database credentials from AWS Secrets Manager or enter them manually:
+   + To use database credentials from Secrets Manager, use the following insructions:
+
+     1. For **AWS Secret**, choose the name of the secret\.
+
+     1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
+
+     For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
+   + To enter the IBM Db2 LUW source database connection information manually, use the instructions in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.DB2LUW.html)
 

@@ -1,4 +1,4 @@
-# Converting Oracle to RDS for MySQL or Aurora MySQL<a name="CHAP_Source.Oracle.ToMySQL"></a>
+# Converting Oracle to Amazon RDS for MySQL or Amazon Aurora MySQL<a name="CHAP_Source.Oracle.ToMySQL"></a>
 
 When you convert Oracle to RDS for MySQL or Aurora MySQL, to change the order that statements run in, you can use a GOTO statement and a label\. Any PL/SQL statements that follow a GOTO statement are skipped, and processing continues at the label\. You can use GOTO statements and labels anywhere within a procedure, batch, or statement block\. You can also next GOTO statements\.
 

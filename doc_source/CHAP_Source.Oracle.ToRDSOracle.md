@@ -44,7 +44,7 @@ Some things to consider when migrating Oracle schema and code to Amazon RDS for 
   For more information about using database links with Amazon RDS, see the [Amazon RDS documentation](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.Oracle.CommonDBATasks.Database.html#Appendix.Oracle.CommonDBATasks.DBLinks)\.
 + The AWS SCT assessment report provides server metrics for the conversion\. These metrics about your Oracle instance include the following:
   + Computation and memory capacity of the target DB instance\.
-  + Unsupported Oracle features such as Unified Auditing, and Real Application Clusters that Amazon RDS doesn't support\.
+  + Unsupported Oracle features such as Real Application Clusters that Amazon RDS doesn't support\.
   + Disk read\-write load
   + Average total disk throughput
   + Server information such as server name, OS, host name, and character set\.
@@ -61,5 +61,5 @@ Some limitations you should consider when migrating Oracle schema and code to Am
   + Create external job
 
   You can grant all other privileges to an Oracle RDS user role\.
-+ Amazon RDS for Oracle doesn’t support Oracle Unified Auditing\. Amazon RDS for Oracle supports traditional auditing and fine\-grained auditing using the DBMS\_FGA package\.
++ Amazon RDS for Oracle supports traditional auditing, fine\-grained auditing using the DBMS\_FGA package, and Oracle Unified Auditing\.
 + Amazon RDS for Oracle doesn’t support change data capture \(CDC\)\. To do CDC during and after a database migration, use AWS Database Migration Service\.

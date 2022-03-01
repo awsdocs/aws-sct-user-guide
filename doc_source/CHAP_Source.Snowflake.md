@@ -2,7 +2,7 @@
 
 You can use AWS SCT to convert schemas, code objects, and application code from Snowflake to Amazon Redshift\.
 
-## Privileges for using Snowflake as a source database<a name="CHAP_Source.Snowflake.Permissions"></a>
+## Privileges for Snowflake as a source database<a name="CHAP_Source.Snowflake.Permissions"></a>
 
 You can create a role with privileges and grant this role the name of a user by using the `SECURITYADMIN` role and the `SECURITYADMIN` session context\.
 
@@ -80,7 +80,17 @@ Use the following procedure to connect to your source database with the AWS Sche
 
    The **Add source** dialog box appears\.
 
-1. Provide the Snowflake source database connection information\. Use the instructions in the following table\.   
+1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
+
+1. Use database credentials from AWS Secrets Manager or enter them manually:
+   + To use database credentials from Secrets Manager, use the following insructions:
+
+     1. For **AWS Secret**, choose the name of the secret\.
+
+     1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
+
+     For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
+   + To enter the Snowflake source data warehouse connection information manually, use the instructions in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.Snowflake.html)
 

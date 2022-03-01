@@ -1,6 +1,6 @@
 # Installing, verifying, and updating AWS SCT<a name="CHAP_Installing"></a>
 
-The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. AWS SCT also installs Amazon Corretto JDK 11\. 
+The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. 
 
 To ensure that you get the correct version of the AWS SCT distribution file we provide verification steps after you download the compressed file\. You can verify the file using the steps provided\.
 

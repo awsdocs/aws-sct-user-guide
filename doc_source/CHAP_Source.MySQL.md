@@ -8,16 +8,16 @@ You can use AWS SCT to convert schemas, database code objects, and application c
 For more information, see the following sections:
 
 **Topics**
-+ [Privileges for MySQL as a source database](#CHAP_Source.MySQL.Permissions)
-+ [Connecting to MySQL as a source database](#CHAP_Source.MySQL.Connecting)
++ [Privileges for MySQL as a source](#CHAP_Source.MySQL.Permissions)
++ [Connecting to MySQL as a source](#CHAP_Source.MySQL.Connecting)
 
-## Privileges for MySQL as a source database<a name="CHAP_Source.MySQL.Permissions"></a>
+## Privileges for MySQL as a source<a name="CHAP_Source.MySQL.Permissions"></a>
 
 The privileges required for MySQL as a source are listed following: 
 + SELECT ON \*\.\* 
 + SHOW VIEW ON \*\.\* 
 
-## Connecting to MySQL as a source database<a name="CHAP_Source.MySQL.Connecting"></a>
+## Connecting to MySQL as a source<a name="CHAP_Source.MySQL.Connecting"></a>
 
 Use the following procedure to connect to your MySQL source database with the AWS Schema Conversion Tool\. 
 
@@ -27,10 +27,19 @@ Use the following procedure to connect to your MySQL source database with the AW
 
 1. Choose **MySQL**, then choose **Next**\.
 
-   The **Add source** dialog box appears\.  
-![\[MySQL connection information\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/source-mysql.png)
+   The **Add source** dialog box appears\.
 
-1. Provide the MySQL source database connection information\. Use the instructions in the following table\.   
+1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
+
+1. Use database credentials from AWS Secrets Manager or enter them manually:
+   + To use database credentials from Secrets Manager, use the following insructions:
+
+     1. For **AWS Secret**, choose the name of the secret\.
+
+     1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
+
+     For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
+   + To enter the MySQL source database connection information manually, use the instructions in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.MySQL.html)
 

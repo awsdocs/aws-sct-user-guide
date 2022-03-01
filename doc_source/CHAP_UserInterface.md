@@ -8,12 +8,14 @@ Use the following topics to help you work with the AWS SCT user interface\. For 
 + [Creating an AWS SCT project](#CHAP_UserInterface.Project)
 + [Saving and opening an AWS SCT project](#CHAP_UserInterface.SaveProject)
 + [Adding database servers to an AWS SCT project](#CHAP_UserInterface.AddServers)
++ [Running AWS SCT in an offline mode](#CHAP_UserInterface.OfflineMode)
 + [Using AWS SCT tree filters](#CHAP_UserInterface.TreeFilters)
 + [Hiding schemas in the AWS SCT tree view](#CHAP_UserInterface.HidingSchemas)
 + [Creating and reviewing the database migration assessment report](#CHAP_UserInterface.AssessmentReport)
 + [Converting your schema](#CHAP_UserInterface.Converting)
 + [Applying the converted schema to your target DB instance](#CHAP_UserInterface.ApplyingConversion)
 + [Storing AWS service profiles in the AWS SCT](#CHAP_UserInterface.Profiles)
++ [Using AWS Secrets Manager](#CHAP_UserInterface.SecretsManager)
 + [Storing database passwords](#CHAP_UserInterface.StoringPasswords)
 + [Using the UNION ALL view for projects with partitioned tables](#CHAP_UserInterface.UnionAllView)
 + [Keyboard shortcuts for the AWS SCT](#CHAP_UserInterface.KeyboardShortcuts)
@@ -55,7 +57,7 @@ Use the following procedure to create an AWS Schema Conversion Tool project\.
 
 1. Start the AWS Schema Conversion Tool\.
 
-1. On the **File** menu, choose **New Project**\. The **New Project** dialog box appears\.   
+1. On the **File** menu, choose **New project**\. The **New project** dialog box appears\.   
 ![\[New Project dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/file-new-project.png)
 
 1.  Enter a name for your project, which is stored locally on your computer\. 
@@ -122,7 +124,7 @@ Use the following procedure to connect to your database\.
 
 1.  Enter the password to connect to your source database server\. 
 
-1. Choose **Test Connection** to verify that AWS SCT can connect to your source database\. 
+1. Choose **Test connection** to verify that AWS SCT can connect to your source database\. 
 
 1. Choose **Connect** to connect to your source database\.
 
@@ -135,6 +137,39 @@ Use the following procedure to remove a database server from your AWS SCT projec
 1. Open the context \(right\-click\) menu, and then choose **Remove from project**\.
 
     AWS SCT removes the selected database server, all mapping rules, conversion results, and other metadata related to this server\. 
+
+## Running AWS SCT in an offline mode<a name="CHAP_UserInterface.OfflineMode"></a>
+
+You can run AWS Schema Conversion Tool in an offline mode\. Following, you can learn how to work with an existing AWS SCT project when disconnected from your source database\.
+
+AWS SCT doesn't require a connection to your source database to run the following operations:
++ Add mapping rules\.
++ Create database migration assessment reports\.
++ Convert database schemas and code\.
++ Edit your source and converted code\.
++ Save your source and converted code as SQL scripts in a text file\.
+
+Before you use AWS SCT in an offline mode, connect to your source database, load metadata, and save your project\. Open this project or disconnect from the source database server to use AWS SCT in an offline mode\.
+
+**To run AWS SCT in an offline mode**
+
+1. Start the AWS Schema Conversion Tool and create a new project\. For more information, see [Creating an AWS SCT project](#CHAP_UserInterface.Project)\.
+
+1. Add a source database server and connect to your source database\. For more information, see [Adding database servers to an AWS SCT project](#CHAP_UserInterface.AddServers)\.
+
+1. Add a target database server or use a virtual target database platform\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\.
+
+1. Create a mapping rule to define the target database platform for your source database\. For more information, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\.
+
+1. Choose **View**, and then choose **Main view**\. 
+
+1. In the left panel that displays the objects of your source database, choose your source database schemas\. Open the context \(right\-click\) menu for the object, and then choose **Load schema**\. This operation loads all source schema metadata into your AWS SCT project\.
+
+   The **Create report** and **Convert schema** operations also load all source schema metadata into your AWS SCT project\. If you ran one of these operations from the context menu, skip the **Load schema** operation\.
+
+1. On the **File** menu, choose **Save project** to save the source database metadata in your project\.
+
+1. Choose **Disconnect from the server** to disconnect from your source database\. Now you can use AWS SCT in the offline mode\.
 
 ## Using AWS SCT tree filters<a name="CHAP_UserInterface.TreeFilters"></a>
 
@@ -236,9 +271,9 @@ You can create a database migration assessment report after you add the source d
 
    The assessment report view opens\.
 
-1. Choose the **Action Items** tab\. 
+1. Choose the **Action items** tab\. 
 
-   The **Action Items** tab displays a list of items that describe the schema that can't be converted automatically\. Choose one of the action items in the list\. AWS SCT highlights the item from your schema that the action item applies to, as shown following\.   
+   The **Action items** tab displays a list of items that describe the schema that can't be converted automatically\. Choose one of the action items in the list\. AWS SCT highlights the item from your schema that the action item applies to, as shown following\.   
 ![\[Action items tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/action_items_tab.png)
 
 1. Choose the **Summary** tab\. 
@@ -264,7 +299,7 @@ After you added source and target databases to your project and created mapping 
 
 **To convert your schema**
 
-1. Choose **View**, and then choose **Main View**\.   
+1. Choose **View**, and then choose **Main view**\.   
 ![\[Select main view\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_main_view.png)
 
 1. In the left panel that displays the schema from your source database, choose schemas to convert\. Open the context \(right\-click\) menu for the object, and then choose **Convert schema**\.   
@@ -309,10 +344,10 @@ Use the following procedure to store AWS credentials globally\.
 
 1. Start the AWS Schema Conversion Tool\.
 
-1. Open the **Settings Menu**, and then choose **Global Settings**\. The **Global Settings** dialog box appears\. 
+1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\. 
 
-   Choose **AWS Service Profiles**, as shown following\.   
-![\[The Global Settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings.png)
+   Choose **AWS service profiles**, as shown following\.   
+![\[The Global settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings.png)
 
 1. Choose **Add a new AWS service profile**\. 
 
@@ -325,14 +360,14 @@ Use the following procedure to store AWS credentials globally\.
    + US West \(N\. California\) Region
    + US West \(Oregon\) Region
 
-1. Choose **Test Connection** to verify that your credentials are correct and active\. 
+1. Choose **Test connection** to verify that your credentials are correct and active\. 
 
-   The **Test Connection** dialog box appears\. You can see the status for each of the services connected to your profile\. **Pass** indicates that the profile can successfully access the service\.   
-![\[The Global Settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings-Test.png)
+   The **Test connection** dialog box appears\. You can see the status for each of the services connected to your profile\. **Pass** indicates that the profile can successfully access the service\.   
+![\[The Test connection dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings-Test.png)
 
 1. After you have configured your profile, choose **Save** to save your profile or **Cancel** to cancel your changes\. 
 
-1. Choose **OK** to close the **Global Settings** dialog box\. 
+1. Choose **OK** to close the **Global settings** dialog box\. 
 
 ### Setting the default profile for a project<a name="CHAP_UserInterface.Profiles.Project"></a>
 
@@ -342,13 +377,50 @@ You can set the default profile for an AWS SCT project\. Doing this associates t
 
 1. Start the AWS Schema Conversion Tool and create a new project\.
 
-1. On the **Settings** menu, choose **Project Settings**\. The **Project settings** dialog box appears\. 
+1. On the **Settings** menu, choose **Project settings**\. The **Project settings** dialog box appears\. 
 
-1. Choose the **Project Environment** tab\. 
+1. Choose the **Project environment** tab\. 
 
-1. Choose **Add a new AWS service profile** to add a new profile\. Then for **AWS Service Profile**, choose the profile that you want to associate with the project\. 
+1. Choose **Add a new AWS service profile** to add a new profile\. Then for **AWS service profile**, choose the profile that you want to associate with the project\. 
 
 1. Choose **OK** to close the **Project settings** dialog box\. You can also choose **Cancel** to cancel your changes\. 
+
+## Using AWS Secrets Manager<a name="CHAP_UserInterface.SecretsManager"></a>
+
+AWS SCT can use database credentials that you store in AWS Secrets Manager\. You can fill in all values in the database connection dialog box from Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS Schema Conversion Tool\. 
+
+For more information about using AWS Secrets Manager, see [What is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\. For more information about storing AWS profiles, see [Storing AWS service profiles in the AWS SCT](#CHAP_UserInterface.Profiles)\.
+
+**To retrieve database credentials from Secrets Manager**
+
+1. Start the AWS Schema Conversion Tool and create a new project\.
+
+1. Choose **Add source** or **Add target** to add a new database to your project\.
+
+1. Choose a database platform and then choose **Next**\.
+
+1. For **AWS Secret**, choose the secret you want to use\.
+
+1. Choose **Populate**\. Then AWS SCT fills in all values in the database connection dialog box\.
+
+1. Choose **Test connection** to verify that AWS SCT can connect to your database\.
+
+1. Choose **Connect** to connect to your database\.
+
+ AWS SCT supports secrets that have the following structure\. 
+
+```
+{
+  "username": "secret_user",
+  "password": "secret_password",
+  "engine": "oracle",
+  "host": "secret_host.eu-west-1.compute.amazonaws.com",
+  "port": "1521",
+  "dbname": "ora_db"
+}
+```
+
+In this structure, the `username` and `password` values are required, and all other values are optional\. Make sure that the values that you store in Secrets Manager include all database credentials\. 
 
 ## Storing database passwords<a name="CHAP_UserInterface.StoringPasswords"></a>
 

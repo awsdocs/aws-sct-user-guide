@@ -3,6 +3,7 @@
 You can see how AWS SCT converts your source database schema to any supported target database platform\. To do so, you don't need to connect to an existing target database\. Instead, you can use a virtual target database platform in a mapping rule\. 
 
  AWS SCT supports the following virtual target database platforms: 
++ Amazon Redshift
 + Amazon Redshift and AWS Glue
 + Aurora MySQL
 + Aurora PostgreSQL

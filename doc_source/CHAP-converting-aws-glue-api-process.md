@@ -1,4 +1,4 @@
-# Converting using the Python API for AWS Glue<a name="CHAP-converting-aws-glue-api-process"></a>
+# Converting ETL processes using the Python API for AWS Glue with AWS SCT<a name="CHAP-converting-aws-glue-api-process"></a>
 
 In the following sections, you can find a description of a conversion that calls AWS Glue API operations in Python\. For more information, see [Program AWS Glue ETL scripts in Python](https://docs.aws.amazon.com//glue/latest/dg/aws-glue-programming-python.html) in the* AWS Glue Developer Guide\.*
 
@@ -27,7 +27,7 @@ If you are using Amazon Redshift, the database name is formed as follows\.
 {redshift_cluster_name}_{redshift_database_name}_{redshift_schema_name}
 ```
 
-The full name of Amazon Redshift cluster for this example is as follows:
+The full name of Amazon Redshift cluster for this example is as follows\.
 
 ```
 rsdbb03.apq1mpqso.us-west-2.redshift.amazonaws.com
@@ -71,17 +71,19 @@ response = client.create_connection(
 
 The parameters used in `create_connection` are as follows:
 + `Name` \(UTF\-8 string\) – required\. For Amazon Redshift, the connection name is formed as follows: `Redshift_{Endpoint-name}_{redshift-database-name}`, for example:` Redshift_abcde03_dev`
-+ `Description` \(UTF\-8 string\) – your description of the connection\.
-+ `ConnectionType` \(UTF\-8 string\) – required; the type of connection\. Currently, only JDBC is supported; SFTP is not supported\.
-+ `ConnectionProperties` \(dict\) – required; a list of key\-value pairs used as parameters for this connection, including the JDBC connection URL, the user name, and the password\.
-+ `PhysicalConnectionRequirements` \(dict\) – physical connection requirements, which include the following:
-  + `SubnetId` \(UTF\-8 string\) – the ID of the subnet used by the connection\.
-  + `SecurityGroupIdList` \(list\) – the security group ID list used by the connection\.
-  + `AvailabilityZone` \(UTF\-8 string\) – required; the Availability Zone that contains the endpoint\. This parameter is deprecated\.
++ `Description` \(UTF\-8 string\) – Your description of the connection\.
++ `ConnectionType` \(UTF\-8 string\) – Required\. The type of connection\. Currently, only JDBC is supported; SFTP is not supported\.
++ `ConnectionProperties` \(dict\) – Required\. A list of key\-value pairs used as parameters for this connection, including the JDBC connection URL, the user name, and the password\.
++ `PhysicalConnectionRequirements` \(dict\) – Physical connection requirements, which include the following:
+  + `SubnetId` \(UTF\-8 string\) – The ID of the subnet used by the connection\.
+  + `SecurityGroupIdList` \(list\) – The security group ID list used by the connection\.
+  + `AvailabilityZone` \(UTF\-8 string\) – Required\. The Availability Zone that contains the endpoint\. This parameter is deprecated\.
 
-## Step 3: Creating an AWS Glue crawler<a name="CHAP-converting-aws-glue-step-api-crawler"></a>
+## Step 3: Create an AWS Glue crawler<a name="CHAP-converting-aws-glue-step-api-crawler"></a>
 
-Next, you create an AWS Glue crawler to populate the AWS Glue catalog\. For more information, see [Cataloging tables with a crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html) in the AWS Glue Developer Guide\. The first step in adding a crawler is to create a new database in a Data Catalog by using the [AWS SDK API](https://docs.aws.amazon.com//glue/latest/webapi/API_CreateCrawler.html)\. Before you begin, you must first delete any previous version of it by using the `delete_crawler` operation\.
+Next, you create an AWS Glue crawler to populate the AWS Glue catalog\. For more information, see [Cataloging tables with a crawler](https://docs.aws.amazon.com/glue/latest/dg/add-crawler.html) in the *AWS Glue Developer Guide\. *
+
+The first step in adding a crawler is to create a new database in a Data Catalog by using the [AWS SDK API](https://docs.aws.amazon.com//glue/latest/webapi/API_CreateCrawler.html)\. Before you begin, make sure to first delete any previous version of it by using the `delete_crawler` operation\.
 
 When you create your crawler, a few considerations apply:
 + For the crawler name, use the format `<redshift_node_name>_<redshift_database_name>_<redshift_shema_name>`, for example: `abcde03_dev_ora_glue`
@@ -142,7 +144,7 @@ response = client.start_crawler(
 )
 ```
 
-Because we're using Amazon Redshift as our target for this example, Amazon Redshift data types map to AWS Glue data types in the following way after the crawler runs\.
+This example uses Amazon Redshift as the target\. Amazon Redshift data types map to AWS Glue data types in the following way after the crawler runs\.
 
 
 |  |  | 

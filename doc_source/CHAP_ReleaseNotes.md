@@ -2,6 +2,92 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 659<a name="CHAP_ReleaseNotes.659"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Improved the **New project wizard** that generates a combined assessment report for multiple source databases\.  | 
+| All | All | Fixed an issue where the extension pack wasn't created in projects that include multiple source and target databases\.  | 
+| All | All | Improved conversion of SQL code that is embedded in application source code\.  | 
+| All | All | Added the ability to run scripts from different folders in the AWS SCT command\-line interface\.  | 
+| All | Amazon Redshift | Improved the warning message provided when users choose **Run optimization** in migration projects with the Amazon Redshift virtual target database platform\.  | 
+| All | Aurora PostgreSQL | Implemented support of PostgreSQL major version 13 on Aurora PostgreSQL\-Compatible Edition as a migration target\.  | 
+| All | Amazon RDS for MySQL | Implemented the case insensitive code conversion by default\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Resolved an error where the connection to a source database failed in the command\-line interface\.  | 
+| Microsoft SQL Server | PostgreSQL Aurora PostgreSQL |  Improved conversion of procedures that include `UPDATE` statements with join conditions\.  | 
+| Microsoft SQL Server | PostgreSQL Aurora PostgreSQL |  Improved conversion of triggers, stored procedures, and functions that include the value after the equal sign\.  | 
+| Microsoft SQL Server | PostgreSQL Aurora PostgreSQL |  Fixed a transformer error for procedures with the `DELETE` statement and the `OR` operator\.  | 
+| Microsoft SQL Server | PostgreSQL Aurora PostgreSQL |  Improved conversion of the `OUTPUT` clause\.  | 
+| Microsoft SQL Server DW | Amazon Redshift and AWS Glue | Improved conversion of the `NUMERIC` data type\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Improved conversion of views which have a table alias with same name as the original table\.  | 
+|  Microsoft SSIS | AWS Glue |  Fixed an issue where the AWS Glue connvection credentials weren't displayed in the **Configure connections** window\.  | 
+| Netezza | Amazon Redshift | Added the ability to repeat the run of change data capture \(CDC\) data migration tasks every day\.  | 
+| Netezza | Amazon Redshift | Fixed an issue where the **Tasks** tab becomes inactive after unregistering a data extraction agent\.  | 
+| Netezza | Amazon Redshift | Fixed an issue where the confirmation of the registration of the data migration agent didn't display in the user interface\.  | 
+| Netezza | Amazon Redshift | Fixed an issue where a connection to a source database failed with a **Loader error**\.  | 
+| Netezza | Amazon Redshift | Resolved an error where data migration agents failed to run after opening a saved project\.  | 
+| Oracle | Amazon RDS for Oracle |  Implemented support of Oracle Unified Auditing\.  | 
+| Oracle | PostgreSQL Aurora PostgreSQL |  Implemented SQL code conversion in C\# applications\. For more information, see [Converting SQL code in C\# applications](CHAP_Converting.App.Csharp.md)\.   | 
+| Oracle | PostgreSQL Aurora PostgreSQL |  Implemented a new transformation logic for case\-sensitive object names to improve the visibility of code conversion changes\. AWS SCT converts object names in uppercase to lowercase\. The opposite is also true; AWS SCT converts object names in lowercase to uppercase\. Other object names and reserved words are converted without changes\.  | 
+| Oracle | PostgreSQL Aurora PostgreSQL |  Improved conversion of hash partitions without the `NOT NULL` constraint\.  | 
+| Oracle | Aurora PostgreSQL |  Added support for conversion of Oracle `CHECK`, `FOREIGN KEY`, and `NOT NULL` constraints with the `ENABLE NOVALIDATE` clause\.  | 
+| Oracle DW | Amazon Redshift | Fixed an issue where the incorrect values for floating point numbers were migrated\.  | 
+| Oracle DW | Amazon Redshift and AWS Glue | Resolved an issue with empty columns in the database migration assessment report in a comma\-separated value \(CSV\) file\.  | 
+| SAP ASE | PostgreSQL Aurora PostgreSQL |  Fixed an issue with an unexpected conversion interruption\.  | 
+| Snowflake | Amazon Redshift | Improved conversion of the `VARIANT` data type\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `COLLECT STATISTICS` statement\. | 
+| Teradata | Amazon Redshift | Fixed a problem where action item 9998 doesn't appear when converting nested views with `PERIOD` columns\. | 
+| Teradata | Amazon Redshift and AWS Glue | Fixed an issue where a virtual AWS Glue target platform didn't display in the UI after opening a saved project\.  | 
+| Teradata BTEQ | AWS Glue | Fixed an issue where the conversion to a virtual AWS Glue target platform wasn't supported after opening a saved project\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Improved syntax highlighting of the converted code\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Implemented checking parameter values after upload\. Unsupported values are highlighted on the **Variables** tab\. | 
+| Vertica | Amazon Redshift | Implemented conversion of aggregate functions\. | 
+| Vertica | Amazon Redshift | Implemented conversion of projections to materialized views and improved the UI that displays the source code of projections\. | 
+
+## Release notes for AWS SCT Build 658<a name="CHAP_ReleaseNotes.658"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Provided integration with AWS Secrets Manager\. You can now use database connection credentials that are stored in Secrets Manager\.  | 
+| All | All | Added support for scripts in the YAML format in the AWS SCT command\-line interface\.  | 
+| All | Amazon Redshift | Implemented support of Amazon S3 interface endpoints \(VPCE\) in data extraction agents\.  | 
+| All | Amazon Redshift | Added support for the Amazon Redshift virtual target database platform in addition to the already supported Amazon Redshift and AWS Glue combination\.  | 
+| Greenplum | Amazon Redshift | Fixed an issue where the **Save as SQL** option didn't save converted SQL code to a file\.  | 
+|  IBM Db2 LUW Microsoft Azure SQL Database Microsoft SQL Server Oracle SAP ASE  | Aurora MySQL | Improved conversion to support new features of Amazon Aurora MySQL\-Compatible Edition with MySQL 8\.0 compatibility\.  | 
+| Microsoft SQL Server |  Aurora MySQL Aurora PostgreSQL MySQL PostgreSQL  | Fixed a problem where action item 810 doesn't appear when required\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of procedures with `UPDATE`, `DELETE`, and `INSERT` statements\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Fixed a problem where action item 7810 doesn't appear when required\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of an `EXEC` statement that is nested inside an `IF...ELSE` statement\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of indexed views\.  | 
+| Netezza | Amazon Redshift | Improved data migration agents by tracking live transactions during full load in the change data capture \(CDC\) operation\. You can now stop data migration tasks if the CDC session is scheduled to start at a certain time\. Also, you can see the error logging level in the console after you stop a task with CDC\.  | 
+| Oracle | All | Enhanced the table loader to ensure that AWS SCT loads objects with sharing options\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of the `SYSDATE` function and added the ability to change the time zone in **Conversion settings**\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where dynamic statements weren't converted\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Fixed an issue where the converted code doesn't include system\-generated names\.  | 
+|  Oracle Oracle DW  |  Aurora PostgreSQL PostgreSQL  | Improved conversion of `SELECT` statements that are nested inside triggers\.  | 
+| Oracle DW | Amazon Redshift | Improved conversion of the `TO_DATE`, `TO_TIMESTAMP`, and `TO_TIMESTAMP_TZ` functions in the extension pack\.  | 
+| Snowflake | Amazon Redshift | Added an option to save converted SQL code in different files for each object or for each statement\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `CONCAT` function\.  | 
+| Teradata | Amazon Redshift | Improved conversion of a `SELECT` statement that is nested inside a `WHERE` clause\.  | 
+| Teradata | Amazon Redshift | Resolved an issue when `SET` and `MULTISET` tables were incorrectly converted after users drop and recreate a table\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the procedures that include a `WITH` clause\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `DATE` data type\.  | 
+| Teradata | Amazon Redshift RSQL | Resolved an issue where an unexpected transformer error occurred during FastExport scripts conversion\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Added support for conversion of a join index to a materialized view\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Added support for conversion of a `TITLE` definition that includes multiple lines\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an issue where the size of a geospatial data type wasn't converted\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed a problem where the parameter names were converted to lowercase characters\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed an issue when a stored procedure that is nested inside a `MACRO` statement wasn't converted\. | 
+| Vertica | Amazon Redshift | Improved conversion of the `ALL` operator\.  | 
+| Vertica | Amazon Redshift | Resolved an issue where the `Use Union all view?` option in **Conversion settings** wasn't applied\.  | 
+| Vertica | Amazon Redshift | Improved conversion of the `TIME` and `TIME WITH TIMEZONE` data types\.  | 
+| Vertica | Amazon Redshift | Resolved an issue with loading of flex tables\.  | 
+
+**Issues resolved:**
++ General improvements\.
+
 ## Release notes for AWS SCT Build 657<a name="CHAP_ReleaseNotes.657"></a>
 
 
@@ -48,6 +134,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
 | All | All | Added support of multiple source and target databases within one project\. Users can now create mapping rules to match different database schemas and target platforms in the same project\.  | 
+| All | All | Added support of virtual target database platforms\. Users now don't need to connect to a target database to see how AWS SCT converts their source database schema\.  | 
 | All | All |  UI improvements:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
 | Cassandra | Amazon DynamoDB | Resolved a search issue where the `CASSANDRA_HOME` variable didn't include a slash \(`/`\) after `cassandra.yaml` or the `conf` folder\. | 
 | Cassandra | Amazon DynamoDB | Added support of the Amazon Machine Image \(AMI\) for Amazon Linux 2\. | 
@@ -59,7 +146,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 |  Greenplum Microsoft SQL Server DW  | Amazon Redshift | Resolved an issue where the `Apply RTRIM to string columns` option didn't display in the UI\. | 
 | Microsoft SQL Server | Babelfish for Aurora PostgreSQL | Added support for Babelfish for Aurora PostgreSQL as a target platform\. Users can now create an assessment report to estimate the migration from SQL Server to Babelfish for Aurora PostgreSQL\. | 
 | Netezza | Amazon Redshift | Improved optimization strategies in **Project Settings**\. | 
-| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Implemented ability to generate unique names for indexes\. | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Implemented the ability to generate unique names for indexes\. | 
 | SAP ASE |  Aurora PostgreSQL PostgreSQL  | Fixed an issue with a duplicate index column in the target script\. | 
 | Snowflake | Amazon Redshift | Resolved a problem where Hide empty schemas, Hide empty databases, and Hide system databases/schemas options weren't displayed in the UI\. | 
 | Teradata | Amazon Redshift RSQL | Added support for conversion of Teradata MultiLoad job scripts to Amazon Redshift RSQL scripts\. | 
@@ -82,6 +169,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
 | Teradata | Amazon Redshift RSQL | Fixed a problem to ensure all assessment issues appear in reports when FastLoad or MultiLoad is used\. | 
+| Teradata | Amazon Redshift RSQL | Added support for conversion of Teradata FastExport job scripts to Amazon Redshift RSQL scripts\. | 
 | Teradata | Amazon Redshift RSQL | Fixed a problem to ensure the Save manifest to S3 action is enabled in offline mode when using FastLoad\. | 
 | Teradata | Amazon Redshift RSQL | Fixed an issue to ensure mapping rules are applied for scripts like FastLoad\. | 
 | Greenplum | Amazon Redshift | Increased the minimum supported driver version for Greenplum to 42\.2\.5\. | 
@@ -119,6 +207,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | DB2 LUW |  PostgreSQL Aurora PostgreSQL  | Improved conversion of LABEL statements that add or replace labels in the descriptions of tables, views, aliases, or columns\. | 
 | Oracle | None | Substituted SYS\.USER$ system table with DBA\_USERS view, and improved queries\. | 
 | Oracle DW | Amazon Redshift | Updated Oracle DW metadata queries\. | 
+| Teradata | Amazon Redshift RSQL | Added support for conversion of Shell, Teradata FastLoad, and Teradata Basic Teradata Query \(BTEQ\) scripts to Amazon Redshift RSQL scripts\. | 
 | Teradata BTEQ | Amazon Redshift RSQL | Resolved issue where "merge\_01" was incorrectly converted\. | 
 | Teradata BTEQ | Amazon Redshift RSQL | Resolved issue so that End or Identify \(EOI\) appears at the end of a script on a new line\. | 
 | Azure Synapse | Amazon Redshift | Improved error message provided when an incorrect password given for Azure Synapse\. | 
@@ -150,7 +239,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
-| Oracle |  PostgreSQL Aurora PostgreSQL  | Implemented ability to convert dynamic SQL created in called functions or procedures\. | 
+| Oracle |  PostgreSQL Aurora PostgreSQL  | Implemented the ability to convert dynamic SQL created in called functions or procedures\. | 
 | Oracle |  PostgreSQL Aurora PostgreSQL  | Improved Dynamic SQL conversion: In\-parameters as bind variables\. | 
 | Oracle DW 18, 19 | Amazon Redshift | Oracle to Redshift conversion improvements implemented: enhanced conversion built\-ins\. Aggregate LISTAGG; Analytic LISTAGG\. | 
 | Oracle DW 18,19 | Amazon Redshift | Oracle to Redshift conversion improvements implemented: Query new features\. | 
@@ -342,7 +431,6 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
-| SQL SSIS | AWS Glue |  Added support for ETL SSIS to AWS Glue conversion\. For more information, see [Converting SSIS to AWS Glue using AWS SCT](CHAP-converting-aws-glue-ssis.md)\.  | 
 | Teradata | Amazon Redshift | Provide solution to resolve Teradata non\-fully qualified views \(view names or non\-fully qualified objects within the view\)\. | 
 | Teradata | Amazon Redshift | Added support of ASCII function to compute nodes\. | 
 | Teradata | Amazon Redshift | When AWS SCT spots multi\-byte data in a Teradata `CHAR` defined as `CHAR(N)`, it is converted to `VARCHAR(3*N)` in Amazon Redshift\. | 
@@ -385,15 +473,16 @@ AWS Schema Conversion Tool \(AWS SCT\) build 1\.0\.642 changes are applicable to
 
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
-|  Vertica | Amazon Redshift |  Enable exporting of SQL scripts from a Vertica database to Amazon Redshift\.  | 
+|  Microsoft SSIS | AWS Glue |  Implemented conversion of Microsoft SQL Server Integration Services \(SSIS\) ETL packages to AWS Glue\. For more information, see [Converting SSIS to AWS Glue with AWS SCT](CHAP-converting-aws-glue-ssis.md)\.  | 
 |  Oracle | MariaDB/SQL MODE=ORACLE/MySQL/Amazon Aurora MySQL |  Implemented the PL/SQL declaration section in the WITH clause\.  | 
 |  Oracle | PostgreSQL/Aurora PostgreSQL |  Added support for `DBMS_SESSION.RESET_PACKAGE` and `DBMS_SESSION.MODIFY_PACKAGE`\.  | 
+|  Vertica | Amazon Redshift |  Enable exporting of SQL scripts from a Vertica database to Amazon Redshift\.  | 
 
 **Issues resolved:**
-+ Assessment Report Enhancement
-+ Assessment Report UI Enhancement
-+ Add ability to change JVM settings from UI
-+ General improvements
++ Assessment Report Enhancement\.
++ Assessment Report UI Enhancement\.
++ Add the ability to change JVM settings from UI\.
++ General improvements\.
 
 ## Release notes for AWS SCT build 641<a name="CHAP_ReleaseNotes.641"></a>
 
@@ -441,7 +530,8 @@ The following table lists build 1\.0\.640 changes in which Oracle is the source 
 
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
-| Oracle | PostgreSQL/Aurora PostgreSQL\-Compatible Edition |  Improved performance of the following functions when used in a WHERE clause: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) | 
+| Oracle | PostgreSQL Aurora PostgreSQL |  Implemented SQL code conversion in Java and Pro\*C applications\.  | 
+| Oracle | PostgreSQL Aurora PostgreSQL |  Improved performance of the following functions when used in a WHERE clause: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) | 
 | Oracle | RDS MariaDB 10\.4 | Added RDS MariaDB 10\.4 support for all online transactional processing \(OLTP\) vendors\. | 
 | Oracle | PostgreSQL/Aurora PostgreSQL |  Added support for DBMS\_UTILITY\.GET\_TIME\. Added the following emulations: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) | 
 |  Oracle |  MariaDB/MySQL/Aurora MySQL/Microsoft SQL Server Mode=Oracle/PostgreSQL/Aurora PostgreSQL/RDS Oracle |  Added sharing clause support for TABLE\(DATA,EXTENDED DATA\), VIEW\(DATA,EXTENDED DATA\), and SEQUENCE\(DATA\) | 
@@ -454,7 +544,7 @@ The following table lists build 1\.0\.640 changes in which Oracle is the source 
 |  Oracle | MySQL 8\.x | Added support for CHECK constraint\. | 
 | Oracle | PostgreSQL/Aurora PostgreSQL |  Implemented checking ANYDATA IS NULL/IS NOT NULL using extension pack routine\. Implemented the emulation of the VALUE function used in a query based on the TABLE function of XMLSequence\. Added DBMS\_LOB support for the following built\-in routines: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 | Oracle | Amazon Redshift |  Implemented conversion of cursor attributes in nested blocks\. Amazon Redshift doesn't support collections\. Related variables are converted as VARCHAR\. All collection operations other than assigning one variable to another are rejected, including initiation and collection elements access\. Implemented Amazon Redshift distribution style = AUTO\.  | 
 | Oracle | PostgreSQL/Aurora PostgreSQL |  If a nonreserved word in Oracle is reserved in PostgreSQL, then the following is true: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) Implemented the ability to use functions as input to LTRIM, RTRIM, and TRIM functions\. SELECT DISTINCT, ORDER BY expressions must appear in select list\. For cursor parameters that follow after a parameter with a DEFAULT value, AWS SCT adds DEFAULT IS NULL clause Source OUT cursor parameters are converted to IN cursor parameters\. Reimplemented package variable by adding the "Package variables logic implementation" option under "Conversion settings"\. Available settings are: "session variables" and "plv8 global objects"\. The default is "session variables"\. Implemented AUTONOMOUS\_TRANSACTION pragma support with dblink and pg\_background\.  | 
 | Oracle | All | Implemented view SYS\_%\_TAB\_COMMENTS\. | 
@@ -479,7 +569,7 @@ The following table lists build 1\.0\.640 changes in which Microsoft SQL Server 
 | SQL Server | Aurora PostgreSQL | Added option to convert parameters without the `par_` prefix\. | 
 |  Azure/SQL Server | MySQL 8\.x | Added support for CHECK constraint\. | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 | SQL Server | AWS Glue \(Python shell\) |  Conversion improvements, including: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
 | Azure/SQL Server | PostgreSQL/Aurora PostgreSQL | Implemented making $TMP procedures optional\. | 
 | SQL Server | MySQL/Aurora MySQL |  Extended arithmetic operations with dates\. Construction emulation 'TOP \(expression\) WITH TIES\. After calling procedures with the generated refcursor out, the refcursor now closes\. Setting a GLOBAL isolation level isn't supported in Aurora MySQL\. Only the session scope can be changed\. The default behavior of transactions is to use REPEATABLE READ and consistent reads\. Applications designed for use with READ COMMITTED may need to be modified\. Alternatively, they can explicitly change the default to READ COMMITTED\.  | 
@@ -498,7 +588,7 @@ The following table lists build 1\.0\.640 changes in which MySQL is the source e
 | All | All | Added information to the assessment report about possible inconsistencies in the user's database\. | 
 | MySQL |  PostgreSQL/Aurora PostgreSQL 11\. |  Added support for the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 
 ### Release 1\.0\.640 PostgreSQL changes<a name="640.postgresql"></a>
 
@@ -514,7 +604,7 @@ The following table lists build 1\.0\.640 changes in which PostgreSQL is the sou
 | PostgreSQL | MySQL 8\.x |  Added MySQL support for descending indexes\. DESC in an index definition is no longer ignored, but causes storage of key values in descending order\. Added MySQL support the use of expressions as default values in data type specifications, including expressions as default values for the BLOB, TEXT, GEOMETRY, and JSON data types\. Several existing aggregate functions can now be used as window functions: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) MySQL supports window functions that, for each row from a query, perform a calculation using rows related to that row\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) | 
 |  PostgreSQL | MySQL 8\.x | Added support for CHECK constraint\. | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 |  PostgreSQL/Aurora PostgreSQL  | All |  Added system view sysindexes emulation\. If there is a SELECT statement in a procedure without specifying INTO, the parameter INOUT p\_refcur of type refcursor is created for a procedure on the target\. | 
 
 ### Release 1\.0\.640 Db2 LUW changes<a name="640.db2luw"></a>
@@ -529,7 +619,7 @@ The following table lists build 1\.0\.640 changes in which DB2 LUW is the source
 | All | All | Added information to the assessment report about possible inconsistencies in the user's database\. | 
 | DB2 LUW | MySQL 8\.0\.17 | Added CHECK constraint support\. | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 
 ### Release 1\.0\.640 Teradata changes<a name="640.Teradata"></a>
 
@@ -544,7 +634,7 @@ The following table lists build 1\.0\.640 changes Teradata source engines\.
 | All | All | Added information to the assessment report about possible inconsistencies in the user's database\. | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
 | Teradata | All | Added support for REGEXP\_INSTR\(\) and REGEXP\_SUBSTR\(\)\. | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 | Teradata | Amazon Redshift |  Implemented the ability to save SQL of the source tree into single file or multiple files by stage using the settings in Project Settings, Save as SQL and Apply, Dropdown list: Single file/Multiple files\. Implemented improvements in views and procedures conversions\.  | 
 | Teradata | All | Added support for Teradata version 16\.20 | 
 
@@ -563,7 +653,7 @@ The following table lists build 1\.0\.640 changes for other source engines\.
 | SAP ASE | MySQL 8\.0\.17 | Added CHECK constraint support\. | 
 | All | SQL Server |  SQL Server 2019: Added support for new index attribute OPTIMIZE\_FOR\_SEQUENTIAL\_KEY\. SQL Server 2017: Added support for Graph Databases Node and Edge table types\. SQL Server 2016: Added support for TEMPORAL TABLES\.  | 
 | Vertica | Amazon Redshift | Added support for distribution style = AUTO\. | 
-| All | All | Implemented ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
+| All | All | Implemented the ability to override physical partitions with virtual partitions\. Data warehouse extractors extract data according to created virtual partitions\. | 
 | Amazon Redshift | Amazon Redshift | Unsupported built\-in functions in DML statements are replaced with NULL as a placeholder\. | 
 | Sybase | PostgreSQL | Added support for native functions\. | 
 | SAP ASE | MySQL/Aurora MySQL |  The default isolation level for Aurora MySQL is REPEATABLE READ\. Setting a GLOBAL isolation level isn't supported in Aurora MySQL\. Only session scope can be changed\. The default behavior of transactions is to use REPEATABLE READ and consistent reads\. Applications designed to run with READ COMMITTED may need to be modified\. Or you can explicitly change the default to READ COMMITTED\.  | 

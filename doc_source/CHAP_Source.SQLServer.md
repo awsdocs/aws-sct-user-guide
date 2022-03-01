@@ -13,14 +13,14 @@ You can use AWS SCT to create an assessment report for the migration of schemas,
 For more information, see the following sections:
 
 **Topics**
-+ [Permissions required when using Microsoft SQL Server as a source](#CHAP_Source.SQLServer.Permissions)
++ [Privileges for Microsoft SQL Server as a source](#CHAP_Source.SQLServer.Permissions)
 + [Using Windows Authentication when using Microsoft SQL Server as a source](#CHAP_Source.SQLServer.Permissions.WinAuth)
 + [Connecting to SQL Server as a source](#CHAP_Source.SQLServer.Connecting)
 + [Converting SQL Server to MySQL](CHAP_Source.SQLServer.ToMySQL.md)
 + [Converting SQL Server to PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.md)
 + [Converting SQL Server to Amazon RDS for SQL Server](CHAP_Source.SQLServer.ToRDSSQLServer.md)
 
-## Permissions required when using Microsoft SQL Server as a source<a name="CHAP_Source.SQLServer.Permissions"></a>
+## Privileges for Microsoft SQL Server as a source<a name="CHAP_Source.SQLServer.Permissions"></a>
 
 The privileges required for Microsoft SQL Server as a source are listed following: 
 + VIEW DEFINITION 
@@ -55,23 +55,23 @@ To use integrated authentication
 
 1. Copy the `sqljdbc_auth.dll` file to a directory on the Windows system path on the computer where the JDBC driver is installed\.
 
-   The` sqljdbc_auth.dll` files are installed in the following location:
+   The `sqljdbc_auth.dll` files are installed in the following location:
 
    <*installation directory*>\\sqljdbc\_<*version*>\\<*language*>\\auth\\
 
 When you try to establish a connection to SQL Server database using Windows Authentication, you might get this error: This driver is not configured for integrated authentication\. This problem can be solved by performing the following actions:
 + Declare two variables that point to the installed path of your JDBC:
 
-  \-variable name: SQLJDBC\_HOME; variable value: D:\\lib\\JDBC4\.1\\enu \(where your sqljdbc4\.jar exists\);
+   `variable name: SQLJDBC_HOME; variable value: D:\lib\JDBC4.1\enu` \(where your sqljdbc4\.jar exists\);
 
-  \-variable name: SQLJDBC\_AUTH\_HOME; variable value: D\\lib\\JDBC4\.1\\enu\\auth\\x86 \(if you are running 32bit OS\) or D\\lib\\JDBC4\.1\\enu\\auth\\x64 \(if you are running 64bit OS\)\. This is where your sqljdbc\_auth\.dll is located\. 
-+ Copy sqljdbc\_auth\.dll to the folder where your JDK/JRE is running\. You may copy to lib folder, bin folder, and so on\. As an example, you might copy to the following folder\.
+  `variable name: SQLJDBC_AUTH_HOME; variable value: D\lib\JDBC4.1\enu\auth\x86` \(if you are running 32bit OS\) or `D\lib\JDBC4.1\enu\auth\x64` \(if you are running 64bit OS\)\. This is where your `sqljdbc_auth.dll` is located\. 
++ Copy `sqljdbc_auth.dll` to the folder where your JDK/JRE is running\. You may copy to lib folder, bin folder, and so on\. As an example, you might copy to the following folder\.
 
   ```
   [JDK_INSTALLED_PATH]\bin;
-   [JDK_INSTALLED_PATH]\jre\bin;
-   [JDK_INSTALLED_PATH]\jre\lib;
-   [JDK_INSTALLED_PATH]\lib;
+  [JDK_INSTALLED_PATH]\jre\bin;
+  [JDK_INSTALLED_PATH]\jre\lib;
+  [JDK_INSTALLED_PATH]\lib;
   ```
 + Ensure that in your JDBC library folder, you have only the SQLJDBC4\.jar file\. Remove any other sqljdbc\*\.jar files from that folder \(or copy them to another folder\)\. If you are adding the driver as part of your program, ensure that you add only SQLJDBC4\.jar as the driver to use\.
 + Copy sqljdbc\_auth\.dll the file in the folder with your application\.
@@ -87,14 +87,23 @@ Use the following procedure to connect to your Microsoft SQL Server source datab
 
 **To connect to a Microsoft SQL Server source database**
 
-1. In the AWS Schema Conversion Tool, choose **Add source**\. 
+1. In the AWS Schema Conversion Tool, choose **Add source**\.
 
 1. Choose **Microsoft SQL Server**, then choose **Next**\. 
 
-    The **Add source** dialog box appears\.  
-![\[Microsoft SQL Server connection information\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/source-sql-server.png)
+   The **Add source** dialog box appears\.
 
-1. Provide the Microsoft SQL Server source database connection information\. Use the instructions in the following table\.   
+1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
+
+1. Use database credentials from AWS Secrets Manager or enter them manually:
+   + To use database credentials from Secrets Manager, use the following insructions:
+
+     1. For **AWS Secret**, choose the name of the secret\.
+
+     1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
+
+     For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
+   + To enter the Microsoft SQL Server source database connection information manually, use the instructions in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.SQLServer.html)
 

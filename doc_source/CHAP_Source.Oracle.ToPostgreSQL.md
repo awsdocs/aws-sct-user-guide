@@ -1,4 +1,4 @@
-# Converting Oracle to RDS for PostgreSQL or Amazon Aurora PostgreSQL<a name="CHAP_Source.Oracle.ToPostgreSQL"></a>
+# Converting Oracle to Amazon RDS for PostgreSQL or Amazon Aurora PostgreSQL<a name="CHAP_Source.Oracle.ToPostgreSQL"></a>
 
 When you convert an Oracle to RDS for PostgreSQL or Amazon Aurora PostgreSQL, be aware of the following\.
 

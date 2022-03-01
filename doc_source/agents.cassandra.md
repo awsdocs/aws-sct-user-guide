@@ -4,11 +4,11 @@ You can use an AWS SCT data extraction agent to extract data from Apache Cassand
 
 Amazon DynamoDB is a NoSQL database service\. To store data in DynamoDB, you create database tables and then upload data to those tables\. The AWS SCT extraction agent for Cassandra automates the process of creating DynamoDB tables that match their Cassandra counterparts, and then populating those DynamoDB tables with data from Cassandra\.
 
-The process of extracting data can add considerable overhead to a Cassandra cluster\. For this reason, you don't run the extraction agent directly against your production data in Cassandra\. To avoid interfering with production applications, AWS SCT helps you create a *clone datacenter*—a standalone copy of the Cassandra data that you want to migrate to DynamoDB\. The agent can then read data from the clone and make it available to AWS SCT, without affecting your production applications\. 
+The process of extracting data can add considerable overhead to a Cassandra cluster\. For this reason, you don't run the extraction agent directly against your production data in Cassandra\. To avoid interfering with production applications, AWS SCT helps you create a *clone data center*—a standalone copy of the Cassandra data that you want to migrate to DynamoDB\. The agent can then read data from the clone and make it available to AWS SCT, without affecting your production applications\. 
 
-When the data extraction agent runs, it reads data from the clone datacenter and writes it to an Amazon S3 bucket\. AWS SCT then reads the data from Amazon S3 and writes it to Amazon DynamoDB\.
+When the data extraction agent runs, it reads data from the clone data center and writes it to an Amazon S3 bucket\. AWS SCT then reads the data from Amazon S3 and writes it to DynamoDB\.
 
-The following diagram shows the supported scenario:
+The following diagram shows the supported scenario\.
 
 ![\[Extraction agent architecture\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/extraction-agent-cassandra.png)
 
@@ -16,19 +16,19 @@ If you are new to Cassandra, be aware of the following important terminology:
 + A *node* is a single computer \(physical or virtual\) running the Cassandra software\.
 + A *server* is a logical entity composed of up to 256 nodes\.
 + A *rack* represents one or more servers\.
-+ A *datacenter* is a collection of racks\.
++ A *data center* is a collection of racks\.
 + A *cluster* is a collection of data centers\.
 
 For more information, go to the [Wikipedia page](https://en.wikipedia.org/wiki/Apache_Cassandra) for Apache Cassandra\.
 
-Use the information in the following topics to learn how to migrate data from Apache Cassandra to Amazon DynamoDB:
+Use the information in the following topics to learn how to migrate data from Apache Cassandra to DynamoDB:
 
 **Topics**
 + [Prerequisites for migrating from Cassandra to DynamoDB](#agents.cassandra.prereqs)
 + [Create a new AWS SCT project](#agents.cassandra.new-project)
-+ [Create a clone datacenter](#agents.cassandra.clone-datacenter)
++ [Create a clone data center](#agents.cassandra.clone-datacenter)
 + [Install, configure, and run the data extraction agent](#agents.cassandra.run-extractor)
-+ [Migrate data from the clone datacenter to Amazon DynamoDB](#agents.cassandra.migrate-to-ddb)
++ [Migrate data from the clone data center to Amazon DynamoDB](#agents.cassandra.migrate-to-ddb)
 + [Post\-migration activities](#agents.cassandra.post-migration)
 
 ## Prerequisites for migrating from Cassandra to DynamoDB<a name="agents.cassandra.prereqs"></a>
@@ -47,11 +47,11 @@ Other versions of Cassandra aren't supported\.
 
 ### Amazon S3 settings<a name="agents.cassandra.prereqs.s3"></a>
 
-When the AWS SCT data extraction agent runs, it reads data from your clone datacenter and writes it to an Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose Global Settings to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+When the AWS SCT data extraction agent runs, it reads data from your clone data center and writes it to an Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose Global Settings to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
-### Amazon EC2 Instance for clone datacenter<a name="agents.cassandra.prereqs.ec2"></a>
+### Amazon EC2 instance for clone data center<a name="agents.cassandra.prereqs.ec2"></a>
 
-As part of the migration process, you'll need to create a clone of an existing Cassandra datacenter\. This clone will run on an Amazon EC2 instance that you provision in advance\. The instance will run a standalone Cassandra installation, for hosting your clone datacenter independently of your existing Cassandra datacenter\.
+As part of the migration process, you'll need to create a clone of an existing Cassandra data center\. This clone will run on an Amazon EC2 instance that you provision in advance\. The instance will run a standalone Cassandra installation, for hosting your clone data center independently of your existing Cassandra data center\.
 
  The new Amazon EC2 instance must meet the following requirements:
 + Operating system: either Ubuntu or CentOS\.
@@ -84,40 +84,48 @@ AWS SCT communicates with the data extraction agent using Secure Sockets Layer \
 
 After you have performed the steps in [Prerequisites for migrating from Cassandra to DynamoDB](#agents.cassandra.prereqs), you're ready to create a new AWS SCT project for your migration\. Follow these steps:
 
-1. From the **File** menu, choose **New project**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-new-project.png)
+**To create a new AWS SCT project using Apache Cassandra as a source and DynamoDB as a target**
 
-   Add the following information:    
+1. In the AWS SCT, choose **Add source**\. 
+
+1. Choose **Cassandra**, then choose **Next**\. 
+
+   The **Add source** dialog box appears\.
+
+1. Provide the Apache Cassandra source database connection information\. Use the instructions in the following table\.   
+****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.cassandra.html)
 
-   Choose **OK** to create your AWS SCT project\.
+1. Choose **Test Connection** to verify that AWS SCT can connect to your source database\. 
 
-1. From the menu bar, choose **Connect to Cassandra**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-connect-to-source.png)
+1. Choose **Connect** to connect to your source database\.
 
-   Add the following information:    
+1. In the AWS SCT, choose **Add target**\. 
+
+1. Choose **Amazon DynamoDB**, then choose **Next**\. 
+
+   The **Add target** dialog box appears\.
+
+1. Provide the DynamoDB target database connection information\. Use the instructions in the following table\.   
+****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.cassandra.html)
 
-1. Choose **OK**\. AWS SCT tests the connection to ensure that it can access your Cassandra cluster\.
+1. Choose **Test Connection** to verify that AWS SCT can connect to your target database\. 
 
-1. From the menu bar, choose **Connect to Amazon DynamoDB**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-connect-to-target.png)
+1. Choose **Connect** to connect to your target database\.
 
-   Add the following information:    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.cassandra.html)
+1. Create a new mapping rule that describes a source\-target pair that includes your Apache Cassandra source database and a target DynamoDB database\. For more information, see [Adding a new mapping rule](CHAP_Mapping.New.md)\. 
 
-1. Choose **OK**\. AWS SCT tests the connection to ensure that it can access DynamoDB\.
+## Create a clone data center<a name="agents.cassandra.clone-datacenter"></a>
 
-## Create a clone datacenter<a name="agents.cassandra.clone-datacenter"></a>
-
-To avoid interfering with production applications that use your Cassandra cluster, AWS SCT will create a clone datacenter and copy your production data into it\. The clone datacenter acts as a staging area, so that AWS SCT can perform further migration activities using the clone rather than your production datacenter\.
+To avoid interfering with production applications that use your Cassandra cluster, AWS SCT will create a clone data center and copy your production data into it\. The clone data center acts as a staging area, so that AWS SCT can perform further migration activities using the clone rather than your production data center\.
 
 To begin the cloning process, follow this procedure:
 
-1. In the AWS SCT window, on the left\-hand side \(source\), expand the **Datacenters** node and choose one of your existing Cassandra datacenters\.
+1. In the AWS SCT window, on the left\-hand side \(source\), expand the **Datacenters** node and choose one of your existing Cassandra data centers\.
 
 1. From the **Actions** menu, choose **Clone Datacenter for Extract**\.  
-![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-clone-datacenter.png)
+![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-clone-data center.png)
 
 1. Read the introductory text, and then choose **Next** to continue\.
 
@@ -134,12 +142,12 @@ Instead of entering all of the data here, you can bulk\-upload it instead\. To d
 
    Choose **Next** to continue\. AWS SCT verifies that the node configuration is valid\.
 
-1. In the **Configure Target Datacenter** window, review the default values\. In particular, note the **Datacenter suffix** field: When AWS SCT creates your clone datacenter, it will be named similarly to the source datacenter, but with the suffix that you provide\. For example, if the source datacenter is named `my_datacenter`, then a suffix of `_tgt` would cause the clone to be named `my_datacenter_tgt`\.
+1. In the **Configure Target Datacenter** window, review the default values\. In particular, note the **Datacenter suffix** field: When AWS SCT creates your clone data center, it will be named similarly to the source data center, but with the suffix that you provide\. For example, if the source data center is named `my_datacenter`, then a suffix of `_tgt` would cause the clone to be named `my_datacenter_tgt`\.
 
 1. While still in the **Configure Target Datacenter** window, choose **Add new node**:   
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-add-new-node.png)
 
-1. In the **Add New Node** window, add the information needed to connect to the Amazon EC2 instance that you created in [Amazon EC2 Instance for clone datacenter](#agents.cassandra.prereqs.ec2)\.
+1. In the **Add New Node** window, add the information needed to connect to the Amazon EC2 instance that you created in [Amazon EC2 instance for clone data center](#agents.cassandra.prereqs.ec2)\.
 
    When the settings are as you want them, choose **Add**\. The node appears in the list:  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-list-of-nodes.png)
@@ -147,13 +155,13 @@ Instead of entering all of the data here, you can bulk\-upload it instead\. To d
 1. Choose **Next** to continue\. The following confirmation box appears:  
 ![\[Image NOT FOUND\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/cassandra-confirm-reboot.png)
 
-   Choose **OK** to continue\. AWS SCT reboots your source datacenter, one node at a time\.
+   Choose **OK** to continue\. AWS SCT reboots your source data center, one node at a time\.
 
-1. Review the information in the **Datacenter Synchronization** window\. If your cluster is running Cassandra version 2, then AWS SCT copies all of the data to the clone datacenter\. If your cluster is running Cassandra version 3, then you can choose which keyspace\(s\) you want to copy to the clone datacenter\.
+1. Review the information in the **Datacenter Synchronization** window\. If your cluster is running Cassandra version 2, then AWS SCT copies all of the data to the clone data center\. If your cluster is running Cassandra version 3, then you can choose which keyspace or keyspaces you want to copy to the clone data center\.
 
-1. When you are ready to begin replicating data to your clone datacenter, choose **Start**\.
+1. When you are ready to begin replicating data to your clone data center, choose **Start**\.
 
-   Data replication will begin immediately\. AWS SCT displays a progress bar so that you can monitor the replication process\. Note that replication can take a long time, depending on how much data is in the source datacenter\. If you need to cancel the operation before it's fully complete, choose **Cancel**\.
+   Data replication will begin immediately\. AWS SCT displays a progress bar so that you can monitor the replication process\. Note that replication can take a long time, depending on how much data is in the source data center\. If you need to cancel the operation before it's fully complete, choose **Cancel**\.
 
    When the replication is complete, choose **Next** to continue\.
 
@@ -165,7 +173,7 @@ Instead of entering all of the data here, you can bulk\-upload it instead\. To d
 
 ## Install, configure, and run the data extraction agent<a name="agents.cassandra.run-extractor"></a>
 
-Now that you have a clone of your datacenter, you are ready to begin using the AWS SCT data extraction agent for Cassandra\. This agent is available as part of the AWS SCT distribution \(for more information, see [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\)\.
+Now that you have a clone of your data center, you are ready to begin using the AWS SCT data extraction agent for Cassandra\. This agent is available as part of the AWS SCT distribution \(for more information, see [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\)\.
 
 **Note**  
 We recommend that you run the agent on an Amazon EC2 instance\. The Amazon EC2 instance must meet the following requirements:  
@@ -310,11 +318,13 @@ You can use the `chmod` command to change the permissions, as in this example:
 **Note**  
 By default, the agent runs on port 8080\. You can change this by editing the `agent-settings.yaml` file\.
 
-## Migrate data from the clone datacenter to Amazon DynamoDB<a name="agents.cassandra.migrate-to-ddb"></a>
+## Migrate data from the clone data center to Amazon DynamoDB<a name="agents.cassandra.migrate-to-ddb"></a>
 
-You are now ready to perform the migration from the clone datacenter to Amazon DynamoDB, using AWS SCT\. AWS SCT manages the workflows among the AWS SCT data extraction agent for Cassandra, AWS Database Migration Service \(AWS DMS\), and DynamoDB You perform the migration process entirely within the AWS SCT interface, and AWS SCT manages all of the external components on your behalf\.
+You are now ready to perform the migration from the clone data center to Amazon DynamoDB, using AWS SCT\. AWS SCT manages the workflows among the AWS SCT data extraction agent for Cassandra, AWS Database Migration Service \(AWS DMS\), and DynamoDB You perform the migration process entirely within the AWS SCT interface, and AWS SCT manages all of the external components on your behalf\.
 
 To migrate your data, follow this procedure:
+
+**To migrate your data from the clone data center to DynamoDB**
 
 1. From the **View** menu, choose **Data migration view**\. 
 
@@ -333,7 +343,7 @@ To migrate your data, follow this procedure:
 
    When the settings are as you want them, choose **Register**\. AWS SCT will attempt to connect with the AWS SCT data extraction agent for Cassandra\.
 
-1. On the left side of the AWS SCT window, choose the Cassandra datacenter that you created in [Create a clone datacenter](#agents.cassandra.clone-datacenter)\.
+1. On the left side of the AWS SCT window, choose the Cassandra data center that you created in [Create a clone data center](#agents.cassandra.clone-datacenter)\.
 
 1. From the **Actions** menu, choose **Create Local & DMS Task**\.
 

@@ -14,7 +14,7 @@ Repeat the grant for each database whose schema you are converting\.
 
 Use the following procedure to connect to your Azure Synapse Analytics source data warehouse with the AWS Schema Conversion Tool\. 
 
-**To connect to a Azure Synapse Analytics source data warehouse**
+**To connect to an Azure Synapse Analytics source data warehouse**
 
 1. In the AWS Schema Conversion Tool, choose **Add source**\. 
 
@@ -22,7 +22,17 @@ Use the following procedure to connect to your Azure Synapse Analytics source da
 
    The **Add source** dialog box appears\.
 
-1. Provide the Azure Synapse Analytics source data warehouse connection information\. Use the instructions in the following table\.   
+1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
+
+1. Use database credentials from AWS Secrets Manager or enter them manually:
+   + To use database credentials from Secrets Manager, use the following insructions:
+
+     1. For **AWS Secret**, choose the name of the secret\.
+
+     1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
+
+     For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
+   + To enter the Azure Synapse Analytics source data warehouse connection information manually, use the instructions in the following table\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.AzureSynapse.html)
 

@@ -36,8 +36,8 @@ Use the information in the following topics to learn how to work with data extra
 + [Installing extraction agents](#agents.Installing)
 + [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)
 + [Hiding and recovering information for an AWS SCT agent](#agents.Recovering)
-+ [Creating data extraction filters in the AWS SCT](#agents.Filtering)
-+ [Changing extractor and copy settings from current project settings](#agents.ProjectSettings)
++ [Creating data migration rules in the AWS SCT](#agents.Filtering)
++ [Changing extractor and copy settings from project settings](#agents.ProjectSettings)
 + [Sorting data before migrating using AWS SCT](#agents.Sorting)
 + [Creating, running, and monitoring an AWS SCT data extraction task](#agents.Tasks)
 + [Exporting and importing an AWS SCT data extraction task](#agents.ExportImportTasks)
@@ -53,7 +53,7 @@ Before you work with data extraction agents, store your Amazon S3 bucket informa
 
 ### Amazon S3 settings<a name="agents.S3Credentials"></a>
 
-After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 ### Security settings<a name="agents.Installing.Security"></a>
 
@@ -63,18 +63,18 @@ The AWS Schema Conversion Tool and the extraction agents can communicate through
 
 1. Start the AWS Schema Conversion Tool\.
 
-1. Open the **Settings** menu, and then choose **Global Settings**\. The **Global settings** dialog box appears\. 
+1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\. 
 
    Choose the **Security** tab as shown following\.   
 ![\[The Security tab on the Global Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/SecuritySettings.png)
 
-1. Choose **Generate Trust and Key Store**, or choose **Select existing Trust and Key Store**\. 
+1. Choose **Generate trust and key store**, or choose **Select existing trust store**\. 
 
-   If you choose **Generate Trust and Key Store**, you then specify the name and password for the trust and key stores, and the path to the location for the generated files\. You use these files in later steps\. 
+   If you choose **Generate trust and key store**, you then specify the name and password for the trust and key stores, and the path to the location for the generated files\. You use these files in later steps\. 
 
-   If you choose **Select existing Trust and Key Store**, you then specify the password and file name for the trust and key stores\. You use these files in later steps\. 
+   If you choose **Select existing trust store**, you then specify the password and file name for the trust and key stores\. You use these files in later steps\. 
 
-1. After you have specified the trust store and key store, choose **OK** to close the **Global Settings** dialog box\. 
+1. After you have specified the trust store and key store, choose **OK** to close the **Global settings** dialog box\. 
 
 ## Installing extraction agents<a name="agents.Installing"></a>
 
@@ -187,20 +187,21 @@ Use the following procedure to register extraction agents with your AWS SCT proj
 
 1. Start the AWS Schema Conversion Tool, and open a project\. 
 
-1. Open the **View** menu, and then choose **Data Migration View**\. The **Agents** tab appears\. If you have previously registered agents, they appear in a grid at the top of the tab as shown following\.   
-![\[Agents grid\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AgentsGrid.png)
+1. Open the **View** menu, and then choose **Data Migration view \(other\)**\. The **Agents** tab appears\. If you have previously registered agents, AWS SCT displays them in a grid at the top of the tab\. 
 
-1. Choose **Register**\. The **New Agent Registration** dialog box appears\. 
-**Note**  
-After you register an agent with an AWS SCT project, you can't register the same agent with a different project\. If you're no longer using an agent in an AWS SCT project, you can unregister it\. You can then register it with a different project\. 
+1. Choose **Register**\.
 
-1. Enter your information in the **New Agent Registration** dialog box: 
+   After you register an agent with an AWS SCT project, you can't register the same agent with a different project\. If you're no longer using an agent in an AWS SCT project, you can unregister it\. You can then register it with a different project\. 
 
-   1. For **Description**, type a description of the agent\. 
+1. Choose **Redshift data agent**, and then choose **OK**\.
 
-   1. For **Host Name**, type the host name or IP address of the computer of the agent\. 
+1. Enter your information on the **Connection** tab of the dialog box: 
 
-   1. For **Port**, type the port number that the agent is listening on\. 
+   1. For **Description**, enter a description of the agent\. 
+
+   1. For **Host Name**, enter the host name or IP address of the computer of the agent\. 
+
+   1. For **Port**, enter the port number that the agent is listening on\. 
 
    1. Choose **Register** to register the agent with your AWS SCT project\. 
 
@@ -242,57 +243,80 @@ When AWS SCT can ping the new agent, AWS SCT receives the status **Waiting for r
 
 Each agent that works with the agent storage updates a special file called `storage.lck` located at `{output.folder}\{agentName}\storage\`\. This file contains the agent's network ID and the time until which the storage is locked\. When the agent works with the agent storage, it updates the `storage.lck` file and extends the lease of the storage by 10 minutes every 5 minutes\. No other instance can work with this agent storage before the lease expires\.
 
-## Creating data extraction filters in the AWS SCT<a name="agents.Filtering"></a>
+## Creating data migration rules in the AWS SCT<a name="agents.Filtering"></a>
 
-Before you extract your data with the AWS Schema Conversion Tool, you can set up filters that reduce the amount of data that you extract\. You can create data extraction filters by using `WHERE` clauses to reduce the data that you extract\. For example, you can write a `WHERE` clause that selects data from a single table\. 
+Before you extract your data with the AWS Schema Conversion Tool, you can set up filters that reduce the amount of data that you extract\. You can create data migration rules by using `WHERE` clauses to reduce the data that you extract\. For example, you can write a `WHERE` clause that selects data from a single table\. 
 
-You can create data extraction filters and save the filters as part of your project\. With your project open, use the following procedure to create data extraction filters\. 
+You can create data migration rules and save the filters as part of your project\. With your project open, use the following procedure to create data migration rules\. 
 
-**To create data extraction filters**
+**To create data migration rules**
 
-1. On the **Settings** menu, choose **Mapping Rules**\. The **Mapping Rules** dialog box appears\. The top pane contains transformation rules, and the bottom pane contains filtering rules\. 
+1. Open the **View** menu, and then choose **Data Migration view \(other\)**\.
 
-1. In the **Filtering Rules** pane, choose **Add new rule**\. 
+1.  Choose **Data migration rules**, and then choose **Add new rule**\.
 
-1. Configure your filter: 
+1. Configure your data migration rule: 
 
-   1. For **Name**, type a name for your filter\. 
+   1. For **Name**, enter a name for your data migration rule\. 
 
-   1. For **Where schema name like**, type a filter to apply to schemas\. In this filter, a `WHERE` clause is evaluated by using a `LIKE` clause\. You can enter an exact name to choose one schema, or you can enter a pattern to choose multiple schemas\. 
+   1. For **Where schema name is like**, enter a filter to apply to schemas\. In this filter, a `WHERE` clause is evaluated by using a `LIKE` clause\. To choose one schema, enter an exact schema name\. To choose multiple schemas, use the “%” character as a wildcard to match any number of characters in the schema name\.
 
-   1. For **table name like**, type a filter to apply to tables\. In this filter, a `WHERE` clause is evaluated by using a `LIKE` clause\. You can enter an exact name to choose one table, or you can enter a pattern to choose multiple tables\. 
+   1. For **table name like**, enter a filter to apply to tables\. In this filter, a `WHERE` clause is evaluated by using a `LIKE` clause\. To choose one table, enter an exact name\. To choose multiple tables, use the “%” character as a wildcard to match any number of characters in the table name\.
 
    1. For **Where clause**, type a `WHERE` clause to filter data\. 
 
 1. After you have configured your filter, choose **Save** to save your filter, or **Cancel** to cancel your changes\. 
 
-1. After you are done adding, editing, and deleting filters, choose **Save All** to save all your changes, and then choose **Close**\. 
+1. After you are done adding, editing, and deleting filters, choose **Save all** to save all your changes\. 
 
-To turn off a filter without deleting it, use the toggle icon\. To duplicate an existing filter, use the copy icon\. To delete an existing filter, use the delete icon\. To save any changes you make to your filters, choose **Save All**\. 
+To turn off a filter without deleting it, use the toggle icon\. To duplicate an existing filter, use the copy icon\. To delete an existing filter, use the delete icon\. To save any changes you make to your filters, choose **Save all**\. 
 
-## Changing extractor and copy settings from current project settings<a name="agents.ProjectSettings"></a>
+## Changing extractor and copy settings from project settings<a name="agents.ProjectSettings"></a>
 
-From the AWS SCT **Current project settings** window, you can choose settings that affect data extraction agents and the Amazon Redshift COPY command\. 
+From the **Project settings** window in AWS SCT, you can choose settings for data extraction agents and the Amazon Redshift `COPY` command\.
 
-When you choose the **Data migration** tab in the **Current project settings** window, **Extractor settings** and **Copy settings** are displayed, as shown in the following screenshot\.
+To choose these settings, choose **Settings**, **Project settings**, and then choose **Data migration**\. Here, you can edit **Extraction settings**, **AWS S3 settings**, and **Copy settings**\.
 
-![\[Data migration Extractor and Copy setting options\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/Exractor_Copy_Settings.png)
+Use the instructions in the following table to provide the information for **Extraction settings**\.
 
-The extractor setting options that you can select include the following:
-+ **Compression format**, such as **GZIP**\.
-+ **Delimiter character**, such as a **\|** \(pipe symbol\)\. 
-+ An **Extract LOBs** option\.
-+ An **S3 bucket LOBs folder** option\.
-+ A **Sorting strategy** option\. We recommend the **Use sorting after first fail**\.
-+ A **Keep files locally after upload to s3** option\.
 
-The copy setting options that you can select include the following:
-+ A **Maximum error count** setting\. The default is 0\. 
-+ The **Replace invalid UTF\-8 character** option, by identifying a character such as **?**\. 
-+ A **NULL value as a string** option that loads the string field provided as NULL\. 
-+ The **Use empty as null value** option\. The default behavior that loads blank fields as NULL\.
-+ The **Truncate columns** option applies only to columns of VARCHAR and CHAR data type, and rows of 4 MB or fewer in size\.
-+ The **Automatic compressions** option controls whether compression encodings are automatically applied during a copy operation\.
+| For this parameter | Do this | 
+| --- | --- | 
+| **Compression format** | Specify the compression format of the input files\. Choose one of the following options: **GZIP**, **BZIP2**, **ZSTD**, or **No compression**\. | 
+| **Delimiter character** | Specify the ASCII character that separates fields in the input files\. Nonprinting characters aren't supported\. | 
+| **NULL value as a string** | Turn this option on if your data includes a null terminator\. If this option is turned off, the Amazon Redshift `COPY` command treats null as an end of the record and ends the load process\. | 
+| **Sorting strategy** | Use sorting to restart the extraction from the point of failure\. Choose one of the following sorting strategies: **Use sorting after the first fail \(recommended\)**, **Use sorting if possible**, or **Never use sorting**\. For more information, see [Sorting data before migrating using AWS SCT](#agents.Sorting)\. | 
+| **Source temp schema** | Enter the name of the schema in the source database, where the extraction agent can create the temporary objects\. | 
+| **Out file size \(in MB\)** | Enter the size, in MB, of the files uploaded to Amazon S3\.  | 
+| **Snowball out file size \(in MB\)** | Enter the size, in MB, of the files uploaded to AWS Snowball\. Files can be 1–1,000 MB in size\.  | 
+| **Use table partitioning if it is supported by DB server and table size \(in MB\) is more than** | Turn this option on to use table partitioning, and then enter the size of tables to partition\. | 
+| **Extract LOBs** | Turn this option on to extract large objects \(LOBs\) from your source database\. LOBs include BLOBs, CLOBs, NCLOBs, XML files, and so on\. For every LOB, AWS SCT extraction agents create a data file\. | 
+| **Amazon S3 bucket LOBs folder** | Enter the location for AWS SCT extraction agents to store LOBs\. | 
+| **Apply RTRIM to string columns** | Turn this option on to trim a specified set of characters from the end of the extracted strings\. | 
+| **Keep files locally after upload to Amazon S3** | Turn this option on to keep files on your local machine after data extraction agents upload them to Amazon S3\. | 
+
+Use the instructions in the following table to provide the information for **Amazon S3 settings**\.
+
+
+| For this parameter | Do this | 
+| --- | --- | 
+| **Use proxy** | Turn this option on to use a proxy server to upload data to Amazon S3\. Then choose the data transfer protocol, enter the host name, port, user name, and password\. | 
+| **Use FIPS endpoint for Amazon S3** | Turn this option on to use the Federal Information Processing Standard \(FIPS\) endpoint\. | 
+| **Keep files on Amazon S3 after copying to Amazon Redshift** | Turn this option on to keep extracted files on Amazon S3 after copying these files to Amazon Redshift\. | 
+
+Use the instructions in the following table to provide the information for **Copy settings**\.
+
+
+| For this parameter | Do this | 
+| --- | --- | 
+| **Maximum error count** | Enter the number of load errors\. After the operation reaches this limit, the AWS SCT data extraction agents end the data load process\. The default value is 0, which means that the AWS SCT data extraction agents continue the data load regardless of the failures\. | 
+| **Replace not valid UTF\-8 characters** | Turn this option on to replace not valid UTF\-8 characters with the specified character and continue the data load operation\. | 
+| **Use blank as null value** | Turn this option on to load blank fields that consist of white space characters as null\. | 
+| **Use empty as null value** | Turn this option on to load empty `CHAR` and `VARCHAR` fields as null\. | 
+| **Truncate columns** | Turn this option on to truncate data in columns to fit the data type specification\. | 
+| **Automatic compression** | Turn this option on to apply compression encoding during a copy operation\. | 
+| **Automatic statistics refresh** | Turn this option on to refresh the statistics at the end of a copy operation\. | 
+| **Check file before load** | Turn this option on to validate data files before loading them to Amazon Redshift\. | 
 
 ## Sorting data before migrating using AWS SCT<a name="agents.Sorting"></a>
 
@@ -304,9 +328,9 @@ These benefits have to do with how AWS SCT creates data extraction queries\. In 
 
 1. Open an AWS SCT project\.
 
-1. Open the context \(right\-click\) menu for the object, and then choose **Create Local Task**\.
+1. Open the context \(right\-click\) menu for the object, and then choose **Create Local task**\.
 
-1. Choose the **Advanced** tab, and for **Sorting Strategy**, choose an option:
+1. Choose the **Advanced** tab, and for **Sorting strategy**, choose an option:
    + **Never use sorting** – The extraction agent doesn't use the DENSE\_RANK analytic function and restarts from the beginning if a failure occurs\.
    + **Use sorting if possible** – The extraction agent uses DENSE\_RANK if the table has a primary key or a unique constraint\.
    + **Use sorting after first fail \(recommended\)** – The extraction agent first tries to get the data without using DENSE\_RANK\. If the first attempt fails, the extraction agent rebuilds the query using DENSE\_RANK and preserves its location in case of failure\.  
@@ -324,19 +348,19 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
 
    You can choose all tables, but we recommend against that for performance reasons\. We recommend that you create multiple tasks for multiple tables based on the size of the tables in your data warehouse\. 
 
-1. Open the context \(right\-click\) menu for each table, and then choose **Create Task**\. The **Create Local Task** dialog box opens, as shown following\.   
+1. Open the context \(right\-click\) menu for each table, and then choose **Create task**\. The **Create Local task** dialog box opens, as shown following\.   
 ![\[Task dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/TaskDialog.png)
 
-1. For **Task Name**, type a name for the task\. 
+1. For **Task name**, type a name for the task\. 
 
-1. For **Migration Mode**, choose one of the following: 
-   + **Extract Only** – Extract your data, and save the data to your local working folders\. 
-   + **Extract and Upload** – Extract your data, and upload your data to Amazon S3\. 
-   + **Extract, Upload and Copy** – Extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
+1. For **Migration mode**, choose one of the following: 
+   + **Extract only** – Extract your data, and save the data to your local working folders\. 
+   + **Extract and upload** – Extract your data, and upload your data to Amazon S3\. 
+   + **Extract, upload and copy** – Extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
 
 1. Choose **Extract LOBs** to extract large objects\. If you don't need to extract large objects, you can clear the check box\. Doing this reduces the amount of data that you extract\. 
 
-1. If you want to see detailed information about a task, choose **Enable Task Logging**\. You can use the task log to debug problems\. 
+1. If you want to see detailed information about a task, choose **Enable task logging**\. You can use the task log to debug problems\. 
 
    If you enable task logging, choose the level of detail that you want to see\. The levels are the following, with each level including all messages from the previous level: 
    + `ERROR` – The smallest amount of detail\.
@@ -345,7 +369,7 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
    + `DEBUG`
    + `TRACE` – The largest amount of detail\.
 
-1. Choose **Test Task** to verify that you can connect to your working folder, Amazon S3 bucket, and Amazon Redshift data warehouse\. The verification depends on the migration mode you chose\. 
+1. Choose **Test task** to verify that you can connect to your working folder, Amazon S3 bucket, and Amazon Redshift data warehouse\. The verification depends on the migration mode you chose\. 
 
 1. Choose **Create** to create the task\.
 
@@ -353,7 +377,7 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
 
 **To run and monitor tasks**
 
-1. For **View**, choose **Data Migration View**\. The **Agents** tab appears\. 
+1. For **View**, choose **Data Migration view**\. The **Agents** tab appears\. 
 
 1. Choose the **Tasks** tab\. Your tasks appear in the grid at the top as shown following\. You can see the status of a task in the top grid, and the status of its subtasks in the bottom grid\.   
 ![\[Tasks grid\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/TasksGrid.png)
@@ -364,7 +388,7 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
 
 1. If you enabled logging when you set up the task, you can view the log: 
 
-   1. Choose **Download Log**\. A message appears with the name of the folder that contains the log file\. Dismiss the message\. 
+   1. Choose **Download log**\. A message appears with the name of the folder that contains the log file\. Dismiss the message\. 
 
    1. A link appears in the **Task details** tab\. Choose the link to open the folder that contains the log file\. 
 
@@ -378,7 +402,6 @@ When you export an extraction task, AWS SCT creates a separate `.xml` file for t
 + Distribution of extracting agents by subtasks and stages
 + Task and subtask IDs
 + Task name
-+ AWS profile access key and secret key
 
 ## Exporting and importing an AWS SCT data extraction task<a name="agents.ExportImportTasks"></a>
 
@@ -386,7 +409,7 @@ You can quickly save an existing task from one project and restore it in another
 
 **To export and import a data extraction task**
 
-1. For **View**, choose **Data Migration View**\. The **Agents** tab appears\. 
+1. For **View**, choose **Data Migration view**\. The **Agents** tab appears\. 
 
 1. Choose the **Tasks** tab\. Your tasks are listed in the grid that appears\.
 
@@ -456,18 +479,27 @@ aws s3 ls s3://<bucket-name> --profile <Snowball Edge profile> --endpoint http:/
 
 #### Step 3: Create a new AWS SCT project<a name="agents.Snowball.SBS.NewSCTProject"></a>
 
-Next, you create a new AWS SCT project\.
+Next, create a new AWS SCT project\.
 
 **To create a new project in AWS SCT**
 
-1. Start AWS SCT, and choose **New Project** for **File**\. The **New Project** dialog box appears\.
+1. Start the AWS Schema Conversion Tool\. On the **File** menu, choose **New project**\. The **New project** dialog box appears\. 
 
-1. Add the following project information\.     
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
+1.  Enter a name for your project, which is stored locally on your computer\. 
 
-1. Choose **OK** to create your AWS SCT project\.
+1.  Enter the location for your local project file\. 
 
-1. \(Optional\) Test your connection\. 
+1. Choose **OK** to create your AWS SCT project\. 
+
+1. Choose **Add source** to add a new source database to your AWS SCT project\. 
+
+1. Choose **Add target** to add a new target platform in your AWS SCT project\. 
+
+1. Choose the source database schema in the left panel\. 
+
+1. In the right panel, specify the target database platform for the selected source schema\. 
+
+1. Choose **Create mapping**\. This button becomes active after you choose the source database schema and the target database platform\. 
 
 #### Step 4: Install the source database driver for the AWS DMS agent on the Linux computer<a name="agents.Snowball.SBS.SourceDriver"></a>
 
@@ -573,11 +605,11 @@ Next, you create the task that is the end\-to\-end migration task\. The task inc
 
 **To create the end\-to\-end migration task**
 
-1. Start AWS SCT, choose **View**, and then choose **Database Migration View \(Local & DMS\)**\.  
-![\[View > Database Migration View (Local & DMS)\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/snowball-view-databasemigview.png)
+1. Start AWS SCT, choose **View**, and then choose **Database Migration View \(Local & DMS\)**\.
 
-1. In the left panel that displays the schema from your source database, choose a schema object to migrate\. Open the context \(right\-click\) menu for the object, and then choose **Create Local & DMS Task**\.  
-![\[AWS Database Migration Service and AWS Snowball Edge process\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/snowball-contextmenucreatelocal.png)
+1. In the left panel that displays the schema from your source database, choose a schema object to migrate\. Open the context \(right\-click\) menu for the object, and then choose **Create Local & DMS Task**\.
+
+   You can't migrate individual tables using AWS DMS and Snowball Edge\.
 
 1. Add your task information\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
@@ -588,7 +620,7 @@ Next, you create the task that is the end\-to\-end migration task\. The task inc
 
 You can start the Local & DMS Task when all connections to endpoints are successful\. This means all connections for the Local task, which includes connections from the AWS DMS agent to the source database, the staging Amazon S3 bucket, and the AWS Snowball device, as well as the connections for the DMS task, which includes connections from the staging Amazon S3 bucket to the target database on AWS\.
 
-You can monitor the AWS DMS agent logs by choosing **Show Log**\. The log details include agent server \(**Agent Log**\) and local running task \(**Task Log**\) logs\. Because the endpoint connectivity is done by the server \(since the local task is not running and there are no task logs\), connection issues are listed under the **Agent Log** tab\.
+You can monitor the AWS DMS agent logs by choosing **Show log**\. The log details include agent server \(**Agent log**\) and local running task \(**Task log**\) logs\. Because the endpoint connectivity is done by the server \(since the local task is not running and there are no task logs\), connection issues are listed under the **Agent log** tab\.
 
 ![\[Local task completed, waiting for the second task\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/snowball-tasklog.png)
 
@@ -601,9 +633,9 @@ After your migration tasks complete, your data is ready\. Use the following info
 
 | Migration mode | Data location | 
 | --- | --- | 
-|  **Extract, Upload and Copy**  |  The data is already in your Amazon Redshift data warehouse\. You can verify that the data is there, and start using it\. For more information, see [Connecting to clusters from client tools and code](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-via-client-tools.html)\.   | 
-|  **Extract and Upload**  |  The extraction agents saved your data as files in your Amazon S3 bucket\. You can use the Amazon Redshift COPY command to load your data to Amazon Redshift\. For more information, see [Loading data from Amazon S3](https://docs.aws.amazon.com/redshift/latest/dg/t_Loading-data-from-S3.html) in the Amazon Redshift documentation\.  There are multiple folders in your Amazon S3 bucket, corresponding to the extraction tasks that you set up\. When you load your data to Amazon Redshift, specify the name of the manifest file created by each task\. The manifest file appears in the task folder in your S3 bucket as shown following\.  ![\[File list in S3 bucket\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3FileList.png)  | 
-|  **Extract Only**  |  The extraction agents saved your data as files in your working folder\. Manually copy your data to your Amazon S3 bucket, and then proceed with the instructions for **Extract and Upload**\.  | 
+|  **Extract, upload and copy**  |  The data is already in your Amazon Redshift data warehouse\. You can verify that the data is there, and start using it\. For more information, see [Connecting to clusters from client tools and code](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-via-client-tools.html)\.   | 
+|  **Extract and upload**  |  The extraction agents saved your data as files in your Amazon S3 bucket\. You can use the Amazon Redshift COPY command to load your data to Amazon Redshift\. For more information, see [Loading data from Amazon S3](https://docs.aws.amazon.com/redshift/latest/dg/t_Loading-data-from-S3.html) in the Amazon Redshift documentation\.  There are multiple folders in your Amazon S3 bucket, corresponding to the extraction tasks that you set up\. When you load your data to Amazon Redshift, specify the name of the manifest file created by each task\. The manifest file appears in the task folder in your S3 bucket as shown following\.  ![\[File list in S3 bucket\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3FileList.png)  | 
+|  **Extract only**  |  The extraction agents saved your data as files in your working folder\. Manually copy your data to your Amazon S3 bucket, and then proceed with the instructions for **Extract and upload**\.  | 
 
 ## Using virtual partitioning with AWS Schema Conversion Tool<a name="agents.VirtualPartitioning"></a>
 
@@ -641,11 +673,11 @@ Partition3: WHERE LO_TAX > 15005.5 AND LO_TAX <= 25005.95
 
 1. Open the AWS SCT application\.
 
-1. Choose **Data Migration View** mode\.
+1. Choose **Data Migration view \(other\)** mode\.
 
-1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add Virtual Partitioning**\.
+1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add virtual partitioning**\.
 
-1. In the **Add Virtual Partitioning** dialog box, enter the information as follows\.  
+1. In the **Add virtual partitioning** dialog box, enter the information as follows\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
 
@@ -667,17 +699,17 @@ PartitionN: WHERE LO_ORDERKEY = USER_VALUE_N
 
 You can also create a default partition for values not included in the ones specified\.
 
-You can use the LIST partition type to filter the source data if you want to exclude particular values from the migration\. For example, suppose that you want to omit rows with `LO_ORDERKEY = 4`\. In this case, don't include the value `4` in the list of partition values and make sure that **Include Other Values** isn't chosen\.
+You can use the LIST partition type to filter the source data if you want to exclude particular values from the migration\. For example, suppose that you want to omit rows with `LO_ORDERKEY = 4`\. In this case, don't include the value `4` in the list of partition values and make sure that **Include other values** isn't chosen\.
 
 **To create a LIST virtual partition**
 
 1. Open the AWS SCT application\.
 
-1. Choose **Data Migration View** mode\.
+1. Choose **Data Migration view \(other\)** mode\.
 
-1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add Virtual Partitioning**\.
+1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add virtual partitioning**\.
 
-1. In the **Add Virtual Partitioning** dialog box, enter the information as follows\.  
+1. In the **Add virtual partitioning** dialog box, enter the information as follows\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
 
@@ -701,11 +733,11 @@ PartitionN: WHERE LO_ORDERDATE >= USER_VALUE_N AND LO_ORDERDATE <= ‘2017-08-13
 
 1. Open the AWS SCT application\.
 
-1. Choose **Data Migration View** mode\.
+1. Choose **Data Migration view \(other\)** mode\.
 
-1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add Virtual Partitioning**\.
+1. Choose the table where you want to set up virtual partitioning\. Open the context \(right\-click\) menu for the table, and choose **Add virtual partitioning**\.
 
-1. In the **Add Virtual Partitioning** dialog box, enter information as follows\.  
+1. In the **Add virtual partitioning** dialog box, enter information as follows\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
 
@@ -719,11 +751,11 @@ For example, after you create a project, you might collect statistics on a schem
 
 **To use native Netezza partitioning**
 
-1. Open the AWS SCT application, and choose **New Project** for **File**\. The **New Project** dialog box appears\.
+1. Open the AWS SCT application, and choose **New project** for **File**\. The **New project** dialog box appears\.
 
 1. Create a new project and connect to the source and target servers\.
 
-1. Choose **View**, and then choose **Main View**\.
+1. Choose **View**, and then choose **Main view**\.
 
 1. In the left panel that displays the schema from your source database, choose a schema\. Open the context \(right\-click\) menu for the object, and chose **Collect statistics**\.
 
@@ -747,11 +779,19 @@ Amazon Redshift doesn't support storing large binary objects \(LOBs\)\. However,
 
 1. Open an AWS SCT project\.
 
-1. For **Actions**, choose **Create Local Task**\.
+1. Connect to the source and target databases\. Refresh metadata from the target database, and make sure that the converted tables exist there\.
 
-1. Choose the **Advanced** tab\.
+1. For **Actions**, choose **Create local task**\.
 
-1. For **S3 bucket LOBs folder**, type the name of the folder in an S3 bucket where you want the LOBs stored\.  
+1. For **Migration mode**, choose one of the following: 
+   + **Extract and upload** to extract your data, and upload your data to Amazon S3\. 
+   + **Extract, upload and copy** to extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
+
+1. Choose **AWS S3 settings**\.
+
+1. For **S3 bucket LOBs folder**, enter the name of the folder in an S3 bucket where you want the LOBs stored\.
+
+   If you use AWS service profile, this field is optional\. AWS SCT can use the default settings from your profile\. To use another Amazon S3 bucket, enter the path here\.  
 ![\[LOBs in Local Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3LOBs.png)
 
 1. Choose **Create** to create the task\.

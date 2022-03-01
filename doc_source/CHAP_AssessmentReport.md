@@ -20,4 +20,4 @@ If you use AWS SCT to migrate your existing schema to an Amazon RDS DB instance,
 + [Creating a database migration assessment report](CHAP_AssessmentReport.Create.md)
 + [Viewing the assessment report](CHAP_AssessmentReport.View.md)
 + [Saving the assessment report](CHAP_AssessmentReport.Save.md)
-+ [Using the multiserver assessor to create an aggregate report](CHAP_AssessmentReport.Multiserver.md)
++ [Creating a multiserver assessment report for database migration](CHAP_AssessmentReport.Multiserver.md)
