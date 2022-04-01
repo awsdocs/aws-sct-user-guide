@@ -11,10 +11,10 @@ The privileges required for Greenplum Database as a source are listed following:
 + SELECT ON SEQUENCE *<schema\_name>\.<sequence\_name>* 
 
 In the example preceding, replace placeholders as following:
-+ Replace `database_name` with the name of the source database\.
-+ Replace `schema_name` with the name of the source schema\.
-+ Replace *`table_name`* with the name of the source table\.
-+ Replace `sequence_name` with the name of the sequence name\.
++ Replace *database\_name* with the name of the source database\.
++ Replace *schema\_name* with the name of the source schema\.
++ Replace *table\_name* with the name of the source table\.
++ Replace *sequence\_name* with the name of the sequence name\.
 
 ## Connecting to Greenplum Database as a source<a name="CHAP_Source.Greenplum.Connecting"></a>
 
@@ -31,7 +31,7 @@ Use the following procedure to connect to your Greenplum source database with th
 1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
 
 1. Use database credentials from AWS Secrets Manager or enter them manually:
-   + To use database credentials from Secrets Manager, use the following insructions:
+   + To use database credentials from Secrets Manager, use the following instructions:
 
      1. For **AWS Secret**, choose the name of the secret\.
 

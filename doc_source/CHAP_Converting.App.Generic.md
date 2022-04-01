@@ -21,6 +21,26 @@ In the AWS Schema Conversion Tool, the application conversion project is a child
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Converting.App.Generic.html)
 
+1. Select **Don't cast bind variables to SQL types** to avoid casting bind variables to SQL types\. This option is available only for an Oracle to PostgreSQL conversion\.
+
+   For example, your source application code includes the following Oracle query:
+
+   ```
+   SELECT * FROM ACCOUNT WHERE id = ?
+   ```
+
+   When you select **Don't cast bind variables to SQL types**, AWS SCT converts this query as shown following\.
+
+   ```
+   SELECT * FROM account WHERE id = ?
+   ```
+
+   When you clear **Don't cast bind variables to SQL types**, AWS SCT casts the bind variable to the `NUMERIC` data type\. The conversion result is shown following\.
+
+   ```
+   SELECT * FROM account WHERE id = (?)::NUMERIC
+   ```
+
 1. Choose **OK** to create your application conversion project\. 
 
    The project window opens\.  

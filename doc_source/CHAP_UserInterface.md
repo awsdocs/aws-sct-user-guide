@@ -45,7 +45,7 @@ To start the AWS Schema Conversion Tool, use the instructions for your operating
 
 | Operating system | Instructions | 
 | --- | --- | 
-| Fedora Linux |  Run the following command:  `/opt/AWSSchemaConversionTool/AWSSchemaConversionTool`  | 
+| Fedora Linux |  Run the following command:  `/opt/aws-schema-conversion-tool/bin/AWSSchemaConversionTool`  | 
 | Microsoft Windows | Double\-click the application icon\. | 
 | Ubuntu Linux |  Double\-click the application icon or run the following command:  `sudo /opt/aws-schema-conversion-tool/bin/AWSSchemaConversionTool`  | 
 
@@ -387,7 +387,7 @@ You can set the default profile for an AWS SCT project\. Doing this associates t
 
 ## Using AWS Secrets Manager<a name="CHAP_UserInterface.SecretsManager"></a>
 
-AWS SCT can use database credentials that you store in AWS Secrets Manager\. You can fill in all values in the database connection dialog box from Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS Schema Conversion Tool\. 
+AWS SCT can use database credentials that you store in AWS Secrets Manager\. You can fill in all values in the database connection dialog box from Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS Schema Conversion Tool\.
 
 For more information about using AWS Secrets Manager, see [What is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\. For more information about storing AWS profiles, see [Storing AWS service profiles in the AWS SCT](#CHAP_UserInterface.Profiles)\.
 

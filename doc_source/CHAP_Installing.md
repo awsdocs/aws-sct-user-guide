@@ -33,18 +33,18 @@ To ensure that you get the correct version of the AWS SCT distribution file we p
 
 ### Installing previous versions of AWS SCT<a name="CHAP_Installing.PreviousVersions"></a>
 
-You can download and install previous versions of the AWS SCT starting from 1\.0\.625\. Use the following format to download a previous version\. You must provide the version and OS information using this format\. 
+You can download and install previous versions of the AWS SCT starting from 1\.0\.625\. To download a previous version, provide the version and OS information using the following format\.
 
 ```
 https://d211wdu1froga6.cloudfront.net/builds/1.0/<version>/<OS>/aws-schema-conversion-tool-1.0.zip
 ```
 
-For example, to download AWS SCT version 632, do the following:
-+ Windows \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Windows/aws-schema-conversion-tool-1.0.zip)
-+ Ubuntu \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Ubuntu/aws-schema-conversion-tool-1.0.zip)
-+ Fedora \- [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/632/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/632/Fedora/aws-schema-conversion-tool-1.0.zip)
+For example, to download AWS SCT version 658, do the following:
++ Windows – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Windows/aws-schema-conversion-tool-1.0.zip)
++ Ubuntu – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Ubuntu/aws-schema-conversion-tool-1.0.zip)
++ Fedora – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Fedora/aws-schema-conversion-tool-1.0.zip)
 
- 
+AWS supports the three latest versions of the AWS SCT application\. We recommend that you use the latest version of AWS SCT\.
 
 ## Verifying the AWS SCT file download<a name="CHAP_Installing.InstallValidation"></a>
 
@@ -162,7 +162,7 @@ AWS provides another level of validation in addition to the distribution file ch
 
 ## Installing the required database drivers<a name="CHAP_Installing.JDBCDrivers"></a>
 
-For the AWS SCT to work correctly, you must install the JDBC drivers for your source and target database engines\. 
+For the AWS SCT to work correctly, install the JDBC drivers for your source and target database engines\. If you use a virtual target database platform, you don't need to install the JDBC driver for your target database engine\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\. 
 
 After you download the drivers, you give the location of the driver files\. For more information, see [Storing driver paths in the global settings](#CHAP_Installing.JDBCDrivers.Settings)\. 
 
@@ -183,7 +183,7 @@ Install the latest version of the driver available\. The following table include
 | Azure Synapse | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
 | Greenplum Database | postgresql\-42\.2\.19\.jar |  [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
 | Maria DB |  mariadb\-java\-client\-2\.4\.1\.jar  |  [https://downloads\.mariadb\.com/Connectors/java/connector\-java\-2\.4\.1/mariadb\-java\-client\-2\.4\.1\.jar](https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar)   | 
-| Microsoft SQL Server | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Microsoft SQL Server | mssql\-jdbc\-10\.2\. |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/download\-microsoft\-jdbc\-driver\-for\-sql\-server?view=sql\-server\-ver15](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)    | 
 | MySQL | mysql\-connector\-java\-8\.0\.15\.jar |   [https://dev\.mysql\.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)   | 
 | Netezza |  nzjdbc\.jar Use the client tools software\. Install driver version 7\.2\.1, which is backwards compatible with data warehouse version 7\.2\.0\.   |   [http://www\.ibm\.com/support/knowledgecenter/SSULQD\_7\.2\.1/com\.ibm\.nz\.datacon\.doc/c\_datacon\_plg\_overview\.html](http://www.ibm.com/support/knowledgecenter/SSULQD_7.2.1/com.ibm.nz.datacon.doc/c_datacon_plg_overview.html)   | 
 | Oracle |  ojdbc8\.jar Driver versions 8 and later are supported\.   |   [https://www\.oracle\.com/database/technologies/jdbc\-ucp\-122\-downloads\.html](https://www.oracle.com/database/technologies/jdbc-ucp-122-downloads.html)   | 

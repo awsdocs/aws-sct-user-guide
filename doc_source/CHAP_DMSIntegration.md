@@ -2,9 +2,9 @@
 
 ## Using an AWS SCT replication agent with AWS DMS<a name="dms-integration.replication-agent"></a>
 
-For very large database migrations, you can use an AWS SCT replication agent \(aws\-schema\-conversion\-tool\-dms\-agent\) to copy data from your on\-premises database to Amazon S3 or an Amazon Snowball Edge device\. The replication agent works in conjunction with AWS DMS and can work in the background while AWS SCT is closed\.
+For very large database migrations, you can use an AWS SCT replication agent \(aws\-schema\-conversion\-tool\-dms\-agent\) to copy data from your on\-premises database to Amazon S3 or an AWS Snowball Edge device\. The replication agent works in conjunction with AWS DMS and can work in the background while AWS SCT is closed\.
 
-When working with Amazon Snowball Edge, the AWS SCT agent replicates data to the Amazon Snowball device\. The device is then sent to AWS and the data is loaded to an Amazon S3 bucket\. During this time, the AWS SCT agent continues to run\. The agent then takes the data on Amazon S3 and copies the data to the target endpoint\.
+When working with AWS Snowball Edge, the AWS SCT agent replicates data to the AWS Snowball device\. The device is then sent to AWS and the data is loaded to an Amazon S3 bucket\. During this time, the AWS SCT agent continues to run\. The agent then takes the data on Amazon S3 and copies the data to the target endpoint\.
 
 For more information, see [Using data extraction agents](agents.md)\.
 

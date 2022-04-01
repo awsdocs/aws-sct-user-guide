@@ -2,6 +2,43 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 660<a name="CHAP_ReleaseNotes.660"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Added support of AWS Secrets Manager and Secure Sockets Layer \(SSL\) in the multiserver assessment report\. For more information, see [Creating a multiserver assessment report for database migration](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| All | All | Improved statistics collection for converted objects\.  | 
+| All | PostgreSQL | Implemented support of PostgreSQL major version 14 and MariaDB 10\.6 as migration targets\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved transformation logic for the names of converted objects\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL | Improved conversion of the `XML` data type\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where `NOT LIKE` clauses were incorrectly converted\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a transformer error for procedures with `INSERT`, `DELETE`, and `UPDATE` statements that include the `OUTPUT` clause\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a transformer error for procedures with the `RETURN @@ROWCOUNT` statement\.  | 
+| Microsoft SQL Server | All | Improved conversion of procedures that use linked servers\. | 
+| Microsoft SQL Server | All | Added support of Microsoft Windows Authentication in the multiserver assessment report\. | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a transformer error for table value constructors\.  | 
+| Microsoft SQL Server DW | Amazon Redshift and AWS Glue | Improved conversion of extract, transform, and load \(ETL\) scripts to include the correct path to the converted scripts\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Resolved an issue where different converted scripts were generated for virtual and real target database platforms\.  | 
+| Oracle | PostgreSQL Aurora PostgreSQL | Added support for conversion of indexes for materialized views\.  | 
+| Oracle | PostgreSQL Aurora PostgreSQL | Fixed a problem where action item 5982 doesn't appear when converting `PRIMARY KEY` and `UNIQUE` constraints with the `NOVALIDATE` option\.  | 
+| Oracle DW | Amazon Redshift | Resolved an issue where additional categories were displayed in the converted schema\.  | 
+| Teradata | Amazon Redshift | Fixed a problem where action item 13185 doesn't appear when converting an unresolved column as an argument of the `CAST` function\. | 
+| Teradata | Amazon Redshift | Improved conversion of `DELETE` and `DELETE ALL` statements to use the `TRUNCATE` command in the converted code\. | 
+| Teradata | Amazon Redshift | Improved conversion of `SET` tables\. | 
+| Teradata | Amazon Redshift | Improved conversion of `NORMALIZE` condition\. | 
+| Teradata | Amazon Redshift | Updated the assessment report to remove the database schema conversion statistics from the list of database storage objects\. | 
+| Teradata | Amazon Redshift | Improved conversion of the `UPDATE` statement without the `FROM` clause\. | 
+| Teradata | Amazon Redshift | Implemented support of the `VARBYTE` data type in the converted code\. | 
+| Teradata BTEQ | AWS Glue | Resolved an issue where the **Convert to AWS Glue** option was deactivated in the context menu\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an issue where data types were missing in the converted code\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an issue where substitution variables were incorrectly quoted in the converted code\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed a problem with conversion of substitution variables with values in FastLoad scripts\. | 
+| Vertica | Amazon Redshift | Implemented support of the `TIME` data type in the converted code\. | 
+| Vertica | Amazon Redshift | Improved conversion of `SELECT DISTINCT` and `ORDER BY` expressions\. | 
+| Vertica | Amazon Redshift | Added support for conversion of constraints\. | 
+| Vertica | Amazon Redshift | Resolved an error where an assessment report wasn't saved as a comma\-separated value \(CSV\) file\. | 
+
 ## Release notes for AWS SCT Build 659<a name="CHAP_ReleaseNotes.659"></a>
 
 
@@ -21,7 +58,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Microsoft SQL Server | PostgreSQL Aurora PostgreSQL |  Improved conversion of the `OUTPUT` clause\.  | 
 | Microsoft SQL Server DW | Amazon Redshift and AWS Glue | Improved conversion of the `NUMERIC` data type\.  | 
 | Microsoft SQL Server DW | Amazon Redshift | Improved conversion of views which have a table alias with same name as the original table\.  | 
-|  Microsoft SSIS | AWS Glue |  Fixed an issue where the AWS Glue connvection credentials weren't displayed in the **Configure connections** window\.  | 
+|  Microsoft SSIS | AWS Glue |  Fixed an issue where the AWS Glue connection credentials weren't displayed in the **Configure connections** window\.  | 
 | Netezza | Amazon Redshift | Added the ability to repeat the run of change data capture \(CDC\) data migration tasks every day\.  | 
 | Netezza | Amazon Redshift | Fixed an issue where the **Tasks** tab becomes inactive after unregistering a data extraction agent\.  | 
 | Netezza | Amazon Redshift | Fixed an issue where the confirmation of the registration of the data migration agent didn't display in the user interface\.  | 

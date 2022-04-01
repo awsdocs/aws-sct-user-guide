@@ -32,7 +32,7 @@ You can connect to FIPS endpoints for Amazon Redshift if you need to comply with
 Use the information in the following topics to learn how to work with data extraction agents\. 
 
 **Topics**
-+ [Prerequisite settings for Amazon S3 and security for data extraction agents](#agents.PreReqSettings)
++ [Prerequisite settings for using data extraction agents](#agents.PreReqSettings)
 + [Installing extraction agents](#agents.Installing)
 + [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)
 + [Hiding and recovering information for an AWS SCT agent](#agents.Recovering)
@@ -47,7 +47,7 @@ Use the information in the following topics to learn how to work with data extra
 + [Migrating LOBs to Amazon Redshift](#agents.LOBs)
 + [Best practices and troubleshooting for data extraction agents](#agents.BestPractices)
 
-## Prerequisite settings for Amazon S3 and security for data extraction agents<a name="agents.PreReqSettings"></a>
+## Prerequisite settings for using data extraction agents<a name="agents.PreReqSettings"></a>
 
 Before you work with data extraction agents, store your Amazon S3 bucket information and set up your Secure Sockets Layer \(SSL\) trust and key store\.
 
@@ -78,36 +78,50 @@ The AWS Schema Conversion Tool and the extraction agents can communicate through
 
 ## Installing extraction agents<a name="agents.Installing"></a>
 
-We recommend that you install multiple extraction agents on individual computers, separate from the computer that is running the AWS Schema Conversion Tool\. 
+We recommend that you install multiple extraction agents on individual computers, separate from the computer that is running the AWS Schema Conversion Tool\.
 
-Extraction agents are currently supported on the following operating systems: 
+Extraction agents are currently supported on the following operating systems:
 + Microsoft Windows
 + Red Hat Enterprise Linux \(RHEL\) 6\.0
 + Ubuntu Linux \(version 14\.04 and later\)
 
-Use the following procedure to install extraction agents\. Repeat this procedure for each computer that you want to install an extraction agent on\. 
+Use the following procedure to install extraction agents\. Repeat this procedure for each computer that you want to install an extraction agent on\.
 
 **To install an extraction agent**
 
-1. If you have not already downloaded the AWS SCT installer file, follow the instructions at [Installing, verifying, and updating AWS SCT](CHAP_Installing.md) to download it\. The \.zip file that contains the AWS SCT installer file also contains the extraction agent installer file\. 
+1. If you have not already downloaded the AWS SCT installer file, follow the instructions at [Installing, verifying, and updating AWS SCT](CHAP_Installing.md) to download it\. The \.zip file that contains the AWS SCT installer file also contains the extraction agent installer file\.
 
-1. Locate the installer file for your extraction agent in a subfolder named agents\. For each computer operating system, the correct file to install the extraction agent is shown following\.   
+1. Download and install the latest version of Amazon Corretto 11\. For more information, see [Downloads for Amazon Corretto 11](https://docs.aws.amazon.com/corretto/latest/corretto-11-ug/downloads-list.html) in the *Amazon Corretto 11 User Guide*\.
+
+1. Locate the installer file for your extraction agent in a subfolder named agents\. For each computer operating system, the correct file to install the extraction agent is shown following\.  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
 
-1. To install the extraction agent on a separate computer, copy the installer file to the new computer\. 
+1. Install the extraction agent on a separate computer by copying the installer file to the new computer\. 
 
 1. Run the installer file\. Use the instructions for your operating system, shown following\.   
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
 
-1. Install the Java Database Connectivity \(JDBC\) drivers for your source database engine\. For instructions and download links, see [Installing the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\. Follow the instructions for your source database engine only, not your target database engine\. 
+1. Choose **Next**, accept the license agreement, and choose **Next**\.
 
-1. Copy the SSL trust and key stores \(\.zip or individual files\) that you generated in the third step of the [Security settings](#agents.Installing.Security) section\. If you copy the \.zip file to a new computer, extract the individual files from the \.zip file on the new computer\. 
+1. Enter the path to install the AWS SCT data extraction agent, and choose **Next**\.
 
-   You can put the files anywhere you want\. However, note the locations because in a later procedure you tell the agent where to find the files\. 
+1. Install the Java Database Connectivity \(JDBC\) drivers for your source database engine\. For instructions and download links, see [Installing the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  
 
-Continue installing your extraction agent by completing the procedure in the following section\. 
+1. Enter the path to your source and target database drivers and choose **Next**\.
+
+1. Do one of the following:
+   + Select **Use SSL** to use Secure Sockets Layer \(SSL\) to connect to your databases\.
+
+     Copy the SSL trust and key stores \(\.zip or individual files\) that you generated in the third step of the [Security settings](#agents.Installing.Security) section\. If you copy the \.zip file to a new computer, extract the individual files from the \.zip file on the new computer\.
+
+     Enter the path and the password to your trust store and key store\.
+   + Clear **Use SSL** to connect to your databases without SSL\.
+
+1. Choose **Install** to install your data extraction agent\.
+
+AWS SCT installs your data extraction agent\. Now, you can configure your data extraction agent\.
 
 ### Configuring extraction agents<a name="agents.Installing.AgentSettings"></a>
 
@@ -443,7 +457,7 @@ The sections following this overview provide a step\-by\-step guide to each of t
 
 The following steps need to occur to migrate data from a local data store to an AWS data store using AWS Snowball Edge\.
 
-1. Create an AWS Snowball Edge job using the AWS Snowball console\. For more information, see [Create an import job](https://docs.aws.amazon.com/snowball/latest/ug/create-import-job.html) in the AWS Snowball documentation\.
+1. Create an AWS Snowball Edge job using the AWS Snowball console\. For more information, see [Creating an AWS Snowball Edge Job](https://docs.aws.amazon.com/snowball/latest/developer-guide/create-job-common.html) in the *AWS Snowball Edge Developer Guide*\.
 
 1. Unlock the AWS Snowball Edge device using the local, dedicated Linux machine\.
 
@@ -465,11 +479,11 @@ The following sections provide detailed information on the migration steps\.
 
 #### Step 1: Create an AWS Snowball Edge job<a name="agents.Snowball.SBS.OrderSnowball"></a>
 
-Create an AWS Snowball job by following the steps outlined in the section [Getting started with AWS Snowball Edge: your first job](http://docs.aws.amazon.com/snowball/latest/developer-guide/common-get-start.html) in the AWS Snowball documentation\.
+Create an AWS Snowball job by following the steps outlined in the section [Creating an AWS Snowball Edge Job](https://docs.aws.amazon.com/snowball/latest/developer-guide/create-job-common.html) in the *AWS Snowball Edge Developer Guide*\.
 
 #### Step 2: Unlock the AWS Snowball Edge device<a name="agents.Snowball.SBS.UnlockSnowball"></a>
 
-Run the commands that unlock and provide credentials to the Snowball Edge device from the machine where you installed the AWS DMS agent\. This way, you can be sure that the AWS DMS agent call connects to the AWS Snowball Edge device\. For more information about unlocking the AWS Snowball Edge device, see [ Unlock the AWS Snowball Edge](http://docs.aws.amazon.com/snowball/latest/developer-guide/unlockappliance.html)\.
+Run the commands that unlock and provide credentials to the Snowball Edge device from the machine where you installed the AWS DMS agent\. This way, you can be sure that the AWS DMS agent call connects to the AWS Snowball Edge device\. For more information about unlocking the AWS Snowball Edge device, see [Unlocking the Snowball Edge](https://docs.aws.amazon.com/snowball/latest/developer-guide/unlockdevice.html)\.
 
 For example, the following command lists the Amazon S3 bucket used by the device\. 
 

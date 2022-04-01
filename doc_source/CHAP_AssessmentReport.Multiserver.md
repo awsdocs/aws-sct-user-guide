@@ -25,7 +25,7 @@ You can use AWS SCT to create a multiserver assessment report for the following 
 
 ## Performing a multiserver assessment<a name="CHAP_AssessmentReport.Multiserver.Procedure"></a>
 
-Use the following procedure to perform a multiserver assessment with AWS SCT\. You don't need to create a new project in AWS SCT to perform a multiserver assessment\. Before you get started, make sure that you have prepared a comma\-separated value \(CSV\) file with database connection parameters\. 
+Use the following procedure to perform a multiserver assessment with AWS SCT\. You don't need to create a new project in AWS SCT to perform a multiserver assessment\. Before you get started, make sure that you have prepared a comma\-separated value \(CSV\) file with database connection parameters\. Also, make sure that you have installed all required database drivers and set the location of the drivers in the AWS SCT settings\. For more information, see [Installing the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  
 
 **To perform a multiserver assessment and create an aggregated summary report**
 
@@ -51,14 +51,18 @@ Use the following procedure to perform a multiserver assessment with AWS SCT\. Y
 To provide connection parameters as input for multiserver assessment report, use a CSV file as shown in the following example\.
 
 ```
-Name,Description,Server IP,Port,Service Name,SID,Source Engine,Schema Names,Login,Password,Target Engines
-Sales,,192.0.2.0,1521,pdb,,ORACLE,Q4_2021;FY_2021,user,password,POSTGRESQL;AURORA_POSTGRESQL
-Marketing,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MSSQL,customers.dbo,user,password,AURORA_MYSQL
-Analytics,,198.51.100.0,8195,,STATISTICS,DB2LUW,BI_REPORTS,user,password,POSTGRESQL
-Products,,203.0.113.0,8194,,products_db,TERADATA,new_products,user,password,REDSHIFT
+Name,Description,Secret Manager Key,Server IP,Port,Service Name,SID,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
+Sales,,,192.0.2.0,1521,pdb,,ORACLE,Q4_2021;FY_2021,,user,password,,,,,POSTGRESQL;AURORA_POSTGRESQL
+Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MSSQL,customers.dbo,,user,password,,,,,AURORA_MYSQL
+HR,,,192.0.2.0,1433,,employees,MSSQL,employees.dbo,true,,,,,,,AURORA_POSTGRESQL
+Customers,,secret-name,,,,,MYSQL,customers,,,,,,,,AURORA_POSTGRESQL
+Analytics,,,198.51.100.0,8195,,STATISTICS,DB2LUW,BI_REPORTS,,user,password,,,,,POSTGRESQL
+Products,,,203.0.113.0,8194,,products_db,TERADATA,new_products,,user,password,,,,,REDSHIFT
 ```
 
 The example preceding uses a semicolon to separate the two schema names for the `Sales` database\. It also uses a semicolon to separate the two target database migration platforms for the `Sales` database\.
+
+Also, the example preceding uses AWS Secrets Manager to connect to the `Customers` database and Windows Authentication to connect to the `HR` database\.
 
 You can create a new CSV file or download a template for a CSV file from AWS SCT and fill in the required information\. Make sure that the first row of your CSV file includes the same column names as shown in the preceding example\.
 
@@ -70,9 +74,10 @@ You can create a new CSV file or download a template for a CSV file from AWS SCT
 
 1. Choose **Download a connections file example**\.
 
-Make sure that your CSV file includes the following values, provided by the template:  
+Make sure that your CSV file includes the following values, provided by the template: 
 + **Name** – The text label that helps identify your database\. AWS SCT displays this text label in the assessment report\.
 + **Description** – An optional value, where you can provide additional information about the database\.
++ **Secret Manager Key** – The name of the secret that stores your database credentials in the AWS Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS SCT\. For more information, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\. 
 + **Server IP** – The Domain Name Service \(DNS\) name or IP address of your source database server\. 
 + **Port** – The port used to connect to your source database server\.
 + **Service Name** – If you use a service name to connect to your Oracle database, the name of the Oracle service to connect to\. 
@@ -102,8 +107,13 @@ Make sure that your CSV file includes the following values, provided by the temp
   Replace `schema_name` with the name of the source schema\.
 
   Separate multiple schema names by using semicolons like this: `Schema1;Schema2`\.
++ **Use Windows Authentication** – If you use Windows Authentication to connect to your Microsoft SQL Server database, enter **true**\. For more information, see [Using Windows Authentication when using Microsoft SQL Server as a source](CHAP_Source.SQLServer.md#CHAP_Source.SQLServer.Permissions.WinAuth)\. 
 + **Login** – The user name to connect to your source database server\.
 + **Password** – The password to connect to your source database server\.
++ **Use SSL** – If you use Secure Sockets Layer \(SSL\) to connect to your source database, enter **true**\. 
++ **Trust store** – The trust store to use for your SSL connection\.
++ **Key store** – The key store to use for your SSL connection\.
++ **SSL authentication** – If you use SSL authentication by certificate, enter **true**\.
 + **Target Engines** – The target database platforms\. Use the following values to specify one or more targets in the assessment report:
   + **AURORA\_MYSQL** for an Aurora MySQL\-Compatible database\.
   + **AURORA\_POSTGRESQL** for an Aurora PostgreSQL\-Compatible database\.

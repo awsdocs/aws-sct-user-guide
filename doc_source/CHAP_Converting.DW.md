@@ -202,7 +202,7 @@ The left pane contains key suggestions, and includes the confidence rating for e
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with the AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
-### Related topics<a name="w20aac21c23c13"></a>
+### Related topics<a name="w22aac21c23c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 

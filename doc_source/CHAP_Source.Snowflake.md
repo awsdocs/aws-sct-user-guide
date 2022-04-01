@@ -9,47 +9,27 @@ You can create a role with privileges and grant this role the name of a user by 
 The example following creates minimal privileges and grants them to the `min_privs` user\. 
 
 ```
-create role role_name;  
-
+create role role_name;
 grant role role_name to role sysadmin;
-
-grant usage on database db_name to role role_name;  
-
+grant usage on database db_name to role role_name;
 grant usage on schema db_name.schema_name to role role_name;             
-
 grant usage on warehouse datawarehouse_name to role role_name;
-
 grant monitor on database db_name to role role_name;
-
 grant monitor on warehouse datawarehouse_name to role role_name;
-
 grant select on all tables in schema db_name.schema_name to role role_name;
-
 grant select on future tables in schema db_name.schema_name to role role_name;
-
 grant select on all views in schema db_name.schema_name to role role_name;
-
 grant select on future views in schema db_name.schema_name to role role_name;
-
 grant select on all external tables in schema db_name.schema_name to role role_name;
-
 grant select on future external tables in schema db_name.schema_name to role role_name;
-
 grant usage on all sequences in schema db_name.schema_name to role role_name;
-
 grant usage on future sequences in schema db_name.schema_name to role role_name;
-
 grant usage on all functions in schema db_name.schema_name to role role_name;
-
 grant usage on future functions in schema db_name.schema_name to role role_name;
-
 grant usage on all procedures in schema db_name.schema_name to role role_name;
-
 grant usage on future procedures in schema db_name.schema_name to role role_name;
-
 create user min_privs password='real_user_password'  
 DEFAULT_ROLE = role_name DEFAULT_WAREHOUSE = 'datawarehouse_name';
-
 grant role role_name to user min_privs;
 ```
 
@@ -83,7 +63,7 @@ Use the following procedure to connect to your source database with the AWS Sche
 1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
 
 1. Use database credentials from AWS Secrets Manager or enter them manually:
-   + To use database credentials from Secrets Manager, use the following insructions:
+   + To use database credentials from Secrets Manager, use the following instructions:
 
      1. For **AWS Secret**, choose the name of the secret\.
 

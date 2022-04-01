@@ -211,10 +211,10 @@ Follow this procedure to install, configure, and run the AWS SCT data extraction
    user_allow_other
    ```
 
-1. The AWS SCT data extraction agent for Cassandra is available as part of the AWS SCT distribution \(for more information, see [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\)\. You can find the agent in the \.zip file that contains the AWS SCT installer file, in the `agents` directory\. The following builds of the agent are available:    
+1. The AWS SCT data extraction agent for Cassandra is available as part of the AWS SCT distribution \(for more information, see [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\)\. You can find the agent in the \.zip file that contains the AWS SCT installer file, in the `agents` directory\. The following builds of the agent are available\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.cassandra.html)
 
-   Choose the file that's appropriate for your Amazon EC2 instance\. Use the `scp` utility to upload that file to your Amazon EC2 instance\.
+   Choose the file that's appropriate for your Amazon EC2 instance\. Use the scp utility to upload that file to your Amazon EC2 instance\.
 
 1. Install the AWS SCT data extraction agent for Cassandra\. \(Replace `n.n.n` with the build number\.\)
    + For Ubuntu:

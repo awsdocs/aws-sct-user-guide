@@ -1,16 +1,18 @@
-# Migrating data from on\-premises databases<a name="agents.oltp"></a>
+# Extracting data from on\-premises databases using data extraction agents<a name="agents.oltp"></a>
 
-You can use an AWS SCT agent to extract data from your on\-premises relational database and migrate it to the AWS Cloud\. The agent extracts your data and uploads the data to either Amazon S3 or, for large\-scale migrations, an AWS Snowball Edge device\. You can then use AWS SCT to copy the data to the AWS Cloud\.
+You can use an AWS SCT agent to extract data from your on\-premises relational database\. You can then migrate the extracted data to the AWS Cloud\.
 
 ## Installing extraction agents<a name="agents.oltp.Installing"></a>
 
-We recommend that you install multiple extraction agents on individual computers, separate from the computer that is running AWS SCT\. The AWS DMS agent is provided as part of [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\. 
+You can install multiple data extraction agents on individual computers, separate from the computer that is running AWS SCT\. Use this approach to run multiple data extraction agents in parallel\. 
 
-**To install an AWS DMS agent**
+The AWS DMS data extraction agent is provided as part of AWS SCT installation package\. Find the installation file in the `dmsagent` folder of the AWS SCT installation directory\. For more information, see [Installing, verifying, and updating AWS SCT](CHAP_Installing.md)\. 
 
-1. Make sure that AWS SCT and the AWS DMS agent are installed on separate machines\. Make sure that the AWS DMS agent is installed on the same machine as the Open Database Connectivity \(ODBC\) drivers and, as needed, the Snowball Edge client\. 
+**To install an AWS DMS data extraction agent**
 
-1. In the AWS SCT installation directory, locate the RPM Package Manager \(RPM\) file called `aws-schema-conversion-tool-dms-agent-X.X.X-XX.x86_64.rpm`\.
+1. Make sure that AWS SCT and the AWS DMS agent are installed on separate machines\. Make sure that the AWS DMS agent is installed on the same machine as the Open Database Connectivity \(ODBC\) drivers and, as needed, the AWS Snowball Edge client\.
+
+1. In the `dmsagent` folder of the AWS SCT installation directory, locate the RPM Package Manager \(RPM\) file called `aws-schema-conversion-tool-dms-agent-X.X.X-XX.x86_64.rpm`\.
 
    Copy it to the AWS DMS agent machine\. 
 
@@ -26,7 +28,7 @@ We recommend that you install multiple extraction agents on individual computers
    sudo rpm --prefix installation_directory -i aws-schema-conversion-tool-dms-agent-X.X.X-XX.x86_64.rpm
    ```
 
-1. Run the following command to verify that the DMS agent is running\.
+1. Run the following command to verify that the data extraction agent is running\.
 
    ```
    ps -ef | grep repctl
@@ -34,7 +36,7 @@ We recommend that you install multiple extraction agents on individual computers
 
    The output of this command should show two processes running\.
 
-1. Configure the DMS agent as follows:
+1. Configure the data extraction agent as follows:
 
    1. Run the `configure.sh` script\.
 
@@ -48,7 +50,7 @@ We recommend that you install multiple extraction agents on individual computers
 
       A port prompt appears\.
 
-   1. Provide a port number\. Choose an unused port number for the DMS agent to listen on for AWS SCT connections\. The default is 3554\. You might have to configure your firewall to allow connectivity\.
+   1. Provide a port number\. Choose an unused port number for the data extraction agent to listen on for AWS SCT connections\. The default is 3554\. You might have to configure your firewall to allow connectivity\.
 
 The output is as follows, confirming that the service is started\. 
 
@@ -90,31 +92,37 @@ This command produces the following output\.
 2018-08-20 11:31:42 53079181 streams/load00000001000573E166ACF4C0/00000003.fcd.gz
 ```
 
-**To start the DMS agent**
+**To start the data extraction agent**
 + Run the following command in the `/opt/amazon/aws-schema-conversion-tool-dms-agent/bin` directory\.
 
   ```
   ./aws-schema-conversion-tool-dms-agent start
   ```
 
-**To stop the DMS agent**
+**To stop the data extraction agent**
 + Run the following command in the `/opt/amazon/aws-schema-conversion-tool-dms-agent/bin` directory\.
 
   ```
   ./aws-schema-conversion-tool-dms-agent stop
   ```
 
-## Registering extraction agents<a name="agents.oltp.Registering"></a>
+## Registering data extraction agents<a name="agents.oltp.Registering"></a>
 
 You manage your extraction agents by using AWS SCT\. The extraction agents act as listeners\. When they receive instructions from AWS SCT, they extract data from your database\.
 
 Use the following procedure to register extraction agents with your AWS SCT project\. 
 
-**To register a AWS DMS agent**
+**To register a data extraction agent**
 
-1. Start AWS SCT, choose **View**, and then choose **Database Migration view \(standard DMS\)**\.
+1. Create a new project in AWS SCT or open an existing project\. For more information, see [Creating an AWS SCT project](CHAP_UserInterface.md#CHAP_UserInterface.Project)\. 
 
-1. Choose the **Agent** tab, and then choose **Register**\.
+1. Add your source and target databases, and create a new mapping rule\. For more information, see [Adding a new mapping rule](CHAP_Mapping.New.md)\.
+
+1. On the **View** menu, choose **Data Migration view \(other\)**\.
+
+1. Choose **Register**, and then choose **DMS data agent**\.
+
+   If your mapping rules imply using only one type of agent, the **New Agent Registration** dialog box appears automatically after you choose **Register**\.
 
 1. Enter your information in the **New Agent Registration** dialog box\.    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.oltp.html)
@@ -129,16 +137,13 @@ Use the following procedures to create, run, and monitor data extraction tasks i
 
 1. In AWS SCT, after you have converted your schema, choose one or more tables from the left panel of your project\. 
 
-   You can choose all tables, but we recommend against that for performance reasons\. We recommend that you create multiple tasks for multiple tables based on the size of the tables in your data warehouse\. 
+   You can choose all tables, but we recommend against that for performance reasons\. We recommend that you create multiple tasks for multiple tables based on the size of the tables in your database\. 
 
-1. Open the context \(right\-click\) menu for each table, and then choose **Create task**\. The **Create Local task** dialog box opens\. 
+1. Open the context \(right\-click\) menu for each table, and then choose **Create task**\. The **Create Local task** dialog box opens\.
 
 1. For **Task name**, enter a name for the task\. 
 
-1. For **Migration mode**, choose one of the following: 
-   + **Extract only** – Extract your data, and save the data to your local working folders\. 
-   + **Extract and upload** – Extract your data, and upload your data to Amazon S3\. 
-   + **Extract, upload and copy** – Extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
+1. For **Migration mode**, choose **Extract only** to extract your data, and save the data to your local working folders\.
 
 1. Choose **Extract LOBs** to extract large objects\. If you don't need to extract large objects, you can clear the check box\. Doing this reduces the amount of data that you extract\. 
 
@@ -159,7 +164,7 @@ Use the following procedures to create, run, and monitor data extraction tasks i
 
 **To run a task**
 
-1. In AWS SCT, for **View**, choose **Data Migration View \(standard DMS\)**\. The **Agents** tab appears\. 
+1. In AWS SCT, for **View**, choose **Data Migration view \(standard DMS\)**\. The **Agents** tab appears\. 
 
 1. Choose the **Tasks** tab\. Your tasks appear in the grid at the top\. You can see the status of a task in the top grid, and the status of its subtasks in the bottom grid\. 
 

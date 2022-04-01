@@ -25,7 +25,7 @@ Use the following procedure to connect to your Azure Synapse Analytics source da
 1. For **Connection name**, enter a name for your database\. AWS SCT displays this name in the tree in the left panel\. 
 
 1. Use database credentials from AWS Secrets Manager or enter them manually:
-   + To use database credentials from Secrets Manager, use the following insructions:
+   + To use database credentials from Secrets Manager, use the following instructions:
 
      1. For **AWS Secret**, choose the name of the secret\.
 
