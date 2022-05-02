@@ -242,4 +242,4 @@ The extension pack schema is named according to your source database as follows:
 + PostgreSQL: `aws_postgresql_ext`
 + SAP ASE: `aws_sapase_ext`
 
-For more information, see [Using the AWS Lambda functions from the AWS SCT extension pack](CHAP_ExtensionPack.md#CHAP_ExtensionPack.OLTP)\. 
+For more information, see [Using the AWS Lambda functions from the AWS SCT extension pack ](CHAP_ExtensionPack.md#CHAP_ExtensionPack.OLTP)\. 

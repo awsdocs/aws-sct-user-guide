@@ -25,7 +25,7 @@ The privileges required for Oracle as a source are listed following:
 + CONNECT 
 + SELECT\_CATALOG\_ROLE 
 + SELECT ANY DICTIONARY 
-+ SELECT on SYS\.USER$
++ SELECT ON SYS\.ARGUMENT$
 
 ## Connecting to Oracle as a source<a name="CHAP_Source.Oracle.Connecting"></a>
 

@@ -176,12 +176,14 @@ Install the latest version of the driver available\. The following table include
 
 | Database engine | Drivers | Download location | 
 | --- | --- | --- | 
-| Amazon Aurora \(MySQL compatible\) | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
-| Amazon Aurora \(PostgreSQL compatible\) | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| Amazon Aurora MySQL\-Compatible Edition | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
+| Amazon Aurora PostgreSQL\-Compatible Edition | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
 | Amazon Redshift | redshift\-jdbc42\-2\.0\.0\.1\.jar |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.0\.0\.1/redshift\-jdbc42\-2\.0\.0\.1\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.0.0.1/redshift-jdbc42-2.0.0.1.zip)   | 
-| Azure SQL | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
-| Azure Synapse | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Azure SQL Database | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Azure Synapse Analytics | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
 | Greenplum Database | postgresql\-42\.2\.19\.jar |  [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| IBM Db2 for z/OS |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/db2\-jdbc\-driver\-versions\-and\-downloads\-db2\-zos](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads-db2-zos)   | 
+| IBM Db2 LUW |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/node/382667](https://www.ibm.com/support/pages/node/382667)   | 
 | Maria DB |  mariadb\-java\-client\-2\.4\.1\.jar  |  [https://downloads\.mariadb\.com/Connectors/java/connector\-java\-2\.4\.1/mariadb\-java\-client\-2\.4\.1\.jar](https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar)   | 
 | Microsoft SQL Server | mssql\-jdbc\-10\.2\. |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/download\-microsoft\-jdbc\-driver\-for\-sql\-server?view=sql\-server\-ver15](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)    | 
 | MySQL | mysql\-connector\-java\-8\.0\.15\.jar |   [https://dev\.mysql\.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)   | 
@@ -191,7 +193,6 @@ Install the latest version of the driver available\. The following table include
 | SAP ASE \(Sybase ASE\) | jconn4\.jar | Available as part of the SDK for SAP Adaptive Server Enterprise 16 provided with SAP ASE product\. You can download the trial version of the SDK at [https://www\.sap\.com/developer/trials\-downloads/additional\-downloads/sdk\-for\-sap\-adaptive\-server\-enterprise\-16\-13351\.html](https://www.sap.com/developer/trials-downloads/additional-downloads/sdk-for-sap-adaptive-server-enterprise-16-13351.html) | 
 | Teradata |  terajdbc4\.jar tdgssconfig\.jar  |   [https://downloads\.teradata\.com/download/connectivity/jdbc\-driver ](https://downloads.teradata.com/download/connectivity/jdbc-driver)   | 
 | Vertica |  vertica\-jdbc\-9\.1\.1\-0\.jar Driver versions 7\.2\.0 and later are supported\.  |   [https://www\.vertica\.com/client\_drivers/9\.1\.x/9\.1\.1\-0/vertica\-jdbc\-9\.1\.1\-0\.jar](https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-jdbc-9.1.1-0.jar)   | 
-| IBM DB2 LUW |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/node/382667](https://www.ibm.com/support/pages/node/382667)   | 
 | Snowflake |  snowflake\-jdbc\-3\.9\.2\.jar For more information, see [https://docs.snowflake.com/en/user-guide/jdbc-download.html](https://docs.snowflake.com/en/user-guide/jdbc-download.html)   |   [ https://repo1\.maven\.org/maven2/net/snowflake/snowflake\-jdbc/3\.9\.2/snowflake\-jdbc\-3\.9\.2\.jar]( https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.9.2/snowflake-jdbc-3.9.2.jar)   | 
 
 ### Installing JDBC drivers on Linux<a name="CHAP_Installing.JDBCDrivers.Linux"></a>

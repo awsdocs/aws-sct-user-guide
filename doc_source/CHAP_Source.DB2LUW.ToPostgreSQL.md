@@ -1,4 +1,4 @@
-# Converting DB2 LUW to Amazon RDS for PostgreSQL or Amazon Aurora PostgreSQL\-Compatible Edition<a name="CHAP_Source.DB2LUW.ToPostgreSQL"></a>
+# Converting Db2 LUW to Amazon RDS for PostgreSQL or Amazon Aurora PostgreSQL\-Compatible Edition<a name="CHAP_Source.DB2LUW.ToPostgreSQL"></a>
 
 When you migrate IBM Db2 LUW to PostgreSQL, AWS SCT can convert various trigger statements used with Db2 LUW\. These trigger statements include the following:
 + **Trigger events** – INSERT, DELETE, and UPDATE trigger events specify that the triggered action runs whenever the event is applied to the subject table or subject view\. You can specify any combination of the INSERT, DELETE, and UPDATE events, but you can specify each event only once\. AWS SCT supports single and multiple trigger events\. For events, PostgreSQL has practically the same functionality\. 
@@ -7,7 +7,7 @@ When you migrate IBM Db2 LUW to PostgreSQL, AWS SCT can convert various trigger 
 + **Referencing clauses** – These specify the correlation names for transition variables and the table names for transition tables\. Correlation names identify a specific row in the set of rows affected by the triggering SQL operation\. Table names identify the complete set of affected rows\. Each row affected by a triggering SQL operation is available to the triggered action by qualifying columns with specified correlation\-names\. PostgreSQL doesn’t support this functionality, and only uses a NEW or OLD correlation name\.
 + **INSTEAD OF triggers** – AWS SCT supports these\.
 
-## Converting DB2 LUW partitioned tables to PostgreSQL version 10 partitioned tables<a name="CHAP_Source.DB2LUW.ToPostgreSQL.PartitionedTables"></a>
+## Converting Db2 LUW partitioned tables to PostgreSQL version 10 partitioned tables<a name="CHAP_Source.DB2LUW.ToPostgreSQL.PartitionedTables"></a>
 
 AWS SCT can convert Db2 LUW tables to partitioned tables in PostgreSQL 10\. There are several restrictions when converting a Db2 LUW partitioned table to PostgreSQL:
 + You can create a partitioned table with a nullable column in Db2 LUW, and you can specify a partition to store NULL values\. However, PostgreSQL doesn’t support NULL values for RANGE partitioning\.

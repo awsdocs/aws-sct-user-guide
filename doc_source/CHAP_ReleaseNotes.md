@@ -2,6 +2,45 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 661<a name="CHAP_ReleaseNotes.661"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Added filters to search for mapping rules in the mapping view\. When you apply a filter, AWS SCT displays rules that match the filtering conditions in the **Server mappings** list\. For more information, see [Managing mapping rules](CHAP_Mapping.Edit.md)\.  | 
+| All | Amazon Redshift | Added support of data migration to Amazon Redshift using the `ENCRYPTED` clause in the `COPY` command\.  | 
+| All | Amazon Redshift | Enhanced the REST API of the data extraction agents\. The updated REST API adds support of new properties such as encryption key, encryption type, and so on\.  | 
+| All | Amazon Redshift | Implemented role assuming in the data extraction agents\. This update improves the distribution of subtasks, and enables AWS SCT to assign tasks to free agents of the specified role\.  | 
+| All | Amazon Redshift | Implemented a check that all required components are installed before the extension pack is applied to Amazon Redshift\.  | 
+|  Azure Synapse Analytics Microsoft SQL Server DW  | Amazon Redshift | Improved conversion of the `ERROR_LINE`, `ERROR_MESSAGE`, `ERROR_NUMBER`, `ERROR_PROCEDURE`, `ERROR_SEVERITY`, and `ERROR_STATE` system functions for error handling\.  | 
+| IBM Db2 for z/OS |  Aurora MySQL Aurora PostgreSQL MySQL PostgreSQL  | Added support of IBM Db2 for z/OS version 12 as a source for database migration projects in AWS SCT\. For more information, see [Using IBM Db2 for z/OS as a source](CHAP_Source.DB2zOS.md)\.  | 
+| IBM Db2 LUW |  All  | Enhanced the source metadata loader to ensure that AWS SCT loads routine parameters that duplicate column names\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a transformer error for procedures with the `SET NOCOUNT ON` set statement\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of the `CONCAT` function when an input value is a variable of the user\-defined type\.  | 
+| Microsoft Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where the `DATEPART` function was incorrectly converted\.  | 
+| Microsoft SQL Server | Babelfish for Aurora PostgreSQL | Implemented support of the new version of the Babelfish features configuration file\. This file defines SQL features that are supported and not supported by specific Babelfish versions\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Resolved an issue where procedures with an `EXECUTE` statement were incorrectly converted\.  | 
+| Microsoft SSIS | AWS Glue | Improved the user interface of the job configuration wizard\. AWS SCT now displays only available connections in the connection configuration section\.  | 
+| Microsoft SSIS | AWS Glue | Resolved an issue where the transformation rules weren't applied to package tasks and variable rules\.  | 
+| Microsoft SSIS | AWS Glue AWS Glue Studio | Added a new action item 25042 for unsupported components\.  | 
+| Microsoft SSIS | AWS Glue Studio | Implemented conversion of Microsoft SQL Server Integration Services \(SSIS\) extract, transform, and load \(ETL\) packages to AWS Glue Studio\. For more information, see [Converting SSIS to AWS Glue Studio](CHAP-converting-ssis-glue-studio.md)\.   | 
+| Oracle | MariaDB | Fixed a problem with conversion of the `MINUS` operator\.  | 
+| Oracle | MariaDB | Improved conversion of the `ROWNUM`, `SYS_GUID`, `TO_CHAR`, and `ADD_MONTHS` functions when the `sql_mode` system variable in MariaDB is to Oracle\.  | 
+| Oracle | PostgreSQL | Added an option to avoid conversion of bind variables types to SQL types in generic application conversion projects\.  | 
+| Oracle | PostgreSQL | Added an option to avoid adding the schema name to the name of the converted object in generic application conversion projects\.  | 
+| Oracle | PostgreSQL | Added support of the `?x` bind variable format for application SQL code conversion\.  | 
+| Oracle DW | Amazon Redshift | Implemented conversion of the `RAW` data type to the `VARBYTE` data type\.  | 
+| Teradata | Amazon Redshift | Added an option to emulate `SET` tables in the converted code\. For this emulation, AWS SCT supports `MIN` and `MAX` conditions\.  | 
+| Teradata | Amazon Redshift | Improved conversion of join operations that have parameters of different data types\. This update enables AWS SCT to apply transformation rules during conversion of such operations\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where the `GROUP BY` clause was incorrectly converted\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where the `QUALIFY` clause was incorrectly converted\.  | 
+| Teradata | Amazon Redshift | Resolved an unexpected error occurred during FastExport scripts import\.  | 
+| Teradata | Amazon Redshift RSQL | Implemented the ability to edit the values of variables in Teradata BTEQ and shell scripts\.  | 
+| Teradata | Amazon Redshift RSQL | Resolved an issue where the manifest script was missing for the converted Teradata FastLoad sessions\.  | 
+| Teradata | Amazon Redshift RSQL | Resolved an issue where the extension of the manifest file was missing in the uniform resource locator \(URL\) for the converted FastLoad scripts\.  | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed a loader error for scripts with substitution variables\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed a problem where action item 27022 doesn't appear when required\. | 
+
 ## Release notes for AWS SCT Build 660<a name="CHAP_ReleaseNotes.660"></a>
 
 

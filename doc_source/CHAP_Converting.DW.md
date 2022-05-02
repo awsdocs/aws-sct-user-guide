@@ -337,8 +337,8 @@ The extension pack schema is named according to your source database as follows:
 + Teradata: `aws_teradata_ext`
 + Vertica: `aws_vertica_ext`
 
-For more information, see [Using the AWS SCT extension pack](CHAP_ExtensionPack.md)\. 
+For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
 
 ### Python libraries<a name="CHAP_Converting.DW.SaveAndApply.Py"></a>
 
-To create custom functions in Amazon Redshift, you use the Python language\. Use the AWS SCT extension pack to install python libraries for your Amazon Redshift database\. For more information, see [Using the AWS SCT extension pack](CHAP_ExtensionPack.md)\. 
+To create custom functions in Amazon Redshift, you use the Python language\. Use the AWS SCT extension pack to install python libraries for your Amazon Redshift database\. For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 

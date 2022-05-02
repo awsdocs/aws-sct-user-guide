@@ -21,7 +21,7 @@ In the AWS Schema Conversion Tool, the application conversion project is a child
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Converting.App.Generic.html)
 
-1. Select **Don't cast bind variables to SQL types** to avoid casting bind variables to SQL types\. This option is available only for an Oracle to PostgreSQL conversion\.
+1. Select **Don't cast bind variables to SQL types** to avoid conversion of bind variables types to SQL types\. This option is available only for an Oracle to PostgreSQL conversion\.
 
    For example, your source application code includes the following Oracle query:
 
@@ -35,11 +35,33 @@ In the AWS Schema Conversion Tool, the application conversion project is a child
    SELECT * FROM account WHERE id = ?
    ```
 
-   When you clear **Don't cast bind variables to SQL types**, AWS SCT casts the bind variable to the `NUMERIC` data type\. The conversion result is shown following\.
+   When you clear **Don't cast bind variables to SQL types**, AWS SCT changes the bind variable type to the `NUMERIC` data type\. The conversion result is shown following\.
 
    ```
    SELECT * FROM account WHERE id = (?)::NUMERIC
    ```
+
+1. Select **Keep object names** to avoid adding the schema name to the name of the converted object\. This option is available only for an Oracle to PostgreSQL conversion\.
+
+   For example, suppose that your source application code includes the following Oracle query\.
+
+   ```
+   SELECT * FROM ACCOUNT
+   ```
+
+   When you select **Keep object names**, AWS SCT converts this query as shown following\.
+
+   ```
+   SELECT * FROM account
+   ```
+
+   When you clear **Keep object names**, AWS SCT adds the schema name to the name of the table\. The conversion result is shown following\.
+
+   ```
+   SELECT * FROM schema_name.account
+   ```
+
+   If your source code includes the names of the parent objects in the names of the objects, AWS SCT uses this format in the converted code\. In this case, ignore the **Keep object names** option because AWS SCT adds the names of the parent objects in the converted code\.
 
 1. Choose **OK** to create your application conversion project\. 
 

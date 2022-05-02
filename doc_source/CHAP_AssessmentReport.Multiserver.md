@@ -11,9 +11,10 @@ You can use AWS SCT to create a multiserver assessment report for the following 
 | --- | --- | 
 |  Amazon Redshift  |  Amazon Redshift  | 
 |  Greenplum  |  Amazon Redshift  | 
-|  IBM Db2 LUW  |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MariaDB, MySQL, PostgreSQL  | 
+|  IBM Db2 for z/OS  |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MySQL, PostgreSQL  | 
+|  IBM Db2 LUW  |  Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL  | 
 |  Microsoft Azure SQL  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
-|  Microsoft SQL Server  |  Aurora MySQL, Aurora PostgreSQL, Amazon Redshift, MariaDB, Microsoft SQL Server, MySQL, PostgreSQL  | 
+|  Microsoft SQL Server  |  Aurora MySQL, Aurora PostgreSQL, Amazon Redshift, Babelfish for Aurora PostgreSQL, MariaDB, Microsoft SQL Server, MySQL, PostgreSQL  | 
 |  MySQL  |  Aurora PostgreSQL, MySQL, PostgreSQL  | 
 |  Netezza  |  Amazon Redshift  | 
 |  Oracle  |  Aurora MySQL, Aurora PostgreSQL, Amazon Redshift, MariaDB, MySQL, Oracle, PostgreSQL  | 
@@ -84,6 +85,7 @@ Make sure that your CSV file includes the following values, provided by the temp
 + **SID** – The database name\. For Oracle databases, use the Oracle System ID \(SID\)\.
 + **Source Engine** – The type of your source database\. Use one of the following values:
   + **AZURE\_MSSQL** for a Microsoft Azure SQL database\.
+  + **DB2ZOS** for an IBM Db2 for z/OS database\.
   + **DB2LUW** for an IBM Db2 LUW database\.
   + **GREENPLUM** for a Greenplum database\.
   + **MSSQL** for a Microsoft SQL Server database\.
@@ -117,6 +119,7 @@ Make sure that your CSV file includes the following values, provided by the temp
 + **Target Engines** – The target database platforms\. Use the following values to specify one or more targets in the assessment report:
   + **AURORA\_MYSQL** for an Aurora MySQL\-Compatible database\.
   + **AURORA\_POSTGRESQL** for an Aurora PostgreSQL\-Compatible database\.
+  + **BABELFISH** for a Babelfish for Aurora PostgreSQL database\.
   + **MARIA\_DB** for a MariaDB database\.
   + **MSSQL** for a Microsoft SQL Server database\.
   + **MYSQL** for a MySQL database\.

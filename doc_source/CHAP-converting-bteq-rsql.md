@@ -58,23 +58,9 @@ Before you run a BTEQ script with substitution variables, make sure to assign th
 
 1. Choose **OK** to load scripts to your AWS SCT project, and then choose **OK** to close the **Load scripts** window\.
 
-1. In the left panel, expand the **Scripts** node\. Choose **BTEQ scripts**, open the context \(right\-click\) menu, and choose **Export variables** under **Substitution variables**\.
-
-1. Export substitution variables for one script\. Expand the **BTEQ scripts** node, choose your script, open the context \(right\-click\) menu, and choose **Export variables** under **Substitution variables**\.
-
-1. Enter the name of the comma\-separated values \(CSV\) file to save the substitution variables and choose **Save**\.
-
-1. Open this CSV file and fill in the values for the substitution variables\.
-
-   Depending on the operating system, AWS SCT uses different formats for CSV files\. The values in the file might be either enclosed in quotation marks or not\. Make sure that you use the same format for the values of substitution variables as the other values in the file\. AWS SCT can't import a CSV file with values in different formats\.
-
-1. Save the CSV file\.
-
-1. In the left panel, expand the **Scripts** node\. Choose **BTEQ scripts**, open the context \(right\-click\) menu, and choose **Import variables** under **Substitution variables**\.
-
-1. Choose your CSV file, and then choose **Open**\.
-
 1. Choose **Variables** to view all discovered substitution variables and their values\.
+
+1. For **Value**, enter the value for the substitution variable\.
 
 ## Converting Teradata BTEQ scripts to Amazon Redshift RSQL with AWS SCT<a name="CHAP-converting-bteq-rsql-convert"></a>
 

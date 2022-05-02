@@ -107,40 +107,50 @@ Use the following procedure to install extraction agents\. Repeat this procedure
 
 1. Enter the path to install the AWS SCT data extraction agent, and choose **Next**\.
 
-1. Install the Java Database Connectivity \(JDBC\) drivers for your source database engine\. For instructions and download links, see [Installing the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  
-
-1. Enter the path to your source and target database drivers and choose **Next**\.
-
-1. Do one of the following:
-   + Select **Use SSL** to use Secure Sockets Layer \(SSL\) to connect to your databases\.
-
-     Copy the SSL trust and key stores \(\.zip or individual files\) that you generated in the third step of the [Security settings](#agents.Installing.Security) section\. If you copy the \.zip file to a new computer, extract the individual files from the \.zip file on the new computer\.
-
-     Enter the path and the password to your trust store and key store\.
-   + Clear **Use SSL** to connect to your databases without SSL\.
-
 1. Choose **Install** to install your data extraction agent\.
 
-AWS SCT installs your data extraction agent\. Now, you can configure your data extraction agent\.
+   AWS SCT installs your data extraction agent\. To complete the installation, configure your data extraction agent\. AWS SCT automatically launches the configuration setup program\. For more information, see [Configuring extraction agents](#agents.Installing.AgentSettings)\. 
+
+1. Choose **Finish** to close the installation wizard after you configure your data extraction agent\.
 
 ### Configuring extraction agents<a name="agents.Installing.AgentSettings"></a>
 
 Use the following procedure to configure extraction agents\. Repeat this procedure on each computer that has an extraction agent installed\. 
 
 **To configure your extraction agent**
-+ On Microsoft Windows, AWS SCT completes the initial configuration of the extraction agent during the installation process\. If you need to change any configuration settings, edit the `settings.properties` file using a text editor\. For RHEL and Ubuntu, run the `sct-extractor-setup.sh` file from the location where you installed the agent\. 
 
-  The setup program prompts you for information\. For each prompt, a default value appears\. You can accept the default value, or type a new value\. You specify the following information: 
-  + The data warehouse engine\.
-  + The port number the agent listens on\.
-  + The location where you installed the JDBC drivers\.
-  + The working folder\. Your extracted data goes into a subfolder of this location\. The working folder can be on a different computer from the agent, and a single working folder can be shared by multiple agents on different computers\. 
-  + The location of the key store file\.
-  + The password for the key store\.
-  + The location of the trust store file\.
-  + The password for the trust store\.
+1. Launch the configuration setup program: 
+   + On Microsoft Windows, AWS SCT launches the configuration setup program automatically during the installation of a data extraction agent\. 
 
-The setup program updates the settings file for the extraction agent\. The settings file is named `settings.properties`, and is located where you installed the extraction agent\. The following is a sample settings file\. 
+     As needed, launch the setup program manually on Windows using the following command\.
+
+     ```
+     cd path/AWSSchemaConversionTool-Extractor.jar
+     java -jar AWSSchemaConversionTool-Extractor.jar -config
+     ```
+
+     In the preceding example, `path` is the path where you installed the AWS SCT data extraction agent\.
+   + On RHEL and Ubuntu, run the `sct-extractor-setup.sh` file from the location where you installed the agent\. 
+
+   The setup program prompts you for information\. For each prompt, a default value appears\.
+
+1. Accept the default value at each prompt, or enter a new value\. 
+
+   Specify the following information: 
+   + For **Listening port**, enter the port number the agent listens on\.
+   + For **Add a source vendor**, enter **yes**, and then enter your source data warehouse platform\.
+   + For **JDBC driver**, enter the location where you installed the JDBC drivers\.
+   + For **Working folder**, enter the path where the AWS SCT data extraction agent will store the extracted data\. The working folder can be on a different computer from the agent, and a single working folder can be shared by multiple agents on different computers\.
+   + For **Enable SSL communication**, enter **yes**\.
+   + For **Key store**, enter the location of the key store file\.
+   + For **Key store password**, enter the password for the key store\.
+   + For **Enable client SSL authentication**, enter **yes**\.
+   + For **Trust store**, enter the location of the trust store file\.
+   + For **Trust store password**, enter the password for the trust store\.
+
+The setup program updates the settings file for the extraction agent\. The settings file is named `settings.properties`, and is located where you installed the extraction agent\. 
+
+The following is a sample settings file\. 
 
 ```
  1. $ cat settings.properties
@@ -157,6 +167,8 @@ The setup program updates the settings file for the extraction agent\. The setti
 12. extractor.private.folder=/home/ubuntu
 13. ssl.option=OFF
 ```
+
+To change configuration settings, you can edit the `settings.properties` file using a text editor or run the agent configuration again\.
 
 ### Installing and configuring extraction agents with dedicated copying agents<a name="agents.Installing.CopyingAgent"></a>
 
@@ -289,7 +301,7 @@ To turn off a filter without deleting it, use the toggle icon\. To duplicate an 
 
 From the **Project settings** window in AWS SCT, you can choose settings for data extraction agents and the Amazon Redshift `COPY` command\.
 
-To choose these settings, choose **Settings**, **Project settings**, and then choose **Data migration**\. Here, you can edit **Extraction settings**, **AWS S3 settings**, and **Copy settings**\.
+To choose these settings, choose **Settings**, **Project settings**, and then choose **Data migration**\. Here, you can edit **Extraction settings**, **Amazon S3 settings**, and **Copy settings**\.
 
 Use the instructions in the following table to provide the information for **Extraction settings**\.
 
@@ -648,7 +660,7 @@ After your migration tasks complete, your data is ready\. Use the following info
 | Migration mode | Data location | 
 | --- | --- | 
 |  **Extract, upload and copy**  |  The data is already in your Amazon Redshift data warehouse\. You can verify that the data is there, and start using it\. For more information, see [Connecting to clusters from client tools and code](https://docs.aws.amazon.com/redshift/latest/mgmt/connecting-via-client-tools.html)\.   | 
-|  **Extract and upload**  |  The extraction agents saved your data as files in your Amazon S3 bucket\. You can use the Amazon Redshift COPY command to load your data to Amazon Redshift\. For more information, see [Loading data from Amazon S3](https://docs.aws.amazon.com/redshift/latest/dg/t_Loading-data-from-S3.html) in the Amazon Redshift documentation\.  There are multiple folders in your Amazon S3 bucket, corresponding to the extraction tasks that you set up\. When you load your data to Amazon Redshift, specify the name of the manifest file created by each task\. The manifest file appears in the task folder in your S3 bucket as shown following\.  ![\[File list in S3 bucket\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3FileList.png)  | 
+|  **Extract and upload**  |  The extraction agents saved your data as files in your Amazon S3 bucket\. You can use the Amazon Redshift COPY command to load your data to Amazon Redshift\. For more information, see [Loading data from Amazon S3](https://docs.aws.amazon.com/redshift/latest/dg/t_Loading-data-from-S3.html) in the Amazon Redshift documentation\.  There are multiple folders in your Amazon S3 bucket, corresponding to the extraction tasks that you set up\. When you load your data to Amazon Redshift, specify the name of the manifest file created by each task\. The manifest file appears in the task folder in your Amazon S3 bucket as shown following\.  ![\[File list in Amazon S3 bucket\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3FileList.png)  | 
 |  **Extract only**  |  The extraction agents saved your data as files in your working folder\. Manually copy your data to your Amazon S3 bucket, and then proceed with the instructions for **Extract and upload**\.  | 
 
 ## Using virtual partitioning with AWS Schema Conversion Tool<a name="agents.VirtualPartitioning"></a>
@@ -787,7 +799,7 @@ For example, after you create a project, you might collect statistics on a schem
 
 ## Migrating LOBs to Amazon Redshift<a name="agents.LOBs"></a>
 
-Amazon Redshift doesn't support storing large binary objects \(LOBs\)\. However, if you need to migrate one or more LOBs to Amazon Redshift, AWS SCT can perform the migration\. To do so, AWS SCT uses an Amazon S3 bucket to store the LOBs and writes the URL for the S3 bucket into the migrated data stored in Amazon Redshift\.
+Amazon Redshift doesn't support storing large binary objects \(LOBs\)\. However, if you need to migrate one or more LOBs to Amazon Redshift, AWS SCT can perform the migration\. To do so, AWS SCT uses an Amazon S3 bucket to store the LOBs and writes the URL for the Amazon S3 bucket into the migrated data stored in Amazon Redshift\.
 
 **To migrate LOBs to Amazon Redshift**
 
@@ -801,9 +813,9 @@ Amazon Redshift doesn't support storing large binary objects \(LOBs\)\. However,
    + **Extract and upload** to extract your data, and upload your data to Amazon S3\. 
    + **Extract, upload and copy** to extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
 
-1. Choose **AWS S3 settings**\.
+1. Choose **Amazon S3 settings**\.
 
-1. For **S3 bucket LOBs folder**, enter the name of the folder in an S3 bucket where you want the LOBs stored\.
+1. For **S3 bucket LOBs folder**, enter the name of the folder in an Amazon S3 bucket where you want the LOBs stored\.
 
    If you use AWS service profile, this field is optional\. AWS SCT can use the default settings from your profile\. To use another Amazon S3 bucket, enter the path here\.  
 ![\[LOBs in Local Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3LOBs.png)

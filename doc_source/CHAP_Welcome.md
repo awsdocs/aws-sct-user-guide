@@ -11,13 +11,14 @@ AWS SCT supports the following OLTP conversions\.
 
 | Source database | Target database | 
 | --- | --- | 
-|  IBM Db2 LUW \(versions 9\.1, 9\.5, 9\.7, 10\.5, 11\.1, and 11\.5\)  |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MariaDB 10\.5, MySQL, PostgreSQL  For more information, see [Using IBM Db2 LUW as a source for AWS SCT](CHAP_Source.DB2LUW.md)\.   | 
-| Microsoft Azure SQL Database |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
-|  Microsoft SQL Server \(version 2008 R2 and later\)  |  Aurora MySQL, Aurora PostgreSQL, Babelfish for Aurora PostgreSQL \(only for assessment reports\), MariaDB 10\.5, Microsoft SQL Server, MySQL, PostgreSQL   For more information, see [Using Microsoft SQL Server as a source for AWS SCT](CHAP_Source.SQLServer.md)\.   | 
-|  MySQL \(version 5\.5 and later\)  |  Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using MySQL as a source for AWS SCT](CHAP_Source.MySQL.md)  You can migrate schema and data from MySQL to an Aurora MySQL DB cluster without using AWS SCT\. For more information, see [Migrating data to an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html)\.   | 
-|  Oracle \(version 10\.2 and later\)  |   Aurora MySQL, Aurora PostgreSQL, MariaDB 10\.5, MySQL, Oracle, PostgreSQL   For more information, see [Using Oracle Database as a source for AWS SCT](CHAP_Source.Oracle.md)\.   | 
-|  PostgreSQL \(version 9\.1 and later\)  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [ Using PostgreSQL as a source for AWS SCT](CHAP_Source.PostgreSQL.md)\.   | 
-| SAP ASE \(12\.5, 15\.0, 15\.5, 15\.7, and 16\.0\) |   Aurora MySQL, Aurora PostgreSQL, MariaDB 10\.5, MySQL, PostgreSQL   For more information, see [ Using SAP ASE \(Sybase ASE\) as a source for AWS SCT](CHAP_Source.SAP.md)\.   | 
+| IBM Db2 for z/OS \(version 12\) |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MySQL, PostgreSQL  For more information, see [Using IBM Db2 for z/OS as a source](CHAP_Source.DB2zOS.md)\.   | 
+|  IBM Db2 LUW \(versions 9\.1, 9\.5, 9\.7, 10\.5, 11\.1, and 11\.5\)  |  Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL  For more information, see [Using IBM Db2 LUW as a source](CHAP_Source.DB2LUW.md)\.   | 
+| Microsoft Azure SQL Database |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using Azure SQL Database as a source](CHAP_Source.AzureSQL.md)\.   | 
+|  Microsoft SQL Server \(version 2008 R2 and later\)  |  Aurora MySQL, Aurora PostgreSQL, Babelfish for Aurora PostgreSQL \(only for assessment reports\), MariaDB, Microsoft SQL Server, MySQL, PostgreSQL   For more information, see [Using SQL Server as a source](CHAP_Source.SQLServer.md)\.   | 
+|  MySQL \(version 5\.5 and later\)  |  Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using MySQL as a source](CHAP_Source.MySQL.md)  You can migrate schema and data from MySQL to an Aurora MySQL DB cluster without using AWS SCT\. For more information, see [Migrating data to an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html)\.   | 
+|  Oracle \(version 10\.2 and later\)  |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, Oracle, PostgreSQL   For more information, see [Using Oracle Database as a source](CHAP_Source.Oracle.md)\.   | 
+|  PostgreSQL \(version 9\.1 and later\)  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using PostgreSQL as a source](CHAP_Source.PostgreSQL.md)\.   | 
+| SAP ASE \(versions 12\.5, 15\.0, 15\.5, 15\.7, and 16\.0\) |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL   For more information, see [Using SAP ASE \(Sybase ASE\) as a source](CHAP_Source.SAP.md)\.   | 
 
 AWS SCT supports the following data warehouse conversions\. 
 
@@ -27,14 +28,14 @@ AWS SCT supports the following data warehouse conversions\.
 | Source data warehouse | Target data warehouse | 
 | --- | --- | 
 |  Amazon Redshift  |  Amazon Redshift  For more information, see [Using Amazon Redshift as a source for AWS SCT](CHAP_Source.Redshift.md)\.   | 
-|  Azure Synapse Analytics \(version 10\)  | Amazon Redshift | 
-|  Greenplum Database \(version 4\.3 and later\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source for AWS SCT](CHAP_Source.Greenplum.md)\.   | 
-|  Microsoft SQL Server \(version 2008 and later\)  |  Amazon Redshift  For more information, see [Using Microsoft SQL Server Data Warehouse as a source for AWS SCT](CHAP_Source.SQLServerDW.md)\.   | 
-|  Netezza \(version 7\.0\.3 and later\)  |  Amazon Redshift  For more information, see [Using Netezza as a source for AWS SCT](CHAP_Source.Netezza.md)\.   | 
-|  Oracle \(version 10\.2 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source for AWS SCT](CHAP_Source.OracleDW.md)\.   | 
-|  Teradata \(version 13 and later\)  |  Amazon Redshift  For more information, see [Using Teradata as a source for AWS SCT](CHAP_Source.Teradata.md)\.   | 
-|  Vertica \(version 7\.2 and later\)  |  Amazon Redshift  For more information, see [Using Vertica as a source for AWS SCT](CHAP_Source.Vertica.md)\.   | 
-|  Snowflake \(version 3\)  |  Amazon Redshift  For more information, see [Using Snowflake as a source for AWS SCT](CHAP_Source.Snowflake.md)\.   | 
+|  Azure Synapse Analytics \(version 10\)  |  Amazon Redshift  For more information, see [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)\.   | 
+|  Greenplum Database \(version 4\.3 and later\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
+|  Microsoft SQL Server \(version 2008 and later\)  |  Amazon Redshift  For more information, see [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)\.   | 
+|  Netezza \(version 7\.0\.3 and later\)  |  Amazon Redshift  For more information, see [Using Netezza as a source](CHAP_Source.Netezza.md)\.   | 
+|  Oracle \(version 10\.2 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)\.   | 
+|  Teradata \(version 13 and later\)  |  Amazon Redshift  For more information, see [Using Teradata as a source](CHAP_Source.Teradata.md)\.   | 
+|  Vertica \(version 7\.2 and later\)  |  Amazon Redshift  For more information, see [Using Vertica as a source](CHAP_Source.Vertica.md)\.   | 
+|  Snowflake \(version 3\)  |  Amazon Redshift  For more information, see [Using Snowflake as a source](CHAP_Source.Snowflake.md)\.   | 
 
 AWS SCT supports the following data NoSQL database conversions\. 
 
@@ -43,7 +44,7 @@ AWS SCT supports the following data NoSQL database conversions\.
 
 | Source database | Target database | 
 | --- | --- | 
-|  Apache Cassandra \(versions 2\.1\.0, 2\.1\.20, and 3\.11\.4\)  |  Amazon DynamoDB  | 
+|  Apache Cassandra \(versions 2\.1\.0, 2\.1\.20, and 3\.11\.4\)  |  Amazon DynamoDB  For more information, see [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)\.   | 
 
 ## Schema conversion overview<a name="CHAP_Welcome.Overview"></a>
 
@@ -58,7 +59,7 @@ For information on the conversion process, see [Converting database schemas usin
 In addition to converting your existing database schema from one database engine to another, AWS SCT has some additional features that help you move your data and applications to the AWS Cloud: 
 + You can use data extraction agents to extract data from your data warehouse to prepare to migrate it to Amazon Redshift\. To manage the data extraction agents, you can use AWS SCT\. For more information, see [Using data extraction agents](agents.md)\. 
 + You can use AWS SCT to create AWS DMS endpoints and tasks\. You can run and monitor these tasks from AWS SCT\. For more information, see [Using AWS SCT with AWS DMS](CHAP_DMSIntegration.md)\. 
-+ In some cases, database features can't be converted to equivalent Amazon RDS or Amazon Redshift features\. The AWS SCT extension pack wizard can help you install AWS Lambda functions and Python libraries to emulate the features that can't be converted\. For more information, see [Using the AWS SCT extension pack](CHAP_ExtensionPack.md)\. 
++ In some cases, database features can't be converted to equivalent Amazon RDS or Amazon Redshift features\. The AWS SCT extension pack wizard can help you install AWS Lambda functions and Python libraries to emulate the features that can't be converted\. For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
 + You can use AWS SCT to optimize your existing Amazon Redshift database\. AWS SCT recommends sort keys and distribution keys to optimize your database\. For more information, see [Optimizing Amazon Redshift by using the AWS SCT](CHAP_Converting.DW.RedshiftOpt.md)\. 
 + You can use AWS SCT to copy your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. You can use this feature to analyze potential cost savings of moving to the cloud and of changing your license type\. 
 + You can use AWS SCT to convert SQL in your C\+\+, C\#, Java, or other application code\. You can view, analyze, edit, and save the converted SQL code\. For more information, see [Converting application SQL using the AWS SCT](CHAP_Converting.App.md)\. 

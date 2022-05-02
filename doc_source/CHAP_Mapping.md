@@ -12,6 +12,6 @@
 
 **Topics**
 + [Adding a new mapping rule](CHAP_Mapping.New.md)
-+ [Editing mapping rules](CHAP_Mapping.Edit.md)
++ [Managing mapping rules](CHAP_Mapping.Edit.md)
 + [Using virtual targets](CHAP_Mapping.VirtualTargets.md)
 + [Limitations to using multiple servers in a single AWS SCT project](CHAP_Mapping.Limitations.md)

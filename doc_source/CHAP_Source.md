@@ -9,6 +9,7 @@ AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following so
 + [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)
 + [Using Azure SQL Database as a source](CHAP_Source.AzureSQL.md)
 + [Using IBM Db2 LUW as a source](CHAP_Source.DB2LUW.md)
++ [Using IBM Db2 for z/OS as a source](CHAP_Source.DB2zOS.md)
 + [Using MySQL as a source](CHAP_Source.MySQL.md)
 + [Using Oracle Database as a source](CHAP_Source.Oracle.md)
 + [Using PostgreSQL as a source](CHAP_Source.PostgreSQL.md)

@@ -1,5 +1,26 @@
 # Converting SQL Server to PostgreSQL<a name="CHAP_Source.SQLServer.ToPostgreSQL"></a>
 
+You can use the SQL Server to PostgreSQL extension pack in AWS SCT\. This extension pack emulates SQL Server database functions in the converted PostgreSQL code\. Use the SQL Server to PostgreSQL extension pack to emulate SQL Server Agent and SQL Server Database Mail\. For more information about extension packs, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
+
+When you convert a Microsoft SQL Server database to Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\) or Amazon Relational Database Service for PostgreSQL \(Amazon RDS for PostgreSQL\), be aware of the following\.
+
+**Topics**
++ [Converting SQL Server partitions to PostgreSQL version 10 partitions](#CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions)
++ [Migration considerations](#CHAP_Source.SQLServer.ToPostgreSQL.MigrationConsiderations)
++ [Using an AWS SCT extension pack to emulate SQL Server Agent in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Agent.md)
++ [Using an AWS SCT extension pack to emulate SQL Server Database Mail in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Mail.md)
+
+## Converting SQL Server partitions to PostgreSQL version 10 partitions<a name="CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions"></a>
+
+In SQL Server, you create partitions with partition functions\. When converting from a SQL Server portioned table to a PostgreSQL version 10 partitioned table, be aware of several potential issues:
++ SQL Server allows you to partition a table using a column without a NOT NULL constraint\. In that case, all NULL values go to the leftmost partition\. PostgreSQL doesn’t support NULL values for RANGE partitioning\.
++ SQL Server allows you to create primary and unique keys for partitioned tables\. For PostgreSQL, you create primary or unique keys for each partition directly\. Thus, PRIMARY or UNIQUE KEY constraint must be removed from their parent table when migrating to PostgreSQL\. The resulting key names take the format `<original_key_name>_<partition_number>`\.
++ SQL Server allows you to create foreign key constraint from and to partitioned tables\. PostgreSQL doesn’t support foreign keys referencing partitioned tables\. Also, PostgreSQL doesn’t support foreign key references from a partitioned table to another table\.
++ SQL Server allows you to create indexes for partitioned tables\. For PostgreSQL, an index should be created for each partition directly\. Thus, indexes must be removed from their parent tables when migrating to PostgreSQL\. The resulting index names take the format `<original_index_name>_<partition_number>`\.
++  PostgreSQL doesn’t support partitioned indexes\.
+
+## Migration considerations<a name="CHAP_Source.SQLServer.ToPostgreSQL.MigrationConsiderations"></a>
+
 Some things to consider when migrating a SQL Server schema to PostgreSQL: 
 + In PostgreSQL, all object’s names in a schema must be unique, including indexes\. Index names must be unique in the schema of the base table\. In SQL Server, an index name can be the same for different tables\.
 
@@ -30,7 +51,7 @@ When converting from SQL Server to PostgreSQL, AWS SCT converts SQL Server syste
  
 
 
-| >MS SQL Server use cases | PostgreSQL substitution | 
+| MS SQL Server use cases | PostgreSQL substitution | 
 | --- | --- | 
 | SYS\.SCHEMAS | AWS\_SQLSERVER\_EXT\.SYS\_SCHEMAS | 
 | SYS\.TABLES | AWS\_SQLSERVER\_EXT\.SYS\_TABLES | 
@@ -65,14 +86,3 @@ When converting from SQL Server to PostgreSQL, AWS SCT converts SQL Server syste
 | INFORMATION\_SCHEMA\.ROUTINES | AWS\_SQLSERVER\_EXT\.INFORMATION\_SCHEMA\_ROUTINES | 
 | SYS\.SYSPROCESSES | AWS\_SQLSERVER\_EXT\.SYS\_SYSPROCESSES | 
 | sys\.system\_objects | AWS\_SQLSERVER\_EXT\.SYS\_SYSTEM\_OBJECTS | 
-
-## Converting SQL Server partitions to PostgreSQL version 10 partitions<a name="CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions"></a>
-
-In SQL Server, you create partitions with partition functions\. When converting from a SQL Server portioned table to a PostgreSQL version 10 partitioned table, be aware of several potential issues:
-+ SQL Server allows you to partition a table using a column without a NOT NULL constraint\. In that case, all NULL values go to the leftmost partition\. PostgreSQL doesn’t support NULL values for RANGE partitioning\.
-+ SQL Server allows you to create primary and unique keys for partitioned tables\. For PostgreSQL, you create primary or unique keys for each partition directly\. Thus, PRIMARY or UNIQUE KEY constraint must be removed from their parent table when migrating to PostgreSQL\. The resulting key names take the format 
-
-   `<original_key_name>_<partition_number>`\.
-+ SQL Server allows you to create foreign key constraint from and to partitioned tables\. PostgreSQL doesn’t support foreign keys referencing partitioned tables\. Also, PostgreSQL doesn’t support foreign key references from a partitioned table to another table\.
-+ SQL Server allows you to create indexes for partitioned tables\. For PostgreSQL, an index should be created for each partition directly\. Thus, indexes must be removed from their parent tables when migrating to PostgreSQL\. The resulting index names take the format `<original_index_name>_<partition_number>`\.
-+  PostgreSQL doesn’t support partitioned indexes\.

@@ -118,7 +118,7 @@ You can add multiple Teradata FastExport job scripts or remove a FastExport job 
 
 The *FastExport job script conversion assessment report* provides information about converting the FastExport commands and SQL statements from your FastExport scripts to a format compatible with Amazon Redshift RSQL\. The assessment report includes action items for FastExport commands and SQL statements that AWS SCT can't convert\. 
 
-**To create a script conversion assessment report for a Terdata FastExport job**
+**To create a script conversion assessment report for a Teradata FastExport job**
 
 1. Expand the **FastExport** node under **Scripts** in the left panel\.
 
