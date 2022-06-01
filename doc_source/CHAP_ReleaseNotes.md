@@ -2,12 +2,54 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 662<a name="CHAP_ReleaseNotes.662"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Added the ability to automatically create AWS SCT projects for each source database when creating the multiserver assessment report\. With this option turned on, AWS SCT can add mapping rules to these projects and save conversion statistics for offline use\. For more information, see [Creating a multiserver assessment report for database migration](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| All | All | Implemented support of the percent \(`%`\) as a wildcard in database and schema names when creating the multiserver assessment report\.  | 
+| All | Aurora MySQL Aurora PostgreSQL | Updated the runtime of all AWS Lambda functions to Python version 3\.9\.  | 
+| All | Amazon Redshift | Upgraded all data extraction agents to use AWS SDK for Java 2\.x\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of `DELETE` statements with `NON EXISTS` clauses\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Resolved an error where the connection to a source database failed\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Resolved an error where the converted code of a trigger included two mentions of the object alias\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of objects with names in mixed\-case when the **Treat database object name as case sensitive** option is turned on\.  | 
+| Microsoft SQL Server DW Teradata | Amazon Redshift | Implemented conversion of the `PIVOT` and `UNPIVOT` relational operators\.  | 
+| Netezza | Amazon Redshift | Implemented conversion of the `TIME` data type\.  | 
+| Oracle | Aurora MySQL Aurora PostgreSQL MySQL PostgreSQL | Implemented the `UTL_TCP.CRLF` package constant conversion\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Fixed an extension pack issue where the length of data types for columns of variable length wasn't maintained during conversion\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Implemented SQL code conversion in C\+\+ applications\. For more information, see [Converting SQL code in C\+\+ applications with AWS SCT](CHAP_Converting.App.Cplusplus.md)\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Implemented support of case sensitive naming for the conversion of global variables and associative arrays\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved conversion of the `TO_CHAR`, `TO_DATE`, and `TO_NUMBER` functions in the extension pack\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved conversion of the `TABLE()` operator\.  | 
+| Oracle DW | Amazon Redshift | Added support for conversion of primary keys and other constraints\.  | 
+| Oracle DW | Amazon Redshift | Fixed a problem where action item 12054 doesn't appear during the conversion of conditional statements\.  | 
+| SAP ASE | Aurora PostgreSQL PostgreSQL | Resolved an error when an object with an empty name was created in the target tree during the conversion of tables with columns of user\-defined type\.  | 
+| SAP ASE | Aurora PostgreSQL PostgreSQL | Fixed a loader error for stored objects such as scripts, routines, and so on\.  | 
+| Snowflake | Amazon Redshift | Fixed a problem where action item 22152 doesn't appear when required and AWS SCT displays the conversion result as a comment\.  | 
+| Snowflake | Amazon Redshift | Improved conversion of the date and time functions, implemented support of time zones\.  | 
+| Snowflake | Amazon Redshift | Resolved an issue where non\-recursive common table expressions \(CTEs\) with a `WITH` clause were converted as recursive CTEs\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `UPDATE` statements with table links in condition\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `RENAME TABLE` statements\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where empty columns appeared in the comma\-separated value \(CSV\) file with an assessment report\.  | 
+| Teradata | Amazon Redshift RSQL | Fixed an error where a semicolon was missing in the end of the converted a Basic Teradata Query \(BTEQ\) macro\.  | 
+| Teradata | Amazon Redshift RSQL | Improved conversion of multiple data type values in `CASE` statements\.  | 
+| Teradata | Amazon Redshift RSQL | Improved conversion of the `LIKE ANY` clause with an `ESCAPE` character\.  | 
+| Teradata | Amazon Redshift RSQL | Improved conversion of the `CAST` function in `INSERT` statements\.  | 
+| Teradata | Amazon Redshift RSQL | Improved conversion of the time zones, implemented time zone region mapping\.  | 
+| Teradata | Amazon Redshift RSQL | Resolved an issue where action item 9998 unexpectedly appears during the conversion of shell scripts with BTEQ scripts\.  | 
+| Teradata | Amazon Redshift RSQL AWS Glue | Implemented the limit of 500 characters for the values of substitution variables\.  | 
+| Vertica | Amazon Redshift | Implemented conversion of the `BINARY`, `VARBINARY`, `LONG BINARY`, `BYTEA`, and `RAW` data types to the `VARBYTE` data type\.  | 
+| Vertica | Amazon Redshift | Improved conversion of the built\-in functions and literals\.  | 
+
 ## Release notes for AWS SCT Build 661<a name="CHAP_ReleaseNotes.661"></a>
 
 
 | Source | Target | What's new, enhanced, or fixed | 
 | --- | --- | --- | 
 | All | All | Added filters to search for mapping rules in the mapping view\. When you apply a filter, AWS SCT displays rules that match the filtering conditions in the **Server mappings** list\. For more information, see [Managing mapping rules](CHAP_Mapping.Edit.md)\.  | 
+| All | All | Upgraded Apache Log4j to version 2\.17\.1\.  | 
 | All | Amazon Redshift | Added support of data migration to Amazon Redshift using the `ENCRYPTED` clause in the `COPY` command\.  | 
 | All | Amazon Redshift | Enhanced the REST API of the data extraction agents\. The updated REST API adds support of new properties such as encryption key, encryption type, and so on\.  | 
 | All | Amazon Redshift | Implemented role assuming in the data extraction agents\. This update improves the distribution of subtasks, and enables AWS SCT to assign tasks to free agents of the specified role\.  | 
@@ -229,7 +271,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Teradata | Amazon Redshift RSQL | Fixed a problem with conversion of substitution variables in FastLoad and FastExport scripts\. | 
 | Teradata | Amazon Redshift RSQL | Fixed an issue where action items didn't display in the **Action Items** tab after switching from the **Summary** tab\. | 
 | Teradata | Amazon Redshift RSQL | Resolved an issue where an error occurs after generating report during FastExport scripts conversion\. | 
-| Teradata | Amazon Redshift RSQL | Resolved formatting issues after Shell scripts conversion\. | 
+| Teradata | Amazon Redshift RSQL | Resolved formatting issues after shell scripts conversion\. | 
 | Teradata | Amazon Redshift RSQL | Fixed a problem so that AI 13177 is now commented in converted script\. | 
 | Teradata | Amazon Redshift | Fixed a broken conversion of temporal tables\. | 
 | Teradata | Amazon Redshift | Improved conversion of the `SET QUERY_BAND` statement\. | 
@@ -283,7 +325,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | DB2 LUW |  PostgreSQL Aurora PostgreSQL  | Improved conversion of LABEL statements that add or replace labels in the descriptions of tables, views, aliases, or columns\. | 
 | Oracle | None | Substituted SYS\.USER$ system table with DBA\_USERS view, and improved queries\. | 
 | Oracle DW | Amazon Redshift | Updated Oracle DW metadata queries\. | 
-| Teradata | Amazon Redshift RSQL | Added support for conversion of Shell, Teradata FastLoad, and Teradata Basic Teradata Query \(BTEQ\) scripts to Amazon Redshift RSQL scripts\. | 
+| Teradata | Amazon Redshift RSQL | Added support for conversion of shell, Teradata FastLoad, and Teradata Basic Teradata Query \(BTEQ\) scripts to Amazon Redshift RSQL scripts\. | 
 | Teradata BTEQ | Amazon Redshift RSQL | Resolved issue where "merge\_01" was incorrectly converted\. | 
 | Teradata BTEQ | Amazon Redshift RSQL | Resolved issue so that End or Identify \(EOI\) appears at the end of a script on a new line\. | 
 | Azure Synapse | Amazon Redshift | Improved error message provided when an incorrect password given for Azure Synapse\. | 

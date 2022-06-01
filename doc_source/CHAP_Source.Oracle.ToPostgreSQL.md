@@ -16,7 +16,7 @@ When converting Oracle system objects to PostgreSQL, AWS SCT performs conversion
 | V$VERSION  | Displays version numbers of core library components in the Oracle Database | aws\_oracle\_ext\.v$version | 
 | V$INSTANCE | A view that shows the state of the current instance\. | aws\_oracle\_ext\.v$instance | 
 
-You can use AWS SCT to convert Oracle SQL\*Plus files to psql, which is a terminal\-based front\-end to PostgreSQL\. For more information, see [Converting application SQL using the AWS SCT](CHAP_Converting.App.md)\.
+You can use AWS SCT to convert Oracle SQL\*Plus files to psql, which is a terminal\-based front\-end to PostgreSQL\. For more information, see [Converting application SQL using AWS SCT](CHAP_Converting.App.md)\.
 
 ## Converting Oracle sequences<a name="CHAP_Source.Oracle.ToPostgreSQL.ConvertSequences"></a>
 

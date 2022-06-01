@@ -54,20 +54,20 @@ For information about how to install AWS SCT, see [Installing, verifying, and up
 
 For an introduction to the AWS SCT user interface, see [Using the AWS SCT user interface](CHAP_UserInterface.md)\. 
 
-For information on the conversion process, see [Converting database schemas using the AWS SCT](CHAP_Converting.md)\. 
+For information on the conversion process, see [Converting database schemas using AWS SCT](CHAP_Converting.md)\. 
 
 In addition to converting your existing database schema from one database engine to another, AWS SCT has some additional features that help you move your data and applications to the AWS Cloud: 
 + You can use data extraction agents to extract data from your data warehouse to prepare to migrate it to Amazon Redshift\. To manage the data extraction agents, you can use AWS SCT\. For more information, see [Using data extraction agents](agents.md)\. 
 + You can use AWS SCT to create AWS DMS endpoints and tasks\. You can run and monitor these tasks from AWS SCT\. For more information, see [Using AWS SCT with AWS DMS](CHAP_DMSIntegration.md)\. 
 + In some cases, database features can't be converted to equivalent Amazon RDS or Amazon Redshift features\. The AWS SCT extension pack wizard can help you install AWS Lambda functions and Python libraries to emulate the features that can't be converted\. For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
-+ You can use AWS SCT to optimize your existing Amazon Redshift database\. AWS SCT recommends sort keys and distribution keys to optimize your database\. For more information, see [Optimizing Amazon Redshift by using the AWS SCT](CHAP_Converting.DW.RedshiftOpt.md)\. 
++ You can use AWS SCT to optimize your existing Amazon Redshift database\. AWS SCT recommends sort keys and distribution keys to optimize your database\. For more information, see [Optimizing Amazon Redshift by using AWS SCT](CHAP_Converting.DW.RedshiftOpt.md)\. 
 + You can use AWS SCT to copy your existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. You can use this feature to analyze potential cost savings of moving to the cloud and of changing your license type\. 
-+ You can use AWS SCT to convert SQL in your C\+\+, C\#, Java, or other application code\. You can view, analyze, edit, and save the converted SQL code\. For more information, see [Converting application SQL using the AWS SCT](CHAP_Converting.App.md)\. 
++ You can use AWS SCT to convert SQL in your C\+\+, C\#, Java, or other application code\. You can view, analyze, edit, and save the converted SQL code\. For more information, see [Converting application SQL using AWS SCT](CHAP_Converting.App.md)\. 
 + You can use AWS SCT to migrate extraction, transformation, and load \(ETL\) processes\. For more information, see [Converting extract, transform, and load \(ETL\) processes with AWS Schema Conversion Tool](CHAP-converting-etl.md)\. 
 
 ## Providing feedback<a name="CHAP_Welcome.Feedback"></a>
 
-You can provide feedback about the AWS SCT\. You can file a bug report, submit a feature request, or provide general information\.
+You can provide feedback about AWS SCT\. You can file a bug report, submit a feature request, or provide general information\.
 
 **To provide feedback about AWS SCT**
 

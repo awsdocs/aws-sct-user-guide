@@ -8,7 +8,7 @@ Use the following procedure to create an AWS DMS task in AWS SCT\.
 
 **To create a data migration task**
 
-1. In the AWS SCT, after you have converted your schema, choose one or more tables from the left panel of your project\. 
+1. In AWS SCT, after you have converted your schema, choose one or more tables from the left panel of your project\. 
 
    For performance reasons, AWS recommends that you create multiple tasks for multiple tables\.
 

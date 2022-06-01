@@ -37,6 +37,10 @@ Use the following procedure to perform a multiserver assessment with AWS SCT\. Y
 
 1. Enter values for **Project name**, **Location** \(to store reports\), and **Connections file** \(a CSV file\)\.
 
+1. Choose **Create AWS SCT projects for each source database** to automatically create migration projects after generating the assessment report\.
+
+1. With the **Create AWS SCT projects for each source database** turned on, you can choose **Add mapping rules to these projects and save conversion statistics for offline use**\. In this case, AWS SCT will add mapping rules to each project and save the source database metadata in the project\. For more information, see [Running AWS SCT in an offline mode](CHAP_UserInterface.md#CHAP_UserInterface.OfflineMode)\.
+
 1. Choose **Run**\. 
 
    A progress bar appears indicating the pace of database assessment\. The number of target engines can affect the assessment runtime\. 
@@ -55,7 +59,7 @@ To provide connection parameters as input for multiserver assessment report, use
 Name,Description,Secret Manager Key,Server IP,Port,Service Name,SID,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
 Sales,,,192.0.2.0,1521,pdb,,ORACLE,Q4_2021;FY_2021,,user,password,,,,,POSTGRESQL;AURORA_POSTGRESQL
 Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MSSQL,customers.dbo,,user,password,,,,,AURORA_MYSQL
-HR,,,192.0.2.0,1433,,employees,MSSQL,employees.dbo,true,,,,,,,AURORA_POSTGRESQL
+HR,,,192.0.2.0,1433,,employees,MSSQL,employees.%,true,,,,,,,AURORA_POSTGRESQL
 Customers,,secret-name,,,,,MYSQL,customers,,,,,,,,AURORA_POSTGRESQL
 Analytics,,,198.51.100.0,8195,,STATISTICS,DB2LUW,BI_REPORTS,,user,password,,,,,POSTGRESQL
 Products,,,203.0.113.0,8194,,products_db,TERADATA,new_products,,user,password,,,,,REDSHIFT
@@ -78,7 +82,7 @@ You can create a new CSV file or download a template for a CSV file from AWS SCT
 Make sure that your CSV file includes the following values, provided by the template: 
 + **Name** – The text label that helps identify your database\. AWS SCT displays this text label in the assessment report\.
 + **Description** – An optional value, where you can provide additional information about the database\.
-+ **Secret Manager Key** – The name of the secret that stores your database credentials in the AWS Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS SCT\. For more information, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\. 
++ **Secret Manager Key** – The name of the secret that stores your database credentials in the AWS Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in AWS SCT\. For more information, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\. 
 + **Server IP** – The Domain Name Service \(DNS\) name or IP address of your source database server\. 
 + **Port** – The port used to connect to your source database server\.
 + **Service Name** – If you use a service name to connect to your Oracle database, the name of the Oracle service to connect to\. 
@@ -108,7 +112,13 @@ Make sure that your CSV file includes the following values, provided by the temp
 
   Replace `schema_name` with the name of the source schema\.
 
-  Separate multiple schema names by using semicolons like this: `Schema1;Schema2`\.
+  Enclose database or schema names that include a dot in double quotation marks as shown following: `"database.name"."schema.name"`\.
+
+  Separate multiple schema names by using semicolons as shown following: `Schema1;Schema2`\.
+
+  The database and schema names are case\-sensitive\.
+
+  Use the percent \(`%`\) as a wildcard to replace any number of any symbols in the database or schema name\. The example preceding uses the percent \(`%`\) as a wildcard to include all schemas from the `employees` database in the assessment report\.
 + **Use Windows Authentication** – If you use Windows Authentication to connect to your Microsoft SQL Server database, enter **true**\. For more information, see [Using Windows Authentication when using Microsoft SQL Server as a source](CHAP_Source.SQLServer.md#CHAP_Source.SQLServer.Permissions.WinAuth)\. 
 + **Login** – The user name to connect to your source database server\.
 + **Password** – The password to connect to your source database server\.

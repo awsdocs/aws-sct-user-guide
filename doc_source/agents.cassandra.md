@@ -86,7 +86,7 @@ After you have performed the steps in [Prerequisites for migrating from Cassandr
 
 **To create a new AWS SCT project using Apache Cassandra as a source and DynamoDB as a target**
 
-1. In the AWS SCT, choose **Add source**\. 
+1. In AWS SCT, choose **Add source**\. 
 
 1. Choose **Cassandra**, then choose **Next**\. 
 
@@ -100,7 +100,7 @@ After you have performed the steps in [Prerequisites for migrating from Cassandr
 
 1. Choose **Connect** to connect to your source database\.
 
-1. In the AWS SCT, choose **Add target**\. 
+1. In AWS SCT, choose **Add target**\. 
 
 1. Choose **Amazon DynamoDB**, then choose **Next**\. 
 

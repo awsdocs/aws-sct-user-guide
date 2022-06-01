@@ -476,7 +476,7 @@ You can create a new AWS Lambda function or register an existing function\.
 
 **To create a new AWS Lambda function**
 
-1. In the AWS SCT, in the target database tree, open the context \(right\-click\) menu, choose **Apply extension pack for**, and then choose **PostgreSQL**\. 
+1. In AWS SCT, in the target database tree, open the context \(right\-click\) menu, choose **Apply extension pack for**, and then choose **PostgreSQL**\. 
 
    The extension pack wizard appears\. 
 

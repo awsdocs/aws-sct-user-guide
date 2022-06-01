@@ -1,4 +1,4 @@
-# Best practices for the AWS SCT<a name="CHAP_BestPractices"></a>
+# Best practices for AWS SCT<a name="CHAP_BestPractices"></a>
 
 Following, you can find information on best practices and options for using the AWS Schema Conversion Tool\. 
 

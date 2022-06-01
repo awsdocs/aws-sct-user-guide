@@ -8,7 +8,7 @@ Amazon S3 is a storage and retrieval service\. To store an object in Amazon S3, 
 
 Large\-scale data migrations can include many terabytes of information, and can be slowed by network performance and by the sheer amount of data that has to be moved\. AWS Snowball Edge is an AWS service you can use to transfer data to the cloud at faster\-than\-network speeds using an AWS\-owned appliance\. An AWS Snowball Edge device can hold up to 100 TB of data\. It uses 256\-bit encryption and an industry\-standard Trusted Platform Module \(TPM\) to ensure both security and full chain\-of\-custody for your data\. AWS SCT works with AWS Snowball Edge devices\. 
 
-When you use AWS SCT and an AWS Snowball Edge device, you migrate your data in two stages\. First, you use the AWS SCT to process the data locally and then move that data to the AWS Snowball Edge device\. You then send the device to AWS using the AWS Snowball Edge process, and then AWS automatically loads the data into an Amazon S3 bucket\. Next, when the data is available on Amazon S3, you use AWS SCT to migrate the data to Amazon Redshift\. Data extraction agents can work in the background while AWS SCT is closed\.
+When you use AWS SCT and an AWS Snowball Edge device, you migrate your data in two stages\. First, you use AWS SCT to process the data locally and then move that data to the AWS Snowball Edge device\. You then send the device to AWS using the AWS Snowball Edge process, and then AWS automatically loads the data into an Amazon S3 bucket\. Next, when the data is available on Amazon S3, you use AWS SCT to migrate the data to Amazon Redshift\. Data extraction agents can work in the background while AWS SCT is closed\.
 
 The following diagram shows the supported scenario\.
 
@@ -32,11 +32,11 @@ You can connect to FIPS endpoints for Amazon Redshift if you need to comply with
 Use the information in the following topics to learn how to work with data extraction agents\. 
 
 **Topics**
-+ [Prerequisite settings for using data extraction agents](#agents.PreReqSettings)
++ [Prerequisites for using data extraction agents](#agents.PreReqSettings)
 + [Installing extraction agents](#agents.Installing)
 + [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)
 + [Hiding and recovering information for an AWS SCT agent](#agents.Recovering)
-+ [Creating data migration rules in the AWS SCT](#agents.Filtering)
++ [Creating data migration rules in AWS SCT](#agents.Filtering)
 + [Changing extractor and copy settings from project settings](#agents.ProjectSettings)
 + [Sorting data before migrating using AWS SCT](#agents.Sorting)
 + [Creating, running, and monitoring an AWS SCT data extraction task](#agents.Tasks)
@@ -47,13 +47,59 @@ Use the information in the following topics to learn how to work with data extra
 + [Migrating LOBs to Amazon Redshift](#agents.LOBs)
 + [Best practices and troubleshooting for data extraction agents](#agents.BestPractices)
 
-## Prerequisite settings for using data extraction agents<a name="agents.PreReqSettings"></a>
+## Prerequisites for using data extraction agents<a name="agents.PreReqSettings"></a>
 
 Before you work with data extraction agents, store your Amazon S3 bucket information and set up your Secure Sockets Layer \(SSL\) trust and key store\.
 
 ### Amazon S3 settings<a name="agents.S3Credentials"></a>
 
 After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+
+### Assuming IAM roles<a name="agents.PreReqSettings.IAMroles"></a>
+
+For additional security, you can use AWS Identity and Access Management \(IAM\) roles to access your Amazon S3 bucket\. To do so, create an IAM user for your data extraction agents without any permissions\. Then, create an IAM role that enables Amazon S3 access, and specify the list of services and users that can assume this role\. For more information, see [IAM roles](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) in the *IAM User Guide*\. 
+
+**To configure IAM roles to access your Amazon S3 bucket**
+
+1. Create a new IAM user\. For user credentials, choose **Programmatic access** type\.
+
+1. Configure the host environment so that your data extraction agent can assume the role that AWS SCT provides\. Make sure that the user that you configured in the previous step enables data extraction agents to use the credential provider chain\. For more information, see [Using credentials](https://docs.aws.amazon.com/sdk-for-java/latest/developer-guide/credentials.html) in the *AWS SDK for Java Developer Guide*\.
+
+1. Create a new IAM role that has access to your Amazon S3 bucket\.
+
+1. Modify the trust section of this role to trust the user that you created before to assume the role\. In the following example, replace `111122223333:user/DataExtractionAgentName` with the name of your IAM user\.
+
+   ```
+   {
+       "Effect": "Allow",
+       "Principal": {
+           "AWS": "arn:aws:iam::111122223333:user/DataExtractionAgentName"
+       },
+       "Action": "sts:AssumeRole"
+   }
+   ```
+
+1. Modify the trust section of this role to trust `redshift.amazonaws.com` to assume the role\.
+
+   ```
+   {
+       "Effect": "Allow",
+       "Principal": {
+           "Service": [
+               "redshift.amazonaws.com"
+           ]
+       },
+       "Action": "sts:AssumeRole"
+   }
+   ```
+
+1. Attach this role to your Amazon Redshift cluster\.
+
+Now, you can run your data extraction agent in AWS SCT\.
+
+When you use IAM role assuming, the data migration works the following way\. The data extraction agent starts and gets the user credentials using the credential provider chain\. Next, you create a data migration task in AWS SCT, then specify the IAM role for data extraction agents to assume, and start the task\. AWS Security Token Service \(AWS STS\) generates temporary credentials to access Amazon S3\. The data extraction agent uses these credentials to upload data to Amazon S3\.
+
+Then, AWS SCT provides Amazon Redshift with the IAM role\. In turn, Amazon Redshift gets new temporary credentials from AWS STS to access Amazon S3\. Amazon Redshift uses these credentials to copy data from Amazon S3 to your Amazon Redshift table\.
 
 ### Security settings<a name="agents.Installing.Security"></a>
 
@@ -269,7 +315,7 @@ When AWS SCT can ping the new agent, AWS SCT receives the status **Waiting for r
 
 Each agent that works with the agent storage updates a special file called `storage.lck` located at `{output.folder}\{agentName}\storage\`\. This file contains the agent's network ID and the time until which the storage is locked\. When the agent works with the agent storage, it updates the `storage.lck` file and extends the lease of the storage by 10 minutes every 5 minutes\. No other instance can work with this agent storage before the lease expires\.
 
-## Creating data migration rules in the AWS SCT<a name="agents.Filtering"></a>
+## Creating data migration rules in AWS SCT<a name="agents.Filtering"></a>
 
 Before you extract your data with the AWS Schema Conversion Tool, you can set up filters that reduce the amount of data that you extract\. You can create data migration rules by using `WHERE` clauses to reduce the data that you extract\. For example, you can write a `WHERE` clause that selects data from a single table\. 
 
@@ -327,7 +373,7 @@ Use the instructions in the following table to provide the information for **Ama
 | For this parameter | Do this | 
 | --- | --- | 
 | **Use proxy** | Turn this option on to use a proxy server to upload data to Amazon S3\. Then choose the data transfer protocol, enter the host name, port, user name, and password\. | 
-| **Use FIPS endpoint for Amazon S3** | Turn this option on to use the Federal Information Processing Standard \(FIPS\) endpoint\. | 
+| **Endpoint type** | Choose **FIPS** to use the Federal Information Processing Standard \(FIPS\) endpoint\. Choose **VPCE** to use the virtual private cloud \(VPC\) endpoint\. Then for **VPC endpoint**, enter the Domain Name System \(DNS\) of your VPC endpoint\. | 
 | **Keep files on Amazon S3 after copying to Amazon Redshift** | Turn this option on to keep extracted files on Amazon S3 after copying these files to Amazon Redshift\. | 
 
 Use the instructions in the following table to provide the information for **Copy settings**\.
@@ -384,9 +430,13 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
    + **Extract and upload** – Extract your data, and upload your data to Amazon S3\. 
    + **Extract, upload and copy** – Extract your data, upload your data to Amazon S3, and copy it into your Amazon Redshift data warehouse\. 
 
+1. For **Encryption type**, choose one of the following: 
+   + **NONE** – Turn off data encryption for the entire data migration process\. 
+   + **CSE\_SK** – Use client\-side encryption with a symmetric key to migrate data\. AWS SCT automatically generates encryption keys and transmits them to data extraction agents using Secure Sockets Layer \(SSL\)\. AWS SCT doesn't encrypt large objects \(LOBs\) during data migration\. 
+
 1. Choose **Extract LOBs** to extract large objects\. If you don't need to extract large objects, you can clear the check box\. Doing this reduces the amount of data that you extract\. 
 
-1. If you want to see detailed information about a task, choose **Enable task logging**\. You can use the task log to debug problems\. 
+1. To see detailed information about a task, choose **Enable task logging**\. You can use the task log to debug problems\. 
 
    If you enable task logging, choose the level of detail that you want to see\. The levels are the following, with each level including all messages from the previous level: 
    + `ERROR` – The smallest amount of detail\.
@@ -394,6 +444,8 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
    + `INFO`
    + `DEBUG`
    + `TRACE` – The largest amount of detail\.
+
+1. To assume a role to an IAM user that your data extraction agent uses, choose **Amazon S3 settings**\. For **IAM role**, enter the name of the role to use\. For **Region**, choose the AWS Region for this role\.
 
 1. Choose **Test task** to verify that you can connect to your working folder, Amazon S3 bucket, and Amazon Redshift data warehouse\. The verification depends on the migration mode you chose\. 
 
@@ -697,7 +749,7 @@ Partition3: WHERE LO_TAX > 15005.5 AND LO_TAX <= 25005.95
 
 **To create a RANGE virtual partition**
 
-1. Open the AWS SCT application\.
+1. Open AWS SCT\.
 
 1. Choose **Data Migration view \(other\)** mode\.
 
@@ -729,7 +781,7 @@ You can use the LIST partition type to filter the source data if you want to exc
 
 **To create a LIST virtual partition**
 
-1. Open the AWS SCT application\.
+1. Open AWS SCT\.
 
 1. Choose **Data Migration view \(other\)** mode\.
 
@@ -757,7 +809,7 @@ PartitionN: WHERE LO_ORDERDATE >= USER_VALUE_N AND LO_ORDERDATE <= ‘2017-08-13
 
 **To create a DATE AUTO SPLIT virtual partition**
 
-1. Open the AWS SCT application\.
+1. Open AWS SCT\.
 
 1. Choose **Data Migration view \(other\)** mode\.
 
@@ -777,7 +829,7 @@ For example, after you create a project, you might collect statistics on a schem
 
 **To use native Netezza partitioning**
 
-1. Open the AWS SCT application, and choose **New project** for **File**\. The **New project** dialog box appears\.
+1. Open AWS SCT, and choose **New project** for **File**\. The **New project** dialog box appears\.
 
 1. Create a new project and connect to the source and target servers\.
 
@@ -815,10 +867,15 @@ Amazon Redshift doesn't support storing large binary objects \(LOBs\)\. However,
 
 1. Choose **Amazon S3 settings**\.
 
-1. For **S3 bucket LOBs folder**, enter the name of the folder in an Amazon S3 bucket where you want the LOBs stored\.
+1. For **Amazon S3 bucket LOBs folder**, enter the name of the folder in an Amazon S3 bucket where you want the LOBs stored\.
 
-   If you use AWS service profile, this field is optional\. AWS SCT can use the default settings from your profile\. To use another Amazon S3 bucket, enter the path here\.  
-![\[LOBs in Local Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/S3LOBs.png)
+   If you use AWS service profile, this field is optional\. AWS SCT can use the default settings from your profile\. To use another Amazon S3 bucket, enter the path here\.
+
+1. Turn on the **Use proxy** option to use a proxy server to upload data to Amazon S3\. Then choose the data transfer protocol, enter the host name, port, user name, and password\.
+
+1. For **Endpoint type**, choose **FIPS** to use the Federal Information Processing Standard \(FIPS\) endpoint\. Choose **VPCE** to use the virtual private cloud \(VPC\) endpoint\. Then for **VPC endpoint**, enter the Domain Name System \(DNS\) of your VPC endpoint\.
+
+1. Turn on the **Keep files on Amazon S3 after copying to Amazon Redshift** option to keep extracted files on Amazon S3 after copying these files to Amazon Redshift\.
 
 1. Choose **Create** to create the task\.
 
@@ -829,7 +886,7 @@ The following are some best practices and troubleshooting suggestions for using 
 
 ****  
 
-| Issue | Troubleshooting Suggestions | 
+| Issue | Troubleshooting suggestions | 
 | --- | --- | 
 |  Performance is slow  |  To improve performance, we recommend the following:  [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)  | 
 |  Contention delays  |  Avoid having too many agents accessing your data warehouse at the same time\.   | 

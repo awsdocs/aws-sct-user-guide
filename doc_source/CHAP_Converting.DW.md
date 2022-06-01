@@ -1,4 +1,4 @@
-# Converting data warehouse schemas to Amazon Redshift using the AWS SCT<a name="CHAP_Converting.DW"></a>
+# Converting data warehouse schemas to Amazon Redshift using AWS SCT<a name="CHAP_Converting.DW"></a>
 
 The AWS Schema Conversion Tool automates much of the process of converting your data warehouse schema to an Amazon Redshift database schema\. Because the source and target database engines can have many different features and capabilities, AWS SCT attempts to create an equivalent schema in your target database wherever possible\. If no direct conversion is possible, AWS SCT provides an assessment report with a list of possible actions for you to take\. Using AWS SCT, you can manage keys, map data types and objects, and create manual conversions\.
 
@@ -13,27 +13,27 @@ AWS SCT can convert the following data warehouse schemas to Amazon Redshift\.
 + Teradata \(version 13 and later\)
 + Vertica \(version 7\.2 and later\)
 
-For information about converting an online transaction processing \(OLTP\) database schema, see [Converting database schemas using the AWS SCT](CHAP_Converting.md)\. 
+For information about converting an online transaction processing \(OLTP\) database schema, see [Converting database schemas using AWS SCT](CHAP_Converting.md)\. 
 
 To convert a data warehouse schema, take the following steps: 
 
 1. Specify the optimization strategy and rules, and specify the migration rules that you want AWS SCT to use\. You can set up rules that change the data type of columns, move objects from one schema to another, and change the names of objects\.
 
-    You can specify optimization and migration rules in **Settings**\. For more information on optimization strategies, see [Choosing optimization strategies and rules for use with the AWS SCT](#CHAP_Converting.DW.Strategy)\. for more information about migration rules, see [Creating migration rules in the AWS SCT](#CHAP_Converting.DW.MigrationRules) 
+    You can specify optimization and migration rules in **Settings**\. For more information on optimization strategies, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. for more information about migration rules, see [Creating migration rules in AWS SCT](#CHAP_Converting.DW.MigrationRules) 
 
-1. Provide statistics on your source data warehouse so that AWS SCT can optimize how your data warehouse is converted\. You can either collect statistics directly from the database, or upload an existing statistics file\. For more information about providing data warehouse statistics, see [Collecting or uploading statistics for the AWS SCT](#CHAP_Converting.DW.Statistics)\. 
+1. Provide statistics on your source data warehouse so that AWS SCT can optimize how your data warehouse is converted\. You can either collect statistics directly from the database, or upload an existing statistics file\. For more information about providing data warehouse statistics, see [Collecting or uploading statistics for AWS SCT](#CHAP_Converting.DW.Statistics)\. 
 
 1. Create a database migration assessment report that details the schema elements that can't be converted automatically\. You can use this report to identify where you need to manually create a schema in your target database that is compatible with your source database\. For more information about the assessment report, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
 
-1. Convert the schema\. AWS SCT creates a local version of the converted schema for you to review, but it doesn't apply it to your target database until you are ready\. For more information about converting, see [Converting your schema using the AWS SCT](#CHAP_Converting.DW.Convert) 
+1. Convert the schema\. AWS SCT creates a local version of the converted schema for you to review, but it doesn't apply it to your target database until you are ready\. For more information about converting, see [Converting your schema using AWS SCT](#CHAP_Converting.DW.Convert) 
 
-1.  After you convert your schema, you can manage and edit your keys\. Key management is the heart of a data warehouse conversion\. For more information about managing keys, see [Managing and customizing keys in the AWS SCT](#CHAP_Converting.DW.Keys)\. 
+1.  After you convert your schema, you can manage and edit your keys\. Key management is the heart of a data warehouse conversion\. For more information about managing keys, see [Managing and customizing keys in AWS SCT](#CHAP_Converting.DW.Keys)\. 
 
-1.  If you have schema elements that can't be converted automatically, you have two choices: update the source schema and then convert again, or create equivalent schema elements in your target database\. For more information on manually converting schema elements, see [Handling manual conversions in the AWS SCT](#CHAP_Converting.DW.Manual)\. For more information about updating your source schema, see [Updating and refreshing your converted schema in the AWS SCT](#CHAP_Converting.DW.UpdateRefresh)\. 
+1.  If you have schema elements that can't be converted automatically, you have two choices: update the source schema and then convert again, or create equivalent schema elements in your target database\. For more information on manually converting schema elements, see [Handling manual conversions in AWS SCT](#CHAP_Converting.DW.Manual)\. For more information about updating your source schema, see [Updating and refreshing your converted schema in AWS SCT](#CHAP_Converting.DW.UpdateRefresh)\. 
 
-1. When you are ready, you can apply the converted schema to your target database\. For more information about saving and applying the converted schema, see [Saving and applying your converted schema in the AWS SCT](#CHAP_Converting.DW.SaveAndApply)\. 
+1. When you are ready, you can apply the converted schema to your target database\. For more information about saving and applying the converted schema, see [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.DW.SaveAndApply)\. 
 
-## Choosing optimization strategies and rules for use with the AWS SCT<a name="CHAP_Converting.DW.Strategy"></a>
+## Choosing optimization strategies and rules for use with AWS SCT<a name="CHAP_Converting.DW.Strategy"></a>
 
 To optimize how the AWS Schema Conversion Tool converts your data warehouse schema, you can choose the strategies and rules you want the tool to use\. After converting your schema, and reviewing the suggested keys, you can adjust your rules or change your strategy to get the results you want\. 
 
@@ -47,7 +47,7 @@ To optimize how the AWS Schema Conversion Tool converts your data warehouse sche
    + **Use metadata, ignore statistical information** – In this strategy, only information from the metadata is used for optimization decisions\. For example, if there is more than one index on a source table, the source database sort order is used, and the first index becomes a distribution key\. 
 
       
-   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions are derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [Collecting or uploading statistics for the AWS SCT](#CHAP_Converting.DW.Statistics)\. 
+   + **Ignore metadata, use statistical information** – In this strategy, optimization decisions are derived from statistical information only\. This strategy applies only to tables and columns for which statistics are provided\. For more information, see [Collecting or uploading statistics for AWS SCT](#CHAP_Converting.DW.Statistics)\. 
 
       
    + **Use metadata and use statistical information** – In this strategy, both metadata and statistics are used for optimization decisions\. 
@@ -60,9 +60,9 @@ To optimize how the AWS Schema Conversion Tool converts your data warehouse sche
    + **Analyze cardinality of indexes' columns**
    + **Find the most used tables and columns from QueryLog table**
 
-   For each rule, you can enter a weight for the sort key and a weight for the distribution key\. AWS SCT uses the weights you choose when it converts your schema\. Later, when you review the suggested keys, if you are not satisfied with the results, you can return here and change your settings\. For more information, see [Managing and customizing keys in the AWS SCT](#CHAP_Converting.DW.Keys)\. 
+   For each rule, you can enter a weight for the sort key and a weight for the distribution key\. AWS SCT uses the weights you choose when it converts your schema\. Later, when you review the suggested keys, if you are not satisfied with the results, you can return here and change your settings\. For more information, see [Managing and customizing keys in AWS SCT](#CHAP_Converting.DW.Keys)\. 
 
-## Collecting or uploading statistics for the AWS SCT<a name="CHAP_Converting.DW.Statistics"></a>
+## Collecting or uploading statistics for AWS SCT<a name="CHAP_Converting.DW.Statistics"></a>
 
 To optimize how the AWS Schema Conversion Tool converts your data warehouse schema, you can provide statistics from your source database that the tool can use\. You can either collect statistics directly from the database, or upload an existing statistics file\. 
 
@@ -76,11 +76,11 @@ To optimize how the AWS Schema Conversion Tool converts your data warehouse sche
 1. Choose a schema object from the left panel of your project, and then choose the **Statistics** tab\. You can review the statistics for the object\.   
 ![\[Statistics tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/statistics.png)
 
-   Later, when you review the suggested keys, if you are not satisfied with the results, you can collect additional statistics and repeat this procedure\. For more information, see [Managing and customizing keys in the AWS SCT](#CHAP_Converting.DW.Keys)\. 
+   Later, when you review the suggested keys, if you are not satisfied with the results, you can collect additional statistics and repeat this procedure\. For more information, see [Managing and customizing keys in AWS SCT](#CHAP_Converting.DW.Keys)\. 
 
-## Creating migration rules in the AWS SCT<a name="CHAP_Converting.DW.MigrationRules"></a>
+## Creating migration rules in AWS SCT<a name="CHAP_Converting.DW.MigrationRules"></a>
 
-Before you convert your schema with the AWS SCT, you can set up migration rules\. *Migration rules* can do such things as change the data type of columns, move objects from one schema to another, and change the names of objects\. For example, suppose that you have a set of tables in your source schema named `test_TABLE_NAME`\. You can set up a rule that changes the prefix `test_` to the prefix `demo_` in the target schema\. 
+Before you convert your schema with AWS SCT, you can set up migration rules\. *Migration rules* can do such things as change the data type of columns, move objects from one schema to another, and change the names of objects\. For example, suppose that you have a set of tables in your source schema named `test_TABLE_NAME`\. You can set up a rule that changes the prefix `test_` to the prefix `demo_` in the target schema\. 
 
 **Note**  
 You can create migration rules only for different source and target database engines\. 
@@ -149,7 +149,7 @@ If you use AWS Database Migration Service \(AWS DMS\) to migrate your data from 
 
 1. Browse to the location where you want to save your script, and then choose **Save**\. Your migration rules are saved as a JSON script that can be consumed by AWS DMS\. 
 
-## Converting your schema using the AWS SCT<a name="CHAP_Converting.DW.Convert"></a>
+## Converting your schema using AWS SCT<a name="CHAP_Converting.DW.Convert"></a>
 
 After you have connected your project to both your source database and your target database, your AWS Schema Conversion Tool project displays the schema from your source database in the left panel\. The schema is presented in a tree\-view format, and each node of the tree is lazy loaded\. When you choose a node in the tree view, AWS SCT requests the schema information from your source database at that time\. 
 
@@ -165,7 +165,7 @@ After you have converted the schema from your source database, you can choose sc
 
 ![\[Choose source schema item\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_schema_item.png)
 
-After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [Updating and refreshing your converted schema in the AWS SCT](#CHAP_Converting.DW.UpdateRefresh)\. 
+After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [Updating and refreshing your converted schema in AWS SCT](#CHAP_Converting.DW.UpdateRefresh)\. 
 
 You can create a database migration assessment report of the items that can't be converted automatically\. The assessment report is useful for identifying and resolving schema items that can't be converted automatically\. For more information, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
 
@@ -190,7 +190,7 @@ The changes that you make to converted schema are stored with your project as yo
 
 Until you apply the schema to your target database, AWS SCT only stores the converted schema locally in your project\. You can clear the planned schema from your project by choosing the tree\-view node for your target database, and then choosing **Refresh from Database**\. Because no schema has been written to your target database, refreshing from the database removes the planned schema elements in your AWS SCT project to match what exists in your target database\. 
 
-## Managing and customizing keys in the AWS SCT<a name="CHAP_Converting.DW.Keys"></a>
+## Managing and customizing keys in AWS SCT<a name="CHAP_Converting.DW.Keys"></a>
 
 After you convert your schema with the AWS Schema Conversion Tool, you can manage and edit your keys\. Key management is the heart of a data warehouse conversion\. 
 
@@ -200,13 +200,13 @@ To manage keys, select a table in your target database, and then choose the **Ke
 
 The left pane contains key suggestions, and includes the confidence rating for each suggestion\. You can choose one of the suggestions, or you can customize the key by editing it in the right pane\. 
 
-If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with the AWS SCT](#CHAP_Converting.DW.Strategy)\. 
+If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
 ### Related topics<a name="w22aac21c23c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 
-## Creating and using the assessment report in the AWS SCT<a name="CHAP_Converting.DW.AssessmentReport"></a>
+## Creating and using the assessment report in AWS SCT<a name="CHAP_Converting.DW.AssessmentReport"></a>
 
 The AWS Schema Conversion Tool creates a *database migration assessment report* to help you convert your schema\. The database migration assessment report provides important information about the conversion of the schema from your source database to your target database\. The report summarizes all of the schema conversion tasks and details the action items for schema that can't be converted to the DB engine of your target database\. The report also includes estimates of the amount of effort that it will take to write the equivalent code in your target database that can't be converted automatically\. 
 
@@ -238,7 +238,7 @@ The report categorizes the estimated time to convert these schema items as follo
 
 The assessment report view also includes an **Action Items** tab\. This tab contains a list of items that can't be converted automatically to the database engine of your target database\. If you select an action item from the list, AWS SCT highlights the item from your schema that the action item applies to\. 
 
-The report also contains recommendations for how to manually convert the schema item\. For more information about deciding how to handle manual conversions, see [Handling manual conversions in the AWS SCT](#CHAP_Converting.DW.Manual)\. 
+The report also contains recommendations for how to manually convert the schema item\. For more information about deciding how to handle manual conversions, see [Handling manual conversions in AWS SCT](#CHAP_Converting.DW.Manual)\. 
 
 ![\[Action items tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/action_items_tab.png)
 
@@ -248,7 +248,7 @@ You can save a local copy of the database migration assessment report as either 
 
 ![\[Database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/assessment_report.png)
 
-## Handling manual conversions in the AWS SCT<a name="CHAP_Converting.DW.Manual"></a>
+## Handling manual conversions in AWS SCT<a name="CHAP_Converting.DW.Manual"></a>
 
 The assessment report includes a list of items that can't be converted automatically to the database engine of your target database\. For each item that can't be converted, there is an action item on the **Action Items** tab\. 
 
@@ -264,7 +264,7 @@ The advantage of this process is that your updated schema is always available wh
 
 ### Modifying your target schema<a name="CHAP_Converting.DW.Manual.Target"></a>
 
-For some items, it might be easier to apply the converted schema to your target database, and then add equivalent schema items manually to your target database for the items that couldn't be converted automatically\. You can write all of the schema that can be converted automatically to your target database by applying the schema\. For more information, see [Saving and applying your converted schema in the AWS SCT](#CHAP_Converting.DW.SaveAndApply)\. 
+For some items, it might be easier to apply the converted schema to your target database, and then add equivalent schema items manually to your target database for the items that couldn't be converted automatically\. You can write all of the schema that can be converted automatically to your target database by applying the schema\. For more information, see [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.DW.SaveAndApply)\. 
 
 The schema that are written to your target database don't contain the items that can't be converted automatically\. After applying the schema to your target database, you can then manually create schema in your target database that are equivalent to those in the source database\. The action items in the database migration assessment report contain suggestions for how to create the equivalent schema\. 
 
@@ -273,7 +273,7 @@ If you manually create schema in your target database, save a copy of any manual
 
 In some cases, you can't create equivalent schema in your target database\. You might need to rearchitect a portion of your application and database to use the functionality that is available from the engine for your target database\. In other cases, you can simply ignore the schema that can't be converted automatically\. 
 
-## Updating and refreshing your converted schema in the AWS SCT<a name="CHAP_Converting.DW.UpdateRefresh"></a>
+## Updating and refreshing your converted schema in AWS SCT<a name="CHAP_Converting.DW.UpdateRefresh"></a>
 
 You can update both the source schema and the target schema in your AWS Schema Conversion Tool project\. 
 + **Source** – If you update the schema for your source database, AWS SCT replaces the schema in your project with the latest schema from your source database\. Using this functionality, you can update your project if changes have been made to the schema of your source database\. 
@@ -281,9 +281,9 @@ You can update both the source schema and the target schema in your AWS Schema C
 
 You update the schema in your AWS SCT project by choosing **Refresh from database**\. 
 
-## Saving and applying your converted schema in the AWS SCT<a name="CHAP_Converting.DW.SaveAndApply"></a>
+## Saving and applying your converted schema in AWS SCT<a name="CHAP_Converting.DW.SaveAndApply"></a>
 
-When the AWS Schema Conversion Tool generates converted schema \(as shown in [Converting your schema using the AWS SCT](#CHAP_Converting.DW.Convert)\), it doesn't immediately apply the converted schema to the target database\. Instead, converted schema are stored locally in your project until you are ready to apply them to the target database\. Using this functionality, you can work with schema items that can't be converted automatically to your target database engine\. For more information on items that can't be converted automatically, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
+When the AWS Schema Conversion Tool generates converted schema \(as shown in [Converting your schema using AWS SCT](#CHAP_Converting.DW.Convert)\), it doesn't immediately apply the converted schema to the target database\. Instead, converted schema are stored locally in your project until you are ready to apply them to the target database\. Using this functionality, you can work with schema items that can't be converted automatically to your target database engine\. For more information on items that can't be converted automatically, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
 
 You can optionally have the tool save your converted schema to a file as a SQL script prior to applying the schema to your target database\. You can also have the tool apply the converted schema directly to your target database\. 
 

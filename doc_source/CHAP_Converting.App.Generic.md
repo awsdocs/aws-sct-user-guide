@@ -1,12 +1,12 @@
-# Converting SQL code in your applications with the AWS SCT<a name="CHAP_Converting.App.Generic"></a>
+# Converting SQL code in your applications with AWS SCT<a name="CHAP_Converting.App.Generic"></a>
 
-You can use AWS Schema Conversion Tool \(AWS SCT\) to convert SQL code embedded into your applications\. The generic AWS SCT application converter treats your application code as plain text\. It scans your application code and extracts SQL code with regular expressions\. This converter supports different types of source code files and works with application code that is written in any programming language\.
+You can use AWS SCT to convert SQL code embedded into your applications\. The generic AWS SCT application converter treats your application code as plain text\. It scans your application code and extracts SQL code with regular expressions\. This converter supports different types of source code files and works with application code that is written in any programming language\.
 
 The generic application converter has the following limitations\. It doesn't dive deep into the application logic that is specific for the programming language of your application\. Also, the generic converter doesn't support SQL statements from different application objects, such as functions, parameters, local variables, and so on\.
 
 To improve your application SQL code conversion, use language\-specific application SQL code converters\. For more information, see [Converting SQL code in C\# applications](CHAP_Converting.App.Csharp.md), [Converting SQL code in Java applications](CHAP_Converting.App.Java.md), and [Converting SQL code in Pro\*C applications](CHAP_Converting.App.ProC.md)\.
 
-## Creating generic application conversion projects in the AWS SCT<a name="CHAP_Converting.App.Project"></a>
+## Creating generic application conversion projects in AWS SCT<a name="CHAP_Converting.App.Project"></a>
 
 In the AWS Schema Conversion Tool, the application conversion project is a child of the database schema conversion project\. Each database schema conversion project can have one or more child application conversion projects\. Use the following procedure to create a generic application conversion project\. 
 
@@ -68,7 +68,7 @@ In the AWS Schema Conversion Tool, the application conversion project is a child
    The project window opens\.  
 ![\[The project window\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/applications-project-window.png)
 
-## Managing application conversion projects in the AWS SCT<a name="CHAP_Converting.App.Manage"></a>
+## Managing application conversion projects in AWS SCT<a name="CHAP_Converting.App.Manage"></a>
 
 You can open an existing application conversion project and add multiple application conversion projects\.
 
@@ -88,7 +88,7 @@ After you create an application conversion project, the project window opens aut
 
 1. Enter the information that is required to create a new application conversion project\. For more information, see [Creating generic application conversion projects](#CHAP_Converting.App.Project)\.
 
-## Analyzing and converting your SQL code in the AWS SCT<a name="CHAP_Converting.App.Convert"></a>
+## Analyzing and converting your SQL code in AWS SCT<a name="CHAP_Converting.App.Convert"></a>
 
 Use the following procedure to analyze and convert your SQL code in the AWS Schema Conversion Tool\. 
 
@@ -107,7 +107,7 @@ Use the following procedure to analyze and convert your SQL code in the AWS Sche
 
 1. When you create an application conversion assessment report, AWS SCT converts all extracted SQL code items\. For more information, see [Creating and using the assessment report](#CHAP_Converting.App.AssessmentReport)\. 
 
-## Creating and using the AWS SCT assessment report in the AWS SCT<a name="CHAP_Converting.App.AssessmentReport"></a>
+## Creating and using the AWS SCT assessment report in AWS SCT<a name="CHAP_Converting.App.AssessmentReport"></a>
 
 The *application conversion assessment report* provides information about converting the application SQL code to a format compatible with your target database\. The report details all extracted SQL code, all converted SQL code, and action items for SQL code that AWS SCT can't convert\. 
 
@@ -132,7 +132,7 @@ Use the following procedure to create an application conversion assessment repor
 
 1. Choose **SQL conversion actions**\. 
 
-   Review the list of SQL code items that AWS SCT can't convert automatically\. Use recommended actions to manually convert the SQL code\. For information about how to edit your converted SQL code, see [Editing and saving your converted SQL code with the AWS SCT](#CHAP_Converting.App.Edit)\. 
+   Review the list of SQL code items that AWS SCT can't convert automatically\. Use recommended actions to manually convert the SQL code\. For information about how to edit your converted SQL code, see [Editing and saving your converted SQL code with AWS SCT](#CHAP_Converting.App.Edit)\. 
 
 1. \(Optional\) Save a local copy of the report as either a PDF file or a comma\-separated values \(CSV\) file:
    + Choose **Save to PDF** at upper right to save the report as a PDF file\.
@@ -142,7 +142,7 @@ Use the following procedure to create an application conversion assessment repor
 
      The CSV file contains action items, recommended actions, and an estimated complexity of manual effort required to convert the SQL code\.
 
-## Editing and saving your converted SQL code with the AWS SCT<a name="CHAP_Converting.App.Edit"></a>
+## Editing and saving your converted SQL code with AWS SCT<a name="CHAP_Converting.App.Edit"></a>
 
 The assessment report includes a list of SQL code items that AWS SCT can't convert\. For each item, AWS SCT creates an action item on the **SQL conversion actions** tab\. For these items, you can edit the SQL code manually to perform the conversion\. 
 

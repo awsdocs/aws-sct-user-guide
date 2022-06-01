@@ -106,7 +106,7 @@ You can add multiple shell scripts or remove a shell script from your AWS SCT pr
 
 ## Creating an assessment report for a shell script conversion with AWS SCT<a name="CHAP-converting-shell-rsql-assessment"></a>
 
-The *shell script conversion assessment report* provides information about converting the BTEQ commands and SQL statements from your source scripts to a format compatible with Amazon Redshift RSQL\. The assessment report includes action items for BTEQ commands and SQL statements that AWS SCT can't convert\. 
+The *shell script conversion assessment report* provides information about converting the BTEQ commands and SQL statements\. The conversion is from your source scripts to a format compatible with Amazon Redshift RSQL\. The assessment report includes action items for BTEQ commands and SQL statements that AWS SCT can't convert\. 
 
 **To create a shell script conversion assessment report**
 
@@ -116,7 +116,7 @@ The *shell script conversion assessment report* provides information about conve
 
 1. View the **Summary** tab\. The **Summary** tab displays the executive summary information from the shell script assessment report\. It includes conversion results for all BTEQ commands and SQL statements from your source scripts\. 
 
-1. \(Optional\) Ssve a local copy of the shell script conversion assessment report as either a PDF file or a comma\-separated values \(CSV\) file:
+1. \(Optional\) Save a local copy of the shell script conversion assessment report as either a PDF file or a comma\-separated values \(CSV\) file:
    + To save the shell script conversion assessment report as a PDF file, choose **Save to PDF** at upper right\.
 
       The PDF file contains the executive summary, action items, and recommendations for scripts conversion\.

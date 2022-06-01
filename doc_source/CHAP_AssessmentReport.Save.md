@@ -22,7 +22,7 @@ After you [create a database migration assessment report](CHAP_AssessmentReport.
 
 ![\[Database migration assessment report in the PDF file\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/assessment_report.png)
 
- When you choose the **Save to CSV** option, the AWS SCT creates three CSV files\. 
+ When you choose the **Save to CSV** option, AWS SCT creates three CSV files\. 
 
  The first CSV file contains the following information about action items:
 +  Category 

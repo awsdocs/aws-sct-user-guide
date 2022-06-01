@@ -8,11 +8,11 @@ To ensure that you get the correct version of the AWS SCT distribution file we p
 + [Installing AWS SCT](#CHAP_Installing.Procedure)
 + [Verifying the AWS SCT file download](#CHAP_Installing.InstallValidation)
 + [Installing the required database drivers](#CHAP_Installing.JDBCDrivers)
-+ [Updating the AWS SCT](#CHAP_Installing.Updating)
++ [Updating AWS SCT](#CHAP_Installing.Updating)
 
 ## Installing AWS SCT<a name="CHAP_Installing.Procedure"></a>
 
-**To install the AWS SCT**
+**To install AWS SCT**
 
 1. Download the compressed file that contains the AWS SCT installer, using the link for your operating system\. All compressed files have a \.zip extension\. When you extract the AWS SCT installer file, it will be in the appropriate format for your operating system\. 
    + [Microsoft Windows](https://s3.amazonaws.com/publicsctdownload/Windows/aws-schema-conversion-tool-1.0.latest.zip) 
@@ -33,22 +33,22 @@ To ensure that you get the correct version of the AWS SCT distribution file we p
 
 ### Installing previous versions of AWS SCT<a name="CHAP_Installing.PreviousVersions"></a>
 
-You can download and install previous versions of the AWS SCT starting from 1\.0\.625\. To download a previous version, provide the version and OS information using the following format\.
+You can download and install previous versions of AWS SCT starting from 1\.0\.625\. To download a previous version, provide the version and OS information using the following format\.
 
 ```
 https://d211wdu1froga6.cloudfront.net/builds/1.0/<version>/<OS>/aws-schema-conversion-tool-1.0.zip
 ```
 
-For example, to download AWS SCT version 658, do the following:
-+ Windows – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Windows/aws-schema-conversion-tool-1.0.zip)
-+ Ubuntu – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Ubuntu/aws-schema-conversion-tool-1.0.zip)
-+ Fedora – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/658/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/658/Fedora/aws-schema-conversion-tool-1.0.zip)
+For example, to download AWS SCT version 661, do the following:
++ Windows – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/661/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/661/Windows/aws-schema-conversion-tool-1.0.zip)
++ Ubuntu – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/661/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/661/Ubuntu/aws-schema-conversion-tool-1.0.zip)
++ Fedora – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/661/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/661/Fedora/aws-schema-conversion-tool-1.0.zip)
 
 AWS supports the three latest versions of the AWS SCT application\. We recommend that you use the latest version of AWS SCT\.
 
 ## Verifying the AWS SCT file download<a name="CHAP_Installing.InstallValidation"></a>
 
-There are several ways you can verify the distribution file of the AWS SCT\. The simplest is to compare the checksum of the file with the published checksum from AWS\. As an additional level of security, you can use the procedures following to verify the distribution file, based on the operating system where you installed the file\. 
+There are several ways you can verify the distribution file of AWS SCT\. The simplest is to compare the checksum of the file with the published checksum from AWS\. As an additional level of security, you can use the procedures following to verify the distribution file, based on the operating system where you installed the file\. 
 
 This section includes the following topics\.
 
@@ -162,7 +162,7 @@ AWS provides another level of validation in addition to the distribution file ch
 
 ## Installing the required database drivers<a name="CHAP_Installing.JDBCDrivers"></a>
 
-For the AWS SCT to work correctly, install the JDBC drivers for your source and target database engines\. If you use a virtual target database platform, you don't need to install the JDBC driver for your target database engine\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\. 
+For AWS SCT to work correctly, install the JDBC drivers for your source and target database engines\. If you use a virtual target database platform, you don't need to install the JDBC driver for your target database engine\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\. 
 
 After you download the drivers, you give the location of the driver files\. For more information, see [Storing driver paths in the global settings](#CHAP_Installing.JDBCDrivers.Settings)\. 
 
@@ -217,7 +217,7 @@ After you have downloaded and installed the required JDBC drivers, you can set t
 
 **To update the driver file locations**
 
-1. In the AWS SCT, choose **Settings**, and then choose **Global Settings**\.   
+1. In AWS SCT, choose **Settings**, and then choose **Global Settings**\.   
 ![\[Choose global settings\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_global_settings.png)
 
 1. For **Global settings**, choose **Drivers**\. Add the file path to the JDBC driver for your source database engine and your target Amazon RDS DB instance database engine\.   
@@ -225,14 +225,14 @@ After you have downloaded and installed the required JDBC drivers, you can set t
 
 1. When you are finished adding the driver paths, choose **OK**\. 
 
-## Updating the AWS SCT<a name="CHAP_Installing.Updating"></a>
+## Updating AWS SCT<a name="CHAP_Installing.Updating"></a>
 
-AWS periodically updates the AWS SCT with new features and functionality\. If you are updating from a previous version, create a new AWS SCT project and reconvert any database objects you are using\.
+AWS periodically updates AWS SCT with new features and functionality\. If you are updating from a previous version, create a new AWS SCT project and reconvert any database objects you are using\.
 
-You can check to see if updates exist for the AWS SCT\.
+You can check to see if updates exist for AWS SCT\.
 
 **To check for updates to AWS SCT**
 
-1. When in the AWS SCT, choose **Help** and then choose **Check for Updates**\.
+1. When in AWS SCT, choose **Help** and then choose **Check for Updates**\.
 
 1. In the **Check for Updates dialog box**, choose **What's New**\. If the link does not appear, you have the latest version\.

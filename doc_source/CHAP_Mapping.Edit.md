@@ -16,7 +16,7 @@ When you create a mapping rule for the whole source database, AWS SCT creates on
 
    The filter default is the **%** wildcard, which means that AWS SCT displays mapping rules for all source database schema names\.
 
-1. For **Has migration rules**, choose **Yes** to display mapping rules for which the data migration rules are created\. Choose **No** to display mapping rules which don't have data migration rules\. For more information, see [Creating data migration rules in the AWS SCT](agents.dw.md#agents.Filtering)\.
+1. For **Has migration rules**, choose **Yes** to display mapping rules for which the data migration rules are created\. Choose **No** to display mapping rules which don't have data migration rules\. For more information, see [Creating data migration rules in AWS SCT](agents.dw.md#agents.Filtering)\.
 
    The filter default is **All**, which means that AWS SCT displays all mapping rules\.
 

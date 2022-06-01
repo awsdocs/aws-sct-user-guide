@@ -28,3 +28,4 @@ Currently, AWS SCT supports the conversion of ETL scripts to objects to AWS Glue
 + [Converting shell scripts with embedded Teradata BTEQ commands to Amazon Redshift RSQL with AWS SCT](CHAP-converting-shell-rsql.md)
 + [Converting Teradata FastExport job scripts to Amazon Redshift RSQL with AWS SCT](CHAP-converting-fastexport-rsql.md)
 + [Converting Teradata FastLoad job scripts to Amazon Redshift RSQL with AWS SCT](CHAP-converting-fastload-rsql.md)
++ [Converting Teradata MultiLoad job scripts to Amazon Redshift RSQL with AWS SCT](CHAP-converting-multiload-rsql.md)

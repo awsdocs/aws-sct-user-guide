@@ -1,18 +1,18 @@
-# Converting database schemas using the AWS SCT<a name="CHAP_Converting"></a>
+# Converting database schemas using AWS SCT<a name="CHAP_Converting"></a>
 
 You can use the AWS Schema Conversion Tool \(AWS SCT\) to convert your existing database schemas from one database engine to another\. Converting a database using the AWS SCT user interface can be fairly simple, but there are several things to consider before you do the conversion\. 
 
-For example, you can use the AWS SCT to do the following: 
+For example, you can use AWS SCT to do the following: 
 + You can use AWS SCT to copy an existing on\-premises database schema to an Amazon RDS DB instance running the same engine\. You can use this feature to analyze potential cost savings of moving to the cloud and of changing your license type\. 
 + In some cases, database features can't be converted to equivalent Amazon RDS features\. If you host and self\-manage a database on the Amazon Elastic Compute Cloud \(Amazon EC2\) platform, you can emulate these features by substituting AWS services for them\.
 + AWS SCT automates much of the process of converting your online transaction processing \(OLTP\) database schema to an Amazon Relational Database Service \(Amazon RDS\) MySQL DB instance, an Amazon Aurora DB cluster, or a PostgreSQL DB instance\. The source and target database engines contain many different features and capabilities, and AWS SCT attempts to create an equivalent schema in your Amazon RDS DB instance wherever possible\. If no direct conversion is possible, AWS SCT provides a list of possible actions for you to take\. 
 
 **Topics**
-+ [Creating migration rules in the AWS SCT](#CHAP_Converting.MigrationRules)
-+ [Converting your schema by using the AWS SCT](#CHAP_Converting.Convert)
-+ [Handling manual conversions in the AWS SCT](#CHAP_Converting.Manual)
-+ [Updating and refreshing your converted schema in the AWS SCT](#CHAP_Converting.UpdateRefresh)
-+ [Saving and applying your converted schema in the AWS SCT](#CHAP_Converting.SaveAndApply)
++ [Creating migration rules in AWS SCT](#CHAP_Converting.MigrationRules)
++ [Converting your schema by using AWS SCT](#CHAP_Converting.Convert)
++ [Handling manual conversions in AWS SCT](#CHAP_Converting.Manual)
++ [Updating and refreshing your converted schema in AWS SCT](#CHAP_Converting.UpdateRefresh)
++ [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.SaveAndApply)
 + [Comparing database schemas](CHAP_Converting.SchemaCompare.md)
 + [Finding related transformed objects](CHAP_Converting.RelatedObjects.md)
 
@@ -29,19 +29,19 @@ AWS SCT supports the following online transaction processing \(OLTP\) conversion
 |  PostgreSQL \(version 9\.1 and later\)  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
 | SAP ASE \(12\.5, 15\.0, 15\.5, 15\.7, and 16\.0\) |   Aurora MySQL, Aurora PostgreSQL, MariaDB 10\.5, MySQL, PostgreSQL   | 
 
-For information about converting a data warehouse schema, see [Converting data warehouse schemas to Amazon Redshift using the AWS SCT](CHAP_Converting.DW.md)\. 
+For information about converting a data warehouse schema, see [Converting data warehouse schemas to Amazon Redshift using AWS SCT](CHAP_Converting.DW.md)\. 
 
 To convert your database schema to Amazon RDS, you take the following high\-level steps: 
-+  [Creating migration rules in the AWS SCT](#CHAP_Converting.MigrationRules) – Before you convert your schema with AWS SCT, you can set up rules that change the data type of columns, move objects from one schema to another, and change the names of objects\. 
-+ [Converting your schema by using the AWS SCT](#CHAP_Converting.Convert) – AWS SCT creates a local version of the converted schema for you to review, but it doesn't apply it to your target DB instance until you are ready\. 
++  [Creating migration rules in AWS SCT](#CHAP_Converting.MigrationRules) – Before you convert your schema with AWS SCT, you can set up rules that change the data type of columns, move objects from one schema to another, and change the names of objects\. 
++ [Converting your schema by using AWS SCT](#CHAP_Converting.Convert) – AWS SCT creates a local version of the converted schema for you to review, but it doesn't apply it to your target DB instance until you are ready\. 
 + [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md) – AWS SCT creates a database migration assessment report that details the schema elements that can't be converted automatically\. You can use this report to identify where you need to create a schema in your Amazon RDS DB instance that is compatible with your source database\. 
-+ [Handling manual conversions in the AWS SCT](#CHAP_Converting.Manual) – If you have schema elements that can't be converted automatically, you have two choices: update the source schema and then convert again, or create equivalent schema elements in your target Amazon RDS DB instance\. 
-+ [Updating and refreshing your converted schema in the AWS SCT](#CHAP_Converting.UpdateRefresh) – You can update your AWS SCT project with the most recent schema from your source database\. 
-+ [Saving and applying your converted schema in the AWS SCT](#CHAP_Converting.SaveAndApply) – When you are ready, have AWS SCT apply the converted schema in your local project to your target Amazon RDS DB instance\. 
++ [Handling manual conversions in AWS SCT](#CHAP_Converting.Manual) – If you have schema elements that can't be converted automatically, you have two choices: update the source schema and then convert again, or create equivalent schema elements in your target Amazon RDS DB instance\. 
++ [Updating and refreshing your converted schema in AWS SCT](#CHAP_Converting.UpdateRefresh) – You can update your AWS SCT project with the most recent schema from your source database\. 
++ [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.SaveAndApply) – When you are ready, have AWS SCT apply the converted schema in your local project to your target Amazon RDS DB instance\. 
 
-## Creating migration rules in the AWS SCT<a name="CHAP_Converting.MigrationRules"></a>
+## Creating migration rules in AWS SCT<a name="CHAP_Converting.MigrationRules"></a>
 
-Before you convert your schema with the AWS SCT, you can set up migration rules\. *Migration rules* can do such things as change the data type of columns, move objects from one schema to another, and change the names of objects\. For example, suppose that you have a set of tables in your source schema named `test_TABLE_NAME`\. You can set up a rule that changes the prefix `test_` to the prefix `demo_` in the target schema\. 
+Before you convert your schema with AWS SCT, you can set up migration rules\. *Migration rules* can do such things as change the data type of columns, move objects from one schema to another, and change the names of objects\. For example, suppose that you have a set of tables in your source schema named `test_TABLE_NAME`\. You can set up a rule that changes the prefix `test_` to the prefix `demo_` in the target schema\. 
 
 **Note**  
 You can only create migration rules for different source and target database engines\. 
@@ -110,7 +110,7 @@ If you use AWS DMS to migrate your data from your source database to your target
 
 1. Browse to the location where you want to save your script, and then choose **Save**\. Your migration rules are saved as a JSON script that can be consumed by AWS DMS\. 
 
-## Converting your schema by using the AWS SCT<a name="CHAP_Converting.Convert"></a>
+## Converting your schema by using AWS SCT<a name="CHAP_Converting.Convert"></a>
 
 After you have connected your project to both your source database and your target Amazon RDS DB instance, your AWS Schema Conversion Tool project displays the schema from your source database in the left panel\. The schema is presented in a tree\-view format, and each node of the tree is lazy loaded\. When you choose a node in the tree view, AWS SCT requests the schema information from your source database at that time\. 
 
@@ -126,7 +126,7 @@ After you have converted the schema from your source database, you can choose sc
 
 ![\[Choose source schema item\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/select_schema_item.png)
 
-After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [Updating and refreshing your converted schema in the AWS SCT](#CHAP_Converting.UpdateRefresh)\. 
+After you have converted your schema, you can save your project\. The schema information from your source database is saved with your project\. This functionality means that you can work offline without being connected to your source database\. AWS SCT connects to your source database to update the schema in your project if you choose **Refresh from Database** for your source database\. For more information, see [Updating and refreshing your converted schema in AWS SCT](#CHAP_Converting.UpdateRefresh)\. 
 
 You can create a database migration assessment report of the items that can't be converted automatically\. The assessment report is useful for identifying and resolving schema items that can't be converted automatically\. For more information, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
 
@@ -151,7 +151,7 @@ The changes that you make to converted schema are stored with your project as yo
 
 Until you apply the schema to your target DB instance, AWS SCT only stores the converted schema locally in your project\. You can clear the planned schema from your project by choosing the tree\-view node for your DB instance, and then choosing **Refresh from Database**\. Because no schema has been written to your target DB instance, refreshing from the database removes the planned schema elements in your AWS SCT project to match what exists in your source DB instance\. 
 
-## Handling manual conversions in the AWS SCT<a name="CHAP_Converting.Manual"></a>
+## Handling manual conversions in AWS SCT<a name="CHAP_Converting.Manual"></a>
 
 The assessment report includes a list of items that can't be converted automatically to the database engine of your target Amazon RDS DB instance\. For each item that can't be converted, there is an action item on the **Action Items** tab\. 
 
@@ -167,7 +167,7 @@ The advantage of this process is that your updated schema is always available wh
 
 ### Modifying your target schema<a name="CHAP_Converting.Manual.Target"></a>
 
-For some items, it might be easier to apply the converted schema to your target database, and then add equivalent schema items manually to your target database for the items that couldn't be converted automatically\. You can write all of the schema that can be converted automatically to your target DB instance by applying the schema\. For more information, see [Saving and applying your converted schema in the AWS SCT](#CHAP_Converting.SaveAndApply)\. 
+For some items, it might be easier to apply the converted schema to your target database, and then add equivalent schema items manually to your target database for the items that couldn't be converted automatically\. You can write all of the schema that can be converted automatically to your target DB instance by applying the schema\. For more information, see [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.SaveAndApply)\. 
 
 The schema that are written to your target DB instance don't contain the items that can't be converted automatically\. After applying the schema to your target DB instance, you can then manually create schema in your target DB instance that are equivalent to those in the source database\. The action items in the database migration assessment report contain suggestions for how to create the equivalent schema\. 
 
@@ -176,7 +176,7 @@ If you manually create schema in your target DB instance, save a copy of any man
 
 In some cases, you can't create equivalent schema in your target DB instance\. You might need to re\-architect a portion of your application and database to use the functionality that is available from the DB engine for your target DB instance\. In other cases, you can simply ignore the schema that can't be converted automatically\. 
 
-## Updating and refreshing your converted schema in the AWS SCT<a name="CHAP_Converting.UpdateRefresh"></a>
+## Updating and refreshing your converted schema in AWS SCT<a name="CHAP_Converting.UpdateRefresh"></a>
 
 You can update both the source schema and the target schema in your AWS Schema Conversion Tool project\. 
 + **Source** – If you update the schema for your source database, AWS SCT replaces the schema in your project with the latest schema from your source database\. Using this functionality, you can update your project if changes have been made to the schema of your source database\. 
@@ -187,9 +187,9 @@ You update the schema in your AWS SCT project by choosing **Refresh from Databas
 **Note**  
 When you refresh your schema, AWS SCT loads metadata only as it is needed\. To fully load all of your database's schema, open the context \(right\-click\) menu for your schema, and choose **Load schema**\. For example, you can use this option to load metadata for your database all at once, and then work offline\.
 
-## Saving and applying your converted schema in the AWS SCT<a name="CHAP_Converting.SaveAndApply"></a>
+## Saving and applying your converted schema in AWS SCT<a name="CHAP_Converting.SaveAndApply"></a>
 
-When the AWS Schema Conversion Tool generates converted schema \(as shown in [Converting your schema by using the AWS SCT](#CHAP_Converting.Convert)\), it doesn't immediately apply the converted schema to the target DB instance\. Instead, converted schema are stored locally in your project until you are ready to apply them to the target DB instance\. Using this functionality, you can work with schema items that can't be converted automatically to your target DB engine\. For more information on items that can't be converted automatically, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
+When the AWS Schema Conversion Tool generates converted schema \(as shown in [Converting your schema by using AWS SCT](#CHAP_Converting.Convert)\), it doesn't immediately apply the converted schema to the target DB instance\. Instead, converted schema are stored locally in your project until you are ready to apply them to the target DB instance\. Using this functionality, you can work with schema items that can't be converted automatically to your target DB engine\. For more information on items that can't be converted automatically, see [Creating migration assessment reports with AWS SCT](CHAP_AssessmentReport.md)\. 
 
 You can optionally have the tool save your converted schema to a file as a SQL script prior to applying the schema to your target DB instance\. You can also have the tool apply the converted schema directly to your target DB instance\. 
 

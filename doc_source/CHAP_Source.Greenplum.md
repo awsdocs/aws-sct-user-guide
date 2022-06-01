@@ -18,7 +18,7 @@ In the example preceding, replace placeholders as following:
 
 ## Connecting to Greenplum Database as a source<a name="CHAP_Source.Greenplum.Connecting"></a>
 
-Use the following procedure to connect to your Greenplum source database with the AWS SCT\.
+Use the following procedure to connect to your Greenplum source database with AWS SCT\.
 
 **To connect to a Greenplum source database**
 

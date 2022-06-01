@@ -118,7 +118,7 @@ A *BTEQ script conversion assessment report* provides information about converti
 
 1. View the **Summary** tab\. The **Summary** tab displays the executive summary information from the BTEQ script assessment report\. It includes conversion results for all BTEQ commands and SQL statements from your BTEQ scripts\. 
 
-1. \(Optional\) Ssve a local copy of the BTEQ script conversion assessment report as either a PDF file or a comma\-separated values \(CSV\) file:
+1. \(Optional\) Save a local copy of the BTEQ script conversion assessment report as either a PDF file or a comma\-separated values \(CSV\) file:
    + To save the BTEQ script conversion assessment report as a PDF file, choose **Save to PDF** at upper right\.
 
       The PDF file contains the executive summary, action items, and recommendations for scripts conversion\.

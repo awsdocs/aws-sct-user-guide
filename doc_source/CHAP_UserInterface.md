@@ -4,7 +4,7 @@ Use the following topics to help you work with the AWS SCT user interface\. For 
 
 **Topics**
 + [The AWS SCT project window](#CHAP_UserInterface.Overview.ProjectWindow)
-+ [Starting the AWS SCT](#CHAP_UserInterface.Launching)
++ [Starting AWS SCT](#CHAP_UserInterface.Launching)
 + [Creating an AWS SCT project](#CHAP_UserInterface.Project)
 + [Saving and opening an AWS SCT project](#CHAP_UserInterface.SaveProject)
 + [Adding database servers to an AWS SCT project](#CHAP_UserInterface.AddServers)
@@ -18,11 +18,11 @@ Use the following topics to help you work with the AWS SCT user interface\. For 
 + [Using AWS Secrets Manager](#CHAP_UserInterface.SecretsManager)
 + [Storing database passwords](#CHAP_UserInterface.StoringPasswords)
 + [Using the UNION ALL view for projects with partitioned tables](#CHAP_UserInterface.UnionAllView)
-+ [Keyboard shortcuts for the AWS SCT](#CHAP_UserInterface.KeyboardShortcuts)
++ [Keyboard shortcuts for AWS SCT](#CHAP_UserInterface.KeyboardShortcuts)
 
 ## The AWS SCT project window<a name="CHAP_UserInterface.Overview.ProjectWindow"></a>
 
-The illustration following is what you see in the AWS SCT when you create a schema migration project, and then convert a schema\. 
+The illustration following is what you see in AWS SCT when you create a schema migration project, and then convert a schema\. 
 
 1. In the left panel, the schema from your source database is presented in a tree view\. Your database schema is "lazy loaded\." In other words, when you select an item from the tree view, AWS SCT gets and displays the current schema from your source database\. 
 
@@ -36,7 +36,7 @@ The illustration following is what you see in the AWS SCT when you create a sche
 
 1. In the lower right panel, when you choose a schema element, properties are displayed\. These describe the target schema element and the SQL command to create that element in the target database\. You can edit this SQL command and save the updated command with your project\. 
 
-## Starting the AWS SCT<a name="CHAP_UserInterface.Launching"></a>
+## Starting AWS SCT<a name="CHAP_UserInterface.Launching"></a>
 
 To start the AWS Schema Conversion Tool, use the instructions for your operating system shown following\. 
 
@@ -287,7 +287,7 @@ You can create a database migration assessment report after you add the source d
 
 1. Choose the **Summary** tab, and then choose **Save to PDF**\. The database migration assessment report is saved as a PDF file\. The PDF file contains both the summary and action item information\. 
 
-   You can also choose **Save to CSV** to save the report as a CSV file\. When you choose this option, the AWS SCT creates three CSV files\. These files contain the following information:
+   You can also choose **Save to CSV** to save the report as a CSV file\. When you choose this option, AWS SCT creates three CSV files\. These files contain the following information:
    + A list of conversion action items with recommended actions\.
    + A summary of conversion action items with an estimate of the effort required to convert an occurrence of the action item\.
    + An executive summary with a number of action items categorized by the estimated time to convert\.  
@@ -330,7 +330,7 @@ The following procedure overwrites the existing target schema\. Be careful not t
 
 ## Storing AWS service profiles in the AWS SCT<a name="CHAP_UserInterface.Profiles"></a>
 
-You can store your AWS credentials in the AWS SCT\. AWS SCT uses your credentials when you use features that integrate with AWS services\. For example, AWS SCT integrates with Amazon S3, AWS Lambda, Amazon Relational Database Service \(Amazon RDS\), and AWS Database Migration Service \(AWS DMS\)\. 
+You can store your AWS credentials in AWS SCT\. AWS SCT uses your credentials when you use features that integrate with AWS services\. For example, AWS SCT integrates with Amazon S3, AWS Lambda, Amazon Relational Database Service \(Amazon RDS\), and AWS Database Migration Service \(AWS DMS\)\. 
 
 AWS SCT asks you for your AWS credentials when you access a feature that requires them\. You can store your credentials in the global application settings\. When AWS SCT asks for your credentials, you can select the stored credentials\. 
 
@@ -445,9 +445,9 @@ If a source table is partitioned, AWS SCT creates *n* target tables, where *n* i
 
 1. Choose **OK** to save the settings and close the **Conversion settings** dialog box\. 
 
-## Keyboard shortcuts for the AWS SCT<a name="CHAP_UserInterface.KeyboardShortcuts"></a>
+## Keyboard shortcuts for AWS SCT<a name="CHAP_UserInterface.KeyboardShortcuts"></a>
 
-The following are the keyboard shortcuts that you can use with the AWS SCT\. 
+The following are the keyboard shortcuts that you can use with AWS SCT\. 
 
 
 | Keyboard shortcut | Description | 
