@@ -38,16 +38,7 @@ The illustration following is what you see in AWS SCT when you create a schema m
 
 ## Starting AWS SCT<a name="CHAP_UserInterface.Launching"></a>
 
-To start the AWS Schema Conversion Tool, use the instructions for your operating system shown following\. 
-
-
-****  
-
-| Operating system | Instructions | 
-| --- | --- | 
-| Fedora Linux |  Run the following command:  `/opt/aws-schema-conversion-tool/bin/AWSSchemaConversionTool`  | 
-| Microsoft Windows | Double\-click the application icon\. | 
-| Ubuntu Linux |  Double\-click the application icon or run the following command:  `sudo /opt/aws-schema-conversion-tool/bin/AWSSchemaConversionTool`  | 
+To start the AWS Schema Conversion Tool, double\-click the application icon\.
 
 ## Creating an AWS SCT project<a name="CHAP_UserInterface.Project"></a>
 
@@ -266,7 +257,15 @@ You can create a database migration assessment report after you add the source d
 
 **To create and view the database migration assessment report**
 
-1. In the left panel that displays the schema from your source database, choose a schema object to create an assessment report for\. Open the context \(right\-click\) menu for the object, and then choose **Create Report**\.   
+1. Make sure that you created a mapping rule for the source database schema to create an assessment report for\. For more information, see [Adding a new mapping rule](CHAP_Mapping.New.md)\.
+
+1. On the **View** menu, choose **Main view**\. 
+
+1. In the left panel that displays the schema from your source database, choose schema objects to create an assessment report for\. 
+
+   Make sure that you selected the check boxes for all schema objects to create an assessment report for\.
+
+1. Open the context \(right\-click\) menu for the object, and then choose **Create report**\.  
 ![\[Create database migration assessment report\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/create_assessment_report.png)
 
    The assessment report view opens\.

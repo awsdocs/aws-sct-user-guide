@@ -5,7 +5,7 @@ The AWS Schema Conversion Tool automates much of the process of converting your 
 AWS SCT can convert the following data warehouse schemas to Amazon Redshift\.
 + Amazon Redshift
 + Azure Synapse Analytics \(version 10\)
-+ Greenplum Database \(version 4\.3 and later\)
++ Greenplum Database \(version 4\.3\)
 + Microsoft SQL Server \(version 2008 and later\)
 + Netezza \(version 7\.0\.3 and later\)
 + Oracle \(version 10\.2 and later\)
@@ -202,7 +202,7 @@ The left pane contains key suggestions, and includes the confidence rating for e
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
-### Related topics<a name="w22aac21c23c13"></a>
+### Related topics<a name="w26aac21c23c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 

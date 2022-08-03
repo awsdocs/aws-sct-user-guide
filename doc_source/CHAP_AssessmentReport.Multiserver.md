@@ -26,7 +26,7 @@ You can use AWS SCT to create a multiserver assessment report for the following 
 
 ## Performing a multiserver assessment<a name="CHAP_AssessmentReport.Multiserver.Procedure"></a>
 
-Use the following procedure to perform a multiserver assessment with AWS SCT\. You don't need to create a new project in AWS SCT to perform a multiserver assessment\. Before you get started, make sure that you have prepared a comma\-separated value \(CSV\) file with database connection parameters\. Also, make sure that you have installed all required database drivers and set the location of the drivers in the AWS SCT settings\. For more information, see [Installing the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  
+Use the following procedure to perform a multiserver assessment with AWS SCT\. You don't need to create a new project in AWS SCT to perform a multiserver assessment\. Before you get started, make sure that you have prepared a comma\-separated value \(CSV\) file with database connection parameters\. Also, make sure that you have installed all required database drivers and set the location of the drivers in the AWS SCT settings\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  
 
 **To perform a multiserver assessment and create an aggregated summary report**
 
@@ -51,12 +51,22 @@ Use the following procedure to perform a multiserver assessment with AWS SCT\. Y
 
 1. Choose **Open Report** to view the aggregated summary assessment report\.
 
+By default, AWS SCT generates an aggregated report for all source databases and a detailed assessment report for each schema name in a source database\. For more information, see [Locating and viewing reports](#CHAP_AssessmentReport.Multiserver.Review)\.
+
+With the **Create AWS SCT projects for each source database** option turned on, AWS SCT creates an empty project for each source database\. AWS SCT also creates assessment reports as described earlier\. After you analyze these assessment reports and choose migration destination for each source database, add target databases to these empty projects\.
+
+With the **Add mapping rules to these projects and save conversion statistics for offline use** option turned on, AWS SCT creates a project for each source database\. These projects include the following information:
++ Your source database and a virtual target database platform\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\.
++ A mapping rule for this source\-target pair\. For more information, see [Creating mapping rules](CHAP_Mapping.md)\.
++ A database migration assessment report for this source\-target pair\.
++ Source schema metadata, which enables you to use this AWS SCT project in an offline mode\. For more information, see [Running AWS SCT in an offline mode](CHAP_UserInterface.md#CHAP_UserInterface.OfflineMode)\.
+
 ## Preparing an input CSV file<a name="CHAP_AssessmentReport.Multiserver.Input"></a>
 
 To provide connection parameters as input for multiserver assessment report, use a CSV file as shown in the following example\.
 
 ```
-Name,Description,Secret Manager Key,Server IP,Port,Service Name,SID,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
+Name,Description,Secret Manager Key,Server IP,Port,Service Name,Database name,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
 Sales,,,192.0.2.0,1521,pdb,,ORACLE,Q4_2021;FY_2021,,user,password,,,,,POSTGRESQL;AURORA_POSTGRESQL
 Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MSSQL,customers.dbo,,user,password,,,,,AURORA_MYSQL
 HR,,,192.0.2.0,1433,,employees,MSSQL,employees.%,true,,,,,,,AURORA_POSTGRESQL
@@ -86,7 +96,7 @@ Make sure that your CSV file includes the following values, provided by the temp
 + **Server IP** – The Domain Name Service \(DNS\) name or IP address of your source database server\. 
 + **Port** – The port used to connect to your source database server\.
 + **Service Name** – If you use a service name to connect to your Oracle database, the name of the Oracle service to connect to\. 
-+ **SID** – The database name\. For Oracle databases, use the Oracle System ID \(SID\)\.
++ **Database name** – The database name\. For Oracle databases, use the Oracle System ID \(SID\)\.
 + **Source Engine** – The type of your source database\. Use one of the following values:
   + **AZURE\_MSSQL** for a Microsoft Azure SQL database\.
   + **DB2ZOS** for an IBM Db2 for z/OS database\.
@@ -162,10 +172,12 @@ For details on how to read this information, see following\.
 ## Output for an aggregated assessment report<a name="CHAP_AssessmentReport.Multiserver.Agreggated"></a>
 
 The aggregated multiserver database migration assessment report in AWS Schema Conversion Tool is a CSV file with the following columns: 
-+ `Server IP`
++ `Server IP address and port`
++ `Secret Manager key`
 + `Name`
 + `Description`
-+ `Schema Name`
++ `Database name`
++ `Schema name`
 + `Code object conversion % for target_database`
 + `Storage object conversion % for target_database`
 + `Syntax elements conversion % for target_database`

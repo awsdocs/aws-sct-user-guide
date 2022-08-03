@@ -1,11 +1,13 @@
 # Using IBM Db2 LUW as a source for AWS SCT<a name="CHAP_Source.DB2LUW"></a>
 
-You can use AWS SCT to convert schemas, code objects, and application code from IBM for Linux, Unix, and Windows \(Db2 LUW\) to the following targets\. AWS SCT supports as a source Db2 LUW versions 9\.1, 9\.5, 9\.7, 10\.1, 10\.5, 11\.1, and 11\.5\.
+You can use AWS SCT to convert schemas, code objects in the SQL language, and application code from IBM Db2 for Linux, Unix, and Windows \(Db2 LUW\) to the following targets\.
 + Amazon RDS for MySQL
 + Amazon Aurora MySQL\-Compatible Edition
 + Amazon RDS for PostgreSQL
 + Amazon Aurora PostgreSQL\-Compatible Edition
 + Amazon RDS for MariaDB
+
+AWS SCT supports as a source Db2 LUW versions 9\.1, 9\.5, 9\.7, 10\.1, 10\.5, 11\.1, and 11\.5\.
 
 ## Privileges for Db2 LUW as a source<a name="CHAP_Source.DB2LUW.Permissions"></a>
 

@@ -10,6 +10,8 @@ You can create multiple mapping rules in a single project\. AWS SCT saves mappin
 
 1.  In the right panel, choose a target database platform for the selected source schema or database\. 
 
+   You can choose a virtual database platform as a target\. For more information, see [Using virtual targets](CHAP_Mapping.VirtualTargets.md)\. 
+
 1. Choose **Create mapping**\.
 
     AWS SCT adds this new mapping rule to the **Server mappings** list\. 

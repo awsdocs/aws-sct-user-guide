@@ -15,7 +15,7 @@ The following diagram shows the supported scenario\.
 ![\[Extraction agent architecture\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/extraction-agents-art.png)
 
 Data extraction agents are currently supported for the following source data warehouses:
-+ Greenplum Database \(version 4\.3 and later\)
++ Greenplum Database \(version 4\.3\)
 + Microsoft SQL Server \(version 2008 and later\)
 + Netezza \(version 7\.0\.3 and later\)
 + Oracle \(version 10 and later\)

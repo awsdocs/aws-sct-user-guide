@@ -2,6 +2,64 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 664<a name="CHAP_ReleaseNotes.664"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Added support of Amazon Redshift Serverless as a source and target for database migration projects in AWS SCT\. To connect to Amazon Redshift Serverless, make sure that you use the Amazon Redshift JDBC driver version 2\.1\.0\.9 or higher\.  | 
+| All | All | Improved the user interface of the **Conversion settings** window\. AWS SCT now displays settings only for database conversion pairs with created mapping rules\. For more information, see [Creating mapping rules](CHAP_Mapping.md)\.  | 
+| All | All | Updated the assessment report to remove duplicate information about the line and position of the action item\.  | 
+| All | Amazon Redshift | Implemented automatic memory balancing in data extracting tasks\.  | 
+| All | Amazon Redshift | Resolved an error where the data extraction agents couldn't connect to AWS Snowball devices\.  | 
+|  Azure SQL Database IBM Db2 for z/OS IBM Db2 LUW Microsoft SQL Server MySQL Oracle PostgreSQL SAP ASE  |  Aurora MySQL Aurora PostgreSQL MariaDB MySQL PostgreSQL  | Implemented support of SUSE Linux 15\.3 as a platform to run data extraction agents\. For more information, see [Extracting data from on\-premises databases using data extraction agentsExtracting data from on\-premises databases](agents.oltp.md)\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `DATEADD` functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Added the ability to change column collation in migration rules\.  | 
+| Microsoft SSIS | AWS Glue AWS Glue Studio | Resolved an unexpected error that occurred when users select a source script\.  | 
+| Oracle | Aurora MySQL MariaDB MySQL | Implemented conversion of the usage of stored functions as generated column expressions\. AWS SCT creates triggers to emulate this behavior because MySQL doesn't support the usage of stored functions as generated column expressions\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Implemented conversion of functions from the `UTL_MATCH` package as part of the AWS SCT extension pack\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Implemented conversion of the `REGEXP_LIKE` function with the `NULL` parameter\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved conversion of the `SYS_EXTRACT_UTC` function\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved SQL code conversion in C\+\+ applications by implementing support of `Wcscats`, `Wcscpys`, and `Wcsncats` functions\. For more information, see [Converting SQL code in C\+\+ applications with AWS SCT](CHAP_Converting.App.Cplusplus.md)\.  | 
+| Oracle DW Snowflake | Amazon Redshift | Resolved an issue where converted statements don't include explicit conversion of values to the column data type\. This issue occurred in statements that use query results from other tables\.  | 
+| Teradata | Amazon Redshift | Added the ability to change column collation between `case sensitive` and `case insensitive` in migration rules\. For more information, see [ Creating migration rules](CHAP_Converting.md#CHAP_Converting.MigrationRules)\.  | 
+| Teradata | Amazon Redshift | Fixed a resolver error that occurred for `CREATE TABLE AS` statements\.  | 
+| Teradata | Amazon Redshift | Fixed an error where the built\-in `P_INTERSECT` function with a `COALESCE` expression wasn't converted\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of columns named `OID` to `_OID` to avoid the usage of a reserved keyword in Amazon Redshift\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of `RENAME` statements for functions, procedures, views, and macros\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of the `STROKE` function to the `SPLIT_PART` function in Amazon Redshift\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `INSTR` and `REGEXP_INSTR` system functions\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `TIME` data type\.  | 
+| Teradata | Amazon Redshift | Improved emulation of the `SET` and `MULTISET` tables by implementing conversion of primary and secondary unique indexes\.  | 
+| Teradata | Amazon Redshift | Resolved a parsing error that occurred for the `CHARACTER` function\.  | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an error that occurred when users removed Teradata Basic Teradata Query \(BTEQ\) scripts from the AWS SCT project\. | 
+
+## Release notes for AWS SCT Build 663<a name="CHAP_ReleaseNotes.663"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Added the ability to change the length of `char`, `varchar`, `nvarchar`, and `string` data types using the multiplication operator in a migration rule\. For more information, see [ Creating migration rules](CHAP_Converting.md#CHAP_Converting.MigrationRules)\.  | 
+| All | All | Implemented support of three new columns in the multiserver assessment report and updated the format of the input file\. Make sure that you use the updated template of the input file with the latest version of AWS SCT\. For more information, see [Creating a multiserver assessment report for database migration](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `OBJECT_ID` statements\.  | 
+| Microsoft SQL Server | Babelfish for Aurora PostgreSQL | Added support for Babelfish for Aurora PostgreSQL 1\.2\.0 as a target platform for database migration assessment reports\. For more information, see [Supported functionality in Babelfish by version](https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/babelfish-compatibility.supported-functionality-table.html#babelfish-releases-updates-bfish120) in the *Amazon Aurora User Guide*\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Added support for `AT TIME ZONE` clauses\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Resolved an issue where a statement outside the `BEGIN/END` block was incorrectly converted\.  | 
+| Netezza | Amazon Redshift | Improved conversion of the `TIME` data type and implemented conversion of related built\-in functions, expressions, and literals\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Fixed a loader error that occurred when using Oracle 10g as a source\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved conversion of `OFFSET` and `FETCH` clauses\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Resolved an issue where procedures with `OUT` parameters with default values were incorrectly converted\.  | 
+| Oracle DW | Amazon Redshift | Improved conversion of Oracle functions to Amazon Redshift user\-defined functions\.  | 
+| Snowflake | Amazon Redshift | Improved conversion of `WITH` clauses\.  | 
+| Teradata | Amazon Redshift | Added a new action item 13209 for unsupported multibyte characters for the `CHAR` data type\.  | 
+| Teradata | Amazon Redshift | Fixed a loader error where the tables weren't fully loaded\.  | 
+| Teradata | Amazon Redshift | Fixed a transformer error where the built\-in `P_INTERSECT` function in a `JOIN` condition wasn't converted\.  | 
+| Teradata | Amazon Redshift | Fixed an issue where the name of a view was converted in wrong case when the `SELECT` statement was run on a table with special characters in its name\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `INSERT` statements with the `UNTIL_CHANGED` value in the `PERIOD(DATE)` data type\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the built\-in `FORMAT` function using the `TO_CHAR` function in Amazon Redshift\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the built\-in `RANK` function to make sure that the converted code returns NULL values in the same order as the source code\.  | 
+| Teradata | Amazon Redshift | Improved conversion of unique constraints such as primary or secondary unique indexes\.  | 
+
 ## Release notes for AWS SCT Build 662<a name="CHAP_ReleaseNotes.662"></a>
 
 
@@ -14,7 +72,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of `DELETE` statements with `NON EXISTS` clauses\.  | 
 | Azure Synapse Analytics | Amazon Redshift | Resolved an error where the connection to a source database failed\.  | 
 | IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Resolved an error where the converted code of a trigger included two mentions of the object alias\.  | 
-| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of objects with names in mixed\-case when the **Treat database object name as case sensitive** option is turned on\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of objects with names in mixed case when the **Treat database object name as case sensitive** option is turned on\.  | 
 | Microsoft SQL Server DW Teradata | Amazon Redshift | Implemented conversion of the `PIVOT` and `UNPIVOT` relational operators\.  | 
 | Netezza | Amazon Redshift | Implemented conversion of the `TIME` data type\.  | 
 | Oracle | Aurora MySQL Aurora PostgreSQL MySQL PostgreSQL | Implemented the `UTL_TCP.CRLF` package constant conversion\.  | 
@@ -28,7 +86,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | SAP ASE | Aurora PostgreSQL PostgreSQL | Resolved an error when an object with an empty name was created in the target tree during the conversion of tables with columns of user\-defined type\.  | 
 | SAP ASE | Aurora PostgreSQL PostgreSQL | Fixed a loader error for stored objects such as scripts, routines, and so on\.  | 
 | Snowflake | Amazon Redshift | Fixed a problem where action item 22152 doesn't appear when required and AWS SCT displays the conversion result as a comment\.  | 
-| Snowflake | Amazon Redshift | Improved conversion of the date and time functions, implemented support of time zones\.  | 
+| Snowflake | Amazon Redshift | Improved conversion of the date and time functions; implemented support of time zones\.  | 
 | Snowflake | Amazon Redshift | Resolved an issue where non\-recursive common table expressions \(CTEs\) with a `WITH` clause were converted as recursive CTEs\.  | 
 | Teradata | Amazon Redshift | Improved conversion of `UPDATE` statements with table links in condition\.  | 
 | Teradata | Amazon Redshift | Improved conversion of `RENAME TABLE` statements\.  | 

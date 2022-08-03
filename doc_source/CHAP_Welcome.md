@@ -29,7 +29,7 @@ AWS SCT supports the following data warehouse conversions\.
 | --- | --- | 
 |  Amazon Redshift  |  Amazon Redshift  For more information, see [Using Amazon Redshift as a source for AWS SCT](CHAP_Source.Redshift.md)\.   | 
 |  Azure Synapse Analytics \(version 10\)  |  Amazon Redshift  For more information, see [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)\.   | 
-|  Greenplum Database \(version 4\.3 and later\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
+|  Greenplum Database \(version 4\.3\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
 |  Microsoft SQL Server \(version 2008 and later\)  |  Amazon Redshift  For more information, see [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)\.   | 
 |  Netezza \(version 7\.0\.3 and later\)  |  Amazon Redshift  For more information, see [Using Netezza as a source](CHAP_Source.Netezza.md)\.   | 
 |  Oracle \(version 10\.2 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)\.   | 

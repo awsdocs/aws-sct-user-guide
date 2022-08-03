@@ -47,17 +47,18 @@ Before you convert your schema with AWS SCT, you can set up migration rules\. *M
 You can only create migration rules for different source and target database engines\. 
 
 You can create migration rules that perform the following tasks: 
-+ Change data type 
-+ Move objects 
-+ Rename objects 
-+ Add, remove, or replace a prefix 
-+ Add, remove, or replace a suffix 
++ Add, remove, or replace a prefix
++ Add, remove, or replace a suffix
++ Change column collation
++ Change data type
++ Move objects
++ Rename objects
 
 You can create migration rules for the following objects: 
-+ Database 
-+ Schema 
-+ Table 
-+ Column 
++ Database
++ Schema
++ Table
++ Column
 
 ### Creating migration rules<a name="CHAP_Converting.MigrationRules.Map"></a>
 
@@ -85,7 +86,9 @@ You can create migration rules and save the rules as part of your project\. With
 
    1. For **Actions**, choose the type of migration rule that you want to create\. 
 
-   1. Depending on the rule type, enter one or two additional values\. For example, to rename an object, enter the new name of the object\. To replace a prefix, enter the old prefix and the new prefix\. 
+   1. Depending on the rule type, enter one or two additional values\. For example, to rename an object, enter the new name of the object\. To replace a prefix, enter the old prefix and the new prefix\.
+
+      For char, varchar, nvarchar, and string data types, you can change the data type length using the multiplication operator\. For example, the `%*4` value transforms the `varchar(10)` data type into `varchar(40)`\.
 
 1. After you have configured your migration rule, choose **Save** to save your rule\. You can also choose **Cancel** to cancel your changes\.   
 ![\[The transformation rules dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/transformation-rules.png)

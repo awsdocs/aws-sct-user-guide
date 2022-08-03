@@ -12,6 +12,9 @@ The privileges required for using Amazon Redshift as a source are listed followi
 + SELECT ON SVV\_TABLE\_INFO 
 + SELECT ON TABLE STV\_BLOCKLIST 
 + SELECT ON TABLE STV\_TBL\_PERM 
++ SELECT ON SYS\_SERVERLESS\_USAGE 
++ SELECT ON PG\_DATABASE\_INFO 
++ SELECT ON PG\_STATISTIC 
 
 In the example preceding, replace the *<schema\_name>* placeholder with the name of the source schema\.
 
