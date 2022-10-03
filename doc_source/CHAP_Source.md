@@ -8,8 +8,8 @@ AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following so
 **Database sources**
 + [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)
 + [Using Azure SQL Database as a source](CHAP_Source.AzureSQL.md)
-+ [Using IBM Db2 LUW as a source](CHAP_Source.DB2LUW.md)
 + [Using IBM Db2 for z/OS as a source](CHAP_Source.DB2zOS.md)
++ [Using IBM Db2 LUW as a source](CHAP_Source.DB2LUW.md)
 + [Using MySQL as a source](CHAP_Source.MySQL.md)
 + [Using Oracle Database as a source](CHAP_Source.Oracle.md)
 + [Using PostgreSQL as a source](CHAP_Source.PostgreSQL.md)
@@ -19,6 +19,7 @@ AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following so
 **Data warehouse sources**
 + [Using Amazon Redshift as a source](CHAP_Source.Redshift.md)
 + [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)
++ [Using BigQuery as a source](CHAP_Source.BigQuery.md)
 + [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)
 + [Using Netezza as a source](CHAP_Source.Netezza.md)
 + [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)

@@ -15,10 +15,10 @@ AWS SCT supports the following OLTP conversions\.
 |  IBM Db2 LUW \(versions 9\.1, 9\.5, 9\.7, 10\.5, 11\.1, and 11\.5\)  |  Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL  For more information, see [Using IBM Db2 LUW as a source](CHAP_Source.DB2LUW.md)\.   | 
 | Microsoft Azure SQL Database |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using Azure SQL Database as a source](CHAP_Source.AzureSQL.md)\.   | 
 |  Microsoft SQL Server \(version 2008 R2 and later\)  |  Aurora MySQL, Aurora PostgreSQL, Babelfish for Aurora PostgreSQL \(only for assessment reports\), MariaDB, Microsoft SQL Server, MySQL, PostgreSQL   For more information, see [Using SQL Server as a source](CHAP_Source.SQLServer.md)\.   | 
-|  MySQL \(version 5\.5 and later\)  |  Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using MySQL as a source](CHAP_Source.MySQL.md)  You can migrate schema and data from MySQL to an Aurora MySQL DB cluster without using AWS SCT\. For more information, see [Migrating data to an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html)\.   | 
-|  Oracle \(version 10\.2 and later\)  |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, Oracle, PostgreSQL   For more information, see [Using Oracle Database as a source](CHAP_Source.Oracle.md)\.   | 
+|  MySQL \(version 5\.5 and later\)  |  Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using MySQL as a source](CHAP_Source.MySQL.md)\.  You can migrate schema and data from MySQL to an Aurora MySQL DB cluster without using AWS SCT\. For more information, see [Migrating data to an Amazon Aurora DB cluster](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Migrate.html)\.   | 
+|  Oracle \(version 10\.1 and later\)  |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, Oracle, PostgreSQL   For more information, see [Using Oracle Database as a source](CHAP_Source.Oracle.md)\.   | 
 |  PostgreSQL \(version 9\.1 and later\)  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  For more information, see [Using PostgreSQL as a source](CHAP_Source.PostgreSQL.md)\.   | 
-| SAP ASE \(versions 12\.5, 15\.0, 15\.5, 15\.7, and 16\.0\) |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL   For more information, see [Using SAP ASE \(Sybase ASE\) as a source](CHAP_Source.SAP.md)\.   | 
+| SAP ASE \(versions 12\.5\.4, 15\.0\.2, 15\.5, 15\.7, and 16\.0\) |   Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL   For more information, see [Using SAP ASE \(Sybase ASE\) as a source](CHAP_Source.SAP.md)\.   | 
 
 AWS SCT supports the following data warehouse conversions\. 
 
@@ -27,14 +27,15 @@ AWS SCT supports the following data warehouse conversions\.
 
 | Source data warehouse | Target data warehouse | 
 | --- | --- | 
-|  Amazon Redshift  |  Amazon Redshift  For more information, see [Using Amazon Redshift as a source for AWS SCT](CHAP_Source.Redshift.md)\.   | 
+|  Amazon Redshift  |  Amazon Redshift  For more information, see [Using Amazon Redshift as a source](CHAP_Source.Redshift.md)\.   | 
 |  Azure Synapse Analytics \(version 10\)  |  Amazon Redshift  For more information, see [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)\.   | 
-|  Greenplum Database \(version 4\.3\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
+|  BigQuery  |  Amazon Redshift  For more information, see [Using BigQuery as a source](CHAP_Source.BigQuery.md)\.   | 
+|  Greenplum Database \(versions 4\.3 and 6\.21\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
 |  Microsoft SQL Server \(version 2008 and later\)  |  Amazon Redshift  For more information, see [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)\.   | 
 |  Netezza \(version 7\.0\.3 and later\)  |  Amazon Redshift  For more information, see [Using Netezza as a source](CHAP_Source.Netezza.md)\.   | 
-|  Oracle \(version 10\.2 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)\.   | 
+|  Oracle \(version 10\.1 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)\.   | 
 |  Teradata \(version 13 and later\)  |  Amazon Redshift  For more information, see [Using Teradata as a source](CHAP_Source.Teradata.md)\.   | 
-|  Vertica \(version 7\.2 and later\)  |  Amazon Redshift  For more information, see [Using Vertica as a source](CHAP_Source.Vertica.md)\.   | 
+|  Vertica \(version 9\.1 and 11\.0\)  |  Amazon Redshift  For more information, see [Using Vertica as a source](CHAP_Source.Vertica.md)\.   | 
 |  Snowflake \(version 3\)  |  Amazon Redshift  For more information, see [Using Snowflake as a source](CHAP_Source.Snowflake.md)\.   | 
 
 AWS SCT supports the following data NoSQL database conversions\. 
@@ -44,7 +45,7 @@ AWS SCT supports the following data NoSQL database conversions\.
 
 | Source database | Target database | 
 | --- | --- | 
-|  Apache Cassandra \(versions 2\.1\.0, 2\.1\.20, and 3\.11\.4\)  |  Amazon DynamoDB  For more information, see [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)\.   | 
+|  Apache Cassandra \(versions 2\.1\.x, 2\.2\.16, and 3\.11\.x\)  |  Amazon DynamoDB  For more information, see [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)\.   | 
 
 ## Schema conversion overview<a name="CHAP_Welcome.Overview"></a>
 

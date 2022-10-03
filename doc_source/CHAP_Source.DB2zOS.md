@@ -78,3 +78,74 @@ Use the following procedure to connect to your Db2 for z/OS source database with
 1. Choose **Test Connection** to verify that AWS SCT can connect to your source database\.
 
 1. Choose **Connect** to connect to your source database\.
+
+## Privileges for MySQL as a target<a name="CHAP_Source.DB2zOS.ConfigureMySQL"></a>
+
+The privileges required for MySQL as a target are listed following:
++ CREATE ON \*\.\*
++ ALTER ON \*\.\*
++ DROP ON \*\.\*
++ INDEX ON \*\.\*
++ REFERENCES ON \*\.\*
++ SELECT ON \*\.\*
++ CREATE VIEW ON \*\.\*
++ SHOW VIEW ON \*\.\*
++ TRIGGER ON \*\.\*
++ CREATE ROUTINE ON \*\.\*
++ ALTER ROUTINE ON \*\.\*
++ EXECUTE ON \*\.\*
++ SELECT ON mysql\.proc
++ INSERT, UPDATE ON AWS\_DB2ZOS\_EXT\.\*
++ INSERT, UPDATE, DELETE ON AWS\_DB2ZOS\_EXT\_DATA\.\*
++ CREATE TEMPORARY TABLES ON AWS\_DB2ZOS\_EXT\_DATA\.\*
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE USER 'user_name' IDENTIFIED BY 'your_password';
+GRANT CREATE ON *.* TO 'user_name';
+GRANT ALTER ON *.* TO 'user_name';
+GRANT DROP ON *.* TO 'user_name';
+GRANT INDEX ON *.* TO 'user_name';
+GRANT REFERENCES ON *.* TO 'user_name';
+GRANT SELECT ON *.* TO 'user_name';
+GRANT CREATE VIEW ON *.* TO 'user_name';
+GRANT SHOW VIEW ON *.* TO 'user_name';
+GRANT TRIGGER ON *.* TO 'user_name';
+GRANT CREATE ROUTINE ON *.* TO 'user_name';
+GRANT ALTER ROUTINE ON *.* TO 'user_name';
+GRANT EXECUTE ON *.* TO 'user_name';
+GRANT SELECT ON mysql.proc TO 'user_name';
+GRANT INSERT, UPDATE ON AWS_DB2ZOS_EXT.* TO 'user_name';
+GRANT INSERT, UPDATE, DELETE ON AWS_DB2ZOS_EXT_DATA.* TO 'user_name';
+GRANT CREATE TEMPORARY TABLES ON AWS_DB2ZOS_EXT_DATA.* TO 'user_name';
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+
+To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+
+To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+
+## Privileges for PostgreSQL as a target<a name="CHAP_Source.DB2zOS.ConfigurePostgreSQL"></a>
+
+To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
+
+To use Amazon RDS for PostgreSQL as a target, AWS SCT requires the `rds_superuser` privilege\.
+
+To use the converted public synonyms, change the database default search path to `"$user", public_synonyms, public`\.
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE ROLE user_name LOGIN PASSWORD 'your_password';
+GRANT CREATE ON DATABASE db_name TO user_name;
+GRANT rds_superuser TO user_name;
+ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+
+In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
+
+When you use different users to convert and apply different schemas to your target database, you can get an error message when AWS SCT can't drop a schema\. To avoid this error message, use the `superuser` role\. 

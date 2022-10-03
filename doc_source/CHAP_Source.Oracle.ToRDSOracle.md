@@ -49,6 +49,144 @@ Some things to consider when migrating Oracle schema and code to Amazon RDS for 
   + Average total disk throughput
   + Server information such as server name, OS, host name, and character set\.
 
+## Privileges for RDS for Oracle as a target<a name="CHAP_Source.Oracle.ToRDSOracle.ConfigureTarget"></a>
+
+To migrate to Amazon RDS for Oracle, create a privileged database user\. You can use the following code example\.
+
+```
+CREATE USER user_name IDENTIFIED BY your_password;
+
+-- System privileges
+GRANT DROP ANY CUBE BUILD PROCESS TO user_name;
+GRANT ALTER ANY CUBE TO user_name;
+GRANT CREATE ANY CUBE DIMENSION TO user_name;
+GRANT CREATE ANY ASSEMBLY TO user_name;
+GRANT ALTER ANY RULE TO user_name;
+GRANT SELECT ANY DICTIONARY TO user_name;
+GRANT ALTER ANY DIMENSION TO user_name;
+GRANT CREATE ANY DIMENSION TO user_name;
+GRANT ALTER ANY TYPE TO user_name;
+GRANT DROP ANY TRIGGER TO user_name;
+GRANT CREATE ANY VIEW TO user_name;
+GRANT ALTER ANY CUBE BUILD PROCESS TO user_name;
+GRANT CREATE ANY CREDENTIAL TO user_name;
+GRANT DROP ANY CUBE DIMENSION TO user_name;
+GRANT DROP ANY ASSEMBLY TO user_name;
+GRANT DROP ANY PROCEDURE TO user_name;
+GRANT ALTER ANY PROCEDURE TO user_name;
+GRANT ALTER ANY SQL TRANSLATION PROFILE TO user_name;
+GRANT DROP ANY MEASURE FOLDER TO user_name;
+GRANT CREATE ANY MEASURE FOLDER TO user_name;
+GRANT DROP ANY CUBE TO user_name;
+GRANT DROP ANY MINING MODEL TO user_name;
+GRANT CREATE ANY MINING MODEL TO user_name;
+GRANT DROP ANY EDITION TO user_name;
+GRANT CREATE ANY EVALUATION CONTEXT TO user_name;
+GRANT DROP ANY DIMENSION TO user_name;
+GRANT ALTER ANY INDEXTYPE TO user_name;
+GRANT DROP ANY TYPE TO user_name;
+GRANT CREATE ANY PROCEDURE TO user_name;
+GRANT CREATE ANY SQL TRANSLATION PROFILE TO user_name;
+GRANT CREATE ANY CUBE TO user_name;
+GRANT COMMENT ANY MINING MODEL TO user_name;
+GRANT ALTER ANY MINING MODEL TO user_name;
+GRANT DROP ANY SQL PROFILE TO user_name;
+GRANT CREATE ANY JOB TO user_name;
+GRANT DROP ANY EVALUATION CONTEXT TO user_name;
+GRANT ALTER ANY EVALUATION CONTEXT TO user_name;
+GRANT CREATE ANY INDEXTYPE TO user_name;
+GRANT CREATE ANY OPERATOR TO user_name;
+GRANT CREATE ANY TRIGGER TO user_name;
+GRANT DROP ANY ROLE TO user_name;
+GRANT DROP ANY SEQUENCE TO user_name;
+GRANT DROP ANY CLUSTER TO user_name;
+GRANT DROP ANY SQL TRANSLATION PROFILE TO user_name;
+GRANT ALTER ANY ASSEMBLY TO user_name;
+GRANT CREATE ANY RULE SET TO user_name;
+GRANT ALTER ANY OUTLINE TO user_name;
+GRANT UNDER ANY TYPE TO user_name;
+GRANT CREATE ANY TYPE TO user_name;
+GRANT DROP ANY MATERIALIZED VIEW TO user_name;
+GRANT ALTER ANY ROLE TO user_name;
+GRANT DROP ANY VIEW TO user_name;
+GRANT ALTER ANY INDEX TO user_name;
+GRANT COMMENT ANY TABLE TO user_name;
+GRANT CREATE ANY TABLE TO user_name;
+GRANT CREATE USER TO user_name;
+GRANT DROP ANY RULE SET TO user_name;
+GRANT CREATE ANY CONTEXT TO user_name;
+GRANT DROP ANY INDEXTYPE TO user_name;
+GRANT ALTER ANY OPERATOR TO user_name;
+GRANT CREATE ANY MATERIALIZED VIEW TO user_name;
+GRANT ALTER ANY SEQUENCE TO user_name;
+GRANT DROP ANY SYNONYM TO user_name;
+GRANT CREATE ANY SYNONYM TO user_name;
+GRANT DROP USER TO user_name;
+GRANT ALTER ANY MEASURE FOLDER TO user_name;
+GRANT ALTER ANY EDITION TO user_name;
+GRANT DROP ANY RULE TO user_name;
+GRANT CREATE ANY RULE TO user_name;
+GRANT ALTER ANY RULE SET TO user_name;
+GRANT CREATE ANY OUTLINE TO user_name;
+GRANT UNDER ANY TABLE TO user_name;
+GRANT UNDER ANY VIEW TO user_name;
+GRANT DROP ANY DIRECTORY TO user_name;
+GRANT ALTER ANY CLUSTER TO user_name;
+GRANT CREATE ANY CLUSTER TO user_name;
+GRANT ALTER ANY TABLE TO user_name;
+GRANT CREATE ANY CUBE BUILD PROCESS TO user_name;
+GRANT ALTER ANY CUBE DIMENSION TO user_name;
+GRANT CREATE ANY EDITION TO user_name;
+GRANT CREATE ANY SQL PROFILE TO user_name;
+GRANT ALTER ANY SQL PROFILE TO user_name;
+GRANT DROP ANY OUTLINE TO user_name;
+GRANT DROP ANY CONTEXT TO user_name;
+GRANT DROP ANY OPERATOR TO user_name;
+GRANT DROP ANY LIBRARY TO user_name;
+GRANT ALTER ANY LIBRARY TO user_name;
+GRANT CREATE ANY LIBRARY TO user_name;
+GRANT ALTER ANY MATERIALIZED VIEW TO user_name;
+GRANT ALTER ANY TRIGGER TO user_name;
+GRANT CREATE ANY SEQUENCE TO user_name;
+GRANT DROP ANY INDEX TO user_name;
+GRANT CREATE ANY INDEX TO user_name;
+GRANT DROP ANY TABLE TO user_name;
+GRANT SELECT_CATALOG_ROLE TO user_name;
+GRANT SELECT ANY SEQUENCE TO user_name;
+
+-- Database Links
+GRANT CREATE DATABASE LINK TO user_name;
+GRANT CREATE PUBLIC DATABASE LINK TO user_name;
+GRANT DROP PUBLIC DATABASE LINK TO user_name;
+
+
+-- Server Level Objects (directory)
+GRANT CREATE ANY DIRECTORY TO user_name;
+GRANT DROP ANY DIRECTORY TO user_name;
+-- (for RDS only)
+GRANT EXECUTE ON RDSADMIN.RDSADMIN_UTIL TO user_name;
+
+-- Server Level Objects (tablespace)
+GRANT CREATE TABLESPACE TO user_name;
+GRANT DROP TABLESPACE TO user_name;
+
+-- Server Level Objects (user roles)
+/* (grant source privileges with admin option or convert roles/privs as DBA) */
+
+-- Queues
+grant execute on DBMS_AQADM to user_name;
+grant aq_administrator_role to user_name;
+
+-- for Materialized View Logs creation
+GRANT SELECT ANY TABLE TO user_name;
+
+-- Roles
+GRANT RESOURCE TO user_name;
+GRANT CONNECT TO user_name;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+
 ## Limitations when converting Oracle to Amazon RDS for Oracle<a name="CHAP_Source.Oracle.ToRDSOracle.Limitations"></a>
 
 Some limitations you should consider when migrating Oracle schema and code to Amazon RDS for Oracle: 

@@ -2,15 +2,67 @@
 
 You can use the SQL Server to PostgreSQL extension pack in AWS SCT\. This extension pack emulates SQL Server database functions in the converted PostgreSQL code\. Use the SQL Server to PostgreSQL extension pack to emulate SQL Server Agent and SQL Server Database Mail\. For more information about extension packs, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
 
-When you convert a Microsoft SQL Server database to Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\) or Amazon Relational Database Service for PostgreSQL \(Amazon RDS for PostgreSQL\), be aware of the following\.
-
 **Topics**
++ [Privileges for PostgreSQL as a target](#CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL)
++ [SQL Server to PostgreSQL conversion settings](#CHAP_Source.SQLServer.ToPostgreSQL.ConversionSettings)
 + [Converting SQL Server partitions to PostgreSQL version 10 partitions](#CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions)
 + [Migration considerations](#CHAP_Source.SQLServer.ToPostgreSQL.MigrationConsiderations)
 + [Using an AWS SCT extension pack to emulate SQL Server Agent in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Agent.md)
 + [Using an AWS SCT extension pack to emulate SQL Server Database Mail in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Mail.md)
 
+## Privileges for PostgreSQL as a target<a name="CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL"></a>
+
+To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
+
+To use the converted public synonyms, change the database default search path to `"$user", public_synonyms, public`\.
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE ROLE user_name LOGIN PASSWORD 'your_password';
+GRANT CREATE ON DATABASE db_name TO user_name;
+ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+
+In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
+
+When you use different users to convert and apply different schemas to your target database, you can get an error message when AWS SCT can't drop a schema\. To avoid this error message, use the `superuser` role\. 
+
+## SQL Server to PostgreSQL conversion settings<a name="CHAP_Source.SQLServer.ToPostgreSQL.ConversionSettings"></a>
+
+To edit SQL Server to PostgreSQL conversion settings, choose **Settings**, and then choose **Conversion settings**\. From the upper list, choose **SQL Server**, and then choose **SQL Server – PostgreSQL**\. AWS SCT displays all available settings for SQL Server to PostgreSQL conversion\.
+
+SQL Server to PostgreSQL conversion settings in AWS SCT include options for the following:
++ To limit the number of comments with action items in the converted code\.
+
+  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+
+  For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
++ To allow to use indexes with the same name in different tables in SQL Server\.
+
+  In PostgreSQL, all index names that you use in the schema, must be unique\. To make sure that AWS SCT generates unique names for all your indexes, select **Generate unique names for indexes**\.
++ To convert SQL Server procedures to PostgreSQL functions\.
+
+  PostgreSQL version 10 and earlier doesn't support procedures\. For customers who aren't familiar with using procedures in PostgreSQL, AWS SCT can convert procedures to functions\. To do so, select **Convert procedures to functions**\.
++ To emulate the output of `EXEC` in a table\.
+
+  Your source SQL Server database can store the output of `EXEC` in a table\. AWS SCT creates temporary tables and an additional procedure to emulate this feature\. To use this emulation, select **Create additional routines for handling open datasets**\.
++ To define the template to use for the schema names in the converted code\. For **Schema name generation template**, choose one of the following options:
+  + **<source\_db>** – Uses the SQL Server database name as a schema name in PostgreSQL\.
+  + **<source\_schema>** – Uses the SQL Server schema name as a schema name in PostgreSQL\.
+  + **<source\_db>\_<schema>** – Uses a combination of the SQL Server database and schema names as a schema name in PostgreSQL\.
++ To keep the letter case of your source object names\.
+
+  To avoid conversion of object names to lower case, select **Avoid casting to lower case for case sensitive operations**\. This option applies only when you turn on case sensitivity option in your target database\.
++ To keep the parameter names from your source database\.
+
+  To add double quotation marks to the names of parameters in the converted code, select **Keep original parameter names**\.
+
 ## Converting SQL Server partitions to PostgreSQL version 10 partitions<a name="CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions"></a>
+
+When you convert a Microsoft SQL Server database to Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\) or Amazon Relational Database Service for PostgreSQL \(Amazon RDS for PostgreSQL\), be aware of the following\.
 
 In SQL Server, you create partitions with partition functions\. When converting from a SQL Server portioned table to a PostgreSQL version 10 partitioned table, be aware of several potential issues:
 + SQL Server allows you to partition a table using a column without a NOT NULL constraint\. In that case, all NULL values go to the leftmost partition\. PostgreSQL doesn’t support NULL values for RANGE partitioning\.
@@ -36,6 +88,7 @@ Some things to consider when migrating a SQL Server schema to PostgreSQL:
   + By using CURSOR, such as with a MERGE with DELETE clause or by using a complex MERGE ON condition statement\.
 + AWS SCT can add database triggers to the object tree when Amazon RDS is the target\.
 + AWS SCT can add server\-level triggers to the object tree when Amazon RDS is the target\.
++ SQL Server automatically creates and manages `deleted` and `inserted` tables\. You can use these temporary, memory\-resident tables to test the effects of certain data modifications and to set conditions for DML trigger actions\. AWS SCT can convert the usage of these tables inside DML trigger statements\.
 + AWS SCT can add linked servers to the object tree when Amazon RDS is the target\.
 + When migrating from Microsoft SQL Server to PostgreSQL, the built\-in SUSER\_SNAME function is converted as follows:
   + SUSER\_SNAME – Returns the login name associated with a security identification number \(SID\)\.

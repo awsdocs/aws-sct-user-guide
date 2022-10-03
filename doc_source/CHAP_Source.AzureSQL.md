@@ -18,6 +18,10 @@ The privileges required for Azure SQL Database as a source are listed following:
 
 Repeat the grant for each database whose schema you are converting\. 
 
+The privileges required for target MySQL and PostgreSQL databases are described in the following sections\.
++ [Privileges for MySQL as a target](CHAP_Source.SQLServer.ToMySQL.md#CHAP_Source.SQLServer.ToMySQL.ConfigureTarget) 
++ [Privileges for PostgreSQL as a target](CHAP_Source.SQLServer.ToPostgreSQL.md#CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL) 
+
 ## Connecting to Azure SQL Database as a source<a name="CHAP_Source.AzureSQL.Connecting"></a>
 
 Use the following procedure to connect to your Azure SQL Database source database with the AWS Schema Conversion Tool\. 

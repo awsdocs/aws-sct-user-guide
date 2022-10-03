@@ -12,3 +12,30 @@ Some things to consider when migrating SQL Server schema and code to Amazon RDS 
   + Database Mail is configured\. 
   + Full Text Search Service is used\. Amazon RDS for SQL Server has a limited full text search, and it does not support semantic search\.
   + Data Quality Service \(DQS\) is installed\. Amazon RDS doesn't support DQS so we recommend that you install SQL Server on an Amazon EC2 instance\.
+
+## Privileges for RDS for SQL Server as a target<a name="CHAP_Source.SQLServer.ToRDSSQLServer.ConfigureTarget"></a>
+
+To migrate to RDS for SQL Server, create a database user and then grant the required privileges for each database\. You can use the following code example\.
+
+```
+CREATE LOGIN user_name WITH PASSWORD 'your_password';
+                
+USE db_name
+CREATE USER user_name FOR LOGIN user_name
+GRANT VIEW DEFINITION TO user_name
+GRANT VIEW DATABASE STATE TO user_name
+GRANT CREATE SCHEMA TO user_name;
+GRANT CREATE TABLE TO user_name;
+GRANT CREATE VIEW TO user_name;
+GRANT CREATE TYPE TO user_name;
+GRANT CREATE DEFAULT TO user_name;
+GRANT CREATE FUNCTION TO user_name;
+GRANT CREATE PROCEDURE TO user_name;
+GRANT CREATE ASSEMBLY TO user_name;
+GRANT CREATE AGGREGATE TO user_name;
+GRANT CREATE FULLTEXT CATALOG TO user_name;
+GRANT CREATE SYNONYM TO user_name;
+GRANT CREATE XML SCHEMA COLLECTION TO user_name;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.

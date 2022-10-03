@@ -2,7 +2,9 @@
 
 For an Oracle to PostgreSQL conversion, you can use AWS Schema Conversion Tool to convert SQL code embedded into your Java applications\. This specific Java application converter understands the application logic\. It collects statements that are located in different application objects, such as functions, parameters, local variables, and so on\. 
 
-Because of this deep analysis, the Java application SQL code converter provides better conversion results compared the generic converter\. 
+Because of this deep analysis, the Java application SQL code converter provides better conversion results compared to the generic converter\.
+
+If your Java application uses the MyBatis framework to interact with databases, then you can use AWS SCT to convert SQL statements embedded into MyBatis XML files and annotations\. To understand the logic of these SQL statements, AWS SCT uses the MyBatis configuration file\. AWS SCT can automatically discover this file in your application folder, or you can enter the path to this file manually\.
 
 ## Creating Java application conversion projects in AWS SCT<a name="CHAP_Converting.App.Java.Create"></a>
 
@@ -18,7 +20,7 @@ You can add multiple application conversion projects in a single AWS SCT project
 
 1. On the **View** menu, choose **Main view**\.
 
-1.  On the **Applications** menu, choose **New Java application**\. 
+1. On the **Applications** menu, choose **New Java application**\. 
 
    The **Creating a Java application conversion project** dialog box appears\.   
 ![\[The new Java application conversion project dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/java-application-new-project.png)
@@ -26,6 +28,8 @@ You can add multiple application conversion projects in a single AWS SCT project
 1. For **Name**, enter a name for your Java application conversion project\. Because each database schema conversion project can have one or more child application conversion projects, choose a name that makes sense if you add multiple projects\. 
 
 1. For **Location**, enter the location of the source code for your application\. 
+
+1. \(Optional\) For **MyBatis configuration file**, enter the path to the MyBatis configuration file\. AWS SCT scans your application folder to discover this file automatically\. If this file isn't located in your application folder, or if you use several configuration files, then enter the path manually\.
 
 1. In the source tree, choose the schema that your application uses\. Make sure that this schema is part of a mapping rule\. AWS SCT highlights the schemas that are part of a mapping rule in bold\. 
 
@@ -58,6 +62,20 @@ After you make changes in your source application code, upload it into the AWS S
 1. Choose **Refresh** and then choose **Yes**\.
 
    AWS SCT uploads your application code from the source files and removes conversion results\. To keep code changes that you made in AWS SCT and the conversion results, create a new Java conversion project\.
+
+If your source Java application uses the MyBatis framework, AWS SCT uses the MyBatis configuration file to parse your SQL code\. After you change this file, upload it into the AWS SCT project\.
+
+**To edit the path to the MyBatis configuration file**
+
+1. Expand the **Java** node under **Applications** in the left panel\.
+
+1. Choose your application, and then choose **Settings**\.
+
+1. Choose **Browse**, and then choose the MyBatis configuration file\.
+
+1. Choose **Apply**\.
+
+1. In the left panel, choose your application, open the context \(right\-click\) menu, and choose **Refresh**\.
 
 **To remove a Java application conversion project**
 
@@ -126,3 +144,5 @@ Use the following procedure to save your converted application code\.
 1. Choose your converted application, and choose **Save**\.
 
 1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.
+
+If your source Java application uses the MyBatis framework, make sure that you update your configuration file to work with your new database\.

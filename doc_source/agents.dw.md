@@ -15,13 +15,14 @@ The following diagram shows the supported scenario\.
 ![\[Extraction agent architecture\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/extraction-agents-art.png)
 
 Data extraction agents are currently supported for the following source data warehouses:
++ Azure SQL Data Warehouse \(Azure Synapse\)
++ BigQuery
 + Greenplum Database \(version 4\.3\)
 + Microsoft SQL Server \(version 2008 and later\)
 + Netezza \(version 7\.0\.3 and later\)
 + Oracle \(version 10 and later\)
 + Teradata \(version 13 and later\)
 + Vertica \(version 7\.2\.2 and later\)
-+ Azure SQL Data Warehouse \(Azure Synapse\)
 
 You can connect to FIPS endpoints for Amazon Redshift if you need to comply with the Federal Information Processing Standard \(FIPS\) security requirements\. FIPS endpoints are available in the following AWS Regions: 
 + US East \(N\. Virginia\) Region \(redshift\-fips\.us\-east\-1\.amazonaws\.com\)
@@ -111,8 +112,7 @@ The AWS Schema Conversion Tool and the extraction agents can communicate through
 
 1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\. 
 
-   Choose the **Security** tab as shown following\.   
-![\[The Security tab on the Global Settings dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/SecuritySettings.png)
+1. Choose **Security**\.
 
 1. Choose **Generate trust and key store**, or choose **Select existing trust store**\. 
 
@@ -121,6 +121,14 @@ The AWS Schema Conversion Tool and the extraction agents can communicate through
    If you choose **Select existing trust store**, you then specify the password and file name for the trust and key stores\. You use these files in later steps\. 
 
 1. After you have specified the trust store and key store, choose **OK** to close the **Global settings** dialog box\. 
+
+### Configuring the environment for data extraction agents<a name="agents.PreReqSettings.Configure"></a>
+
+You can install several data extraction agents on a single host\. However, we recommend that you run one data extraction agent on one host\.
+
+To run your data extraction agent, make sure that you use a host with at least four vCPUs and 32 GB memory\.
+
+Optimal configuration and number of agent hosts depend on the specific situation of each customer\. Make sure that you consider such factors as amount of data to migrate, network bandwidth, time to extract data, and so on\. You can perform a proof of concept \(PoC\) first, and then configure your data extraction agents and hosts according to the results of this PoC\.
 
 ## Installing extraction agents<a name="agents.Installing"></a>
 
@@ -335,7 +343,7 @@ You can create data migration rules and save the filters as part of your project
 
    1. For **table name like**, enter a filter to apply to tables\. In this filter, a `WHERE` clause is evaluated by using a `LIKE` clause\. To choose one table, enter an exact name\. To choose multiple tables, use the “%” character as a wildcard to match any number of characters in the table name\.
 
-   1. For **Where clause**, type a `WHERE` clause to filter data\. 
+   1. For **Where clause**, enter a `WHERE` clause to filter data\. 
 
 1. After you have configured your filter, choose **Save** to save your filter, or **Cancel** to cancel your changes\. 
 
@@ -420,10 +428,9 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
 
    You can choose all tables, but we recommend against that for performance reasons\. We recommend that you create multiple tasks for multiple tables based on the size of the tables in your data warehouse\. 
 
-1. Open the context \(right\-click\) menu for each table, and then choose **Create task**\. The **Create Local task** dialog box opens, as shown following\.   
-![\[Task dialog box\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/TaskDialog.png)
+1. Open the context \(right\-click\) menu for each table, and then choose **Create task**\. The **Create Local task** dialog box opens\.
 
-1. For **Task name**, type a name for the task\. 
+1. For **Task name**, enter a name for the task\.
 
 1. For **Migration mode**, choose one of the following: 
    + **Extract only** – Extract your data, and save the data to your local working folders\. 
@@ -445,7 +452,11 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
    + `DEBUG`
    + `TRACE` – The largest amount of detail\.
 
-1. To assume a role to an IAM user that your data extraction agent uses, choose **Amazon S3 settings**\. For **IAM role**, enter the name of the role to use\. For **Region**, choose the AWS Region for this role\.
+1. To export data from BigQuery, AWS SCT uses the Google Cloud Storage bucket folder\. In this folder, data extraction agents store your source data\.
+
+   To enter the path to your Google Cloud Storage bucket folder, choose **Advanced**\. For **Google CS bucket folder**, enter the bucket name and the folder name\.
+
+1. To assume a role for an IAM user that your data extraction agent uses, choose **Amazon S3 settings**\. For **IAM role**, enter the name of the role to use\. For **Region**, choose the AWS Region for this role\.
 
 1. Choose **Test task** to verify that you can connect to your working folder, Amazon S3 bucket, and Amazon Redshift data warehouse\. The verification depends on the migration mode you chose\. 
 
@@ -521,21 +532,23 @@ The sections following this overview provide a step\-by\-step guide to each of t
 
 The following steps need to occur to migrate data from a local data store to an AWS data store using AWS Snowball Edge\.
 
-1. Create an AWS Snowball Edge job using the AWS Snowball console\. For more information, see [Creating an AWS Snowball Edge Job](https://docs.aws.amazon.com/snowball/latest/developer-guide/create-job-common.html) in the *AWS Snowball Edge Developer Guide*\.
+1. Create an AWS Snowball Edge job using the AWS Snowball console\.
 
 1. Unlock the AWS Snowball Edge device using the local, dedicated Linux machine\.
 
-1. Create a new project in AWS SCT using the registered data extraction agent\.
+1. Create a new project in AWS SCT\.
 
-1. Install the database driver for your source database on the dedicated machine where you installed the data extractor\. 
+1. Install and configure your data extraction agents\.
 
-1. Create and set permissions for the Amazon S3 bucket to use\. 
+1. Create and set permissions for the Amazon S3 bucket to use\.
 
-1. Create **Local & DMS Task** in AWS SCT\.
+1. Import an AWS Snowball job to your AWS SCT project\.
 
-1. Run and monitor the **Local & DMS Task** in AWS SCT\.
+1. Register your data extraction agent in AWS SCT\.
 
-1. Run the AWS SCT task and monitor progress in AWS SCT\.
+1. Create a local task in AWS SCT\.
+
+1. Run and monitor the data migration task in AWS SCT\.
 
 ### Step\-by\-step procedures for migrating data using AWS SCT and AWS Snowball Edge<a name="agents.Snowball.SBS"></a>
 
@@ -549,7 +562,7 @@ Create an AWS Snowball job by following the steps outlined in the section [Creat
 
 Run the commands that unlock and provide credentials to the Snowball Edge device from the machine where you installed the AWS DMS agent\. This way, you can be sure that the AWS DMS agent call connects to the AWS Snowball Edge device\. For more information about unlocking the AWS Snowball Edge device, see [Unlocking the Snowball Edge](https://docs.aws.amazon.com/snowball/latest/developer-guide/unlockdevice.html)\.
 
-For example, the following command lists the Amazon S3 bucket used by the device\. 
+For example, the following command lists the Amazon S3 bucket used by the device\.
 
 ```
 aws s3 ls s3://<bucket-name> --profile <Snowball Edge profile> --endpoint http://<Snowball IP>:8080 --recursive 
@@ -563,144 +576,97 @@ Next, create a new AWS SCT project\.
 
 1. Start the AWS Schema Conversion Tool\. On the **File** menu, choose **New project**\. The **New project** dialog box appears\. 
 
-1.  Enter a name for your project, which is stored locally on your computer\. 
+1.  Enter a name for your project, which is stored locally on your computer\.
 
-1.  Enter the location for your local project file\. 
+1. Enter the location for your local project file\.
 
-1. Choose **OK** to create your AWS SCT project\. 
+1. Choose **OK** to create your AWS SCT project\.
 
-1. Choose **Add source** to add a new source database to your AWS SCT project\. 
+1. Choose **Add source** to add a new source database to your AWS SCT project\.
 
-1. Choose **Add target** to add a new target platform in your AWS SCT project\. 
+1. Choose **Add target** to add a new target platform in your AWS SCT project\.
 
-1. Choose the source database schema in the left panel\. 
+1. Choose the source database schema in the left panel\.
 
-1. In the right panel, specify the target database platform for the selected source schema\. 
+1. In the right panel, specify the target database platform for the selected source schema\.
 
-1. Choose **Create mapping**\. This button becomes active after you choose the source database schema and the target database platform\. 
+1. Choose **Create mapping**\. This button becomes active after you choose the source database schema and the target database platform\.
 
-#### Step 4: Install the source database driver for the AWS DMS agent on the Linux computer<a name="agents.Snowball.SBS.SourceDriver"></a>
+#### Step 4: Install and configure your data extraction agent<a name="agents.Snowball.SBS.SourceDriver"></a>
 
-For the migration to succeed, the AWS DMS agent must be able to connect to the source database\. To make this possible, you install the database driver for your source database\. The required driver varies by database\.
+AWS SCT uses a data extraction agent to migrate data to Amazon Redshift\. The \.zip file that you downloaded to install AWS SCT, includes the extraction agent installer file\. You can install the data extraction agent on Windows, Red Hat Enterprise Linux, or Ubuntu\. For more information, see [Installing extraction agents](#agents.Installing)\.
 
-To restart the AWS DMS agent after database driver installation, change the working directory to `<product_dir>/bin` and use the steps listed following for each source database\.
+To configure your data extraction agent, enter your source and target database engines\. Also, make sure that you downloaded JDBC drivers for your source and target databases on the computer where you run your data extraction agent\. Data extraction agents use these drivers to connect to your source and target databases\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.
 
-```
-cd <product_dir>/bin
-./arep.ctl stop
-./arep.ctl start
-```
-
-**To install on Oracle**  
-Install Oracle Instant Client for Linux \(x86\-64\) version 11\.2\.0\.3\.0 or later\.   
-In addition, if one isn't already included in your system, you need to create a symbolic link in the $ORACLE\_HOME\\lib directory\. This link should be called libclntsh\.so, and should point to a specific version of this file\. For example, on an Oracle 12c client, use the following\.  
-
-```
-lrwxrwxrwx 1 oracle oracle 63 Oct 2 14:16 libclntsh.so ->
-                            /u01/app/oracle/home/lib/libclntsh.so.12.1
-```
-In addition, the LD\_LIBRARY\_PATH environment variable should be appended with the Oracle lib directory and added to the site\_arep\_login\.sh script under the lib folder of the installation\. Add this script if it doesn't exist\.  
-
-```
-vi cat <product dir>/bin/site_arep_login.sh
-```
-
-```
-export ORACLE_HOME=/usr/lib/oracle/12.2/client64; export
-                            LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$ORACLE_HOME/lib
-```
-
-**To install on Microsoft SQL Server **  
-Install the Microsoft ODBC Driver\.  
-Update the site\_arep\_login\.sh with the following code\.  
-
-```
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/microsoft/msodbcsql/lib64/
-```
-**Simba ODBC Driver **  
- Install the Microsoft ODBC Driver\.  
- Edit the simba\.sqlserverodbc\.ini file as follows\.  
-
-```
-DriverManagerEncoding=UTF-16
-ODBCInstLib=libodbcinst.so
-```
-
-**To install on SAP Sybase**  
-The SAP Sybase ASE ODBC 64\-bit client should be installed\.  
-If the installation directory is /opt/sap, update the site\_arep\_login\.sh with the following\.  
-
-```
-export SYBASE_HOME=/opt/sap
-export                          
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$SYBASE_HOME/
-   DataAccess64/ODBC/lib:$SYBASE_HOME/DataAccess/ODBC/
-   lib:$SYBASE_HOME/OCS-16_0/lib:$SYBASE_HOME/OCS-16_0/
-   lib3p64:$SYBASE_HOME/OCS-16_0/lib3p
-```
-The /etc/odbcinst\.ini should include the following entries\.  
-
-```
-[Sybase]
-Driver=/opt/sap/DataAccess64/ODBC/lib/libsybdrvodb.so
-Description=Sybase ODBC driver
-```
-
-**To install on MySQL**  
-Install MySQL Connector/ODBC for Linux, version 5\.2\.6 or later\.   
- Make sure that the /etc/odbcinst\.ini file contains an entry for MySQL, as in the following example\.  
-
-```
-[MySQL ODBC 5.2.6 Unicode Driver]
-Driver = /usr/lib64/libmyodbc5w.so 
-UsageCount = 1
-```
-
-**To install on PostgreSQL**  
-Install postgresql94\-9\.4\.4\-1PGDG\.<OS Version>\.x86\_64\.rpm\. This is the package that contains the psql executable\.  
-For example, postgresql94\-9\.4\.4\-1PGDG\.rhel7\.x86\_64\.rpm is the package required for Red Hat 7\.  
-Install the ODBC driver postgresql94\-odbc\-09\.03\.0400\-1PGDG\.<OS version>\.x86\_64 or above for Linux, where <OS version> is the OS of the agent machine\.  
-For example, postgresql94\-odbc\-09\.03\.0400\-1PGDG\.rhel7\.x86\_64 is the client required for Red Hat 7\.  
-Make sure that the /etc/odbcinst\.ini file contains an entry for PostgreSQL, as in the following example\.  
-
-```
-[PostgreSQL]
-Description = PostgreSQL ODBC driver
-Driver = /usr/pgsql-9.4/lib/psqlodbc.so
-Setup = /usr/pgsql-9.4/lib/psqlodbcw.so
-Debug = 0
-CommLog = 1
-UsageCount = 2
-```
+On Windows, the data extraction agent installer launches the configuration wizard in the command prompt window\. On Linux, run the `sct-extractor-setup.sh` file from the location where you installed the agent\.
 
 #### Step 5: Configure AWS SCT to access the Amazon S3 bucket<a name="agents.Snowball.SBS.ConfigureS3"></a>
 
-For information on configuring an Amazon S3 bucket, see [Working with Amazon S3 buckets](http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingBucket.html) in the Amazon S3 documentation\.
+For information on configuring an Amazon S3 bucket, see [Buckets overview](https://docs.aws.amazon.com/AmazonS3/latest/user-guide/UsingBucket.html) in the *Amazon Simple Storage Service User Guide*\.
 
-#### Step 6: Creating a local & AWS DMS task<a name="agents.Snowball.SBS.CreateLocalRemoteTask"></a>
+#### Step 6: Import an AWS Snowball job to your AWS SCT project<a name="agents.Snowball.SBS.Import"></a>
 
-Next, you create the task that is the end\-to\-end migration task\. The task includes two subtasks\. One subtask migrates data from the source database to the AWS Snowball Edge appliance\. The other subtask takes the data that the appliance loads into an Amazon S3 bucket and migrates it to the target database\.
+To connect your AWS SCT project with your AWS Snowball Edge device, import your AWS Snowball job\.
 
-**To create the end\-to\-end migration task**
+**To import your AWS Snowball job**
 
-1. Start AWS SCT, choose **View**, and then choose **Database Migration View \(Local & DMS\)**\.
+1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\.
 
-1. In the left panel that displays the schema from your source database, choose a schema object to migrate\. Open the context \(right\-click\) menu for the object, and then choose **Create Local & DMS Task**\.
+1. Choose **AWS service profiles**, and then choose **Import job**\.
 
-   You can't migrate individual tables using AWS DMS and Snowball Edge\.
+1. Choose your AWS Snowball job\.
 
-1. Add your task information\.    
-[\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/agents.dw.html)
+1. Enter your **AWS Snowball IP**\. For more information, see [Changing Your IP Address](https://docs.aws.amazon.com/snowball/latest/ug/using-device.html#snowballnetwork) in the *AWS Snowball User Guide*\.
+
+1. Enter your AWS Snowball **Port**\. For more information, see [Ports Required to Use AWS Services on an AWS Snowball Edge Device](https://docs.aws.amazon.com/snowball/latest/developer-guide/port-requirements.html) in the *AWS Snowball Edge Developer Guide*\.
+
+1. Enter your **AWS Snowball access key** and **AWS Snowball secret key**\. For more information, see [Authorization and Access Control in AWS Snowball](https://docs.aws.amazon.com/snowball/latest/ug/auth-access-control.html) in the *AWS Snowball User Guide*\.
+
+1. Choose **Apply**, and then choose **OK**\.
+
+#### Step 7: Register a data extraction agent in AWS SCT<a name="agents.Snowball.SBS.Register"></a>
+
+In this section, you register the data extraction agent in AWS SCT\.
+
+**To register a data extraction agent**
+
+1. On the **View** menu, choose **Data migration view \(other\)**, and then choose **Register**\. 
+
+1. For **Description**, enter a name for your data extraction agent\.
+
+1. For **Host name**, enter the IP address of the computer where you run your data extraction agent\.
+
+1. For **Port**, enter the listening port that you configured\.
+
+1. Choose **Register**\.
+
+#### Step 8: Creating a local task<a name="agents.Snowball.SBS.CreateLocalRemoteTask"></a>
+
+Next, you create the migration task\. The task includes two subtasks\. One subtask migrates data from the source database to the AWS Snowball Edge appliance\. The other subtask takes the data that the appliance loads into an Amazon S3 bucket and migrates it to the target database\.
+
+**To create the migration task**
+
+1. On the **View** menu, and then choose **Data migration view \(other\)**\.
+
+1. In the left panel that displays the schema from your source database, choose a schema object to migrate\. Open the context \(right\-click\) menu for the object, and then choose **Create local task**\.
+
+1. For **Task name**, enter a descriptive name for your data migration task\.
+
+1. For **Migration mode**, choose **Extract, upload, and copy**\.
+
+1. Choose **Amazon S3 settings**\.
+
+1. Select **Use Snowball**\.
+
+1. Enter folders and subfolders in your Amazon S3 bucket where the data extraction agent can store data\.
 
 1. Choose **Create** to create the task\.
 
-#### Step 7: Running and monitoring the AWS SCT task<a name="agents.Snowball.SBS.RunMonitorLocalTask"></a>
+#### Step 9: Running and monitoring the data migration task in AWS SCT<a name="agents.Snowball.SBS.RunMonitorLocalTask"></a>
 
-You can start the Local & DMS Task when all connections to endpoints are successful\. This means all connections for the Local task, which includes connections from the AWS DMS agent to the source database, the staging Amazon S3 bucket, and the AWS Snowball device, as well as the connections for the DMS task, which includes connections from the staging Amazon S3 bucket to the target database on AWS\.
+To start your data migration task, choose **Start**\. Make sure that you established connections to the source database, the Amazon S3 bucket, the AWS Snowball device, as well as the connection to the target database on AWS\.
 
-You can monitor the AWS DMS agent logs by choosing **Show log**\. The log details include agent server \(**Agent log**\) and local running task \(**Task log**\) logs\. Because the endpoint connectivity is done by the server \(since the local task is not running and there are no task logs\), connection issues are listed under the **Agent log** tab\.
-
-![\[Local task completed, waiting for the second task\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/snowball-tasklog.png)
+You can monitor and manage the data migration tasks and their subtasks in the **Tasks** tab\. You can see the data migration progress, as well as pause or restart your data migration tasks\.
 
 ## Data extraction task output<a name="agents.MovingData"></a>
 

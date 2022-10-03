@@ -33,6 +33,54 @@ To convert a data warehouse schema, take the following steps:
 
 1. When you are ready, you can apply the converted schema to your target database\. For more information about saving and applying the converted schema, see [Saving and applying your converted schema in AWS SCT](#CHAP_Converting.DW.SaveAndApply)\. 
 
+## Privileges for Amazon Redshift as a target<a name="CHAP_Converting.DW.ConfigureTarget"></a>
+
+The privileges required for Amazon Redshift as a target are listed following:
++ CREATE ON DATABASE – allows to create new schemas in the database\.
++ GRANT USAGE ON LANGUAGE – allows to create new functions and procedures in the database\.
++ GRANT SELECT ON ALL TABLES IN SCHEMA pg\_catalog – provides the user with system information about the Amazon Redshift cluster\.
++ GRANT SELECT ON pg\_class\_info – provides the user with information about tables distribution style\.
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE USER user_name PASSWORD your_password;
+GRANT CREATE ON DATABASE db_name TO user_name;
+GRANT USAGE ON LANGUAGE plpythonu TO user_name;
+GRANT USAGE ON LANGUAGE plpgsql TO user_name;
+GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO user_name;
+GRANT SELECT ON pg_class_info TO user_name;
+GRANT SELECT ON sys_serverless_usage TO user_name;
+GRANT SELECT ON pg_database_info TO user_name;
+GRANT SELECT ON pg_statistic TO user_name;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+
+You can apply an extension pack on your target Amazon Redshift database\. An extension pack is an add\-on module that emulates source database functions that are required when converting objects to Amazon Redshift\. For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\.
+
+For this operation, AWS SCT needs permission to access the Amazon S3 bucket on your behalf\. To provide this permission, create an AWS Identity and Access Management \(IAM\) user with the following policy\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:ListBucket",
+                "s3:PutObject"
+            ],
+            "Resource": [
+                "arn:aws:s3:::aws-sct-*"
+            ]
+        }
+    ]
+}
+```
+
 ## Choosing optimization strategies and rules for use with AWS SCT<a name="CHAP_Converting.DW.Strategy"></a>
 
 To optimize how the AWS Schema Conversion Tool converts your data warehouse schema, you can choose the strategies and rules you want the tool to use\. After converting your schema, and reviewing the suggested keys, you can adjust your rules or change your strategy to get the results you want\. 
@@ -202,7 +250,7 @@ The left pane contains key suggestions, and includes the confidence rating for e
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
-### Related topics<a name="w26aac21c23c13"></a>
+### Related topics<a name="w26aac21c25c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 

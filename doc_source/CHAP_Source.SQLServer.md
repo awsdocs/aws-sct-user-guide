@@ -42,13 +42,13 @@ EXEC master..sp_addsrvrolemember @loginame = N'<user_name>', @rolename = N'sysad
 
 In the preceding example, replace the `<user_name>` placeholder with the name of the user that you granted with the privileges before\.
 
-To read information about SQL Server Agent, add your user to the SQLAgentUser role\. Run the following command on the `msdb` database\.
+To read information about SQL Server Agent, add your user to the `SQLAgentUser` role\. Run the following command on the `msdb` database\.
 
 ```
 EXEC sp_addrolemember <SQLAgentRole>, <user_name>;
 ```
 
-In the preceding example, replace the *<SQLAgentRole>* placeholder with the name of the SQL Server Agent role\. Then replace the `<user_name>` placeholder with the name of the user that you granted with the privileges before\. For more information, see [Adding a user to the SQLAgentUser role](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.SQLServer.CommonDBATasks.Agent.html#SQLServerAgent.AddUser) in the *Amazon RDS User Guide*\.
+In the preceding example, replace the `<SQLAgentRole>` placeholder with the name of the SQL Server Agent role\. Then replace the `<user_name>` placeholder with the name of the user that you granted with the privileges before\. For more information, see [Adding a user to the SQLAgentUser role](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Appendix.SQLServer.CommonDBATasks.Agent.html#SQLServerAgent.AddUser) in the *Amazon RDS User Guide*\.
 
 To detect log shipping, grant the `SELECT on dbo.log_shipping_primary_databases` privilege on the `msdb` database\.
 

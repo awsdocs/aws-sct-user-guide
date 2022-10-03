@@ -2,6 +2,79 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 666<a name="CHAP_ReleaseNotes.666"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved a parsing error that occurred for `ON` clauses that are inside `JOIN` statements\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Added three new functions to the extension pack to improve conversion of the `CONVERT` function with date and time arguments\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Enhanced the source metadata loader to ensure that AWS SCT loads system database schemas\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Fixed a resolver error that occurred for columns of temporary tables\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Implemented conversion of `BINARY` and `VARBINARY` data types to the `VARBYTE` data type\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Implemented support of the `TIME` data type in the converted code\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `COLLATE` clauses\. Resolved an issue where action item 31141 unexpectedly appears during the conversion of columns with the default database collation\.  | 
+| BigQuery | Amazon Redshift | Implemented conversion of procedures that change input parameters\.  | 
+| Greenplum | Amazon Redshift | Resolved an issue where AWS SCT used a query that isn't compatible with Greenplum 6\.x databases\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved conversion of `EXCEPTION` sections by transferring exception handlers from Db2 for z/OS to PostgreSQL\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved conversion of `OPEN CURSOR` statements\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Implemented conversion of `IIF` functions by using `CASE` expressions\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where procedures with table\-valued parameters were incorrectly converted when the `CREATE PROCEDURE` statement didn't include a `BEGIN...END` block\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where the `SCOPE_IDENTITY` function was incorrectly converted\.  | 
+| Oracle | Amazon RDS for Oracle | Fixed a loader error that occurred with the `SELECT_CATALOG_ROLE` role when using Oracle 10g as a source\.  | 
+| Oracle | Amazon RDS for Oracle | Improved the loader to support Oracle Scheduler jobs\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of `JOIN` statements with `USING` clauses\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved performance of the converted code where the source code includes global variables in `WHERE` clauses\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved SQL code conversion in Java applications by adding support for the MyBatis framework\. For more information, see [Converting SQL code in Java applications](CHAP_Converting.App.Java.md)\.  | 
+| Oracle DW | Amazon Redshift | Implemented conversion of the `PIVOT` and `UNPIVOT` relational operators\.  | 
+| Teradata | Amazon Redshift | Fixed an error where source code that uses JSON objects wasn't converted\.  | 
+| Teradata | Amazon Redshift | Fixed an error where the tables created by a dropped user weren't correctly loaded\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of `INSTR` functions to native Amazon Redshift `STRPOS` functions\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of the `NVP` and `TRANSLATE` functions\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `COALESCE` expressions\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `DECLARE CONDITION` statements\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `EXTRACT` functions with the `SECOND` syntax element\.  | 
+| Teradata | Amazon Redshift | Improved conversion of the `SQLSTATE` and `SQLCODE` variables inside the `LOOP` statements\.  | 
+| Teradata | Amazon Redshift | Improved conversion of unique indexes\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where action item 9996 unexpectedly appears during the conversion of `CURRENT_TIMESTAMP` statements with fractional precision set to 3\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where backslashes were incorrectly converted in string literals\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where converted `EXEC` statements included an incorrect field name in the `ADD CONSTRAINT` statement\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where converted `QUALIFY` subqueries included an incorrect subquery name\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where converted views weren't applied\. Added an explicit cast to a specific data type for NULL values in the converted code\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where date and time functions were incorrectly converted\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where hexadecimal string literals weren't converted\.  | 
+
+## Release notes for AWS SCT Build 665<a name="CHAP_ReleaseNotes.665"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| Azure Synapse Analytics | Amazon Redshift | Implemented conversion of `CONCAT` functions with `VARCHAR` arguments\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `CREATE TABLE` statements that create temporary tables and don't include the schema name\. AWS SCT creates the `dbo` schema to store these temporary tables in the target database\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `DROP TABLE` statements that you run on temporary tables\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `OBJECT_ID` statements with the `BEGIN...END` blocks\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Resolved an error where the AWS SCT couldn't convert stored procedures with block comments\.  | 
+| BigQuery | Amazon Redshift | Implemented conversion of BigQuery data warehouses to Amazon Redshift\. For more information, see [Using BigQuery as a source for AWS SCT](CHAP_Source.BigQuery.md)\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of triggers that handle multiple events and work with `inserted` and `deleted` system tables in SQL Server\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a resolver error that occurred for `inserted` and `deleted` system tables in SQL Server\.  | 
+| Microsoft SQL Server | Babelfish for Aurora PostgreSQL | Implemented support of the new version 2\.1\.0 of the Babelfish features configuration file\. This file defines SQL features that are supported and not supported by specific Babelfish versions\.  | 
+|  Oracle  |  Aurora MySQL MariaDB MySQL  | Resolved an issue where the `varchar2` data type was incorrectly converted\.  | 
+|  Oracle  |  Aurora MySQL Aurora PostgreSQL MariaDB MySQL PostgreSQL  | For Oracle databases version 12c and later, AWS SCT supports the following extended data types: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) AWS SCT increased the maximum supported column length from 8,000 to 32,767 bytes for these data types\.  | 
+|  Oracle  |  Aurora PostgreSQL PostgreSQL  | Resolved a parsing error that occurred for the Oracle Event Processing package\.  | 
+| Teradata | Amazon Redshift | Added an action item 13214 for multiple `RESET WHEN` clauses in a single `SELECT` statement\.  | 
+| Teradata | Amazon Redshift | Added an action item for `SQLSTATE` variables that are located outside of an exception handling block\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of `ACTIVITY_COUNT` variables to `ROW_COUNT`\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of the built\-in geometry `ST_TRANSFORM` function\.  | 
+| Teradata | Amazon Redshift | Improved conversion of delete statements in views without the `WHERE` clause\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `CAST` operators in expressions\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `GROUP BY` clauses\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `INSTR` and `REGEXP_INSTR` built\-in functions\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where lateral column alias references were incorrectly converted\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where column names were incorrectly converted in the `QUALIFY` subquery\.  | 
+| Teradata | Amazon Redshift | Implemented conversion of `.QUIT` commands with the `ERRORCODE` status value keyword\.  | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an issue where action item 9996 unexpectedly appears during the conversion of `CREATE` statements\. | 
+| Teradata BTEQ | Amazon Redshift RSQL | Resolved an issue where action item 9998 unexpectedly appears during the conversion of `END` statements\. | 
+
 ## Release notes for AWS SCT Build 664<a name="CHAP_ReleaseNotes.664"></a>
 
 
@@ -277,7 +350,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Fixed a problem so that action item 7672 doesn't appear during the conversion of Microsoft SQL Server procedures with dynamic SQL\.  | 
 |  Azure SQL Database Microsoft SQL Server  |  Aurora PostgreSQL PostgreSQL  | Improved conversion of table\-valued functions\.  | 
 |  Azure SQL Database Microsoft SQL Server  |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where the `OUT` argument in a stored procedure with the default return value wasn't converted to the `INOUT` argument\.  | 
-| Greenplum Database | Amazon Redshift | Improved optimization strategies by finding the most used tables and columns from the `QueryLog` table\.  | 
+| Greenplum | Amazon Redshift | Improved optimization strategies by finding the most used tables and columns from the `QueryLog` table\.  | 
 | Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Fixed problems with conversion of the following: [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
 | Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of views with unsupported functions\.  | 
 | Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Fixed an issue where unsupported functions as an argument to another function were incorrectly converted\.  | 

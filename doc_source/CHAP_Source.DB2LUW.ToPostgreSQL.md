@@ -16,3 +16,23 @@ AWS SCT can convert Db2 LUW tables to partitioned tables in PostgreSQL 10\. Ther
 + You can create a foreign key constraint from and to a partitioned table in Db2 LUW\. However, PostgreSQL doesn’t support foreign keys references in partitioned tables\. PostgreSQL also doesn’t support foreign key references from a partitioned table to another table\.
 + You can create an index on a partitioned table in Db2 LUW\. However, PostgreSQL requires you to create an index for each partition directly\. Indexes must be removed from the parent table\. The converted index name is in the format <original\_index\_name>\_<original\_partition\_name>\.
 + You must define row triggers on individual partitions, not on the partitioned table\. Triggers must be removed from the parent table\. The converted trigger name is in the format <original\_trigger\_name>\_<original\_partition\_name>\.
+
+## Privileges for PostgreSQL as a target<a name="CHAP_Source.DB2LUW.ToPostgreSQL.ConfigureTarget"></a>
+
+To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
+
+To use the converted public synonyms, change the database default search path to `"$user", public_synonyms, public`\.
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE ROLE user_name LOGIN PASSWORD 'your_password';
+GRANT CREATE ON DATABASE db_name TO user_name;
+ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+
+In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
+
+When you use different users to convert and apply different schemas to your target database, you can get an error message when AWS SCT can't drop a schema\. To avoid this error message, use the `superuser` role\. 

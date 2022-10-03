@@ -25,7 +25,7 @@ For converting large database schemas, for example a database with 3,500 stored 
 
    ```
    1. [JavaOptions]
-   2. -Xmx48960M
+   2. -Xmx40960M
    3. -Xms4096M
    ```
 

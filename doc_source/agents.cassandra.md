@@ -35,6 +35,15 @@ Use the information in the following topics to learn how to migrate data from Ap
 
 Before you begin, you will need to perform several pre\-migration tasks, as described in this section\.
 
+**Topics**
++ [Supported Cassandra versions](#agents.cassandra.prereqs.cassandra-version)
++ [Amazon S3 settings](#agents.cassandra.prereqs.s3)
++ [Amazon EC2 instance for clone data center](#agents.cassandra.prereqs.ec2)
++ [Security settings](#agents.cassandra.prereqs.keystore-and-truststore)
++ [Configure your source OS user](#agents.cassandra.prereqs.source-os-user)
++ [Configure your source database user](#agents.cassandra.prereqs.source-db-user)
++ [Configure your target database user](#agents.cassandra.prereqs.target-db-user)
+
 ### Supported Cassandra versions<a name="agents.cassandra.prereqs.cassandra-version"></a>
 
 AWS SCT supports the following Apache Cassandra versions:
@@ -79,6 +88,303 @@ AWS SCT communicates with the data extraction agent using Secure Sockets Layer \
    If you choose **Select existing Trust and Key Store**, you then specify the password and file name for the trust and key stores\. You use these files in later steps\. 
 
 1. After you have specified the trust store and key store, choose **OK** to close the **Global Settings** dialog box\. 
+
+### Configure your source OS user<a name="agents.cassandra.prereqs.source-os-user"></a>
+
+To access your source database, create an OS user on a Cassandra node that is running on Linux\.
+
+**To create a new OS user**
+
+1. Create a new user called `sct_extractor` and set the home directory for this user\.
+
+   ```
+   sudo useradd -s /bin/bash -m -d /home/sct_extractor sct_extractor
+   ```
+
+1. Add this user to Sudoers\.
+
+   ```
+   sudo bash -c "cat << EOF >> /etc/sudoers.d/cassandra-users
+   sct_extractor ALL=(ALL)     NOPASSWD: ALL
+   EOF"
+   ```
+
+1. Set the password for your user\.
+
+   ```
+   sudo passwd sct_extractor
+   ```
+
+1. Create the authorized keys file\.
+
+   ```
+   sudo touch /home/sct_extractor/.ssh/authorized_keys
+   ```
+
+1. Add your user to the `root` and `cassandra` groups\.
+
+   For package Cassandra installations, use the following command\.
+
+   ```
+   sudo usermod -aG [ec2-user|ubuntu|centos],root,cassandra sct_extractor
+   ```
+
+   If you install Cassandra with the binary tarball file, use the following command\.
+
+   ```
+   sudo usermod -aG sudo usermod -aG [ec2-user|ubuntu|centos],root sct_extractor
+   ```
+
+1. Add the following permissions\.
+
+   ```
+   sudo chown -R sct_extractor:sct_extractor /home/sct_extractor
+   sudo chown -R [ec2-user|ubuntu|centos]:[ec2-user|ubuntu|centos] /home/[ec2-user|ubuntu|centos]
+   sudo chmod 750 -R /home/sct_extractor
+   sudo chmod 750 -R /home/[ec2-user|ubuntu|centos]
+   
+   Where: [ec2-user|ubuntu|centos] - OS user
+   ```
+
+1. Generate an RSA key\.
+
+   ```
+   su - sct_extractor
+   sudo ssh-keygen -a 1000 -b 4096 -C "" -E sha256 -o -t rsa -f /home/sct_extractor/.ssh/id_rsa -N 'cassandra'
+   cat /home/sct_extractor/.ssh/id_rsa.pub >> /home/sct_extractor/.ssh/authorized_keys
+   ```
+
+   Download the generated key\.
+
+### Configure your source database user<a name="agents.cassandra.prereqs.source-db-user"></a>
+
+To migrate data from your source database, configure your Cassandra user\.
+
+**To configure your Cassandra user**
+
+1. Edit the `cassandra.yaml` file in all nodes of your Cassandra cluster and change the properties as shown following\.
+
+   ```
+   authorizer : CassandraAuthorizer
+   authenticator : PasswordAuthenticator
+   ```
+
+1. Restart your Cassandra cluster\.
+
+   ```
+   sudo service cassandra restart
+   ```
+
+1. Start `cqlsh` using the default superuser name and password\.
+
+   ```
+   cqlsh -p cassandra -u cassandra
+   cqlsh> CREATE USER IF NOT EXISTS min_privs WITH PASSWORD 'min_privs' NOSUPERUSER;
+   ```
+
+### Configure your target database user<a name="agents.cassandra.prereqs.target-db-user"></a>
+
+Before you migrate data to your target Amazon DynamoDB database, configure a new IAM user\.
+
+**To configure an IAM user**
+
+1. Create a new IAM user\. For more information, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\.
+
+1. Create an IAM policy that provides access to your Amazon DynamoDB database\. Make sure that your IAM policy includes the following permissions\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "SidTables",
+               "Effect": "Allow",
+               "Action": [
+                   "dynamodb:*"
+               ],
+               "Resource": "arn:aws:dynamodb:*:*:table/*"
+           },
+           {
+               "Sid": "SidIndexes",
+               "Effect": "Allow",
+               "Action": [
+                   "dynamodb:Scan",
+                   "dynamodb:Query"
+               ],
+               "Resource": "arn:aws:dynamodb:*:*:table/*/index/*"
+           },
+           {
+               "Sid": "SidAllResources",
+               "Effect": "Allow",
+               "Action": [
+                   "dynamodb:DescribeLimits",
+                   "dynamodb:DescribeReservedCapacity",
+                   "dynamodb:DescribeReservedCapacityOfferings",
+                   "dynamodb:ListTagsOfResource",
+                   "dynamodb:DescribeTimeToLive"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "SidAll",
+               "Effect": "Allow",
+               "Action": [
+                   "dynamodb:ListTables"
+               ],
+               "Resource": "*"
+           }
+       ]
+   }
+   ```
+
+   Attach this IAM policy to your IAM user\. For more information, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
+
+1. Create an IAM policy that provides access to your Amazon S3 bucket\. Make sure that your IAM policy includes the following permissions\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Sid": "MinPrivsS3",
+               "Effect": "Allow",
+               "Action": [
+                   "s3:PutObject",
+                   "s3:GetObject",
+                   "s3:ListBucket",
+                   "s3:DeleteObject"
+               ],
+               "Resource": "*"
+           }
+       ]
+   }
+   ```
+
+   Attach this IAM policy to your IAM user\.
+
+1. Create an IAM policy that provides access to AWS DMS\. Make sure that your IAM policy includes the following permissions\.
+
+   ```
+   {
+       "Version": "2012-10-17",
+       "Statement": [
+           {
+               "Effect": "Allow",
+               "Action": "dms:*",
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "kms:ListAliases",
+                   "kms:DescribeKey"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "iam:GetRole",
+                   "iam:PassRole",
+                   "iam:CreateRole",
+                   "iam:AttachRolePolicy",
+                   "iam:SimulatePrincipalPolicy",
+                   "iam:GetUser"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "ec2:DescribeVpcs",
+                   "ec2:DescribeInternetGateways",
+                   "ec2:DescribeAvailabilityZones",
+                   "ec2:DescribeSubnets",
+                   "ec2:DescribeSecurityGroups",
+                   "ec2:ModifyNetworkInterfaceAttribute",
+                   "ec2:CreateNetworkInterface",
+                   "ec2:DeleteNetworkInterface"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "cloudwatch:Get*",
+                   "cloudwatch:List*"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Effect": "Allow",
+               "Action": [
+                   "logs:DescribeLogGroups",
+                   "logs:DescribeLogStreams",
+                   "logs:FilterLogEvents",
+                   "logs:GetLogEvents"
+               ],
+               "Resource": "*"
+           },
+           {
+               "Sid": "autoscaling",
+               "Action": [
+                   "application-autoscaling:DeleteScalingPolicy",
+                   "application-autoscaling:DeregisterScalableTarget",
+                   "application-autoscaling:DescribeScalableTargets",
+                   "application-autoscaling:DescribeScalingActivities",
+                   "application-autoscaling:DescribeScalingPolicies",
+                   "application-autoscaling:PutScalingPolicy",
+                   "application-autoscaling:RegisterScalableTarget",
+                   "cloudwatch:DeleteAlarms",
+                   "cloudwatch:DescribeAlarmHistory",
+                   "cloudwatch:DescribeAlarms",
+                   "cloudwatch:DescribeAlarmsForMetric",
+                   "cloudwatch:GetMetricStatistics",
+                   "cloudwatch:ListMetrics",
+                   "cloudwatch:PutMetricAlarm"
+               ],
+               "Effect": "Allow",
+               "Resource": "*"
+           },
+           {
+               "Action": [
+                   "iam:PassRole"
+               ],
+               "Effect": "Allow",
+               "Resource": "*",
+               "Condition": {
+                   "StringLike": {
+                       "iam:PassedToService": [
+                           "application-autoscaling.amazonaws.com"
+                       ]
+                   }
+               }
+           }
+       ]
+   }
+   ```
+
+   Attach this IAM policy to your IAM user\.
+
+1. Create an IAM role that allows AWS DMS to assume and grant access to your target DynamoDB tables\. The minimum set of access permissions is shown in the following IAM policy\.
+
+   ```
+   {
+     "Version": "2012-10-17",
+     "Statement": [
+       {
+         "Sid": "",
+         "Effect": "Allow",
+         "Principal": {
+           "Service": "dms.amazonaws.com"
+         },
+         "Action": "sts:AssumeRole"
+       }
+     ]
+   }
+   ```
+
+   Attach all three IAM policies that you created previously to this IAM role\. To create the AWS DMS endpoint, use this role\.
 
 ## Create a new AWS SCT project<a name="agents.cassandra.new-project"></a>
 

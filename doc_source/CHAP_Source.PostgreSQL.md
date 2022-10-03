@@ -11,6 +11,7 @@ For more information, see the following sections:
 **Topics**
 + [Privileges for PostgreSQL as a source database](#CHAP_Source.PostgreSQL.Permissions)
 + [Connecting to PostgreSQL as a source](#CHAP_Source.PostgreSQL.Connecting)
++ [Privileges for MySQL as a target](#CHAP_Source.PostgreSQL.ConfigureMySQL)
 
 ## Privileges for PostgreSQL as a source database<a name="CHAP_Source.PostgreSQL.Permissions"></a>
 
@@ -49,3 +50,49 @@ Use the following procedure to connect to your PostgreSQL source database with t
 1. Choose **Test Connection** to verify that AWS SCT can connect to your source database\. 
 
 1. Choose **Connect** to connect to your source database\.
+
+## Privileges for MySQL as a target<a name="CHAP_Source.PostgreSQL.ConfigureMySQL"></a>
+
+The privileges required for MySQL as a target are listed following:
++ CREATE ON \*\.\*
++ ALTER ON \*\.\*
++ DROP ON \*\.\*
++ INDEX ON \*\.\*
++ REFERENCES ON \*\.\*
++ SELECT ON \*\.\*
++ CREATE VIEW ON \*\.\*
++ SHOW VIEW ON \*\.\*
++ TRIGGER ON \*\.\*
++ CREATE ROUTINE ON \*\.\*
++ ALTER ROUTINE ON \*\.\*
++ EXECUTE ON \*\.\*
++ INSERT, UPDATE ON AWS\_POSTGRESQL\_EXT\.\*
++ INSERT, UPDATE, DELETE ON AWS\_POSTGRESQL\_EXT\_DATA\.\*
++ CREATE TEMPORARY TABLES ON AWS\_POSTGRESQL\_EXT\_DATA\.\*
+
+You can use the following code example to create a database user and grant the privileges\.
+
+```
+CREATE USER 'user_name' IDENTIFIED BY 'your_password';
+GRANT CREATE ON *.* TO 'user_name';
+GRANT ALTER ON *.* TO 'user_name';
+GRANT DROP ON *.* TO 'user_name';
+GRANT INDEX ON *.* TO 'user_name';
+GRANT REFERENCES ON *.* TO 'user_name';
+GRANT SELECT ON *.* TO 'user_name';
+GRANT CREATE VIEW ON *.* TO 'user_name';
+GRANT SHOW VIEW ON *.* TO 'user_name';
+GRANT TRIGGER ON *.* TO 'user_name';
+GRANT CREATE ROUTINE ON *.* TO 'user_name';
+GRANT ALTER ROUTINE ON *.* TO 'user_name';
+GRANT EXECUTE ON *.* TO 'user_name';
+GRANT INSERT, UPDATE ON AWS_POSTGRESQL_EXT.* TO 'user_name';
+GRANT INSERT, UPDATE, DELETE ON AWS_POSTGRESQL_EXT_DATA.* TO 'user_name';
+GRANT CREATE TEMPORARY TABLES ON AWS_POSTGRESQL_EXT_DATA.* TO 'user_name';
+```
+
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+
+To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+
+To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.

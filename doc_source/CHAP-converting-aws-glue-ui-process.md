@@ -21,6 +21,8 @@ Before you begin, do the following:
 + Collect a list of all the code involved in your ETL process\.
 + Collect a list of all the necessary connection information for each database\.
 
+Also, AWS Glue needs permissions to access other AWS resources on your behalf\. You provide those permissions by using AWS Identity and Access Management \(IAM\)\. Make sure that you created an IAM policy for AWS Glue\. For more information, see [Create an IAM policy for the AWS Glueservice](https://docs.aws.amazon.com/glue/latest/dg/create-service-policy.html) in the *AWS Glue Developer Guide*\.
+
 ## Understanding the AWS Glue Data Catalog<a name="CHAP-converting-aws-glue-data-catalog"></a>
 
 As part of the process of conversion, AWS Glue loads information regarding the source and target databases\. It organizes this information into categories, in a structure called a *tree\.* The structure includes the following:

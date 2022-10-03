@@ -20,7 +20,7 @@ Almost all work you do with AWS SCT starts with the following steps:
 
    If you are converting a data warehouse schema, there are also aspects you need to consider before doing the conversion\. For more information, see [Converting data warehouse schemas to Amazon Redshift using AWS SCT](CHAP_Converting.DW.md)\.
 
-1. Applying the schema conversion to your target\. For more information about applying a source schema conversion, see [Using the AWS SCT user interface](CHAP_UserInterface.md)\.
+1. Applying the schema conversion to your target\. For more information about applying a source schema conversion, see [Applying the converted code](CHAP_UserInterface.md#CHAP_UserInterface.ApplyingConversion)\.
 
 1. You can also use AWS SCT to convert SQL stored procedures and other application code\. For more information, see [Converting application SQL using AWS SCT](CHAP_Converting.App.md)
 

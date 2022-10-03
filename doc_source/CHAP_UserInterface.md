@@ -89,7 +89,9 @@ Use the following procedure to open an existing AWS Schema Conversion Tool proje
 
 1.  Choose the project folder and then choose the Windows Script Component \(\*\.sct\) file\. 
 
- If you open a project saved in AWS SCT version 1\.0\.655 or before, AWS SCT automatically creates mapping rules for all source database schemas to the target database platform\. To add other target database platforms, delete existing mapping rules and then create new mapping rules\. For more information on creating mapping rules, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\. 
+1. AWS SCT opens your project but doesn't automatically connect to your source and target databases\. Choose **Connect to the server** at the top of your database schema trees to connect to your source and target databases\.
+
+If you open a project saved in AWS SCT version 1\.0\.655 or before, AWS SCT automatically creates mapping rules for all source database schemas to the target database platform\. To add other target database platforms, delete existing mapping rules and then create new mapping rules\. For more information on creating mapping rules, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\. 
 
 ## Adding database servers to an AWS SCT project<a name="CHAP_UserInterface.AddServers"></a>
 
@@ -203,7 +205,7 @@ When you filter the schema that appears in the tree, you don't change the object
 
 ### Importing a file list for the tree filter<a name="CHAP_UserInterface.UI.TreeFilters.ImportingFileList"></a>
 
-You can import a comma separated value \(CSV\) file or a JSON file that contains names or values that you want the tree filter to use\. Open an existing AWS SCT project, connect to the database to apply the tree filter to, and then choose the filter icon\.
+You can import a comma\-separated value \(CSV\) file with semicolon separators or a JSON file that contains names or values that you want the tree filter to use\. Open an existing AWS SCT project, connect to the database to apply the tree filter to, and then choose the filter icon\.
 
  To download an example of the file, choose **Download template**\. Enter the file name and choose **Save**\. 
 
@@ -211,7 +213,7 @@ You can import a comma separated value \(CSV\) file or a JSON file that contains
 
 To import a file list for the tree filter, choose **Import**\. Choose a file to import, and then choose **Open**\. Choose **Apply**, and then choose **Close**\.
 
-CSV files have the following format:
+CSV files use semicolon as the separator and have the following format:
 + `object_type` is the type of object that you want to find\.
 + `database_name` is the name of database where this object exists\.
 + `schema_name` is the name of schema where this object exists\.
@@ -320,6 +322,8 @@ The following procedure overwrites the existing target schema\. Be careful not t
 
 **To apply the converted database schema to your target database instance**
 
+1. Choose **Connect to the server** at the top of the right panel of your project to connect to your target database\. If you're connected to your target database, then skip this step\.
+
 1. Choose the schema element in the right panel of your project that displays the planned schema for your target DB instance\. 
 
 1. Open the context \(right\-click\) menu for the schema element, and then choose **Apply to database**\.   
@@ -343,12 +347,9 @@ Use the following procedure to store AWS credentials globally\.
 
 1. Start the AWS Schema Conversion Tool\.
 
-1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\. 
+1. Open the **Settings** menu, and then choose **Global settings**\. The **Global settings** dialog box appears\.
 
-   Choose **AWS service profiles**, as shown following\.   
-![\[The Global settings dialog box with the AWS Service Profiles tab selected\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/AWSServiceProfileSettings.png)
-
-1. Choose **Add a new AWS service profile**\. 
+1. Choose **AWS service profiles**, and then choose **Add a new AWS service profile**\. 
 
 1. Enter your AWS information as follows\.     
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_UserInterface.html)

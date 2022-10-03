@@ -5,6 +5,7 @@ AWS SCT can convert schemas for the following source data warehouses to a suppor
 **Topics**
 + [Using Amazon Redshift as a source for AWS SCT](CHAP_Source.Redshift.md)
 + [Using Azure Synapse Analytics as a source for AWS SCT](CHAP_Source.AzureSynapse.md)
++ [Using BigQuery as a source for AWS SCT](CHAP_Source.BigQuery.md)
 + [Using Greenplum Database as a source for AWS SCT](CHAP_Source.Greenplum.md)
 + [Using Netezza as a source for AWS SCT](CHAP_Source.Netezza.md)
 + [Using Oracle Data Warehouse as a source for AWS SCT](CHAP_Source.OracleDW.md)
