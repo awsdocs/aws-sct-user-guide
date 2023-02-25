@@ -12,8 +12,10 @@ For more information, see the following sections:
 **Topics**
 + [Privileges for SAP ASE as a source database](#CHAP_Source.SAP.Permissions)
 + [Connecting to SAP ASE \(Sybase\) as a source](#CHAP_Source.SAP.Connecting)
-+ [Privileges for MySQL as a target](#CHAP_Source.SAP.ConfigureMySQL)
-+ [Privileges for PostgreSQL as a target](#CHAP_Source.SAP.ConfigurePostgreSQL)
++ [Privileges for MySQL as a target database](#CHAP_Source.SAP.ConfigureMySQL)
++ [SAP ASE to MySQL conversion settings](#CHAP_Source.SAP.MySQLConversionSettings)
++ [Privileges for PostgreSQL as a target database](#CHAP_Source.SAP.ConfigurePostgreSQL)
++ [SAP ASE to PostgreSQL conversion settings](#CHAP_Source.SAP.PostgreSQLConversionSettings)
 
 ## Privileges for SAP ASE as a source database<a name="CHAP_Source.SAP.Permissions"></a>
 
@@ -73,7 +75,7 @@ Use the following procedure to connect to your SAP ASE source database with the 
      1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
 
      For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
-   + To enter the SAP ASE source database connection information manually, use the instructions in the following table\.  
+   + To enter the SAP ASE source database connection information manually, use the following instructions:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.SAP.html)
 
@@ -81,7 +83,7 @@ Use the following procedure to connect to your SAP ASE source database with the 
 
 1. Choose **Connect** to connect to your source database\.
 
-## Privileges for MySQL as a target<a name="CHAP_Source.SAP.ConfigureMySQL"></a>
+## Privileges for MySQL as a target database<a name="CHAP_Source.SAP.ConfigureMySQL"></a>
 
 The privileges required for MySQL as a target are listed following:
 + CREATE ON \*\.\*
@@ -119,13 +121,27 @@ GRANT INSERT, UPDATE ON AWS_SAPASE_EXT.* TO 'user_name';
 GRANT CREATE TEMPORARY TABLES ON AWS_SAPASE_EXT.* TO 'user_name';
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
 To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 
 To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 
-## Privileges for PostgreSQL as a target<a name="CHAP_Source.SAP.ConfigurePostgreSQL"></a>
+## SAP ASE to MySQL conversion settings<a name="CHAP_Source.SAP.MySQLConversionSettings"></a>
+
+To edit SAP ASE to MySQL conversion settings, choose **Settings**, and then choose **Conversion settings**\. From the upper list, choose **SAP ASE**, and then choose **SAP ASE – MySQL** or **SAP ASE – Amazon Aurora \(MySQL compatible\)**\. AWS SCT displays all available settings for SAP ASE to PostgreSQL conversion\.
+
+SAP ASE to MySQL conversion settings in AWS SCT include options for the following:
++ To limit the number of comments with action items in the converted code\.
+
+  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+
+  For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
++ To use the exact names of the source database objects in the converted code\.
+
+  By default, AWS SCT converts the names of database objects, variables, and parameters to lowercase\. To keep the original case for these names, select **Treat source database object names as case sensitive**\. Choose this option if you use case\-sensitive object names in your source SAP ASE database server\.
+
+## Privileges for PostgreSQL as a target database<a name="CHAP_Source.SAP.ConfigurePostgreSQL"></a>
 
 To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
 
@@ -139,8 +155,31 @@ GRANT CREATE ON DATABASE db_name TO user_name;
 ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.
 
 In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
 
 When you use different users to convert and apply different schemas to your target database, you can get an error message when AWS SCT can't drop a schema\. To avoid this error message, use the `superuser` role\. 
+
+## SAP ASE to PostgreSQL conversion settings<a name="CHAP_Source.SAP.PostgreSQLConversionSettings"></a>
+
+To edit SAP ASE to PostgreSQL conversion settings, choose **Settings**, and then choose **Conversion settings**\. From the upper list, choose **SAP ASE**, and then choose **SAP ASE – PostgreSQL** or **SAP ASE – Amazon Aurora \(PostgreSQL compatible\)**\. AWS SCT displays all available settings for SAP ASE to PostgreSQL conversion\.
+
+SAP ASE to PostgreSQL conversion settings in AWS SCT include options for the following:
++ To limit the number of comments with action items in the converted code\.
+
+  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+
+  For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
++ To define the template to use for the schema names in the converted code\. For **Schema name generation template**, choose one of the following options:
+  + **<source\_db>** – Uses the SAP ASE database name as a schema name in PostgreSQL\.
+  + **<source\_schema>** – Uses the SAP ASE schema name as a schema name in PostgreSQL\.
+  + **<source\_db>\_<schema>** – Uses a combination of the SAP ASE database and schema names as a schema name in PostgreSQL\.
++ To use the exact names of the source database objects in the converted code\.
+
+  By default, AWS SCT converts the names of database objects, variables, and parameters to lowercase\. To keep the original case for these names, select **Treat source database object names as case sensitive**\. Choose this option if you use case\-sensitive object names in your source SAP ASE database server\.
+
+  For case\-sensitive operations, AWS SCT can avoid the conversion of database object names to lowercase\. To do so, select **Avoid casting to lowercase for case sensitive operations**\.
++ To allow the use of indexes with the same name in different tables in SAP ASE\.
+
+  In PostgreSQL, all index names that you use in the schema must be unique\. To make sure that AWS SCT generates unique names for all your indexes, select **Generate unique names for indexes**\.

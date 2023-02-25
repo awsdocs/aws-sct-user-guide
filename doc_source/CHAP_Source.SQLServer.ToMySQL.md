@@ -3,11 +3,11 @@
 To emulate Microsoft SQL Server database functions in your converted MySQL code, use the SQL Server to MySQL extension pack in AWS SCT\. For more information about extension packs, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
 
 **Topics**
-+ [Privileges for MySQL as a target](#CHAP_Source.SQLServer.ToMySQL.ConfigureTarget)
++ [Privileges for MySQL as a target database](#CHAP_Source.SQLServer.ToMySQL.ConfigureTarget)
 + [SQL Server to MySQL conversion settings](#CHAP_Source.SQLServer.ToMySQL.ConversionSettings)
 + [Migration considerations](#CHAP_Source.SQLServer.ToMySQL.MigrationConsiderations)
 
-## Privileges for MySQL as a target<a name="CHAP_Source.SQLServer.ToMySQL.ConfigureTarget"></a>
+## Privileges for MySQL as a target database<a name="CHAP_Source.SQLServer.ToMySQL.ConfigureTarget"></a>
 
 The privileges required for MySQL as a target are listed following:
 + CREATE ON \*\.\*
@@ -48,7 +48,7 @@ GRANT INSERT, UPDATE, DELETE ON AWS_SQLSERVER_EXT_DATA.* TO 'user_name';
 GRANT CREATE TEMPORARY TABLES ON AWS_SQLSERVER_EXT_DATA.* TO 'user_name';
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
 To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 

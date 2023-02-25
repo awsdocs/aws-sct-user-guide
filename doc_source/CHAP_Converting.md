@@ -51,6 +51,7 @@ You can create migration rules that perform the following tasks:
 + Add, remove, or replace a suffix
 + Change column collation
 + Change data type
++ Change the length of `char`, `varchar`, `nvarchar`, and `string` data types
 + Move objects
 + Rename objects
 
@@ -121,7 +122,7 @@ You can choose schema items from your source database and then convert the schem
 
 ### Converting schema<a name="CHAP_Converting.Convert.Procedure"></a>
 
-To convert schema from your source database, choose a schema object to convert from the left panel of your project\. Open the context \(right\-click\) menu for the object, and then choose **Convert schema**, as shown following\. 
+To convert a schema from your source database, select the check box for the name of schema to convert\. Next, choose this schema from the left panel of your project\. AWS SCT highlights the schema name in blue\. Open the context \(right\-click\) menu for the schema, and choose **Convert schema**, as shown following\.
 
 ![\[Convert schema\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/transform_schema.png)
 

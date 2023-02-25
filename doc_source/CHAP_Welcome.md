@@ -47,6 +47,31 @@ AWS SCT supports the following data NoSQL database conversions\.
 | --- | --- | 
 |  Apache Cassandra \(versions 2\.1\.x, 2\.2\.16, and 3\.11\.x\)  |  Amazon DynamoDB  For more information, see [Using Apache Cassandra as a source](CHAP_Source.Cassandra.md)\.   | 
 
+AWS SCT supports conversions of the following extract, transform, and load \(ETL\) processes\. For more information, see [Converting ETL processes](CHAP-converting-etl.md)\. 
+
+
+****  
+
+| Source | Target | 
+| --- | --- | 
+| Informatica ETL scripts | Informatica | 
+| Microsoft SQL Server Integration Services \(SSIS\) ETL packages | AWS Glue or AWS Glue Studio | 
+| Shell scripts with embedded commands from Teradata Basic Teradata Query \(BTEQ\)  | Amazon Redshift RSQL | 
+| Teradata BTEQ ETL scripts | AWS Glue or Amazon Redshift RSQL | 
+| Teradata FastExport job scripts | Amazon Redshift RSQL | 
+| Teradata FastLoad job scripts | Amazon Redshift RSQL | 
+| Teradata MultiLoad job scripts | Amazon Redshift RSQL | 
+
+AWS SCT supports the following big data framework migrations\. For more information, see [Using Apache Hadoop as a source](CHAP_Source.Hadoop.md)\. 
+
+
+****  
+
+| Source | Target | 
+| --- | --- | 
+|  Apache Hive \(version 0\.13\.0 and later\)  |  Hive on Amazon EMR  | 
+|  Apache HDFS  |  Amazon S3 or HDFS on Amazon EMR  | 
+
 ## Schema conversion overview<a name="CHAP_Welcome.Overview"></a>
 
 AWS SCT provides a project\-based user interface to automatically convert the database schema of your source database into a format compatible with your target Amazon RDS instance\. If schema from your source database can't be converted automatically, AWS SCT provides guidance on how you can create equivalent schema in your target Amazon RDS database\. 

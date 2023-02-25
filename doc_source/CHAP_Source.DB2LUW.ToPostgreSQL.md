@@ -31,7 +31,7 @@ GRANT CREATE ON DATABASE db_name TO user_name;
 ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.
 
 In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
 

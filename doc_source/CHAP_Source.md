@@ -1,6 +1,6 @@
 # Sources for AWS SCT<a name="CHAP_Source"></a>
 
-AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following source databases and data warehouses to a target database or data warehouse\. For information about permissions, connections, and what AWS SCT can convert for use with the target database or data warehouse, see details in the topics listed following\.
+AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following source databases and data warehouses to a target database or data warehouse\. For information about permissions, connections, and what AWS SCT can convert for use with the target database or data warehouse, see the details in the following topics\.
 
 **Encryption information**  
 [Encrypting Amazon RDS connections](CHAP_Source.Encrypt.RDS.md)
@@ -23,7 +23,10 @@ AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following so
 + [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)
 + [Using Netezza as a source](CHAP_Source.Netezza.md)
 + [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)
-+ [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)
 + [Using Snowflake as a source](CHAP_Source.Snowflake.md)
++ [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)
 + [Using Teradata as a source](CHAP_Source.Teradata.md)
 + [Using Vertica as a source](CHAP_Source.Vertica.md)
+
+**Big data sources**
++ [Using Apache Hadoop as a source](CHAP_Source.Hadoop.md)

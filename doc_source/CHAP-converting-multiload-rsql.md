@@ -6,6 +6,14 @@ A *Teradata MultiLoad job script* is a set of commands for batch maintenance of 
 
 AWS SCT converts Teradata MultiLoad commands and SQL statements to a format compatible with Amazon Redshift RSQL\. After you migrate the Teradata database to Amazon Redshift, use these converted scripts to manage data in your Amazon Redshift database\.
 
+**Topics**
++ [Adding MultiLoad job scripts to your AWS SCT project](#CHAP-converting-multiload-rsql-create)
++ [Configuring substitution variables in Teradata MultiLoad job scripts with AWS SCT](#CHAP-converting-multiload-rsql-variables)
++ [Converting Teradata MultiLoad job scripts with AWS SCT](#CHAP-converting-multiload-rsql-convert)
++ [Managing Teradata MultiLoad job scripts with AWS SCT](#CHAP-converting-multiload-rsql-manage)
++ [Creating an assessment report for a Teradata MultiLoad job script conversion with AWS SCT](#CHAP-converting-multiload-rsql-assessment)
++ [Editing and saving your converted Teradata MultiLoad job scripts with AWS SCT](#CHAP-converting-multiload-rsql-save)
+
 ## Adding MultiLoad job scripts to your AWS SCT project<a name="CHAP-converting-multiload-rsql-create"></a>
 
 You can add multiple scripts to a single AWS SCT project\.

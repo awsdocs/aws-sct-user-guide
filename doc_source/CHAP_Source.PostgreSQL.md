@@ -11,7 +11,7 @@ For more information, see the following sections:
 **Topics**
 + [Privileges for PostgreSQL as a source database](#CHAP_Source.PostgreSQL.Permissions)
 + [Connecting to PostgreSQL as a source](#CHAP_Source.PostgreSQL.Connecting)
-+ [Privileges for MySQL as a target](#CHAP_Source.PostgreSQL.ConfigureMySQL)
++ [Privileges for MySQL as a target database](#CHAP_Source.PostgreSQL.ConfigureMySQL)
 
 ## Privileges for PostgreSQL as a source database<a name="CHAP_Source.PostgreSQL.Permissions"></a>
 
@@ -43,7 +43,7 @@ Use the following procedure to connect to your PostgreSQL source database with t
      1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
 
      For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
-   + To enter the PostgreSQL source database connection information manually, use the instructions in the following table\.  
+   + To enter the PostgreSQL source database connection information manually, use the following instructions:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.PostgreSQL.html)
 
@@ -51,9 +51,9 @@ Use the following procedure to connect to your PostgreSQL source database with t
 
 1. Choose **Connect** to connect to your source database\.
 
-## Privileges for MySQL as a target<a name="CHAP_Source.PostgreSQL.ConfigureMySQL"></a>
+## Privileges for MySQL as a target database<a name="CHAP_Source.PostgreSQL.ConfigureMySQL"></a>
 
-The privileges required for MySQL as a target are listed following:
+The privileges required for MySQL as a target when you migrate from PostgreSQL are listed following:
 + CREATE ON \*\.\*
 + ALTER ON \*\.\*
 + DROP ON \*\.\*
@@ -91,7 +91,7 @@ GRANT INSERT, UPDATE, DELETE ON AWS_POSTGRESQL_EXT_DATA.* TO 'user_name';
 GRANT CREATE TEMPORARY TABLES ON AWS_POSTGRESQL_EXT_DATA.* TO 'user_name';
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
 To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 

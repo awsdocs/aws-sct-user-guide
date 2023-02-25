@@ -10,10 +10,11 @@ You can use AWS SCT to create a multiserver assessment report for the following 
 | Source database | Target database | 
 | --- | --- | 
 |  Amazon Redshift  |  Amazon Redshift  | 
+|  Azure SQL Database  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
+|  Azure Synapse Analytics  |  Amazon Redshift  | 
 |  Greenplum  |  Amazon Redshift  | 
 |  IBM Db2 for z/OS  |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MySQL, PostgreSQL  | 
 |  IBM Db2 LUW  |  Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL  | 
-|  Microsoft Azure SQL  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
 |  Microsoft SQL Server  |  Aurora MySQL, Aurora PostgreSQL, Amazon Redshift, Babelfish for Aurora PostgreSQL, MariaDB, Microsoft SQL Server, MySQL, PostgreSQL  | 
 |  MySQL  |  Aurora PostgreSQL, MySQL, PostgreSQL  | 
 |  Netezza  |  Amazon Redshift  | 
@@ -72,12 +73,12 @@ Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MS
 HR,,,192.0.2.0,1433,,employees,MSSQL,employees.%,true,,,,,,,AURORA_POSTGRESQL
 Customers,,secret-name,,,,,MYSQL,customers,,,,,,,,AURORA_POSTGRESQL
 Analytics,,,198.51.100.0,8195,,STATISTICS,DB2LUW,BI_REPORTS,,user,password,,,,,POSTGRESQL
-Products,,,203.0.113.0,8194,,products_db,TERADATA,new_products,,user,password,,,,,REDSHIFT
+Products,,,203.0.113.0,8194,,,TERADATA,new_products,,user,password,,,,,REDSHIFT
 ```
 
-The example preceding uses a semicolon to separate the two schema names for the `Sales` database\. It also uses a semicolon to separate the two target database migration platforms for the `Sales` database\.
+The preceding example uses a semicolon to separate the two schema names for the `Sales` database\. It also uses a semicolon to separate the two target database migration platforms for the `Sales` database\.
 
-Also, the example preceding uses AWS Secrets Manager to connect to the `Customers` database and Windows Authentication to connect to the `HR` database\.
+Also, the preceding example uses AWS Secrets Manager to connect to the `Customers` database and Windows Authentication to connect to the `HR` database\.
 
 You can create a new CSV file or download a template for a CSV file from AWS SCT and fill in the required information\. Make sure that the first row of your CSV file includes the same column names as shown in the preceding example\.
 
@@ -93,12 +94,15 @@ Make sure that your CSV file includes the following values, provided by the temp
 + **Name** – The text label that helps identify your database\. AWS SCT displays this text label in the assessment report\.
 + **Description** – An optional value, where you can provide additional information about the database\.
 + **Secret Manager Key** – The name of the secret that stores your database credentials in the AWS Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in AWS SCT\. For more information, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\. 
+**Important**  
+AWS SCT ignores the **Secret Manager Key** parameter if you include **Server IP**, **Port**, **Login**, and **Password** parameters in the input file\.
 + **Server IP** – The Domain Name Service \(DNS\) name or IP address of your source database server\. 
 + **Port** – The port used to connect to your source database server\.
 + **Service Name** – If you use a service name to connect to your Oracle database, the name of the Oracle service to connect to\. 
 + **Database name** – The database name\. For Oracle databases, use the Oracle System ID \(SID\)\.
 + **Source Engine** – The type of your source database\. Use one of the following values:
-  + **AZURE\_MSSQL** for a Microsoft Azure SQL database\.
+  + **AZURE\_MSSQL** for an Azure SQL Database\.
+  + **AZURE\_SYNAPSE** for an Azure Synapse Analytics database\.
   + **DB2ZOS** for an IBM Db2 for z/OS database\.
   + **DB2LUW** for an IBM Db2 LUW database\.
   + **GREENPLUM** for a Greenplum database\.
@@ -114,7 +118,7 @@ Make sure that your CSV file includes the following values, provided by the temp
   + **VERTICA** for a Vertica database\.
 + **Schema Names** – The names of the database schemas to include in the assessment report\.
 
-  For Microsoft Azure SQL, Microsoft SQL Server, Netezza, SAP ASE, and Snowflake, use the following format of the schema name:
+  For Azure SQL Database, Azure Synapse Analytics, Netezza, SAP ASE, Snowflake, and SQL Server, use the following format of the schema name:
 
   `db_name.schema_name`
 
@@ -128,7 +132,7 @@ Make sure that your CSV file includes the following values, provided by the temp
 
   The database and schema names are case\-sensitive\.
 
-  Use the percent \(`%`\) as a wildcard to replace any number of any symbols in the database or schema name\. The example preceding uses the percent \(`%`\) as a wildcard to include all schemas from the `employees` database in the assessment report\.
+  Use the percent \(`%`\) as a wildcard to replace any number of any symbols in the database or schema name\. The preceding example uses the percent \(`%`\) as a wildcard to include all schemas from the `employees` database in the assessment report\.
 + **Use Windows Authentication** – If you use Windows Authentication to connect to your Microsoft SQL Server database, enter **true**\. For more information, see [Using Windows Authentication when using Microsoft SQL Server as a source](CHAP_Source.SQLServer.md#CHAP_Source.SQLServer.Permissions.WinAuth)\. 
 + **Login** – The user name to connect to your source database server\.
 + **Password** – The password to connect to your source database server\.

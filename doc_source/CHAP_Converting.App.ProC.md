@@ -33,40 +33,6 @@ You can add multiple application conversion projects in a single AWS SCT project
 
 1. Find your Pro\*C application conversion project in the **Applications** node in the left panel\.
 
-## Managing Pro\*C application conversion projects in AWS SCT<a name="CHAP_Converting.App.ProC.Manage"></a>
-
-You can add multiple Pro\*C application conversion projects, update the application code in the AWS SCT project, or remove a Pro\*C conversion project from your AWS SCT project\.
-
-**To add an additional Pro\*C application conversion project**
-
-1. Expand the **Applications** node in the left panel\.
-
-1. Choose the **Pro\*C** node, and open the context \(right\-click\) menu\.
-
-1. Choose **New application**\.
-
-1. Enter the information that is required to create a new Pro\*C application conversion project\. For more information, see [Creating Pro\*C application conversion projects](#CHAP_Converting.App.ProC.Create)\.
-
-After you make changes in your source application code, upload it into the AWS SCT project\.
-
-**To upload the updated application code**
-
-1. Expand the **Pro\*C** node under **Applications** in the left panel\.
-
-1. Choose the application to update, and open the context \(right\-click\) menu\.
-
-1. Choose **Refresh** and then choose **Yes**\.
-
-   AWS SCT uploads your application code from the source files and removes conversion results\. To keep code changes that you made in AWS SCT and the conversion results, create a new Pro\*C conversion project\.
-
-**To remove a Pro\*C application conversion project**
-
-1. Expand the **Pro\*C** node under **Applications** in the left panel\.
-
-1. Choose the application to remove, and open the context \(right\-click\) menu\.
-
-1. Choose **Delete** and then choose **OK**\.
-
 ## Converting your Pro\*C application SQL code in AWS SCT<a name="CHAP_Converting.App.ProC.Convert"></a>
 
 After you add your Pro\*C application to the AWS SCT project, convert SQL code from this application to a format compatible with your target database platform\. Use the following procedure to analyze and convert the SQL code embedded in your Pro\*C application in the AWS Schema Conversion Tool\. 
@@ -95,37 +61,6 @@ After you add your Pro\*C application to the AWS SCT project, convert SQL code f
 ![\[SQL code to analyze\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/proc-applications-project-analyze.png)
 
 1. Save your converted application code\. For more information, see [Editing and saving your converted application code](#CHAP_Converting.App.ProC.Save)\.
-
-## Creating a Pro\*C application conversion assessment report in AWS SCT<a name="CHAP_Converting.App.ProC.AssessmentReport"></a>
-
-The *Pro\*C application conversion assessment report* provides information about converting the SQL code embedded in your Pro\*C application to a format compatible with your target database\. The assessment report provides conversion details for all SQL execution points and all source code files\. The assessment report also includes action items for SQL code that AWS SCT can't convert\. 
-
-Use the following procedure to create a Pro\*C application conversion assessment report\.
-
-**To create a Pro\*C application conversion assessment report**
-
-1. Expand the **Pro\*C** node under **Applications** in the left panel\.
-
-1. Choose the application to convert, and open the context \(right\-click\) menu\.
-
-1. Choose **Convert**\.
-
-1. On the **View** menu, choose **Assessment report view**\.
-
-1. Review the **Summary** tab\.
-
-   The **Summary** tab, shown following, displays the executive summary information from the Pro\*C application assessment report\. It shows conversion results for all SQL execution points and all source code files\.   
-![\[Pro*C Application Assessment Report summary tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/proc-applications-summary.png)
-
-1. Choose **Save statements to CSV** to save the extracted SQL code from your Pro\*C application as a comma\-separated values \(CSV\) file\.
-
-1. \(Optional\) Save a local copy of the report as either a PDF file or a comma\-separated values \(CSV\) file:
-   + Choose **Save to PDF** at upper right to save the report as a PDF file\.
-
-      The PDF file contains the executive summary, action items, and recommendations for application conversion\.
-   + Choose **Save to CSV **at upper right to save the report as a CSV file\.
-
-     The CSV file contains action items, recommended actions, and an estimated complexity of manual effort required to convert the SQL code\.
 
 ## Editing and saving your converted application code with AWS SCT<a name="CHAP_Converting.App.ProC.Save"></a>
 
@@ -162,3 +97,68 @@ AWS SCT breaks the converted SQL statements into parts and places them into the 
 1. Choose your converted application, and choose **Save**\.
 
 1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.
+
+## Managing Pro\*C application conversion projects in AWS SCT<a name="CHAP_Converting.App.ProC.Manage"></a>
+
+You can add multiple Pro\*C application conversion projects, update the application code in the AWS SCT project, or remove a Pro\*C conversion project from your AWS SCT project\.
+
+**To add an additional Pro\*C application conversion project**
+
+1. Expand the **Applications** node in the left panel\.
+
+1. Choose the **Pro\*C** node, and open the context \(right\-click\) menu\.
+
+1. Choose **New application**\.
+
+1. Enter the information that is required to create a new Pro\*C application conversion project\. For more information, see [Creating Pro\*C application conversion projects](#CHAP_Converting.App.ProC.Create)\.
+
+After you make changes in your source application code, upload it into the AWS SCT project\.
+
+**To upload the updated application code**
+
+1. Expand the **Pro\*C** node under **Applications** in the left panel\.
+
+1. Choose the application to update, and open the context \(right\-click\) menu\.
+
+1. Choose **Refresh** and then choose **Yes**\.
+
+   AWS SCT uploads your application code from the source files and removes conversion results\. To keep code changes that you made in AWS SCT and the conversion results, create a new Pro\*C conversion project\.
+
+**To remove a Pro\*C application conversion project**
+
+1. Expand the **Pro\*C** node under **Applications** in the left panel\.
+
+1. Choose the application to remove, and open the context \(right\-click\) menu\.
+
+1. Choose **Delete** and then choose **OK**\.
+
+## Creating a Pro\*C application conversion assessment report in AWS SCT<a name="CHAP_Converting.App.ProC.AssessmentReport"></a>
+
+The *Pro\*C application conversion assessment report* provides information about converting the SQL code embedded in your Pro\*C application to a format compatible with your target database\. The assessment report provides conversion details for all SQL execution points and all source code files\. The assessment report also includes action items for SQL code that AWS SCT can't convert\. 
+
+Use the following procedure to create a Pro\*C application conversion assessment report\.
+
+**To create a Pro\*C application conversion assessment report**
+
+1. Expand the **Pro\*C** node under **Applications** in the left panel\.
+
+1. Choose the application to convert, and open the context \(right\-click\) menu\.
+
+1. Choose **Convert**\.
+
+1. On the **View** menu, choose **Assessment report view**\.
+
+1. Review the **Summary** tab\.
+
+   The **Summary** tab, shown following, displays the executive summary information from the Pro\*C application assessment report\. It shows conversion results for all SQL execution points and all source code files\.   
+![\[Pro*C Application Assessment Report summary tab\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/proc-applications-summary.png)
+
+1. Choose **Save statements to CSV** to save the extracted SQL code from your Pro\*C application as a comma\-separated values \(CSV\) file\.
+
+1. \(Optional\) Save a local copy of the report as either a PDF file or a comma\-separated values \(CSV\) file:
+   + Choose **Save to PDF** at upper right to save the report as a PDF file\.
+
+      The PDF file contains the executive summary, action items, and recommendations for application conversion\.
+   + Choose **Save to CSV **at upper right to save the report as a CSV file\.
+
+     The CSV file contains action items, recommended actions, and an estimated complexity of manual effort required to convert the SQL code\.

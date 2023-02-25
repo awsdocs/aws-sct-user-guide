@@ -2,6 +2,152 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 670<a name="CHAP_ReleaseNotes.670"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved issues where action item 9996 unexpectedly appears during the conversion of the following code elements\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
+|  Azure Synapse Analytics  | Amazon Redshift | Added support for Azure Synapse Analytics as a source for the multiserver assessment process\. For more information, see [Creating a multiserver assessment report](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| Hadoop | Amazon EMR | Implemented support for the migration of Hadoop clusters to Amazon EMR in the command line interface \(CLI\) mode\. For more information, see [Migrating big data frameworks](CHAP-migrating-big-data.md)\.   | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Fixed a resolver error that occurred for source tables and columns\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `CASE` expressions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `CURRENT_DATE` references to special registers\. A reference to a special register in Db2 for z/OS is a reference to a value provided by the current server\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `DATE` and `POSSTR` functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved the conversion of datetime constants\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved the conversion of default values for columns of the following data types: `DATE`, `TIME`, `TIMESTAMP`, and `TIMESTAMP WITH TIME ZONE`\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Resolved an issue where action item 9996 unexpectedly appears during the conversion of `SELECT INTO` statements\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved the conversion of `DATEDIFF` functions\. | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Fixed an error where `ISNULL` functions were converted to `NULLIF`\. As a result, the converted code produced different results compared to the source code\. Now, AWS SCT converts `ISNULL` functions to `COALESCE`\. | 
+| Netezza | Amazon Redshift | Improved data extraction agents to resolve an issue where the failed status was set for tasks that were completed successfully\.  | 
+| Netezza | Amazon Redshift | Added the ability to change endpoints in subtasks after starting a data migration with data extraction agents\.  | 
+|  Microsoft SQL Server MySQL Oracle PostgreSQL  |  Aurora MySQL Aurora PostgreSQL MySQL PostgreSQL  |  Added the ability to connect to databases using an IPv6 address protocol\.  | 
+| Oracle | Amazon RDS for Oracle | Implemented conversion of the `DBMS_JOB` package which schedules and manages jobs in the job queue\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Added new functions to the extension pack to improve the conversion of the global nested tables\. These new functions emulate `DELETE`, `EXTEND`, and `TRIM` functions in your source Oracle code\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Added the ability to specify the conversion scope for SQL code that is embedded in Java applications\. You can now exclude the subsets of the source application project from the conversion scope\. For more information, see [Converting your Java application SQL code in AWS SCT](CHAP_Converting.App.Java.md#CHAP_Converting.App.Java.Convert)\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of concatenation operators \(`\|\|`\) inside functional indexes\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of `IN` conditions where your source code doesn't include parentheses for a single expression\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of `MERGE` statements to `INSERT ON CONFLICT` in PostgreSQL\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Resolved a parsing error that occurred for packages of procedures\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where action item 5072 unexpectedly appears during the conversion of packages\.  | 
+| Oracle DW | Amazon Redshift | Fixed an error where AWS SCT didn't apply the extension pack when applying the converted code to the target database\.  | 
+| Oracle DW | Amazon Redshift | Fixed an error where AWS SCT didn't apply some of the extension pack files when using the extension pack wizard\.  | 
+| Oracle DW | Amazon Redshift |  Resolved an issue where AWS SCT couldn't process the data migration to AWS Snowball with more than 500 tasks running in parallel\.  | 
+| Oracle DW | Amazon Redshift | Resolved an issue where user\-defined functions with user\-defined types were incorrectly converted\.  | 
+
+## Release notes for AWS SCT Build 669<a name="CHAP_ReleaseNotes.669"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Improved the multiserver assessment process, which helps determine the optimal target database platform for your source databases\. Now, AWS SCT ignores the AWS Secrets Manager key if you provide database credentials in the input comma separated values \(CSV\) file\. For more information, see [Creating a multiserver assessment report](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| All | All | Resolved an issue where the multiserver assessment report included the IP address of your source database when using a secret from AWS Secrets Manager to connect to the database\.  | 
+| All | Amazon Redshift | Implemented automatic configuration of Java virtual machine \(JVM\) settings depending on the operating system and available RAM\. AWS SCT uses this JVM to run data extraction agents work\.  | 
+| All | Amazon Redshift | Resolved an issue where the data extraction agents don't start in Ubuntu\.  | 
+| All | Amazon Redshift | Resolved an issue where the data extraction tasks don't start after running the `StartAgent.bat` file in Windows\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where column names were incorrectly converted with the **Generate unique names for indexes** option turned on\.  | 
+| Greenplum | Amazon Redshift | Implemented conversion of functions that return `VOID` to procedures\.  | 
+| Greenplum | Amazon Redshift | Resolved an issue where data migration failed when the source database included not a numeric \(NaN\) values in numeric columns\. AWS SCT data extraction agents now replace NaN values with NULL\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Added a new conversion setting to specify the `DATE FORMAT` and `TIME FORMAT` options during the conversion of `CHAR` built\-in functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Added an action item 8534 for the conversion of predefined cursors that were declared with the `WITHOUT RETURN` clause\. If your cursor doesn't return result sets, AWS SCT assigns a `NULL` value to your cursor name in the converted code and raises an action item\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Edited the `CURRENT CLIENT_APPLNAME` property that identifies AWS SCT during the connection to the source database\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented a new conversion setting to specify the `DATE FORMAT` and `TIME FORMAT` options during the conversion of `CHAR` built\-in functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented conversion of `LEAVE` statements in `BEGIN...END` block statements\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented conversion of `XMLPARSE`, `XMLTABLE`, and `XMLNAMESPACES` functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved conversion of `CHAR` built\-in functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved conversion of cursors\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Resolved an issue where action item 9996 unexpectedly appears during the conversion of `FOR` loop statements\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of the table types usage in `SELECT` statements\.  | 
+| Microsoft SQL Server | Babelfish for Aurora PostgreSQL | Implemented support of the new version 2\.2\.0 of the Babelfish features configuration file\. This file defines SQL features that are supported and not supported by specific Babelfish versions\.  | 
+| Netezza | Amazon Redshift | Improved data extraction agents to resolve an issue where one row wasn't deleted from the target table during ongoing data replication\.  | 
+| Oracle |  Amazon RDS for Oracle  | Improved conversion of Oracle Database Enterprise Edition features\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of `GROUPING_ID` functions\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved SQL code conversion in C\# applications by adding support of custom data type mapping in the command line interface \(CLI\) mode\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of nested tables to avoid an unexpected action item 9996\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where the call of an object constructor was incorrectly converted\.  | 
+| Oracle DW | Amazon Redshift | Implemented support of existing table partitions for data migration\. To speed up data migration, AWS SCT creates subtasks for each partition of the source table that isn't empty\. For more information, see [Using native partitioning](agents.dw.md#agents.NativePartitioning)\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `CAST` functions with `TIME WITH TIME ZONE AS TIMESTAMP`, `TIME WITH TIME ZONE AS CHAR`, and `TIMESTAMP AS TIME WITH TIME ZONE` arguments\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `CAST` functions with the `FORMAT` option\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where `CEIL` functions weren't converted\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where `MERGE` statements with `DELETE` clauses were incorrectly converted\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where `TO_CHAR` functions with date and format arguments were incorrectly converted\.  | 
+
+## Release notes for AWS SCT Build 668<a name="CHAP_ReleaseNotes.668"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | Amazon Redshift | Resolved an issue where multiplication operators in migration rules didn't work correctly\. These operators make it possible to change the length of `char`, `varchar`, `nvarchar`, and `string` data types\. For more information, see [Creating migration rules](CHAP_Converting.DW.md#CHAP_Converting.DW.MigrationRules)\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Implemented support of `CONVERT` functions with `VARCHAR` arguments\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `SELECT` statements with `NOLOCK` clauses\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of `UPDATE` statements with aliases or with `SET` and `FROM` clauses\.  | 
+| Greenplum | Amazon Redshift | Implemented automatic virtual partitioning for data migration\. AWS SCT uses the `GP_SEGMENT_ID` system column to create partitions\.  | 
+| Greenplum | Amazon Redshift | Implemented support of `RETURN QUERY` and `RETURN SETOF` clauses\.  | 
+| Greenplum | Amazon Redshift | Implemented support of `SUBSTRING` functions with three parameters\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved conversion of `SUBSTR` functions with `LOCATE` parameters\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Added an option to use an array of `REFCURSOR` variables to return dynamic result sets\. When you select this option in conversion settings, AWS SCT adds an additional `OUT` parameter in the converted code\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented support of `FOR` loop statements\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Implemented support of `XMLPARSE` functions\. Added an action item 8541 for the white space striping in `XMLPARSE` functions\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Improved the conversion of multiple exception handlers in a single `BEGIN ... END` block\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of `INSERT` and `DELETE` triggers\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of nested procedure calls\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Improved conversion of table types\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where bitwise logical `NOT` operations were incorrectly converted for integer values\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where local arrays were not initialized in PostgreSQL version 8\.0\.2 and lower\.  | 
+| Microsoft SQL Server |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where `MERGE` statements with `WHEN NOT MATCHED BY SOURCE` clauses were incorrectly converted\.  | 
+| MySQL | Aurora MySQL | Resolved an issue where AWS SCT incorrectly determined the user permissions that were granted by the `rds_superuser_role` role\.  | 
+| Netezza | Amazon Redshift | Enhanced the source metadata loader to ensure that AWS SCT correctly loads database objects with names in lowercase\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Added new functions to the extension pack to improve conversion of local nested tables\. These new functions emulate `PRIOR`, `NEXT`, `LIMIT`, `FIRST`, `LAST`, `EXISTS`, `EXTEND`, `TRIM`, `DELETE`, and `SET` functions in your source Oracle code\. For more information, see [Using extension packs](CHAP_ExtensionPack.md)\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Added the ability to specify the conversion scope for C\# applications\. Users can now exclude the subsets of the source application project from the conversion scope\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented support of `COUNT` methods in collections\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented support of variables and constructors in nested tables\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented support of `RATIO_TO_REPORT` and `STANDARD_HASH` functions\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of large objects \(LOBs\) as part of the AWS SCT extension pack\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of local collections\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved conversion of `JOIN` statements with `USING` clauses where column names don't include the table name\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of `EMPTY_BLOB` and `EMPTY_CLOB` functions\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of positional bind variables in C\# applications\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of multi\-event triggers\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Implemented conversion of recursive triggers\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Improved conversion of triggers with the `@@rowcount` global variable\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where aggregate functions in the `SET` clause of `UPDATE` statements were incorrectly converted\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where action item 42702 unexpectedly appears during the conversion of `UPDATE` statements\.  | 
+| SAP ASE |  Aurora PostgreSQL PostgreSQL  | Resolved an issue where `CONVERT` functions with `CHAR` arguments were incorrectly converted\.  | 
+| Snowflake | Amazon Redshift | Added support of Snowflake as a source for data migration with AWS SCT data extraction agents\. For more information, see [Migrating data from an on\-premises data warehouse to Amazon Redshift](agents.dw.md)\.  | 
+| Teradata | Amazon Redshift | Improved conversion of `CAST` functions with `TIMESTAMP AS TIME WITH TIMEZONE` arguments\.  | 
+
+## Release notes for AWS SCT Build 667<a name="CHAP_ReleaseNotes.667"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Implemented support of Informatica extract, transform, and load \(ETL\) scripts in the command line interface \(CLI\) mode\. AWS SCT automatically redirects your Informatica ETL scripts to the new target database\. Also, AWS SCT converts object names and SQL code that is embedded in your Informatica objects\. For more information, see [Converting Informatica ETL scripts](CHAP-converting-informatica.md)\.  | 
+| All | Amazon Redshift | Increased the minimum supported driver version for Amazon Redshift to 2\.1\.0\.9\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Added a new function to the extension pack to improve conversion of the `CONVERT` function with three date and time arguments\.  | 
+| Azure Synapse Analytics | Amazon Redshift | Improved conversion of the `DATEDIFF` function\.  | 
+|  Azure Synapse Analytics Microsoft SQL Server DW  | Amazon Redshift | Updated the extension pack version\. Make sure that you apply the latest version of the extension pack in your existing AWS SCT projects\. For more information, see [Using extension packs](CHAP_ExtensionPack.md)\.  | 
+| BigQuery | Amazon Redshift | Resolved an issue where the filtered objects weren't converted in the command line interface \(CLI\) mode\.  | 
+| Greenplum | Amazon Redshift | Fixed an error where AWS SCT didn't convert temporary tables that are declared in a stored procedure\.  | 
+| Greenplum | Amazon Redshift | Fixed an error where column encoding attributes were missing in the converted code\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Implemented conversion of `UPDATE` statements for self\-referencing tables that have more than one `INNER JOIN` clauses\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Implemented support of `inserted` and `deleted` temporary tables that SQL Server uses for DML triggers\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved conversion of user\-defined types in stored procedures that were created in different database schemas\. Resolved an issue where AWS SCT couldn't find the data type and displayed an action item 9996\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where square brackets \(`[ ]`\) unexpectedly appeared around the database object names in the converted code\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where `@@ROWCOUNT` functions were incorrectly converted\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Implemented support of `geometry` and `geography` data types\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Implemented support of the `MAX` keyword in data type declarations in the converted code\.  | 
+| Microsoft SQL Server DW | Amazon Redshift | Improved conversion of `DATEADD` functions\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved SQL code conversion in Java applications by adding support for the MyBatis framework\. For more information, see [Converting SQL code in Java applications](CHAP_Converting.App.Java.md)\.  | 
+| Oracle |  Aurora PostgreSQL PostgreSQL  | Improved SQL code conversion in Java applications that use the MyBatis framework\. Added an action item 30411 for SQL code with unsupported syntax\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved SQL code conversion in Pro\*C applications by adding support for `typedef struct` declarations\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Implemented support of `CROSS JOIN` and `LEFT JOIN` statements\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved conversion of `MERGE` statements\. Resolved an issue where values to insert were missing in the converted code\.  | 
+| Teradata | Amazon Redshift | Changed the default column compression encoding settings that AWS SCT uses in the converted code to match the default Amazon Redshift settings\. For more information, see [Compression encodings](https://docs.aws.amazon.com/redshift/latest/dg/c_Compression_encodings.html) in the *Amazon Redshift Database Developer Guide*\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where mathematical operations that use the `TIME` data type were incorrectly converted\.  | 
+| Teradata | Amazon Redshift RSQL | Implemented conversion of FastExport code that is inside shell scripts\.  | 
+| Teradata BTEQ | Amazon Redshift RSQL | Fixed an error where AWS SCT didn't convert `COALESCE` and `%data` statements\.  | 
+| Vertica | Amazon Redshift | Improved conversion optimization suggestions when a user selects one optimization strategy\.  | 
+
 ## Release notes for AWS SCT Build 666<a name="CHAP_ReleaseNotes.666"></a>
 
 
@@ -85,7 +231,7 @@ This section contains release notes for AWS SCT, starting with version 1\.0\.640
 | All | All | Updated the assessment report to remove duplicate information about the line and position of the action item\.  | 
 | All | Amazon Redshift | Implemented automatic memory balancing in data extracting tasks\.  | 
 | All | Amazon Redshift | Resolved an error where the data extraction agents couldn't connect to AWS Snowball devices\.  | 
-|  Azure SQL Database IBM Db2 for z/OS IBM Db2 LUW Microsoft SQL Server MySQL Oracle PostgreSQL SAP ASE  |  Aurora MySQL Aurora PostgreSQL MariaDB MySQL PostgreSQL  | Implemented support of SUSE Linux 15\.3 as a platform to run data extraction agents\. For more information, see [Extracting data from on\-premises databases using data extraction agentsExtracting data from on\-premises databases](agents.oltp.md)\.  | 
+|  Azure SQL Database IBM Db2 for z/OS IBM Db2 LUW Microsoft SQL Server MySQL Oracle PostgreSQL SAP ASE  |  Aurora MySQL Aurora PostgreSQL MariaDB MySQL PostgreSQL  | Implemented support of SUSE Linux 15\.3 as a platform to run data extraction agents\. For more information, see [Extracting data from on\-premises databases using data extraction agents](agents.oltp.md)\.  | 
 | Azure Synapse Analytics | Amazon Redshift | Improved conversion of `DATEADD` functions\.  | 
 | IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Added the ability to change column collation in migration rules\.  | 
 | Microsoft SSIS | AWS Glue AWS Glue Studio | Resolved an unexpected error that occurred when users select a source script\.  | 

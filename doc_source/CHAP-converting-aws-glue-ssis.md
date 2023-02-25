@@ -102,3 +102,61 @@ You don't need an installed SSIS server\. The conversion process goes through th
    1. Choose **Add job**, and then choose the job that you want to run\.
 
    1. On the **Actions** tab, choose **Run job**\.
+
+## SSIS components that AWS SCT can convert to AWS Glue<a name="CHAP-converting-aws-glue-ssis-supported-components"></a>
+
+You can use AWS SCT to convert data flow and control flow components, as well as containers, parameters, and variables\.
+
+Supported data flow components include the following:
++ ADO NET Destination
++ ADO NET Source
++ Aggregate
++ Cache Transformation
++ Character Map Transformation
++ Conditional Split Transformation
++ Copy Column Transformation
++ Data Conversion Transformation
++ Derived Column Transformation
++ Excel Destination
++ Excel Source
++ Export Column Transformation
++ Flat File Destination
++ Flat File Source
++ Fuzzy Lookup Transformation
++ Import Column Transformation
++ Lookup Transformation
++ Merge Join Transformation
++ Merge Transformation
++ Multicast Transformation
++ ODBC Destination
++ ODBC Source
++ OLE DB Command Transformation
++ OLE DB Destination
++ OLE DB Source
++ Percentage Sampling Transformation
++ Pivot Transformation
++ Raw File Destination
++ Raw File Source
++ RecordSet Destination
++ Row Count Transformation
++ Row Sampling Transformation
++ Sort Transformation
++ SQL Server Destination
++ Union All Transformation
++ Unpivot Transformation
++ XML Source
+
+Supported control flow components include the following:
++ Bulk Insert Task
++ Execute Package Task
++ Execute SQL Task
++ Execute T\-SQL Statement Task
++ Expression Task
++ File System Task
++ Notify Operator Task
++ Send Mail Task
+
+Supported SSIS containers include the following:
++ For Loop Container
++ Foreach Loop Container
++ Sequence Container

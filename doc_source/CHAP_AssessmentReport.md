@@ -14,10 +14,11 @@ The migration assessment report includes the following:
 
 The report also includes estimates of the amount of effort that it will take to write the equivalent code for your target DB instance that can't be converted automatically\. 
 
-If you use AWS SCT to migrate your existing schema to an Amazon RDS DB instance, the report can help you analyze requirements for moving to the AWS Cloud and for changing your license type\. 
+If you use AWS SCT to migrate your existing schema to an Amazon RDS DB instance, then you can use the report to help you analyze requirements for moving to the AWS Cloud and change your license type\.
 
 **Topics**
 + [Creating a database migration assessment report](CHAP_AssessmentReport.Create.md)
 + [Viewing the assessment report](CHAP_AssessmentReport.View.md)
 + [Saving the assessment report](CHAP_AssessmentReport.Save.md)
++ [Configuring the assessment report](CHAP_AssessmentReport.Configure.md)
 + [Creating a multiserver assessment report for database migration](CHAP_AssessmentReport.Multiserver.md)

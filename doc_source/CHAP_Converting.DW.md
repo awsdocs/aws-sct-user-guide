@@ -37,6 +37,7 @@ To convert a data warehouse schema, take the following steps:
 
 The privileges required for Amazon Redshift as a target are listed following:
 + CREATE ON DATABASE – allows to create new schemas in the database\.
++ CREATE ON SCHEMA – allows to create objects in the database schema\.
 + GRANT USAGE ON LANGUAGE – allows to create new functions and procedures in the database\.
 + GRANT SELECT ON ALL TABLES IN SCHEMA pg\_catalog – provides the user with system information about the Amazon Redshift cluster\.
 + GRANT SELECT ON pg\_class\_info – provides the user with information about tables distribution style\.
@@ -46,6 +47,7 @@ You can use the following code example to create a database user and grant the p
 ```
 CREATE USER user_name PASSWORD your_password;
 GRANT CREATE ON DATABASE db_name TO user_name;
+GRANT CREATE ON SCHEMA schema_name TO user_name;
 GRANT USAGE ON LANGUAGE plpythonu TO user_name;
 GRANT USAGE ON LANGUAGE plpgsql TO user_name;
 GRANT SELECT ON ALL TABLES IN SCHEMA pg_catalog TO user_name;
@@ -55,7 +57,7 @@ GRANT SELECT ON pg_database_info TO user_name;
 GRANT SELECT ON pg_statistic TO user_name;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Next, replace *schema\_name* with the name of your Amazon Redshift schema\. Repeat the `GRANT CREATE ON SCHEMA` operation for each target schema where you will apply the converted code or migrate data\. Finally, replace *your\_password* with a secure password\.
 
 You can apply an extension pack on your target Amazon Redshift database\. An extension pack is an add\-on module that emulates source database functions that are required when converting objects to Amazon Redshift\. For more information, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\.
 
@@ -106,7 +108,7 @@ To optimize how the AWS Schema Conversion Tool converts your data warehouse sche
    + **Choose Distribution Key and Sort Keys using metadata**
    + **Choose fact table and appropriate dimension for collation**
    + **Analyze cardinality of indexes' columns**
-   + **Find the most used tables and columns from QueryLog table**
+   + **Find the most used tables and columns from the query log table**
 
    For each rule, you can enter a weight for the sort key and a weight for the distribution key\. AWS SCT uses the weights you choose when it converts your schema\. Later, when you review the suggested keys, if you are not satisfied with the results, you can return here and change your settings\. For more information, see [Managing and customizing keys in AWS SCT](#CHAP_Converting.DW.Keys)\. 
 
@@ -134,11 +136,13 @@ Before you convert your schema with AWS SCT, you can set up migration rules\. *M
 You can create migration rules only for different source and target database engines\. 
 
 You can create migration rules that perform the following tasks: 
-+ Change data type 
-+ Move objects 
-+ Rename objects 
-+ Add, remove, or replace a prefix 
-+ Add, remove, or replace a suffix 
++ Add, remove, or replace a prefix
++ Add, remove, or replace a suffix
++ Change column collation
++ Change data type
++ Change the length of `char`, `varchar`, `nvarchar`, and `string` data types
++ Move objects
++ Rename objects
 
 You can create migration rules for the following objects: 
 + Database 
@@ -205,7 +209,7 @@ You can choose schema items from your source database and then convert the schem
 
 ### Converting schema<a name="CHAP_Converting.DW.Convert.Convert"></a>
 
-To convert schema from your source database, choose a schema object to convert from the left panel of your project\. Open the context \(right\-click\) menu for the object, and then choose **Convert schema**, as shown following\. 
+To convert a schema from your source database, select the check box for the name of schema to convert\. Next, choose this schema from the left panel of your project\. AWS SCT highlights the schema name in blue\. Open the context \(right\-click\) menu for the schema, and choose **Convert schema**, as shown following\.
 
 ![\[Convert schema\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/transform_schema.png)
 
@@ -250,7 +254,7 @@ The left pane contains key suggestions, and includes the confidence rating for e
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
-### Related topics<a name="w26aac21c25c13"></a>
+### Related topics<a name="w44aac21c25c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 

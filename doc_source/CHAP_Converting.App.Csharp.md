@@ -33,6 +33,39 @@ You can add multiple application conversion projects in a single AWS SCT project
 
 1. Find your C\# application conversion project in the **Applications** node in the left panel\.
 
+## Converting your C\# application SQL code in AWS SCT<a name="CHAP_Converting.App.Csharp.Convert"></a>
+
+After you add your C\# application to the AWS SCT project, convert SQL code from this application to a format compatible with your target database platform\. Use the following procedure to analyze and convert the SQL code embedded in your C\# application in the AWS Schema Conversion Tool\. 
+
+**To convert your SQL code**
+
+1. Expand the **C\#** node under **Applications** in the left panel\.
+
+1. Choose the application to convert, and open the context \(right\-click\) menu\.
+
+1.  Choose **Convert**\. AWS SCT analyzes your source code files, determines the application logic, and loads code metadata into the project\. This code metadata includes C\# classes, objects, methods, global variables, interfaces, and so on\. 
+
+   In the target database panel, AWS SCT creates the similar folders structure to your source application project\. Here you can review the converted application code\.  
+![\[SQL code to analyze\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/csharp-applications-project-analyze.png)
+
+1. Save your converted application code\. For more information, see [Saving your converted application code](#CHAP_Converting.App.Csharp.Save)\.
+
+Your C\# applications might include SQL code that interacts with different source databases\. You can migrate to PostgreSQL several of these source databases\. In this case, make sure that you don't convert SQL code that interacts with databases which you excluded from the migration scope\. You can exclude source files of your C\# application from the conversion scope\. To do so, clear the check boxes for the names of files that you want to exclude from the conversion scope\.
+
+After you change the conversion scope, AWS SCT still analyzes SQL code all source files of your C\# applications\. Then, AWS SCT copies to the target folder all source files that you excluded from the conversion scope\. This operation makes it possible to build your application after you save your converted application files\.
+
+## Saving your converted application code with AWS SCT<a name="CHAP_Converting.App.Csharp.Save"></a>
+
+Use the following procedure to save your converted application code\.
+
+**To save your converted application code**
+
+1. Expand the **C\#** node under **Applications** in the target database panel\.
+
+1. Choose your converted application, and choose **Save**\.
+
+1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.
+
 ## Managing C\# application conversion projects in AWS SCT<a name="CHAP_Converting.App.Csharp.Manage"></a>
 
 You can add multiple C\# application conversion projects, update the application code in the AWS SCT project, or remove a C\# conversion project from your AWS SCT project\.
@@ -67,23 +100,6 @@ After you make changes in your source application code, upload it into the AWS S
 
 1. Choose **Delete** and then choose **OK**\.
 
-## Converting your C\# application SQL code in AWS SCT<a name="CHAP_Converting.App.Csharp.Convert"></a>
-
-After you add your C\# application to the AWS SCT project, convert SQL code from this application to a format compatible with your target database platform\. Use the following procedure to analyze and convert the SQL code embedded in your C\# application in the AWS Schema Conversion Tool\. 
-
-**To convert your SQL code**
-
-1. Expand the **C\#** node under **Applications** in the left panel\.
-
-1. Choose the application to convert, and open the context \(right\-click\) menu\.
-
-1.  Choose **Convert**\. AWS SCT analyzes your source code files, determines the application logic, and loads code metadata into the project\. This code metadata includes C\# classes, objects, methods, global variables, interfaces, and so on\. 
-
-   In the target database panel, AWS SCT creates the similar folders structure to your source application project\. Here you can review the converted application code\.  
-![\[SQL code to analyze\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/csharp-applications-project-analyze.png)
-
-1. Save your converted application code\. For more information, see [Saving your converted application code](#CHAP_Converting.App.Csharp.Save)\.
-
 ## Creating a C\# application conversion assessment report in AWS SCT<a name="CHAP_Converting.App.Csharp.AssessmentReport"></a>
 
 The *C\# application conversion assessment report* provides information about converting the SQL code embedded in your C\# application to a format compatible with your target database\. The assessment report provides conversion details for all SQL execution points and all source code files\. The assessment report also includes action items for SQL code that AWS SCT can't convert\. 
@@ -114,15 +130,3 @@ Use the following procedure to create a C\# application conversion assessment re
    + Choose **Save to CSV **at upper right to save the report as a CSV file\.
 
      The CSV file contains action items, recommended actions, and an estimated complexity of manual effort required to convert the SQL code\.
-
-## Saving your converted application code with AWS SCT<a name="CHAP_Converting.App.Csharp.Save"></a>
-
-Use the following procedure to save your converted application code\.
-
-**To save your converted application code**
-
-1. Expand the **C\#** node under **Applications** in the target database panel\.
-
-1. Choose your converted application, and choose **Save**\.
-
-1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.

@@ -21,6 +21,7 @@ Data extraction agents are currently supported for the following source data war
 + Microsoft SQL Server \(version 2008 and later\)
 + Netezza \(version 7\.0\.3 and later\)
 + Oracle \(version 10 and later\)
++ Snowflake \(version 3\)
 + Teradata \(version 13 and later\)
 + Vertica \(version 7\.2\.2 and later\)
 
@@ -35,6 +36,7 @@ Use the information in the following topics to learn how to work with data extra
 **Topics**
 + [Prerequisites for using data extraction agents](#agents.PreReqSettings)
 + [Installing extraction agents](#agents.Installing)
++ [Configuring extraction agents](#agents.Installing.AgentSettings)
 + [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)
 + [Hiding and recovering information for an AWS SCT agent](#agents.Recovering)
 + [Creating data migration rules in AWS SCT](#agents.Filtering)
@@ -45,6 +47,7 @@ Use the information in the following topics to learn how to work with data extra
 + [Data extraction using an AWS Snowball Edge device](#agents.Snowball)
 + [Data extraction task output](#agents.MovingData)
 + [Using virtual partitioning with AWS Schema Conversion Tool](#agents.VirtualPartitioning)
++ [Using native partitioning](#agents.NativePartitioning)
 + [Migrating LOBs to Amazon Redshift](#agents.LOBs)
 + [Best practices and troubleshooting for data extraction agents](#agents.BestPractices)
 
@@ -55,6 +58,56 @@ Before you work with data extraction agents, store your Amazon S3 bucket informa
 ### Amazon S3 settings<a name="agents.S3Credentials"></a>
 
 After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+
+To migrate data into your target Amazon Redshift database, the AWS SCT data extraction agent needs permission to access the Amazon S3 bucket on your behalf\. To provide this permission, create an AWS Identity and Access Management \(IAM\) user with the following policy\.
+
+```
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:GetObject",
+                "s3:GetObjectTagging",
+                "s3:PutObjectTagging"
+            ],
+            "Resource": [
+                "arn:aws:s3:::{bucket_name}/*",
+                "arn:aws:s3:::{bucket_name}"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Action": [
+                "s3:ListBucket",
+                "s3:GetBucketLocation"
+            ],
+            "Resource": [
+                "arn:aws:s3:::{bucket_name}"
+            ],
+            "Effect": "Allow"
+        },
+        {
+            "Effect": "Allow",
+            "Action": "s3:ListAllMyBuckets",
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "iam:GetUser"
+            ],
+            "Resource": [
+                "arn:aws:iam::111122223333:user/DataExtractionAgentName"
+            ],
+            "Effect": "Allow"
+        }
+    ]
+}
+```
+
+In the preceding example, replace `{bucket_name}` with the name of your Amazon S3 bucket\. Then, replace `111122223333:user/DataExtractionAgentName` with the name of your IAM user\.
 
 ### Assuming IAM roles<a name="agents.PreReqSettings.IAMroles"></a>
 
@@ -167,24 +220,17 @@ Use the following procedure to install extraction agents\. Repeat this procedure
 
 1. Choose **Finish** to close the installation wizard after you configure your data extraction agent\.
 
-### Configuring extraction agents<a name="agents.Installing.AgentSettings"></a>
+## Configuring extraction agents<a name="agents.Installing.AgentSettings"></a>
 
 Use the following procedure to configure extraction agents\. Repeat this procedure on each computer that has an extraction agent installed\. 
 
 **To configure your extraction agent**
 
 1. Launch the configuration setup program: 
-   + On Microsoft Windows, AWS SCT launches the configuration setup program automatically during the installation of a data extraction agent\. 
+   + In Windows, AWS SCT launches the configuration setup program automatically during the installation of a data extraction agent\.
 
-     As needed, launch the setup program manually on Windows using the following command\.
-
-     ```
-     cd path/AWSSchemaConversionTool-Extractor.jar
-     java -jar AWSSchemaConversionTool-Extractor.jar -config
-     ```
-
-     In the preceding example, `path` is the path where you installed the AWS SCT data extraction agent\.
-   + On RHEL and Ubuntu, run the `sct-extractor-setup.sh` file from the location where you installed the agent\. 
+     As needed, you can launch the setup program manually\. To do so, run the `ConfigAgent.bat` file in Windows\. You can find this file in the folder where you installed the agent\.
+   + In RHEL and Ubuntu, run the `sct-extractor-setup.sh` file from the location where you installed the agent\. 
 
    The setup program prompts you for information\. For each prompt, a default value appears\.
 
@@ -369,7 +415,7 @@ Use the instructions in the following table to provide the information for **Ext
 | **Source temp schema** | Enter the name of the schema in the source database, where the extraction agent can create the temporary objects\. | 
 | **Out file size \(in MB\)** | Enter the size, in MB, of the files uploaded to Amazon S3\.  | 
 | **Snowball out file size \(in MB\)** | Enter the size, in MB, of the files uploaded to AWS Snowball\. Files can be 1–1,000 MB in size\.  | 
-| **Use table partitioning if it is supported by DB server and table size \(in MB\) is more than** | Turn this option on to use table partitioning, and then enter the size of tables to partition\. | 
+| **Use automatic partitioning\. For Greenplum and Netezza, enter the minimal size of supported tables \(in megabytes\)** | Turn this option on to use table partitioning, and then enter the size of tables to partition for Greenplum and Netezza source databases\. For Oracle to Amazon Redshift migrations, you can keep this field empty because AWS SCT creates subtasks for all partitioned tables\. | 
 | **Extract LOBs** | Turn this option on to extract large objects \(LOBs\) from your source database\. LOBs include BLOBs, CLOBs, NCLOBs, XML files, and so on\. For every LOB, AWS SCT extraction agents create a data file\. | 
 | **Amazon S3 bucket LOBs folder** | Enter the location for AWS SCT extraction agents to store LOBs\. | 
 | **Apply RTRIM to string columns** | Turn this option on to trim a specified set of characters from the end of the extracted strings\. | 
@@ -530,7 +576,7 @@ The process of using AWS SCT and AWS Snowball Edge has several steps\. The migra
 
 The sections following this overview provide a step\-by\-step guide to each of these tasks\. The procedure assumes that you have AWS SCT installed and that you have configured and registered a data extraction agent on a dedicated machine\.
 
-The following steps need to occur to migrate data from a local data store to an AWS data store using AWS Snowball Edge\.
+Perform the following steps to migrate data from a local data store to an AWS data store using AWS Snowball Edge\.
 
 1. Create an AWS Snowball Edge job using the AWS Snowball console\.
 
@@ -560,9 +606,7 @@ Create an AWS Snowball job by following the steps outlined in the section [Creat
 
 #### Step 2: Unlock the AWS Snowball Edge device<a name="agents.Snowball.SBS.UnlockSnowball"></a>
 
-Run the commands that unlock and provide credentials to the Snowball Edge device from the machine where you installed the AWS DMS agent\. This way, you can be sure that the AWS DMS agent call connects to the AWS Snowball Edge device\. For more information about unlocking the AWS Snowball Edge device, see [Unlocking the Snowball Edge](https://docs.aws.amazon.com/snowball/latest/developer-guide/unlockdevice.html)\.
-
-For example, the following command lists the Amazon S3 bucket used by the device\.
+Run the commands that unlock and provide credentials to the Snowball Edge device from the machine where you installed the AWS DMS agent\. By running these commands, you can be sure that the AWS DMS agent call connects to the AWS Snowball Edge device\. For more information about unlocking the AWS Snowball Edge device, see [Unlocking the Snowball Edge](https://docs.aws.amazon.com/snowball/latest/developer-guide/unlockdevice.html)\.
 
 ```
 aws s3 ls s3://<bucket-name> --profile <Snowball Edge profile> --endpoint http://<Snowball IP>:8080 --recursive 
@@ -594,11 +638,11 @@ Next, create a new AWS SCT project\.
 
 #### Step 4: Install and configure your data extraction agent<a name="agents.Snowball.SBS.SourceDriver"></a>
 
-AWS SCT uses a data extraction agent to migrate data to Amazon Redshift\. The \.zip file that you downloaded to install AWS SCT, includes the extraction agent installer file\. You can install the data extraction agent on Windows, Red Hat Enterprise Linux, or Ubuntu\. For more information, see [Installing extraction agents](#agents.Installing)\.
+AWS SCT uses a data extraction agent to migrate data to Amazon Redshift\. The \.zip file that you downloaded to install AWS SCT, includes the extraction agent installer file\. You can install the data extraction agent in Windows, Red Hat Enterprise Linux, or Ubuntu\. For more information, see [Installing extraction agents](#agents.Installing)\.
 
 To configure your data extraction agent, enter your source and target database engines\. Also, make sure that you downloaded JDBC drivers for your source and target databases on the computer where you run your data extraction agent\. Data extraction agents use these drivers to connect to your source and target databases\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.
 
-On Windows, the data extraction agent installer launches the configuration wizard in the command prompt window\. On Linux, run the `sct-extractor-setup.sh` file from the location where you installed the agent\.
+In Windows, the data extraction agent installer launches the configuration wizard in the command prompt window\. In Linux, run the `sct-extractor-setup.sh` file from the location where you installed the agent\.
 
 #### Step 5: Configure AWS SCT to access the Amazon S3 bucket<a name="agents.Snowball.SBS.ConfigureS3"></a>
 
@@ -690,7 +734,7 @@ You can often best manage large non\-partitioned tables by creating subtasks tha
 
 AWS SCT validates the values you provide for creating a partition\. For example, if you attempt to partition a column with data type NUMERIC but you provide values of a different data type, AWS SCT throws an error\.
 
-Also, if you are using AWS SCT to convert data from Netezza to Amazon Redshift, you can use native Netezza partitioning to manage migrating large tables\. For more information, see [Using native Netezza partitioning](#agents.VirtualPartitioning.Netezza)\. 
+Also, if you are using AWS SCT to migrate data to Amazon Redshift, you can use native partitioning to manage the migration oif large tables\. For more information, see [Using native partitioning](#agents.NativePartitioning)\.
 
 ### Limits when creating virtual partitioning<a name="agents.VirtualPartitioning.Limits"></a>
 
@@ -787,33 +831,33 @@ PartitionN: WHERE LO_ORDERDATE >= USER_VALUE_N AND LO_ORDERDATE <= ‘2017-08-13
 
 1. Choose **OK**\.
 
-### Using native Netezza partitioning<a name="agents.VirtualPartitioning.Netezza"></a>
+## Using native partitioning<a name="agents.NativePartitioning"></a>
 
-To speed up data migration, you can enable extraction agents to use the physical distribution of tables on a Netezza server\. 
+To speed up data migration, your data extraction agents can use native partitions of tables on your source data warehouse server\. AWS SCT supports native partitioning for migrations from Greenplum, Netezza, and Oracle to Amazon Redshift\.
 
-For example, after you create a project, you might collect statistics on a schema and analyze the size of the tables selected for migration\. For tables that exceed the size specified, AWS SCT triggers the native Netezza partitioning mechanism\.
+For example, after you create a project, you might collect statistics on a schema and analyze the size of the tables selected for migration\. For tables that exceed the size specified, AWS SCT triggers the native partitioning mechanism\.
 
-**To use native Netezza partitioning**
+**To use native partitioning**
 
 1. Open AWS SCT, and choose **New project** for **File**\. The **New project** dialog box appears\.
 
-1. Create a new project and connect to the source and target servers\.
+1. Create a new project, add your source and target servers, and create mapping rules\. For more information, see [Creating an AWS SCT project](CHAP_UserInterface.md#CHAP_UserInterface.Project)\.
 
 1. Choose **View**, and then choose **Main view**\.
 
-1. In the left panel that displays the schema from your source database, choose a schema\. Open the context \(right\-click\) menu for the object, and chose **Collect statistics**\.
+1. For **Project settings**, choose the **Data migration** tab\. Choose **Use automatic partitioning\.** For Greenplum and Netezza source databases, enter the minimal size of supported tables in megabytes \(for example, 100\)\. AWS SCT automatically creates separate migration subtasks for each native partition that isn't empty\. For Oracle to Amazon Redshift migrations, AWS SCT creates subtasks for all partitioned tables\.
 
-1. Choose each table to be migrated, and analyze the size and number of rows\.
+1. In the left panel that displays the schema from your source database, choose a schema\. Open the context \(right\-click\) menu for the object, and chose **Collect statistics**\. For data migration from Oracle to Amazon Redshift, you can skip this step\.
 
-1. For **Current project settings**, choose the **Data migration** tab\. Choose **Use table partitioning … if table is more than**, and enter a table size limit in MB \(for example, 100\)\.
+1. Choose all tables to migrate\.
 
-1. Register the required number of agents\. For more information, see [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)\. 
+1. Register the required number of agents\. For more information, see [Registering extraction agents with the AWS Schema Conversion Tool](#agents.Using)\.
 
-1. Create a data extraction task for the selected tables\. For more information, see [Creating, running, and monitoring an AWS SCT data extraction task](#agents.Tasks)\. 
+1. Create a data extraction task for the selected tables\. For more information, see [Creating, running, and monitoring an AWS SCT data extraction task](#agents.Tasks)\.
 
-   Check if large tables are split into subtasks, and that each subtask matches the dataset that presents a part of the table located on one Netezza slice\. 
+   Check if large tables are split into subtasks, and that each subtask matches the dataset that presents a part of the table located on one slice in your source data warehouse\.
 
-1. Start and monitor the migration process until migration of the selected tables has finished\. 
+1. Start and monitor the migration process until AWS SCT data extraction agents complete the migration of data from your source tables\.
 
 ## Migrating LOBs to Amazon Redshift<a name="agents.LOBs"></a>
 

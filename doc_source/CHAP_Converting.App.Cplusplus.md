@@ -60,6 +60,18 @@ After you add your C\+\+ application to the AWS SCT project, convert SQL code fr
 
 1. Save your converted application code\. For more information, see [Saving your converted application code](#CHAP_Converting.App.Cplusplus.Save)\.
 
+## Saving your converted application code with AWS SCT<a name="CHAP_Converting.App.Cplusplus.Save"></a>
+
+Use the following procedure to save your converted application code\. 
+
+**To save your converted application code**
+
+1. Expand the **C\+\+** node under **Applications** in the target database panel\.
+
+1. Choose your converted application, and choose **Save**\.
+
+1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.
+
 ## Managing C\+\+ application conversion projects in AWS SCT<a name="CHAP_Converting.App.Cplusplus.Manage"></a>
 
 You can add multiple C\+\+ application conversion projects, edit conversion settings, update the C\+\+ application code, or remove a C\+\+ conversion project from your AWS SCT project\.
@@ -141,15 +153,3 @@ The *C\+\+ application conversion assessment report* provides information about 
    + Choose **Save to CSV **at upper right to save the report as a CSV file\.
 
      The CSV file contains action items, recommended actions, and an estimated complexity of manual effort required to convert the SQL code\.
-
-## Saving your converted application code with AWS SCT<a name="CHAP_Converting.App.Cplusplus.Save"></a>
-
-Use the following procedure to save your converted application code\. 
-
-**To save your converted application code**
-
-1. Expand the **C\+\+** node under **Applications** in the target database panel\.
-
-1. Choose your converted application, and choose **Save**\.
-
-1. Enter the path to the folder to save the converted application code, and choose **Select folder**\.

@@ -1,6 +1,6 @@
 # Installing, verifying, and updating AWS SCT<a name="CHAP_Installing"></a>
 
-The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Fedora Linux, Microsoft Windows, and Ubuntu Linux version 15\.04\. AWS SCT is supported only on 64\-bit operating systems\. 
+The AWS Schema Conversion Tool \(AWS SCT\) is a standalone application that provides a project\-based user interface\. AWS SCT is available for Microsoft Windows, Fedora Linux, and Ubuntu Linux\. AWS SCT is supported only on 64\-bit operating systems\. 
 
 To ensure that you get the correct version of the AWS SCT distribution file we provide verification steps after you download the compressed file\. You can verify the file using the steps provided\.
 
@@ -11,6 +11,11 @@ To ensure that you get the correct version of the AWS SCT distribution file we p
 + [Updating AWS SCT](#CHAP_Installing.Updating)
 
 ## Installing AWS SCT<a name="CHAP_Installing.Procedure"></a>
+
+You can install AWS SCT on the following operating systems:
++ Microsoft Windows 10
++ Fedora Linux 36 and later
++ Ubuntu Linux 18 and later
 
 **To install AWS SCT**
 
@@ -39,10 +44,10 @@ You can download and install previous versions of AWS SCT starting from 1\.0\.62
 https://d211wdu1froga6.cloudfront.net/builds/1.0/<version>/<OS>/aws-schema-conversion-tool-1.0.zip
 ```
 
-For example, to download AWS SCT version 662, do the following:
-+ Windows – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/662/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/662/Windows/aws-schema-conversion-tool-1.0.zip)
-+ Ubuntu – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/662/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/662/Ubuntu/aws-schema-conversion-tool-1.0.zip)
-+ Fedora – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/662/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/662/Fedora/aws-schema-conversion-tool-1.0.zip)
+For example, to download AWS SCT version 668, do the following:
++ Windows – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/668/Windows/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/668/Windows/aws-schema-conversion-tool-1.0.zip)
++ Ubuntu – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/668/Ubuntu/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/668/Ubuntu/aws-schema-conversion-tool-1.0.zip)
++ Fedora – [ https://d211wdu1froga6\.cloudfront\.net/builds/1\.0/668/Fedora/aws\-schema\-conversion\-tool\-1\.0\.zip ](https://d211wdu1froga6.cloudfront.net/builds/1.0/668/Fedora/aws-schema-conversion-tool-1.0.zip)
 
 AWS supports the three latest versions of the AWS SCT application\. We recommend that you use the latest version of AWS SCT\.
 
@@ -176,25 +181,27 @@ Download the latest version of the driver available\. The following table includ
 
 | Database engine | Drivers | Download location | 
 | --- | --- | --- | 
-| Amazon Aurora MySQL\-Compatible Edition | mysql\-connector\-java\-5\.1\.6\.jar |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
-| Amazon Aurora PostgreSQL\-Compatible Edition | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
-| Amazon Redshift | redshift\-jdbc42\-2\.1\.0\.9\.jar |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.1\.0\.9/redshift\-jdbc42\-2\.1\.0\.9\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.1.0.9/redshift-jdbc42-2.1.0.9.zip)   | 
-| Amazon Redshift Serverless | redshift\-jdbc42\-2\.1\.0\.9\.jar |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.1\.0\.9/redshift\-jdbc42\-2\.1\.0\.9\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.1.0.9/redshift-jdbc42-2.1.0.9.zip)   | 
-| Azure SQL Database | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
-| Azure Synapse Analytics | mssql\-jdbc\-7\.2\.2\.jre11\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
-| Greenplum Database | postgresql\-42\.2\.19\.jar |  [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
-| IBM Db2 for z/OS |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/db2\-jdbc\-driver\-versions\-and\-downloads\-db2\-zos](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads-db2-zos)   | 
-| IBM Db2 LUW |  db2jcc\-db2jcc4\.jar  |   [https://www\.ibm\.com/support/pages/node/382667](https://www.ibm.com/support/pages/node/382667)   | 
-| MariaDB |  mariadb\-java\-client\-2\.4\.1\.jar  |  [https://downloads\.mariadb\.com/Connectors/java/connector\-java\-2\.4\.1/mariadb\-java\-client\-2\.4\.1\.jar](https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar)   | 
-| Microsoft SQL Server | mssql\-jdbc\-10\.2\.jar |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/download\-microsoft\-jdbc\-driver\-for\-sql\-server?view=sql\-server\-ver15](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)    | 
-| MySQL | mysql\-connector\-java\-8\.0\.15\.jar |   [https://dev\.mysql\.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)   | 
-| Netezza |  nzjdbc\.jar Use the client tools software\. Download driver version 7\.2\.1, which is backwards compatible with data warehouse version 7\.2\.0\.   |   [http://www\.ibm\.com/support/knowledgecenter/SSULQD\_7\.2\.1/com\.ibm\.nz\.datacon\.doc/c\_datacon\_plg\_overview\.html](http://www.ibm.com/support/knowledgecenter/SSULQD_7.2.1/com.ibm.nz.datacon.doc/c_datacon_plg_overview.html)   | 
-| Oracle |  ojdbc8\.jar Driver versions 8 and later are supported\.   |   [https://www\.oracle\.com/database/technologies/jdbc\-ucp\-122\-downloads\.html](https://www.oracle.com/database/technologies/jdbc-ucp-122-downloads.html)   | 
-| PostgreSQL | postgresql\-42\.2\.19\.jar |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
-| SAP ASE \(Sybase ASE\) | jconn4\.jar |  Available as part of the SDK for SAP Adaptive Server Enterprise 16 provided with SAP ASE product\. You can download the trial version of the SDK at [https://www\.sap\.com/developer/trials\-downloads/additional\-downloads/sdk\-for\-sap\-adaptive\-server\-enterprise\-16\-13351\.html](https://www.sap.com/developer/trials-downloads/additional-downloads/sdk-for-sap-adaptive-server-enterprise-16-13351.html)\.  | 
-| Snowflake |  snowflake\-jdbc\-3\.9\.2\.jar For more information, see [https://docs.snowflake.com/en/user-guide/jdbc-download.html](https://docs.snowflake.com/en/user-guide/jdbc-download.html)\.   |   [ https://repo1\.maven\.org/maven2/net/snowflake/snowflake\-jdbc/3\.9\.2/snowflake\-jdbc\-3\.9\.2\.jar](https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.9.2/snowflake-jdbc-3.9.2.jar)   | 
-| Teradata |  terajdbc4\.jar tdgssconfig\.jar  |   [https://downloads\.teradata\.com/download/connectivity/jdbc\-driver ](https://downloads.teradata.com/download/connectivity/jdbc-driver)   | 
-| Vertica |  vertica\-jdbc\-9\.1\.1\-0\.jar Driver versions 7\.2\.0 and later are supported\.  |   [https://www\.vertica\.com/client\_drivers/9\.1\.x/9\.1\.1\-0/vertica\-jdbc\-9\.1\.1\-0\.jar](https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-jdbc-9.1.1-0.jar)   | 
+| Amazon Aurora MySQL\-Compatible Edition | `mysql-connector-java-5.1.6.jar` |   [https://www\.mysql\.com/products/connector/](https://www.mysql.com/products/connector/)   | 
+| Amazon Aurora PostgreSQL\-Compatible Edition | `postgresql-42.2.19.jar` |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| Amazon EMR | `HiveJDBC42.jar` |   [http://awssupportdatasvcs\.com/bootstrap\-actions/Simba/latest/](http://awssupportdatasvcs.com/bootstrap-actions/Simba/latest/)   | 
+| Amazon Redshift | `redshift-jdbc42-2.1.0.9.jar` |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.1\.0\.9/redshift\-jdbc42\-2\.1\.0\.9\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.1.0.9/redshift-jdbc42-2.1.0.9.zip)   | 
+| Amazon Redshift Serverless | `redshift-jdbc42-2.1.0.9.jar` |   [https://s3\.amazonaws\.com/redshift\-downloads/drivers/jdbc/2\.1\.0\.9/redshift\-jdbc42\-2\.1\.0\.9\.zip](https://s3.amazonaws.com/redshift-downloads/drivers/jdbc/2.1.0.9/redshift-jdbc42-2.1.0.9.zip)   | 
+| Apache Hadoop | `HiveJDBC42.jar` |   [http://awssupportdatasvcs\.com/bootstrap\-actions/Simba/latest/](http://awssupportdatasvcs.com/bootstrap-actions/Simba/latest/)   | 
+| Azure SQL Database | `mssql-jdbc-7.2.2.jre11.jar` |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Azure Synapse Analytics | `mssql-jdbc-7.2.2.jre11.jar` |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/release\-notes\-for\-the\-jdbc\-driver?view=sql\-server\-ver15\#72](https://docs.microsoft.com/en-us/sql/connect/jdbc/release-notes-for-the-jdbc-driver?view=sql-server-ver15#72)   | 
+| Greenplum Database | `postgresql-42.2.19.jar` |  [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| IBM Db2 for z/OS |  `db2jcc-db2jcc4.jar`  |   [https://www\.ibm\.com/support/pages/db2\-jdbc\-driver\-versions\-and\-downloads\-db2\-zos](https://www.ibm.com/support/pages/db2-jdbc-driver-versions-and-downloads-db2-zos)   | 
+| IBM Db2 LUW |  `db2jcc-db2jcc4.jar`  |   [https://www\.ibm\.com/support/pages/node/382667](https://www.ibm.com/support/pages/node/382667)   | 
+| MariaDB |  `mariadb-java-client-2.4.1.jar`  |  [https://downloads\.mariadb\.com/Connectors/java/connector\-java\-2\.4\.1/mariadb\-java\-client\-2\.4\.1\.jar](https://downloads.mariadb.com/Connectors/java/connector-java-2.4.1/mariadb-java-client-2.4.1.jar)   | 
+| Microsoft SQL Server | `mssql-jdbc-10.2.jar` |   [https://docs\.microsoft\.com/en\-us/sql/connect/jdbc/download\-microsoft\-jdbc\-driver\-for\-sql\-server?view=sql\-server\-ver15](https://docs.microsoft.com/en-us/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver15)    | 
+| MySQL | `mysql-connector-java-8.0.15.jar` |   [https://dev\.mysql\.com/downloads/connector/j/](https://dev.mysql.com/downloads/connector/j/)   | 
+| Netezza |  `nzjdbc.jar` Use the client tools software\. Download driver version 7\.2\.1, which is backwards compatible with data warehouse version 7\.2\.0\.   |   [http://www\.ibm\.com/support/knowledgecenter/SSULQD\_7\.2\.1/com\.ibm\.nz\.datacon\.doc/c\_datacon\_plg\_overview\.html](http://www.ibm.com/support/knowledgecenter/SSULQD_7.2.1/com.ibm.nz.datacon.doc/c_datacon_plg_overview.html)   | 
+| Oracle |  `ojdbc8.jar` Driver versions 8 and higher are supported\.   |   [https://www\.oracle\.com/database/technologies/jdbc\-ucp\-122\-downloads\.html](https://www.oracle.com/database/technologies/jdbc-ucp-122-downloads.html)   | 
+| PostgreSQL | `postgresql-42.2.19.jar` |   [https://jdbc\.postgresql\.org/download/postgresql\-42\.2\.19\.jar](https://jdbc.postgresql.org/download/postgresql-42.2.19.jar)   | 
+| SAP ASE \(Sybase ASE\) | `jconn4.jar` |  Available as part of the SDK for SAP Adaptive Server Enterprise 16 provided with SAP ASE product\. You can download the trial version of the SDK at [https://www\.sap\.com/developer/trials\-downloads/additional\-downloads/sdk\-for\-sap\-adaptive\-server\-enterprise\-16\-13351\.html](https://www.sap.com/developer/trials-downloads/additional-downloads/sdk-for-sap-adaptive-server-enterprise-16-13351.html)\.  | 
+| Snowflake |  `snowflake-jdbc-3.9.2.jar` For more information, see [https://docs.snowflake.com/en/user-guide/jdbc-download.html](https://docs.snowflake.com/en/user-guide/jdbc-download.html)\.   |   [ https://repo1\.maven\.org/maven2/net/snowflake/snowflake\-jdbc/3\.9\.2/snowflake\-jdbc\-3\.9\.2\.jar](https://repo1.maven.org/maven2/net/snowflake/snowflake-jdbc/3.9.2/snowflake-jdbc-3.9.2.jar)   | 
+| Teradata |  `terajdbc4.jar` `tdgssconfig.jar` For Teradata JDBC driver version 16\.20\.00\.11 and higher, you don't need the `tdgssconfig.jar` file\.  |   [https://downloads\.teradata\.com/download/connectivity/jdbc\-driver ](https://downloads.teradata.com/download/connectivity/jdbc-driver)   | 
+| Vertica |  `vertica-jdbc-9.1.1-0.jar` Driver versions 7\.2\.0 and higher are supported\.  |   [https://www\.vertica\.com/client\_drivers/9\.1\.x/9\.1\.1\-0/vertica\-jdbc\-9\.1\.1\-0\.jar](https://www.vertica.com/client_drivers/9.1.x/9.1.1-0/vertica-jdbc-9.1.1-0.jar)   | 
 
 ### Installing JDBC drivers on Linux<a name="CHAP_Installing.JDBCDrivers.Linux"></a>
 

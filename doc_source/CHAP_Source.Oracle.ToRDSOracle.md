@@ -185,7 +185,7 @@ GRANT RESOURCE TO user_name;
 GRANT CONNECT TO user_name;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
 ## Limitations when converting Oracle to Amazon RDS for Oracle<a name="CHAP_Source.Oracle.ToRDSOracle.Limitations"></a>
 

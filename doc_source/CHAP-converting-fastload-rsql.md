@@ -6,6 +6,14 @@ A *Teradata FastLoad script* is a set of commands that use multiple sessions to 
 
 AWS SCT converts Teradata FastLoad commands and SQL statements to a format compatible with Amazon Redshift RSQL\. After you migrate the Teradata database to Amazon Redshift, you can use these converted scripts to load data to your Amazon Redshift database\.
 
+**Topics**
++ [Adding FastLoad job scripts to your AWS SCT project](#CHAP-converting-fastload-rsql-create)
++ [Configuring substitution variables in Teradata FastLoad job scripts with AWS SCT](#CHAP-converting-fastload-rsql-variables)
++ [Converting Teradata FastLoad job scripts with AWS SCT](#CHAP-converting-fastload-rsql-convert)
++ [Managing Teradata FastLoad job scripts with AWS SCT](#CHAP-converting-fastload-rsql-manage)
++ [Creating an assessment report for a Teradata FastLoad job script conversion with AWS SCT](#CHAP-converting-fastload-rsql-assessment)
++ [Editing and saving your converted Teradata FastLoad job scripts with AWS SCT](#CHAP-converting-fastload-rsql-save)
+
 ## Adding FastLoad job scripts to your AWS SCT project<a name="CHAP-converting-fastload-rsql-create"></a>
 
 You can add multiple scripts to a single AWS SCT project\.

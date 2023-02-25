@@ -4,6 +4,14 @@ You can use the AWS Schema Conversion Tool \(AWS SCT\) to convert Teradata FastE
 
 A *FastExport job script* is a set of FastExport commands and SQL statements that select and export data from the Teradata database\. AWS SCT converts FastExport commands and SQL statements to a format compatible with Amazon Redshift RSQL\. After you migrate the Teradata database to Amazon Redshift, you can use these converted scripts to export data from the Amazon Redshift database\.
 
+**Topics**
++ [Adding FastExport job scripts to your AWS SCT project](#CHAP-converting-fastexport-rsql-create)
++ [Configuring substitution variables in Teradata FastExport job scripts with AWS SCT](#CHAP-converting-fastexport-rsql-variables)
++ [Converting Teradata FastExport job scripts with AWS SCT](#CHAP-converting-fastexport-rsql-convert)
++ [Managing Teradata FastExport job scripts with AWS SCT](#CHAP-converting-fastexport-rsql-manage)
++ [Creating an assessment report for a Teradata FastExport job script conversion with AWS SCT](#CHAP-converting-fastexport-rsql-assessment)
++ [Editing and saving your converted Teradata FastExport job scripts with AWS SCT](#CHAP-converting-fastexport-rsql-save)
+
 ## Adding FastExport job scripts to your AWS SCT project<a name="CHAP-converting-fastexport-rsql-create"></a>
 
 You can add multiple scripts to a single AWS SCT project\.

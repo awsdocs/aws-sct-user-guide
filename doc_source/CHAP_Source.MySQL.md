@@ -8,11 +8,11 @@ You can use AWS SCT to convert schemas, database code objects, and application c
 For more information, see the following sections:
 
 **Topics**
-+ [Privileges for MySQL as a source](#CHAP_Source.MySQL.Permissions)
++ [Privileges for MySQL as a source database](#CHAP_Source.MySQL.Permissions)
 + [Connecting to MySQL as a source](#CHAP_Source.MySQL.Connecting)
-+ [Privileges for PostgreSQL as a target](#CHAP_Source.MySQL.ConfigurePostgreSQL)
++ [Privileges for PostgreSQL as a target database](#CHAP_Source.MySQL.ConfigurePostgreSQL)
 
-## Privileges for MySQL as a source<a name="CHAP_Source.MySQL.Permissions"></a>
+## Privileges for MySQL as a source database<a name="CHAP_Source.MySQL.Permissions"></a>
 
 The privileges required for MySQL as a source are listed following: 
 + SELECT ON \*\.\* 
@@ -40,7 +40,7 @@ Use the following procedure to connect to your MySQL source database with the AW
      1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
 
      For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
-   + To enter the MySQL source database connection information manually, use the instructions in the following table\.  
+   + To enter the MySQL source database connection information manually, use the following instructions:  
 ****    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.MySQL.html)
 
@@ -48,7 +48,7 @@ Use the following procedure to connect to your MySQL source database with the AW
 
 1. Choose **Connect** to connect to your source database\.
 
-## Privileges for PostgreSQL as a target<a name="CHAP_Source.MySQL.ConfigurePostgreSQL"></a>
+## Privileges for PostgreSQL as a target database<a name="CHAP_Source.MySQL.ConfigurePostgreSQL"></a>
 
 To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
 
@@ -62,7 +62,7 @@ GRANT CREATE ON DATABASE db_name TO user_name;
 ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.
 
 In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
 

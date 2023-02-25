@@ -49,7 +49,7 @@ Use the following procedure to connect to your Oracle source database with the A
      1. Choose **Populate** to automatically fill in all values in the database connection dialog box from Secrets Manager\.
 
      For information about using database credentials from Secrets Manager, see [Using AWS Secrets Manager](CHAP_UserInterface.md#CHAP_UserInterface.SecretsManager)\.
-   + To enter the Oracle source database connection information manually, use the instructions in the following table\.    
+   + To enter the Oracle source database connection information manually, use the following instructions:    
 [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_Source.Oracle.html)
 
 1. Choose **Test Connection** to verify that AWS SCT can connect to your source database\. 

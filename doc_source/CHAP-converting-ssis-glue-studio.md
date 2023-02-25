@@ -2,9 +2,87 @@
 
 You can use AWS SCT to convert Microsoft SQL Server Integration Services \(SSIS\) packages to AWS Glue Studio\.
 
-An *SSIS package* includes the necessary components, such as the connection manager, tasks, control flow, data flow, parameters, event handlers, and variables, to run a specific extract, transform, and load \(ETL\) task\. AWS SCT converts SSIS packages to a format compatible with AWS Glue Studio\. After you migrate your source database to the AWS Cloud, you can run these converted AWS Glue Studio jobs to perform ETL tasks against the new database\.
+An *SSIS package* includes the necessary components, such as the connection manager, tasks, control flow, data flow, parameters, event handlers, and variables, to run a specific extract, transform, and load \(ETL\) task\. AWS SCT converts SSIS packages to a format compatible with AWS Glue Studio\. After you migrate your source database to the AWS Cloud, you can run these converted AWS Glue Studio jobs to perform ETL tasks\.
 
 To convert Microsoft SSIS packages to AWS Glue Studio, make sure that you use AWS SCT version 1\.0\.661 or later\.
+
+**Topics**
++ [Prerequisites](#CHAP-converting-ssis-glue-studio-prerequisites)
++ [Adding SSIS packages to your AWS SCT project](#CHAP-converting-ssis-glue-studio-create)
++ [Converting SSIS packages to AWS Glue Studio with AWS SCT](#CHAP-converting-ssis-glue-studio-convert)
++ [Creating AWS Glue Studio jobs using the converted code](#CHAP-converting-ssis-glue-studio-jobs)
++ [Creating an assessment report for an SSIS package with AWS SCT](#CHAP-converting-ssis-glue-studio-assessment)
++ [SSIS components that AWS SCT can convert to AWS Glue Studio](#CHAP-converting-ssis-glue-studio-supported-components)
+
+## Prerequisites<a name="CHAP-converting-ssis-glue-studio-prerequisites"></a>
+
+In this section, learn about the prerequisite tasks for the conversion of SSIS packages to AWS Glue\. These tasks include creating required AWS resources in your account\.
+
+You can use AWS Identity and Access Management \(IAM\) to define policies and roles that are needed to access resources that AWS Glue Studio uses\. For more information, see [IAM permissions for the AWS Glue Studio user](https://docs.aws.amazon.com/glue/latest/ug/setting-up.html#getting-started-min-privs)\.
+
+After AWS SCT converts your source scripts to AWS Glue Studio, upload the converted scripts to an Amazon S3 bucket\. Make sure that you create this Amazon S3 bucket and select it in the AWS service profile settings\. For more information about creating an S3 bucket, see [Create your first S3 bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-bucket.html) in the *Amazon Simple Storage Service User Guide*\.
+
+To make sure that AWS Glue Studio can connect to your data store, create a custom connector and a connection\. Also, store database credentials in AWS Secrets Manager\.
+
+**To create a custom connector**
+
+1. Download the JDBC driver for your data store\. For more information about JDBC drivers that AWS SCT uses, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.
+
+1. Upload this driver file to your Amazon S3 bucket\. For more information, see [Upload an object to your bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/uploading-an-object-bucket.html) in the *Amazon Simple Storage Service User Guide*\.
+
+1. Sign in to the AWS Management Console and open the AWS Glue Studio console at [https://console\.aws\.amazon\.com/gluestudio/](https://console.aws.amazon.com/gluestudio/)\.
+
+1. Choose **Connectors**, then choose **Create custom connector**\.
+
+1. For **Connector S3 URL**, choose **Browse S3**, and choose the JDBC driver file that you uploaded to your Amazon S3 bucket\.
+
+1. Enter a descriptive **Name** for your connector\. For example, enter **SQLServer**\.
+
+1. For **Connector type**, choose **JDBC**\.
+
+1. For **Class name**, enter the name of the main class for your JDBC driver\. For SQL Server, enter **com\.microsoft\.sqlserver\.jdbc\.SQLServerDriver**\.
+
+1. For **JDBC URL base**, enter the JDBC base URL\. The syntax of the JDBC base URL depends on your source database engine\. For SQL Server, use the following format: **jdbc:sqlserver://$*\{host\}*:$*\{port\}*;databaseName=$*\{dbname\}*;user=$*\{username\}*;password=$*\{password\}***\.
+
+   Make sure that you replace *\{host\}*, *\{port\}*, *\{dbname\}*, *\{username\}*, and *\{password\}* with your values\.
+
+1. For **URL parameter delimiter**, enter the semicolon \(`;`\)\.
+
+1. Choose **Create connector**\.
+
+**To store database credentials in AWS Secrets Manager**
+
+1. Sign in to the AWS Management Console and open the AWS Secrets Manager console at [https://console\.aws\.amazon\.com/secretsmanager/](https://console.aws.amazon.com/secretsmanager/)\.
+
+1. Choose **Store a new secret**\.
+
+1. On the **Choose secret type** page, do the following:
+
+   1. For **Secret type**, choose the **Other type of secret**\.
+
+   1. For **Key/value pairs**, enter the following keys: **host**, **port**, **dbname**, **username**, and **password**\.
+
+      Next, enter your values for these keys\.
+
+1. On the **Configure secret** page, enter a descriptive **Secret name**\. For example, enter **SQL\_Server\_secret**\. 
+
+1. Choose **Next**\. Then, on the **Configure rotation** page, choose **Next** again\.
+
+1. On the **Review** page, review your secret details, and then choose **Store**\.
+
+**To create a connection for your connector**
+
+1. Sign in to the AWS Management Console and open the AWS Glue Studio console at [https://console\.aws\.amazon\.com/gluestudio/](https://console.aws.amazon.com/gluestudio/)\.
+
+1. Choose the connector for which you want to create a connection, and then choose **Create connection**\.
+
+1. On the **Create connection** page, enter a descriptive **Name** for your connection\. For example, enter **SQL\-Server\-connection**\.
+
+1. For **AWS Secret**, choose the secret that you created in AWS Secrets Manager\.
+
+1. Configure **Network options**, then choose **Create connection**\.
+
+Now, you can create an AWS Glue Studio job with a custom connector\. For more information, see [Creating AWS Glue Studio jobs](#CHAP-converting-ssis-glue-studio-jobs)\.  
 
 ## Adding SSIS packages to your AWS SCT project<a name="CHAP-converting-ssis-glue-studio-create"></a>
 
@@ -16,7 +94,7 @@ You can add multiple SSIS packages to a single AWS SCT project\.
 
 1. Choose **Add source** from the menu, and then choose **SQL Server Integration Services**\.
 
-1. For **Connection name**, enter a name for your SSIS package\. AWS SCT displays this name in the tree in the left panel\.
+1. For **Connection name**, enter a name for your SSIS packages\. AWS SCT displays this name in the tree in the left panel\.
 
 1. For **SSIS packages folder**, enter the path to the folder with source SSIS packages\.
 
@@ -121,3 +199,31 @@ The *ETL migration assessment report* provides information about converting your
      AWS SCT creates three CSV files\. These files contain action items, recommended actions, and an estimated complexity of manual effort required to convert the scripts\.
 
 1. Choose the **Action items** tab\. This tab contains a list of items that require manual conversion to AWS Glue Studio\. When you choose an action item from the list, AWS SCT highlights the item from your source SSIS package that the action item applies to\.
+
+## SSIS components that AWS SCT can convert to AWS Glue Studio<a name="CHAP-converting-ssis-glue-studio-supported-components"></a>
+
+You can use AWS SCT to convert SSIS data flow components and parameters to AWS Glue Studio\.
+
+Supported data flow components include the following:
++ ADO NET Destination
++ ADO NET Source
++ Aggregate
++ Character Map
++ Conditional Split
++ Copy Column
++ Data Conversion
++ Derived Column
++ Lookup
++ Merge
++ Merge Join
++ Multicast
++ ODBCDestination
++ ODBCSource
++ OLEDBDestination
++ OLEDBSource
++ Row Count
++ Sort
++ SQL Server Destination
++ Union All
+
+AWS SCT can convert more SSIS components to AWS Glue\. For more information, see [SSIS components that AWS SCT can convert to AWS Glue](CHAP-converting-aws-glue-ssis.md#CHAP-converting-aws-glue-ssis-supported-components)\.

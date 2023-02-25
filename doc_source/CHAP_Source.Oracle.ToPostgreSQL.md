@@ -3,7 +3,7 @@
 When you convert an Oracle database to RDS for PostgreSQL or Amazon Aurora PostgreSQL, be aware of the following\.
 
 **Topics**
-+ [Privileges for PostgreSQL as a target](#CHAP_Source.Oracle.ToPostgreSQL.ConfigureTarget)
++ [Privileges for PostgreSQL as a target database](#CHAP_Source.Oracle.ToPostgreSQL.ConfigureTarget)
 + [Oracle to PostgreSQL conversion settings](#CHAP_Source.Oracle.ToPostgreSQL.ConversionSettings)
 + [Converting Oracle sequences](#CHAP_Source.Oracle.ToPostgreSQL.ConvertSequences)
 + [Converting Oracle ROWID](#CHAP_Source.Oracle.ToPostgreSQL.ConvertRowID)
@@ -20,7 +20,7 @@ When converting Oracle system objects to PostgreSQL, AWS SCT performs conversion
 
 You can use AWS SCT to convert Oracle SQL\*Plus files to psql, which is a terminal\-based front\-end to PostgreSQL\. For more information, see [Converting application SQL using AWS SCT](CHAP_Converting.App.md)\.
 
-## Privileges for PostgreSQL as a target<a name="CHAP_Source.Oracle.ToPostgreSQL.ConfigureTarget"></a>
+## Privileges for PostgreSQL as a target database<a name="CHAP_Source.Oracle.ToPostgreSQL.ConfigureTarget"></a>
 
 To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
 
@@ -34,7 +34,7 @@ GRANT CREATE ON DATABASE db_name TO user_name;
 ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.
 
 To use Amazon RDS for PostgreSQL as a target, AWS SCT requires the `rds_superuser` privilege\.
 

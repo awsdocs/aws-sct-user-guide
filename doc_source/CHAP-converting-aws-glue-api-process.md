@@ -2,6 +2,11 @@
 
 In the following sections, you can find a description of a conversion that calls AWS Glue API operations in Python\. For more information, see [Program AWS Glue ETL scripts in Python](https://docs.aws.amazon.com//glue/latest/dg/aws-glue-programming-python.html) in the* AWS Glue Developer Guide\.*
 
+**Topics**
++ [Step 1: Create a database](#CHAP-converting-aws-glue-step-api-create-db)
++ [Step 2: Create a connection](#CHAP-converting-aws-glue-step-api-connection)
++ [Step 3: Create an AWS Glue crawler](#CHAP-converting-aws-glue-step-api-crawler)
+
 ## Step 1: Create a database<a name="CHAP-converting-aws-glue-step-api-create-db"></a>
 
 The first step is to create a new database in an AWS Glue Data Catalog by using the [AWS SDK API](https://docs.aws.amazon.com/glue/latest/webapi/API_CreateDatabase.html)\. When you define a table in the Data Catalog, you add it to a database\. A database is used to organize the tables in AWS Glue\. 

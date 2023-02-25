@@ -6,6 +6,14 @@ The following architecture diagram shows the database migration project that inc
 
 ![\[A diagram showing the conversion of ETL scripts to RSQL.\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/redshift-rsql-conversion.png)
 
+**Topics**
++ [Adding BTEQ scripts to your AWS SCT project](#CHAP-converting-bteq-rsql-create)
++ [Configuring substitution variables in BTEQ scripts with AWS SCT](#CHAP-converting-bteq-rsql-variables)
++ [Converting Teradata BTEQ scripts to Amazon Redshift RSQL with AWS SCT](#CHAP-converting-bteq-rsql-convert)
++ [Managing BTEQ scripts with AWS SCT](#CHAP-converting-bteq-rsql-manage)
++ [Creating a BTEQ script conversion assessment report with AWS SCT](#CHAP-converting-bteq-rsql-assessment)
++ [Editing and saving your converted BTEQ scripts with AWS SCT](#CHAP-converting-bteq-rsql-save)
+
 ## Adding BTEQ scripts to your AWS SCT project<a name="CHAP-converting-bteq-rsql-create"></a>
 
 You can add multiple scripts to a single AWS SCT project\. 

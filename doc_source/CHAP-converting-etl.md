@@ -9,19 +9,18 @@ Currently, AWS SCT supports the conversion of ETL scripts to objects to AWS Glue
 
 | Source | Target | 
 | --- | --- | 
+| Informatica ETL scripts | Informatica | 
 | Microsoft SQL Server Integration Services \(SSIS\) ETL packages | AWS Glue or AWS Glue Studio | 
-| Microsoft SQL Server stored database code objects | AWS Glue | 
-| Oracle stored database code objects | AWS Glue | 
 | Shell scripts with embedded commands from Teradata Basic Teradata Query \(BTEQ\)  | Amazon Redshift RSQL | 
 | Teradata BTEQ ETL scripts | AWS Glue or Amazon Redshift RSQL | 
 | Teradata FastExport job scripts | Amazon Redshift RSQL | 
 | Teradata FastLoad job scripts | Amazon Redshift RSQL | 
 | Teradata MultiLoad job scripts | Amazon Redshift RSQL | 
-| Teradata stored database code objects | AWS Glue | 
 
 **Topics**
 + [Converting ETL processes to AWS Glue with AWS SCT](CHAP-converting-aws-glue-ui-process.md)
 + [Converting ETL processes using the Python API for AWS Glue with AWS SCT](CHAP-converting-aws-glue-api-process.md)
++ [Converting Informatica ETL scripts with AWS SCT](CHAP-converting-informatica.md)
 + [Converting SSIS to AWS Glue with AWS SCT](CHAP-converting-aws-glue-ssis.md)
 + [Converting SSIS to AWS Glue Studio with AWS SCT](CHAP-converting-ssis-glue-studio.md)
 + [Converting Teradata BTEQ scripts to Amazon Redshift RSQL with AWS SCT](CHAP-converting-bteq-rsql.md)

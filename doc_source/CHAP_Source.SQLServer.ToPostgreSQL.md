@@ -3,14 +3,14 @@
 You can use the SQL Server to PostgreSQL extension pack in AWS SCT\. This extension pack emulates SQL Server database functions in the converted PostgreSQL code\. Use the SQL Server to PostgreSQL extension pack to emulate SQL Server Agent and SQL Server Database Mail\. For more information about extension packs, see [Using AWS SCT extension packs](CHAP_ExtensionPack.md)\. 
 
 **Topics**
-+ [Privileges for PostgreSQL as a target](#CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL)
++ [Privileges for PostgreSQL as a target database](#CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL)
 + [SQL Server to PostgreSQL conversion settings](#CHAP_Source.SQLServer.ToPostgreSQL.ConversionSettings)
 + [Converting SQL Server partitions to PostgreSQL version 10 partitions](#CHAP_Source.SQLServer.ToPostgreSQL.PG10Partitions)
 + [Migration considerations](#CHAP_Source.SQLServer.ToPostgreSQL.MigrationConsiderations)
 + [Using an AWS SCT extension pack to emulate SQL Server Agent in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Agent.md)
 + [Using an AWS SCT extension pack to emulate SQL Server Database Mail in PostgreSQL](CHAP_Source.SQLServer.ToPostgreSQL.ExtensionPack.Mail.md)
 
-## Privileges for PostgreSQL as a target<a name="CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL"></a>
+## Privileges for PostgreSQL as a target database<a name="CHAP_Source.SQLServer.ToPostgreSQL.ConfigurePostgreSQL"></a>
 
 To use PostgreSQL as a target, AWS SCT requires the `CREATE ON DATABASE` privilege\. Make sure that you grant this privilege for each target PostgreSQL database\.
 
@@ -24,7 +24,7 @@ GRANT CREATE ON DATABASE db_name TO user_name;
 ALTER DATABASE db_name SET SEARCH_PATH = "$user", public_synonyms, public;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.
 
 In PostgreSQL, only the schema owner or a `superuser` can drop a schema\. The owner can drop a schema and all objects that this schema includes even if the owner of the schema doesn't own some of its objects\.
 

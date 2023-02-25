@@ -38,4 +38,4 @@ GRANT CREATE SYNONYM TO user_name;
 GRANT CREATE XML SCHEMA COLLECTION TO user_name;
 ```
 
-In the example preceding, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target Amazon Redshift database\. Finally, replace *your\_password* with a secure password\.
+In the preceding example, replace *user\_name* with the name of your user\. Then, replace *db\_name* with the name of your target database\. Finally, replace *your\_password* with a secure password\.

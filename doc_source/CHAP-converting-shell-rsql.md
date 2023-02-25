@@ -6,6 +6,14 @@ AWS SCT extracts Teradata BTEQ commands from your shell scripts and converts the
 
 You can also use AWS SCT to convert files with Teradata BTEQ ETL scripts to Amazon Redshift RSQL\. For more information, see [Converting Teradata BTEQ scripts to Amazon Redshift RSQL with AWS SCT](CHAP-converting-bteq-rsql.md)\.
 
+**Topics**
++ [Adding shell scripts with embedded Teradata BTEQ commands to your AWS SCT project](#CHAP-converting-shell-rsql-create)
++ [Configuring substitution variables in shell scripts with embedded Teradata BTEQ commands with AWS SCT](#CHAP-converting-shell-rsql-variables)
++ [Converting shell scripts with embedded Teradata BTEQ commands with AWS SCT](#CHAP-converting-shell-rsql-convert)
++ [Managing shell scripts with embedded Teradata BTEQ commands with AWS SCT](#CHAP-converting-shell-rsql-manage)
++ [Creating an assessment report for a shell script conversion with AWS SCT](#CHAP-converting-shell-rsql-assessment)
++ [Editing and saving your converted shell scripts with AWS SCT](#CHAP-converting-shell-rsql-save)
+
 ## Adding shell scripts with embedded Teradata BTEQ commands to your AWS SCT project<a name="CHAP-converting-shell-rsql-create"></a>
 
 You can add multiple scripts to a single AWS SCT project\.
