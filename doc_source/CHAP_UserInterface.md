@@ -15,7 +15,7 @@ Use the following topics to help you work with the AWS SCT user interface\. For 
 + [Creating and reviewing the database migration assessment report](#CHAP_UserInterface.AssessmentReport)
 + [Converting your schema](#CHAP_UserInterface.Converting)
 + [Applying the converted schema to your target DB instance](#CHAP_UserInterface.ApplyingConversion)
-+ [Storing AWS service profiles in the AWS SCT](#CHAP_UserInterface.Profiles)
++ [Storing AWS service profiles in AWS SCT](#CHAP_UserInterface.Profiles)
 + [Using AWS Secrets Manager](#CHAP_UserInterface.SecretsManager)
 + [Storing database passwords](#CHAP_UserInterface.StoringPasswords)
 + [Using the UNION ALL view for projects with partitioned tables](#CHAP_UserInterface.UnionAllView)
@@ -385,7 +385,7 @@ The following procedure overwrites the existing target schema\. Be careful not t
 
    The converted schema is applied to the target DB instance\.
 
-## Storing AWS service profiles in the AWS SCT<a name="CHAP_UserInterface.Profiles"></a>
+## Storing AWS service profiles in AWS SCT<a name="CHAP_UserInterface.Profiles"></a>
 
 You can store your AWS credentials in AWS SCT\. AWS SCT uses your credentials when you use features that integrate with AWS services\. For example, AWS SCT integrates with Amazon S3, AWS Lambda, Amazon Relational Database Service \(Amazon RDS\), and AWS Database Migration Service \(AWS DMS\)\. 
 
@@ -447,7 +447,7 @@ The following permissions are required for accessing your Amazon S3 bucket from 
 + `s3:ListBucket` – to return up to 1,000 objects from your Amazon S3 bucket\.
 + `s3:GetObject` – to retrieve objects from your Amazon S3 bucket\.
 
-The following code example shows you how to grant these permissions to your IAM user\.
+The following code example shows you how to grant these permissions to your user\.
 
 ```
 {
@@ -473,7 +473,7 @@ The following code example shows you how to grant these permissions to your IAM 
 
 AWS SCT can use database credentials that you store in AWS Secrets Manager\. You can fill in all values in the database connection dialog box from Secrets Manager\. To use Secrets Manager, make sure that you store AWS profiles in the AWS Schema Conversion Tool\.
 
-For more information about using AWS Secrets Manager, see [What is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\. For more information about storing AWS profiles, see [Storing AWS service profiles in the AWS SCT](#CHAP_UserInterface.Profiles)\.
+For more information about using AWS Secrets Manager, see [What is AWS Secrets Manager?](https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the *AWS Secrets Manager User Guide*\. For more information about storing AWS profiles, see [Storing AWS service profiles in AWS SCT](#CHAP_UserInterface.Profiles)\.
 
 **To retrieve database credentials from Secrets Manager**
 

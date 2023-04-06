@@ -12,7 +12,7 @@ You can use AWS SCT to convert schemas, code objects, and application code from 
 
 ## Privileges for Azure SQL Database as a source<a name="CHAP_Source.AzureSQL.Permissions"></a>
 
-The privileges required for Azure SQL Database as a source are listed following: 
+The privileges required for Azure SQL Database as a source are as follows: 
 + VIEW DEFINITION 
 + VIEW DATABASE STATE 
 

@@ -12,6 +12,7 @@ You can use AWS SCT to create a multiserver assessment report for the following 
 |  Amazon Redshift  |  Amazon Redshift  | 
 |  Azure SQL Database  |  Aurora MySQL, Aurora PostgreSQL, MySQL, PostgreSQL  | 
 |  Azure Synapse Analytics  |  Amazon Redshift  | 
+|  BigQuery  |  Amazon Redshift  | 
 |  Greenplum  |  Amazon Redshift  | 
 |  IBM Db2 for z/OS  |  Amazon Aurora MySQL\-Compatible Edition \(Aurora MySQL\), Amazon Aurora PostgreSQL\-Compatible Edition \(Aurora PostgreSQL\), MySQL, PostgreSQL  | 
 |  IBM Db2 LUW  |  Aurora MySQL, Aurora PostgreSQL, MariaDB, MySQL, PostgreSQL  | 
@@ -67,13 +68,13 @@ With the **Add mapping rules to these projects and save conversion statistics fo
 To provide connection parameters as input for multiserver assessment report, use a CSV file as shown in the following example\.
 
 ```
-Name,Description,Secret Manager Key,Server IP,Port,Service Name,Database name,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
-Sales,,,192.0.2.0,1521,pdb,,ORACLE,Q4_2021;FY_2021,,user,password,,,,,POSTGRESQL;AURORA_POSTGRESQL
-Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,MSSQL,customers.dbo,,user,password,,,,,AURORA_MYSQL
-HR,,,192.0.2.0,1433,,employees,MSSQL,employees.%,true,,,,,,,AURORA_POSTGRESQL
-Customers,,secret-name,,,,,MYSQL,customers,,,,,,,,AURORA_POSTGRESQL
-Analytics,,,198.51.100.0,8195,,STATISTICS,DB2LUW,BI_REPORTS,,user,password,,,,,POSTGRESQL
-Products,,,203.0.113.0,8194,,,TERADATA,new_products,,user,password,,,,,REDSHIFT
+Name,Description,Secret Manager Key,Server IP,Port,Service Name,Database name,BigQuery path,Source Engine,Schema Names,Use Windows Authentication,Login,Password,Use SSL,Trust store,Key store,SSL authentication,Target Engines
+Sales,,,192.0.2.0,1521,pdb,,,ORACLE,Q4_2021;FY_2021,,user,password,,,,,POSTGRESQL;AURORA_POSTGRESQL
+Marketing,,,ec2-a-b-c-d.eu-west-1.compute.amazonaws.com,1433,,target_audience,,MSSQL,customers.dbo,,user,password,,,,,AURORA_MYSQL
+HR,,,192.0.2.0,1433,,employees,,MSSQL,employees.%,true,,,,,,,AURORA_POSTGRESQL
+Customers,,secret-name,,,,,,MYSQL,customers,,,,,,,,AURORA_POSTGRESQL
+Analytics,,,198.51.100.0,8195,,STATISTICS,,DB2LUW,BI_REPORTS,,user,password,,,,,POSTGRESQL
+Products,,,203.0.113.0,8194,,,,TERADATA,new_products,,user,password,,,,,REDSHIFT
 ```
 
 The preceding example uses a semicolon to separate the two schema names for the `Sales` database\. It also uses a semicolon to separate the two target database migration platforms for the `Sales` database\.
@@ -100,9 +101,11 @@ AWS SCT ignores the **Secret Manager Key** parameter if you include **Server IP*
 + **Port** – The port used to connect to your source database server\.
 + **Service Name** – If you use a service name to connect to your Oracle database, the name of the Oracle service to connect to\. 
 + **Database name** – The database name\. For Oracle databases, use the Oracle System ID \(SID\)\.
++ **BigQuery path** – the path to the service account key file for your source BigQuery database\. For more information about creating this file, see [Privileges for BigQuery as a source](CHAP_Source.BigQuery.md#CHAP_Source.BigQuery.Permissions)\.
 + **Source Engine** – The type of your source database\. Use one of the following values:
   + **AZURE\_MSSQL** for an Azure SQL Database\.
   + **AZURE\_SYNAPSE** for an Azure Synapse Analytics database\.
+  + **GOOGLE\_BIGQUERY** for a BigQuery database\.
   + **DB2ZOS** for an IBM Db2 for z/OS database\.
   + **DB2LUW** for an IBM Db2 LUW database\.
   + **GREENPLUM** for a Greenplum database\.
@@ -118,7 +121,7 @@ AWS SCT ignores the **Secret Manager Key** parameter if you include **Server IP*
   + **VERTICA** for a Vertica database\.
 + **Schema Names** – The names of the database schemas to include in the assessment report\.
 
-  For Azure SQL Database, Azure Synapse Analytics, Netezza, SAP ASE, Snowflake, and SQL Server, use the following format of the schema name:
+  For Azure SQL Database, Azure Synapse Analytics, BigQuery, Netezza, SAP ASE, Snowflake, and SQL Server, use the following format of the schema name:
 
   `db_name.schema_name`
 

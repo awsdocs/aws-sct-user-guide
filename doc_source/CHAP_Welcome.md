@@ -62,7 +62,7 @@ AWS SCT supports conversions of the following extract, transform, and load \(ETL
 | Teradata FastLoad job scripts | Amazon Redshift RSQL | 
 | Teradata MultiLoad job scripts | Amazon Redshift RSQL | 
 
-AWS SCT supports the following big data framework migrations\. For more information, see [Using Apache Hadoop as a source](CHAP_Source.Hadoop.md)\. 
+AWS SCT supports the following big data framework migrations\. For more information, see [Migrating big data frameworks](CHAP-migrating-big-data.md)\. 
 
 
 ****  
@@ -71,6 +71,7 @@ AWS SCT supports the following big data framework migrations\. For more informat
 | --- | --- | 
 |  Apache Hive \(version 0\.13\.0 and later\)  |  Hive on Amazon EMR  | 
 |  Apache HDFS  |  Amazon S3 or HDFS on Amazon EMR  | 
+|  Apache Oozie  |  AWS Step Functions  | 
 
 ## Schema conversion overview<a name="CHAP_Welcome.Overview"></a>
 

@@ -2,20 +2,9 @@
 
 Find information on best practices and options for using the AWS Schema Conversion Tool \(AWS SCT\)\. 
 
-## Configuring conversion performance and memory consumption options<a name="CHAP_BestPractices.Memory"></a>
-
-You can configure AWS SCT with different memory performance settings\. Increasing memory speeds up the performance of your conversion, but uses more memory resources on your desktop\.
-
-To set your memory management option, choose **Global settings** from the **Settings** menu, and choose **Performance and memory**\. For **Performance and memory management policy**, choose one of the following options:
-+ **Faster conversion, larger memory consumption** – This option optimizes for speed of the conversion, but might require more memory for the object reference cache\.
-+ **Slower conversion, lower memory consumption** – This option minimizes the amount of memory used, but results in a slower conversion\. Use this option if your desktop has a limited amount of memory\.
-+ **Balance speed and memory consumption** – This option optimizes a balance between memory use and conversion speed\.
-
-After you select an option, choose **Apply**, and then choose **OK**\.
-
 ## Configuring additional memory<a name="CHAP_BestPractices.JVM"></a>
 
-For converting large database schemas, such as a database with 3,500 stored procedures, you can configure the amount of memory available to the AWS Schema Conversion Tool\. 
+To convert large database schemas, such as a database with 3,500 stored procedures, you can configure the amount of memory available to the AWS Schema Conversion Tool\. 
 
 **To modify the amount of memory that AWS SCT consumes**
 
@@ -23,13 +12,15 @@ For converting large database schemas, such as a database with 3,500 stored proc
 
 1. Choose **Edit config file** and choose the text editor to open the configuration file\.
 
-1. Edit the `JavaOptions` section to set the minimum and maximum memory available\. The following example sets the minimum to 4 GB and the maximum to 40 GB\.
+1. Edit the `JavaOptions` section to set the minimum and maximum memory available\. The following example sets the minimum to four GB and the maximum to 40 GB\.
 
    ```
    1. [JavaOptions]
    2. -Xmx40960M
    3. -Xms4096M
    ```
+
+   We recommend that you set the minimum memory available to at least four GB\.
 
 1. Save the configuration file, choose **OK**, and restart AWS SCT to apply changes\.
 
@@ -44,6 +35,12 @@ AWS SCT uses the project folder to store the project files, save assessment repo
 1. For **Default project file path**, enter the path to the default project folder\.
 
 1. Choose **Apply**, and then choose **OK**\.
+
+## Increasing the data migration speed<a name="CHAP_BestPractices.Extractors"></a>
+
+To migrate large data sets, such as a set of tables with more than 1 TB of data, you might want to increase the migration speed\. When you use data extraction agents, the speed of data migrations depends on various factors\. These factors include the number of slices in your target Amazon Redshift cluster, size of a chunk file in your migration task, available RAM on the PC where you run your data extraction agents, and so on\.
+
+To increase the data migration speed, we recommend running several test migration sessions with small data sets of your production data\. Also, we recommend that you run your data extraction agents on a PC with an SSD that has at least 500 GB of size\. During these test sessions, change different migration parameters monitor your disk utilization to find out the configuration that ensures the maximum data migration speed\. Then, use this configuration to migrate your whole data set\.
 
 ## Increasing logging information<a name="CHAP_BestPractices.Logging"></a>
 

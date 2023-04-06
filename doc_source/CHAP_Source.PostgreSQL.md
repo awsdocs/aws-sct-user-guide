@@ -15,7 +15,7 @@ For more information, see the following sections:
 
 ## Privileges for PostgreSQL as a source database<a name="CHAP_Source.PostgreSQL.Permissions"></a>
 
-The privileges required for PostgreSQL as a source are listed following: 
+The privileges required for PostgreSQL as a source are as follows: 
 + CONNECT ON DATABASE *<database\_name>* 
 + USAGE ON SCHEMA *<database\_name>* 
 + SELECT ON ALL TABLES IN SCHEMA *<database\_name>* 
@@ -53,7 +53,7 @@ Use the following procedure to connect to your PostgreSQL source database with t
 
 ## Privileges for MySQL as a target database<a name="CHAP_Source.PostgreSQL.ConfigureMySQL"></a>
 
-The privileges required for MySQL as a target when you migrate from PostgreSQL are listed following:
+The privileges required for MySQL as a target when you migrate from PostgreSQL are as follows:
 + CREATE ON \*\.\*
 + ALTER ON \*\.\*
 + DROP ON \*\.\*
@@ -93,6 +93,4 @@ GRANT CREATE TEMPORARY TABLES ON AWS_POSTGRESQL_EXT_DATA.* TO 'user_name';
 
 In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
-To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
-
-To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+To use Amazon RDS for MySQL or Aurora MySQL as a target, set the `lower_case_table_names` parameter to `1`\. This value means that the MySQL server handles identifiers of such object names as tables, indexes, triggers, and databases as case insensitive\. If you have turned on binary logging in your target instance, then set the `log_bin_trust_function_creators` parameter to `1`\. In this case, you don't need to use the `DETERMINISTIC`, `READS SQL DATA` or `NO SQL` characteristics to create stored functions\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.

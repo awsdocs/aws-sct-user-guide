@@ -2,6 +2,59 @@
 
 This section contains release notes for AWS SCT, starting with version 1\.0\.640\.
 
+## Release notes for AWS SCT Build 671<a name="CHAP_ReleaseNotes.671"></a>
+
+
+| Source | Target | What's new, enhanced, or fixed | 
+| --- | --- | --- | 
+| All | All | Fixed an error where AWS SCT didn't have permissions to save a project file in Windows\.  | 
+| All | All | Updated the following AWS SCT command line interface \(CLI\) templates\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html) For more information about the AWS SCT CLI templates, see [Getting CLI scenarios](CHAP_Reference.md#CHAP_Reference.Scenario)\.  | 
+| All | Amazon Redshift | Fixed an error where AWS SCT didn't create an extension pack in the command line interface \(CLI\)\.  | 
+| All | Amazon Redshift | Resolved an issue where AWS SCT data extraction agents didn't use the AWS Snowball configuration in the command line interface \(CLI\)\.  | 
+| Apache Oozie | AWS Step Functions | Implemented support for the migration from Apache Oozie to AWS Step Functions in the command line interface \(CLI\) mode\. After migrating your Hadoop workloads to Amazon EMR, you can now migrate the workflow scheduling system to the AWS Cloud\. For more information, see [Converting Apache Oozie to AWS Step Functions](big-data-oozie.md)\.   | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed a resolver error that occurred for tables and aliases\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `INDEX ON` clauses\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Improved the conversion of the following objects to avoid unexpected action items\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved a parsing error that occurred for procedures\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed an error where AWS SCT used incorrect names of temporary tables in the converted code for `OBJECT_ID` functions\.  | 
+| Azure SQL Database Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved issues where action item 9996 unexpectedly appears during the conversion of the following code elements\. [\[See the AWS documentation website for more details\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/CHAP_ReleaseNotes.html)  | 
+|  BigQuery  | Amazon Redshift | Added support for BigQuery as a source for the multiserver assessment process\. For more information, see [Creating a multiserver assessment report](CHAP_AssessmentReport.Multiserver.md)\.  | 
+| Hadoop | Amazon EMR | Updated the version of the supported Apache Hive JDBC driver that you use to connect to your source databases\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Enhanced the source metadata loader to make sure that AWS SCT loads source database objects such as primary keys, implicit indexes, and so on\.  | 
+| IBM Db2 for z/OS | Aurora PostgreSQL PostgreSQL | Fixed a resolver error that occurred for columns in implicit cursors\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Implemented the ability to keep the formatting of column names, expressions, and clauses in DML statements in the converted code\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Implemented the conversion of cross schema foreign keys\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `LENGTH` and `VARCHAR` functions\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `LABEL ON` and `DECLARE CONDITION` statements\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Implemented the conversion of `SELECT` statements with `OPTIMIZE FOR` clauses\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of `CREATE TABLE` statements by adding default values for all supported data types\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of `INCREMENT BY` attributes\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of partitioned tables by adding the ability to exclude table partitions from the conversion scope\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of primary key definitions with `INCLUDE` columns\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of the `SUBSTRING` function\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of `SET` and `DECLARE HANDLER FOR` statements\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of variable data types\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the conversion of `XMLTABLE` functions\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Improved the migration flow by implementing the following order of applying converted objects to the target database: tables, partitions, indexes, constraints, foreign keys, and triggers\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Resolved an issue where action item 9996 unexpectedly appears during the conversion of comments in the source code\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Resolved an issue where action item 9997 unexpectedly appears during the conversion of aliases in `FROM` clauses\.  | 
+|  IBM Db2 for z/OS  | Aurora PostgreSQL PostgreSQL | Resolved an issue where action item 9997 unexpectedly appears during the conversion of cursor aliases\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Fixed an error where the converted code returned different results for `SELECT` statements with `ORDER BY` clauses\. Because SQL Server and PostgreSQL treat `NULL` values differently, the converted code now includes `NULLS FIRST` or `NULLS LAST` clauses that make sure that your converted code returns results in the same order as your source code\.  | 
+| Microsoft SQL Server | Aurora PostgreSQL PostgreSQL | Resolved an issue where data types in table functions were incorrectly converted\.  | 
+| MySQL | Amazon RDS for MySQL | Resolved an issue where single quotation marks \(`' '`\) unexpectedly appeared around the database object names in the converted code\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Added new views to the extension pack to emulate Oracle system views that you use to display information about partitions and subpartitions\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Updated two functions in the extension pack to add schema names as arguments in the converted code\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Fixed an error where AWS SCT didn't use the correct parameters for the conversion of C\+\+ applications after refreshing the application code in the user interface\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved the conversion of `CREATE TYPE` statements to avoid unexpected exceptions\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Improved the conversion of nested tables\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Resolved a parsing error that occurred for package objects\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Resolved an issue where AWS SCT unexpectedly trimmed object names in the converted code when the name length exceeds 60 characters\.  | 
+| Oracle | Aurora PostgreSQL PostgreSQL | Resolved an issue where row\-level triggers for partitioned tables were incorrectly converted\.  | 
+| Oracle DW | Amazon Redshift | Implemented support of automatic table partitioning for data migration\. To speed up data migration, AWS SCT can automatically partition large tables or partitions based on the values in the `ROWID` pseudocolumn\. For more information, see [Using native partitioning](agents.dw.md#agents.NativePartitioning)\.  | 
+| Teradata | Amazon Redshift | Implemented support of native `MERGE` commands in the converted Amazon Redshift code\. For more information about the `MERGE` command in Amazon Redshift, see [MERGE](https://docs.aws.amazon.com/redshift/latest/dg/r_MERGE.html) in the *Amazon Redshift Database Developer Guide*\.  | 
+| Teradata | Amazon Redshift | Improved the conversion of `DELETE` and `UPDATE` statements that don't use explicit table names\.  | 
+| Teradata | Amazon Redshift | Resolved an issue where `IN` and `NOT IN` statements were incorrectly converted\.  | 
+
 ## Release notes for AWS SCT Build 670<a name="CHAP_ReleaseNotes.670"></a>
 
 

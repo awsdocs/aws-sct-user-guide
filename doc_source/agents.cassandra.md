@@ -56,7 +56,7 @@ Other versions of Cassandra aren't supported\.
 
 ### Amazon S3 settings<a name="agents.cassandra.prereqs.s3"></a>
 
-When the AWS SCT data extraction agent runs, it reads data from your clone data center and writes it to an Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose Global Settings to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+When the AWS SCT data extraction agent runs, it reads data from your clone data center and writes it to an Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose Global Settings to create a new profile\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 ### Amazon EC2 instance for clone data center<a name="agents.cassandra.prereqs.ec2"></a>
 
@@ -184,11 +184,9 @@ To migrate data from your source database, configure your Cassandra user\.
 
 ### Configure your target database user<a name="agents.cassandra.prereqs.target-db-user"></a>
 
-Before you migrate data to your target Amazon DynamoDB database, configure a new IAM user\.
+Before you migrate data to your target Amazon DynamoDB database, configure the required IAM resources\.
 
-**To configure an IAM user**
-
-1. Create a new IAM user\. For more information, see [Creating an IAM user in your AWS account](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_users_create.html) in the *IAM User Guide*\.
+**To configure IAM resources**
 
 1. Create an IAM policy that provides access to your Amazon DynamoDB database\. Make sure that your IAM policy includes the following permissions\.
 
@@ -237,8 +235,6 @@ Before you migrate data to your target Amazon DynamoDB database, configure a new
    }
    ```
 
-   Attach this IAM policy to your IAM user\. For more information, see [Creating IAM policies](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create.html) in the *IAM User Guide*\.
-
 1. Create an IAM policy that provides access to your Amazon S3 bucket\. Make sure that your IAM policy includes the following permissions\.
 
    ```
@@ -259,8 +255,6 @@ Before you migrate data to your target Amazon DynamoDB database, configure a new
        ]
    }
    ```
-
-   Attach this IAM policy to your IAM user\.
 
 1. Create an IAM policy that provides access to AWS DMS\. Make sure that your IAM policy includes the following permissions\.
 
@@ -363,8 +357,6 @@ Before you migrate data to your target Amazon DynamoDB database, configure a new
        ]
    }
    ```
-
-   Attach this IAM policy to your IAM user\.
 
 1. Create an IAM role that allows AWS DMS to assume and grant access to your target DynamoDB tables\. The minimum set of access permissions is shown in the following IAM policy\.
 

@@ -9,7 +9,7 @@ To emulate Microsoft SQL Server database functions in your converted MySQL code,
 
 ## Privileges for MySQL as a target database<a name="CHAP_Source.SQLServer.ToMySQL.ConfigureTarget"></a>
 
-The privileges required for MySQL as a target are listed following:
+The privileges required for MySQL as a target are as follows:
 + CREATE ON \*\.\*
 + ALTER ON \*\.\*
 + DROP ON \*\.\*
@@ -42,7 +42,6 @@ GRANT TRIGGER ON *.* TO 'user_name';
 GRANT CREATE ROUTINE ON *.* TO 'user_name';
 GRANT ALTER ROUTINE ON *.* TO 'user_name';
 GRANT EXECUTE ON *.* TO 'user_name';
-GRANT SELECT ON mysql.proc TO 'user_name';
 GRANT INSERT, UPDATE ON AWS_SQLSERVER_EXT.* TO 'user_name';
 GRANT INSERT, UPDATE, DELETE ON AWS_SQLSERVER_EXT_DATA.* TO 'user_name';
 GRANT CREATE TEMPORARY TABLES ON AWS_SQLSERVER_EXT_DATA.* TO 'user_name';
@@ -50,9 +49,13 @@ GRANT CREATE TEMPORARY TABLES ON AWS_SQLSERVER_EXT_DATA.* TO 'user_name';
 
 In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
-To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+If you use a MySQL database version 5\.7 or lower as a target, then run the following command\. For MySQL databases version 8\.0 and higher, this command is deprecated\.
 
-To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+```
+GRANT SELECT ON mysql.proc TO 'user_name';
+```
+
+To use Amazon RDS for MySQL or Aurora MySQL as a target, set the `lower_case_table_names` parameter to `1`\. This value means that the MySQL server handles identifiers of such object names as tables, indexes, triggers, and databases as case insensitive\. If you have turned on binary logging in your target instance, then set the `log_bin_trust_function_creators` parameter to `1`\. In this case, you don't need to use the `DETERMINISTIC`, `READS SQL DATA` or `NO SQL` characteristics to create stored functions\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 
 ## SQL Server to MySQL conversion settings<a name="CHAP_Source.SQLServer.ToMySQL.ConversionSettings"></a>
 
@@ -61,7 +64,7 @@ To edit SQL Server to MySQL conversion settings, in AWS SCT choose **Settings**,
 SQL Server to MySQL conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To allow your source SQL Server database to store the output of `EXEC` in a table\. AWS SCT creates temporary tables and an additional procedure to emulate this feature\. To use this emulation, select **Create additional routines for handling open datasets**\.

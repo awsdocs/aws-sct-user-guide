@@ -85,7 +85,7 @@ Use the following procedure to connect to your SAP ASE source database with the 
 
 ## Privileges for MySQL as a target database<a name="CHAP_Source.SAP.ConfigureMySQL"></a>
 
-The privileges required for MySQL as a target are listed following:
+The privileges required for MySQL as a target are as follows:
 + CREATE ON \*\.\*
 + ALTER ON \*\.\*
 + DROP ON \*\.\*
@@ -123,9 +123,7 @@ GRANT CREATE TEMPORARY TABLES ON AWS_SAPASE_EXT.* TO 'user_name';
 
 In the preceding example, replace *user\_name* with the name of your user\. Then, replace *your\_password* with a secure password\.
 
-To use Amazon RDS for MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
-
-To use Aurora MySQL as a target, set the `log_bin_trust_function_creators` parameter to true, and the `character_set_server` to `latin1`\. Also, set the `lower_case_table_names` parameter to true\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
+To use Amazon RDS for MySQL or Aurora MySQL as a target, set the `lower_case_table_names` parameter to `1`\. This value means that the MySQL server handles identifiers of such object names as tables, indexes, triggers, and databases as case insensitive\. If you have turned on binary logging in your target instance, then set the `log_bin_trust_function_creators` parameter to `1`\. In this case, you don't need to use the `DETERMINISTIC`, `READS SQL DATA` or `NO SQL` characteristics to create stored functions\. To configure these parameters, create a new DB parameter group or modify an existing DB parameter group\.
 
 ## SAP ASE to MySQL conversion settings<a name="CHAP_Source.SAP.MySQLConversionSettings"></a>
 
@@ -134,7 +132,7 @@ To edit SAP ASE to MySQL conversion settings, choose **Settings**, and then choo
 SAP ASE to MySQL conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To use the exact names of the source database objects in the converted code\.
@@ -168,7 +166,7 @@ To edit SAP ASE to PostgreSQL conversion settings, choose **Settings**, and then
 SAP ASE to PostgreSQL conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To define the template to use for the schema names in the converted code\. For **Schema name generation template**, choose one of the following options:

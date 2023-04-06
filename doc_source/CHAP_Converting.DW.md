@@ -1,10 +1,11 @@
 # Converting data warehouse schemas to Amazon Redshift using AWS SCT<a name="CHAP_Converting.DW"></a>
 
-The AWS Schema Conversion Tool automates much of the process of converting your data warehouse schema to an Amazon Redshift database schema\. Because the source and target database engines can have many different features and capabilities, AWS SCT attempts to create an equivalent schema in your target database wherever possible\. If no direct conversion is possible, AWS SCT provides an assessment report with a list of possible actions for you to take\. Using AWS SCT, you can manage keys, map data types and objects, and create manual conversions\.
+The AWS Schema Conversion Tool \(AWS SCT\) automates much of the process of converting your data warehouse schema to an Amazon Redshift database schema\. Because the source and target database engines can have many different features and capabilities, AWS SCT attempts to create an equivalent schema in your target database wherever possible\. If no direct conversion is possible, AWS SCT provides an assessment report with a list of possible actions for you to take\. Using AWS SCT, you can manage keys, map data types and objects, and create manual conversions\.
 
 AWS SCT can convert the following data warehouse schemas to Amazon Redshift\.
 + Amazon Redshift
 + Azure Synapse Analytics \(version 10\)
++ BigQuery
 + Greenplum Database \(version 4\.3\)
 + Microsoft SQL Server \(version 2008 and later\)
 + Netezza \(version 7\.0\.3 and later\)
@@ -65,21 +66,28 @@ For this operation, AWS SCT needs permission to access the Amazon S3 bucket on y
 
 ```
 {
-    "Version": "2012-10-17",
-    "Statement": [
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:DeleteObject",
-                "s3:GetObject",
-                "s3:ListBucket",
-                "s3:PutObject"
-            ],
-            "Resource": [
-                "arn:aws:s3:::aws-sct-*"
-            ]
-        }
-    ]
+   "Version":"2012-10-17",
+   "Statement":[
+      {
+         "Effect":"Allow",
+         "Action":[
+            "s3:DeleteObject",
+            "s3:GetObject",
+            "s3:ListBucket",
+            "s3:PutObject"
+         ],
+         "Resource":[
+            "arn:aws:s3:::aws-sct-*"
+         ]
+      },
+      {
+         "Effect":"Allow",
+         "Action":[
+            "s3:ListAllMyBuckets"
+         ],
+         "Resource":""
+      }
+   ]
 }
 ```
 
@@ -254,7 +262,7 @@ The left pane contains key suggestions, and includes the confidence rating for e
 
 If the choices for the key don't look like what you expected, you can edit your edit your optimization strategies, and then retry the conversion\. For more information, see [Choosing optimization strategies and rules for use with AWS SCT](#CHAP_Converting.DW.Strategy)\. 
 
-### Related topics<a name="w44aac21c25c13"></a>
+### Related topics<a name="w35aac21c25c13"></a>
 + [Choose the best sort key](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-sort-key.html)
 + [Choose the best distribution style](https://docs.aws.amazon.com/redshift/latest/dg/c_best-practices-best-dist-key.html)
 

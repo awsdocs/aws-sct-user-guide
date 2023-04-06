@@ -8,7 +8,9 @@ AWS SCT supports as a target Amazon EMR version 6\.3\.0 and later\. Also, AWS SC
 
 **Topics**
 + [Prerequisites for using Apache Hadoop as a source](#CHAP_Source.Hadoop.Prerequisites)
-+ [Permissions for using HDFS as a source](#CHAP_Source.Hadoop.Permissions)
++ [Permissions for using Hive as a source](#CHAP_Source.Hadoop.Permissions)
++ [Permissions for using HDFS as a source](#CHAP_Source.Hadoop.PermissionsHDFS)
++ [Permissions for using HDFS as a target](#CHAP_Source.Hadoop.PermissionsHDFSTarget)
 + [Connecting to Apache Hadoop as a source](#CHAP_Source.Hadoop.Connecting)
 + [Connecting to your source Hive and HDFS services](#CHAP_Source.Hadoop.Hive)
 + [Connecting to Amazon EMR as a target](#CHAP_Source.Hadoop.Target)
@@ -16,18 +18,47 @@ AWS SCT supports as a target Amazon EMR version 6\.3\.0 and later\. Also, AWS SC
 ## Prerequisites for using Apache Hadoop as a source<a name="CHAP_Source.Hadoop.Prerequisites"></a>
 
 The following prerequisites are required to connect to Apache Hadoop with the AWS SCT CLI\.
-+ Create an Amazon S3 bucket to store data during the migration\. You can then copy data to Amazon EMR HDFS or use Amazon S3 as a data repository for your Hadoop workloads\. For more information, see [Creating a bucket](https://docs.aws.amazon.com/https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the *Amazon S3 User Guide*\.
++ Create an Amazon S3 bucket to store data during the migration\. You can then copy data to Amazon EMR HDFS or use Amazon S3 as a data repository for your Hadoop workloads\. For more information, see [Creating a bucket](https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html) in the *Amazon S3 User Guide*\.
 + Create an AWS Identity and Access Management \(IAM\) role with the `AmazonS3FullAccess` policy\. AWS SCT uses this IAM role to access your Amazon S3 bucket\.
-+ Take a note of your AWS secret key and AWS secret access key\. For more information about AWS access keys, see [Programmatic access](https://docs.aws.amazon.com/https://docs.aws.amazon.com/general/latest/gr/aws-sec-cred-types.html#access-keys-and-secret-access-keys) in the *AWS General Reference*\.
-+ Create and configure a target Amazon EMR cluster\. For more information, see [Getting started with Amazon EMR](https://docs.aws.amazon.com/https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-gs.html) in the *Amazon EMR Management Guide*\.
-+ \(Optional\) Create a Privacy Enhanced Mail \(PEM\) file for your source Hadoop cluster\.
++ Take a note of your AWS secret key and AWS secret access key\. For more information about AWS access keys, see [Managing access keys](https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_access-keys.html) in the *IAM User Guide*\.
++ Create and configure a target Amazon EMR cluster\. For more information, see [Getting started with Amazon EMR](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-gs.html) in the *Amazon EMR Management Guide*\.
++ Install the `distcp` utility on your source Apache Hadoop cluster\. Also, install the `s3-dist-cp` utility on your target Amazon EMR cluster\. Make sure that your database users have permissions to run these utilities\.
++ Configure the `core-site.xml` file in your source Hadoop cluster to use the s3a protocol\. To do so, set the `fs.s3a.aws.credentials.provider` parameter to one of the following values\.
+  + `org.apache.hadoop.fs.s3a.TemporaryAWSCredentialsProvider`
+  + `org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider`
+  + `org.apache.hadoop.fs.s3a.AnonymousAWSCredentialsProvider`
+  + `org.apache.hadoop.fs.s3a.auth.AssumedRoleCredentialProvider`
 
-## Permissions for using HDFS as a source<a name="CHAP_Source.Hadoop.Permissions"></a>
+  You can add the following code example into the `core-site.xml` file\.
 
-The permissions required for HDFS as a source are listed following:
+  ```
+  <property>
+    <name>fs.s3a.aws.credentials.provider</name>
+    <value>org.apache.hadoop.fs.s3a.SimpleAWSCredentialsProvider</value>
+  </property>
+  ```
+
+  The preceding example shows one of the four options from the preceding list of options\. If you don't set the `fs.s3a.aws.credentials.provider` parameter in the `core-site.xml` file, AWS SCT chooses the provider automatically\.
+
+## Permissions for using Hive as a source<a name="CHAP_Source.Hadoop.Permissions"></a>
+
+The permissions required for a Hive source user are as follows:
++ `READ` access to the source data folders and to the source Amazon S3 bucket
++ `READ+WRITE` access to the intermediate and target Amazon S3 buckets
+
+To increase the migration speed, we recommend that you run compaction for ACID\-transactional source tabes\.
+
+The permissions required for an Amazon EMR Hive target user are as follows:
++ `READ` access to the target Amazon S3 bucket
++ `READ+WRITE` access to the intermediate Amazon S3 bucket
++ `READ+WRITE` access to the target HDFS folders
+
+## Permissions for using HDFS as a source<a name="CHAP_Source.Hadoop.PermissionsHDFS"></a>
+
+The permissions required for HDFS as a source are as follows:
 + `EXECUTE` for the NameNode
 + `EXECUTE+READ` for all source folders and files that you include in the migration project
-+ `READ+WRITE` for the `tmp` directory in the NameNode to store files before the migration to Amazon S3
++ `READ+WRITE` for the `tmp` directory in the NameNode to run Spark jobs and store files before the migration to Amazon S3
 
 In HDFS, all operations require traversal access\. Traversal access demands the `EXECUTE` permission on all existing components of the path, except for the final path component\. For example, for any operation accessing `/foo/bar/baz`, your user must have `EXECUTE` permission on `/`, `/foo`, and `/foo/bar`\.
 
@@ -37,6 +68,12 @@ The following code example demonstrates how to grant `EXECUTE+READ` permissions 
 hadoop fs –chmod –R 744 /user/hdfs-data
 hadoop fs –chmod –R 766 /tmp
 ```
+
+## Permissions for using HDFS as a target<a name="CHAP_Source.Hadoop.PermissionsHDFSTarget"></a>
+
+The permissions required for Amazon EMR HDFS as a target are as follows:
++ `EXECUTE` for the NameNode of the target Amazon EMR cluster
++ `READ+WRITE` for the target HDFS folders where you will store data after migration
 
 ## Connecting to Apache Hadoop as a source<a name="CHAP_Source.Hadoop.Connecting"></a>
 
@@ -78,7 +115,7 @@ You can use Apache Hadoop as a source in AWS SCT version 1\.0\.670 or higher\. Y
 
 1. Add your source Hadoop cluster to the project\.
 
-   Use the `AddSourceCluster` command to connect to the source Hadoop cluster\. Make sure that you provide values for the following mandatory parameters: `-name`, `-host`, `-port`, and `-user`\. Other parameters are optional\.
+   Use the `AddSourceCluster` command to connect to the source Hadoop cluster\. Make sure that you provide values for the following mandatory parameters: `name`, `host`, `port`, and `user`\. Other parameters are optional\.
 
    The following code example adds the source Hadoop cluster\. This example sets `HADOOP_SOURCE` as a name of the source cluster\. Use this object name to add Hive and HDFS services to the project and create mapping rules\.
 
@@ -102,18 +139,20 @@ You can use Apache Hadoop as a source in AWS SCT version 1\.0\.670 or higher\. Y
 
 ## Connecting to your source Hive and HDFS services<a name="CHAP_Source.Hadoop.Hive"></a>
 
-You can connect to your source Hive and HDFS services with the AWS SCT CLI\. To do so, use the `AddSourceClusterHive` and `AddSourceClusterHDFS` commands\. You can use one of the following approaches\.
+You can connect to your source Hive and HDFS services with the AWS SCT CLI\. To connect to Apache Hive, use the Hive JDBC driver version 2\.3\.4 or higher\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.
+
+AWS SCT connects to Apache Hive with the `hadoop` cluster user\. To do so, use the `AddSourceClusterHive` and `AddSourceClusterHDFS` commands\. You can use one of the following approaches\.
 + Create a new SSH tunnel\.
 
-  For `-createTunnel`, enter **true**\. For `-host`, enter the internal IP address of your source Hive or HDFS service\. For `-port`, enter the service port of your Hive or HDFS service\.
+  For `createTunnel`, enter **true**\. For `host`, enter the internal IP address of your source Hive or HDFS service\. For `port`, enter the service port of your Hive or HDFS service\.
 
-  Next, enter your Hive or HDFS user name and password for `-user` and `-password`\. For more information about SSH tunnels, see [Set up an SSH tunnel to the primary node using local port forwarding](https://docs.aws.amazon.com/https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-ssh-tunnel-local.html) in the Amazon EMR Management Guide\.
+  Next, enter your Hive or HDFS credentials for `user` and `password`\. For more information about SSH tunnels, see [Set up an SSH tunnel to the primary node using local port forwarding](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-ssh-tunnel-local.html) in the Amazon EMR Management Guide\.
 + Use an existing SSH tunnel\.
 
-  For `-host`, enter **localhost**\. For `-port`, enter the local port from the SSH tunnel parameters\.
+  For `host`, enter **localhost**\. For `port`, enter the local port from the SSH tunnel parameters\.
 + Connect to your Hive and HDFS services directly\.
 
-  For `-host`, enter the IP address or hostname of your source Hive or HDFS service\. For `-port`, enter the service port of your Hive or HDFS service\. Next, enter your Hive or HDFS user name and password for `-user` and `-password`\.
+  For `host`, enter the IP address or hostname of your source Hive or HDFS service\. For `port`, enter the service port of your Hive or HDFS service\. Next, enter your Hive or HDFS credentials for `user` and `password`\.
 
 **To connect to Hive and HDFS in the AWS SCT CLI**
 
@@ -121,7 +160,7 @@ You can connect to your source Hive and HDFS services with the AWS SCT CLI\. To 
 
 1. Add your source Hive service to the project\.
 
-   Use the `AddSourceClusterHive` command to connect the source Hive service\. Make sure that you provide values for the following mandatory parameters: `-user`, `-password`, `-cluster`, `-name`, and `-port`\. Other parameters are optional\.
+   Use the `AddSourceClusterHive` command to connect the source Hive service\. Make sure that you provide values for the following mandatory parameters: `user`, `password`, `cluster`, `name`, and `port`\. Other parameters are optional\.
 
    The following code example creates a tunnel for AWS SCT to work with your Hive service\. This source Hive service runs on the same PC as AWS SCT\. This example uses the `HADOOP_SOURCE` source cluster from the previous example\.
 
@@ -161,9 +200,9 @@ You can connect to your source Hive and HDFS services with the AWS SCT CLI\. To 
 
 1. Add your source HDFS service to the project\.
 
-   Use the `AddSourceClusterHDFS` command to connect the source HDFS service\. Make sure that you provide values for the following mandatory parameters: `-user`, `-password`, `-cluster`, `-name`, and `-port`\. Other parameters are optional\.
+   Use the `AddSourceClusterHDFS` command to connect the source HDFS service\. Make sure that you provide values for the following mandatory parameters: `user`, `password`, `cluster`, `name`, and `port`\. Other parameters are optional\.
 
-   Make sure that your user has the required permissions to migrate data from your source HDFS service\. For more information, see [Permissions for using HDFS as a source](#CHAP_Source.Hadoop.Permissions)\.
+   Make sure that your user has the required permissions to migrate data from your source HDFS service\. For more information, see [Permissions for using Hive as a source](#CHAP_Source.Hadoop.Permissions)\.
 
    The following code example creates a tunnel for AWS SCT to work with your Apache HDFS service\. This example uses the `HADOOP_SOURCE` source cluster that you created before\.
 
@@ -205,7 +244,9 @@ You can connect to your source Hive and HDFS services with the AWS SCT CLI\. To 
 
 ## Connecting to Amazon EMR as a target<a name="CHAP_Source.Hadoop.Target"></a>
 
-You can connect to your target Amazon EMR cluster with the AWS SCT CLI\. To do so, you authorize inbound traffic and use SSH\. In this case, AWS SCT has all required permissions to work with your Amazon EMR cluster\. For more information, see [Before you connect](https://docs.aws.amazon.com/https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-ssh-prereqs.html) and [Connect to the primary node using SSH](https://docs.aws.amazon.com/https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html) in the Amazon EMR Management Guide\.
+You can connect to your target Amazon EMR cluster with the AWS SCT CLI\. To do so, you authorize inbound traffic and use SSH\. In this case, AWS SCT has all required permissions to work with your Amazon EMR cluster\. For more information, see [Before you connect](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-ssh-prereqs.html) and [Connect to the primary node using SSH](https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-connect-master-node-ssh.html) in the Amazon EMR Management Guide\.
+
+AWS SCT connects to Amazon EMR Hive with the `hadoop` cluster user\. To connect to Amazon EMR Hive, use the Hive JDBC driver version 2\.6\.2\.1002 or higher\. For more information, see [Downloading the required database drivers](CHAP_Installing.md#CHAP_Installing.JDBCDrivers)\.
 
 **To connect to Amazon EMR in the AWS SCT CLI**
 
@@ -234,7 +275,7 @@ You can connect to your target Amazon EMR cluster with the AWS SCT CLI\. To do s
    /
    ```
 
-   In the preceding example, enter your AWS resource names and Amazon EMR connection information\. This includes the IP address of your Amazon EMR cluster, AWS access key, AWS secret access key, and Amazon S3 bucket\. If needed, configure the value of the port variable\. Next, replace *emr\_user* and *emr\_password* with the name of your Amazon EMR user and the password for this user\. For *path\\name*, enter the name and path to the PEM file for your target Amazon EMR cluster\. For more information, see [Download PEM File for EMR Cluster Access](https://docs.aws.amazon.com/https://docs.aws.amazon.com/whitepapers/latest/teaching-big-data-skills-with-amazon-emr/download-pem-file-for-emr-cluster-access.html)\.
+   In the preceding example, enter your AWS resource names and Amazon EMR connection information\. This includes the IP address of your Amazon EMR cluster, AWS access key, AWS secret access key, and Amazon S3 bucket\. If needed, configure the value of the port variable\. Next, replace *emr\_user* and *emr\_password* with the name of your Amazon EMR user and the password for this user\. For *path\\name*, enter the name and path to the PEM file for your target Amazon EMR cluster\. For more information, see [Download PEM File for EMR Cluster Access](https://docs.aws.amazon.com/whitepapers/latest/teaching-big-data-skills-with-amazon-emr/download-pem-file-for-emr-cluster-access.html)\.
 
 1. Add your target Amazon S3 bucket to the project\.
 
@@ -299,4 +340,4 @@ You can connect to your target Amazon EMR cluster with the AWS SCT CLI\. To do s
 
    Next, replace *hdfs\_address* and *hdfs\_port* with the private IP address and port of the NameNode of your target HDFS service\.
 
-1. Save your CLI script\. Next, add mapping rules and migration commands\. For more information, see [Migrating big data frameworks](CHAP-migrating-big-data.md)\.
+1. Save your CLI script\. Next, add mapping rules and migration commands\. For more information, see [Migrating Apache Hadoop to Amazon EMR](big-data-hadoop.md)\.

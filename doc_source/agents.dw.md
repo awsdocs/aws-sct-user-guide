@@ -1,6 +1,8 @@
 # Migrating data from an on\-premises data warehouse to Amazon Redshift<a name="agents.dw"></a>
 
-You can use an AWS SCT agent to extract data from your on\-premises data warehouse and migrate it to Amazon Redshift\. The agent extracts your data and uploads the data to either Amazon S3 or, for large\-scale migrations, an AWS Snowball Edge device\. You can then use AWS SCT to copy the data to Amazon Redshift\.
+You can use an AWS SCT agent to extract data from your on\-premises data warehouse and migrate it to Amazon Redshift\. The agent extracts your data and uploads the data to either Amazon S3 or, for large\-scale migrations, an AWS Snowball Edge device\. You can then use an AWS SCT agent to copy the data to Amazon Redshift\.
+
+Alternatively, you can use AWS Database Migration Service \(AWS DMS\) to migrate data to Amazon Redshift\. The advantage of AWS DMS is the support of ongoing replication \(change data capture\)\. However, to increase the speed of data migration, use several AWS SCT agents in parallel\. According to our tests, AWS SCT agents migrate data faster than AWS DMS by 15–35 percent\. The difference in speed is due to data compression, support of migration of table partitions in parallel, and different configuration settings\. For more information, see [Using an Amazon Redshift database as a target for AWS Database Migration Service](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Redshift.html)\.
 
 Amazon S3 is a storage and retrieval service\. To store an object in Amazon S3, you upload the file you want to store to an Amazon S3 bucket\. When you upload a file, you can set permissions on the object and also on any metadata\.
 
@@ -57,7 +59,7 @@ Before you work with data extraction agents, store your Amazon S3 bucket informa
 
 ### Amazon S3 settings<a name="agents.S3Credentials"></a>
 
-After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+After your agents extract your data, they upload it to your Amazon S3 bucket\. Before you continue, you must provide the credentials to connect to your AWS account and your Amazon S3 bucket\. You store your credentials and bucket information in a profile in the global application settings, and then associate the profile with your AWS SCT project\. If necessary, choose **Global settings** to create a new profile\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 To migrate data into your target Amazon Redshift database, the AWS SCT data extraction agent needs permission to access the Amazon S3 bucket on your behalf\. To provide this permission, create an AWS Identity and Access Management \(IAM\) user with the following policy\.
 
@@ -121,7 +123,7 @@ For additional security, you can use AWS Identity and Access Management \(IAM\) 
 
 1. Create a new IAM role that has access to your Amazon S3 bucket\.
 
-1. Modify the trust section of this role to trust the user that you created before to assume the role\. In the following example, replace `111122223333:user/DataExtractionAgentName` with the name of your IAM user\.
+1. Modify the trust section of this role to trust the user that you created before to assume the role\. In the following example, replace `111122223333:user/DataExtractionAgentName` with the name of your user\.
 
    ```
    {
@@ -179,7 +181,7 @@ The AWS Schema Conversion Tool and the extraction agents can communicate through
 
 You can install several data extraction agents on a single host\. However, we recommend that you run one data extraction agent on one host\.
 
-To run your data extraction agent, make sure that you use a host with at least four vCPUs and 32 GB memory\.
+To run your data extraction agent, make sure that you use a host with at least four vCPUs and 32 GB memory\. Also, set the minimum memory available to AWS SCT to at least four GB\. For more information, see [Configuring additional memory](CHAP_BestPractices.md#CHAP_BestPractices.JVM)\.
 
 Optimal configuration and number of agent hosts depend on the specific situation of each customer\. Make sure that you consider such factors as amount of data to migrate, network bandwidth, time to extract data, and so on\. You can perform a proof of concept \(PoC\) first, and then configure your data extraction agents and hosts according to the results of this PoC\.
 
@@ -502,7 +504,7 @@ Use the following procedures to create, run, and monitor data extraction tasks\.
 
    To enter the path to your Google Cloud Storage bucket folder, choose **Advanced**\. For **Google CS bucket folder**, enter the bucket name and the folder name\.
 
-1. To assume a role for an IAM user that your data extraction agent uses, choose **Amazon S3 settings**\. For **IAM role**, enter the name of the role to use\. For **Region**, choose the AWS Region for this role\.
+1. To assume a role for your data extraction agent user, choose **Amazon S3 settings**\. For **IAM role**, enter the name of the role to use\. For **Region**, choose the AWS Region for this role\.
 
 1. Choose **Test task** to verify that you can connect to your working folder, Amazon S3 bucket, and Amazon Redshift data warehouse\. The verification depends on the migration mode you chose\. 
 

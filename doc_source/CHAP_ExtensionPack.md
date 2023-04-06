@@ -50,6 +50,10 @@ The AWS SCT extension pack for Amazon Aurora emulates mail sending, job scheduli
 + `lambda:CreateFunction` – to create a new Lambda function\.
 + `rds:AddRoleToDBCluster` – to associate an IAM role with your Aurora DB cluster\.
 
+The AWS SCT extension pack for Amazon Redshift emulates source data warehouse base functions that are required when applying converted objects to Amazon Redshift\. Before you apply your converted code to Amazon Redshift, you must apply the extension pack for Amazon Redshift\. To do so, include the `iam:SimulatePrincipalPolicy` action in your IAM policy\.
+
+AWS SCT uses the IAM Policy Simulator to check the required permissions for installing the Amazon Redshift extension pack\. The IAM Policy Simulator can display an error message even if you have correctly configured your \. This is a known issue of the IAM Policy Simulator\. Also, the IAM Policy Simulator displays an error message when you don't have the `iam:SimulatePrincipalPolicy` action in your IAM policy\. In these cases, you can ignore the error message and apply the extension pack using the extension pack wizard\. For more information, see [Applying the extension pack](#CHAP_ExtensionPack.DW.Installing)\.
+
 ## Using the extension pack schema<a name="CHAP_ExtensionPack.Schema"></a>
 
 When you convert your database or data warehouse schema, AWS SCT adds an additional schema to your target database\. This schema implements SQL system functions of the source database that are required when writing your converted schema to your target database\. This additional schema is called the extension pack schema\.
@@ -89,7 +93,7 @@ You can apply the AWS SCT extension pack using the extension pack wizard or when
 
 1. On the **AWS profile settings** page, do the following:
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. The **Skip this step for now** option is only available for online transaction processing \(OLTP\) databases\.
-   + If you are uploading a new library, then provide the credentials to connect to your AWS account\. Use this step only when you convert OLAP databases or ETL scripts\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to global settings** to configure of associate a different profile with your AWS SCT project\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+   + If you are uploading a new library, then provide the credentials to connect to your AWS account\. Use this step only when you convert OLAP databases or ETL scripts\. You can use your AWS Command Line Interface \(AWS CLI\) credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to global settings** to configure of associate a different profile with your AWS SCT project\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 1. If you are uploading a new library, then choose **I need to upload a library** on the **Library upload** page\. Use this step only when you convert OLAP databases or ETL scripts\. Next, provide the Amazon S3 path, and then choose **Upload library to S3**\.
 
@@ -103,7 +107,7 @@ You can apply the AWS SCT extension pack using the extension pack wizard or when
 
 **To apply the extension pack when applying the converted code**
 
-1. Specify the Amazon S3 bucket in your AWS service profile\. Use this step only when you convert OLAP databases or ETL scripts\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\.
+1. Specify the Amazon S3 bucket in your AWS service profile\. Use this step only when you convert OLAP databases or ETL scripts\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\.
 
    Make sure that your Amazon S3 bucket policy includes the following permissions:
 
@@ -119,6 +123,11 @@ You can apply the AWS SCT extension pack using the extension pack wizard or when
          {
            "Effect": "Allow",
            "Action": ["s3:PutObject"],
+           "Resource": ["*"]
+         },
+         {
+           "Effect": "Allow",
+           "Action": ["iam:SimulatePrincipalPolicy"],
            "Resource": ["*"]
          },
          {
@@ -170,7 +179,7 @@ The AWS service emulation features are supported only for databases installed an
 
 1. On the **AWS profile settings** page, do the following:
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 
-   + If you are installing AWS services, provide the credentials to connect to your AWS account\. You can use your AWS CLI credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
+   + If you are installing AWS services, provide the credentials to connect to your AWS account\. You can use your AWS CLI credentials if you have the AWS CLI installed\. You can also use credentials that you previously stored in a profile in the global application settings and associated with the project\. If necessary, choose **Navigate to Project Settings** to associate a different profile with the project\. If necessary, choose **Global Settings** to create a new profile\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\. 
 
 1. On the **Email Sending Service** page, do the following: 
    + If you are reinstalling the extension pack schema only, choose **Skip this step for now**, and then choose **Next**\. 

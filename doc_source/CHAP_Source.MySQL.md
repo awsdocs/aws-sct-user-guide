@@ -14,7 +14,7 @@ For more information, see the following sections:
 
 ## Privileges for MySQL as a source database<a name="CHAP_Source.MySQL.Permissions"></a>
 
-The privileges required for MySQL as a source are listed following: 
+The privileges required for MySQL as a source are as follows: 
 + SELECT ON \*\.\* 
 + SHOW VIEW ON \*\.\* 
 

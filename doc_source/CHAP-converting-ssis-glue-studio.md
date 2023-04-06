@@ -100,7 +100,7 @@ You can add multiple SSIS packages to a single AWS SCT project\.
 
 1. Choose **Add target** from the menu, and then choose **AWS Glue Studio**\.
 
-   To connect to AWS Glue Studio, AWS SCT uses your AWS profile\. For more information, see [Storing AWS service profiles in the AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\.
+   To connect to AWS Glue Studio, AWS SCT uses your AWS profile\. For more information, see [Storing AWS service profiles in AWS SCT](CHAP_UserInterface.md#CHAP_UserInterface.Profiles)\.
 
 1. Create a mapping rule, which includes your source SSIS package and your AWS Glue Studio target\. For more information, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\.
 

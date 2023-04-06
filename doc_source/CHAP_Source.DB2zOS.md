@@ -8,7 +8,7 @@ You can use AWS SCT to convert schemas, code objects, and application code from 
 
 ## Privileges for Db2 for z/OS as a source database<a name="CHAP_Source.DB2zOS.Permissions"></a>
 
-The privileges needed to connect to a Db2 for z/OS database and read system catalogs and tables are listed following:
+The privileges needed to connect to a Db2 for z/OS database and read system catalogs and tables are as follows:
 + SELECT ON SYSIBM\.LOCATIONS
 + SELECT ON SYSIBM\.SYSCHECKS
 + SELECT ON SYSIBM\.SYSCOLUMNS
@@ -81,7 +81,7 @@ Use the following procedure to connect to your Db2 for z/OS source database with
 
 ## Privileges for MySQL as a target database<a name="CHAP_Source.DB2zOS.ConfigureMySQL"></a>
 
-The privileges required for MySQL as a target are listed following:
+The privileges required for MySQL as a target are as follows:
 + CREATE ON \*\.\*
 + ALTER ON \*\.\*
 + DROP ON \*\.\*
@@ -157,12 +157,15 @@ To edit Db2 for z/OS to PostgreSQL conversion settings, choose **Settings**, and
 Db2 for z/OS to PostgreSQL conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To generate unique names for constraints in the target database\.
 
   In PostgreSQL, all constraint names that you use must be unique\. AWS SCT can generate unique names for constraints in the converted code by adding a prefix with the table name to the name of your constraint\. To make sure that AWS SCT generates unique names for your constraints, select **Generate unique names for constraints**\.
++ To keep the formatting of column names, expressions, and clauses in DML statements in the converted code\.
+
+  AWS SCT can keep the layout of column names, expressions, and clauses in DML statements in the similar position and order as in the source code\. To do so, select **Yes** for **Keep the formatting of column names, expressions, and clauses in DML statements**\.
 + To exclude table partitions from the conversion scope\.
 
   AWS SCT can skip all partitions of a source table during the conversion\. To do so, select **Exclude table partitions from the conversion scope**\.

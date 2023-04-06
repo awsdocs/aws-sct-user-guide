@@ -21,7 +21,7 @@ For more information, see the following\.
 
 ## Privileges for Oracle as a source<a name="CHAP_Source.Oracle.Permissions"></a>
 
-The privileges required for Oracle as a source are listed following: 
+The privileges required for Oracle as a source are as follows: 
 + CONNECT 
 + SELECT\_CATALOG\_ROLE 
 + SELECT ANY DICTIONARY 

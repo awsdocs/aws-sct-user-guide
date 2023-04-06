@@ -30,3 +30,4 @@ AWS Schema Conversion Tool \(AWS SCT\) can convert schemas from the following so
 
 **Big data sources**
 + [Using Apache Hadoop as a source](CHAP_Source.Hadoop.md)
++ [Using Apache Oozie as a source](CHAP_Source.Oozie.md)

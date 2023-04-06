@@ -67,6 +67,8 @@ To convert Informatica ETL scripts, make sure that you use AWS SCT version 1\.0\
 
    In the preceding example, replace *source\_user* and *target\_user* with the names of your database users\. Next, replace *source\_password* and *target\_password* with your passwords\. For *source\_address* and *target\_address*, enter the IP addresses of your source and target database servers\.
 
+   To connect to an Oracle database version 19 and higher, use the Oracle service name in the `AddSource` command\. To do so, add the `-connectionType` parameter and set its value to `'basic_service_name'`\. Then, add the `-servicename` parameter and set its value to your Oracle service name\. For more information about the `AddSource` command, see the [AWS Schema Conversion Tool CLI Reference](https://s3.amazonaws.com/publicsctdownload/AWS+SCT+CLI+Reference.pdf)\.
+
 1. Create a new AWS SCT mapping rule, which defines the target database engines for each source database schema\. For more information, see [Creating mapping rules in AWS SCT](CHAP_Mapping.md)\.
 
    The following code example creates a mapping rule that includes all source Oracle database schemas and defines PostgreSQL as a migration target\.
@@ -112,7 +114,7 @@ To convert Informatica ETL scripts, make sure that you use AWS SCT version 1\.0\
 
    ```
    ConfigureInformaticaConnectionsRedirect
-   	-treePath: 'ETL.INFA_TARGET.Files'
+   	-treePath: 'ETL.INFA_SOURCE.Files'
    	-connections: '{
    	"ConnectionNames": [
    	{

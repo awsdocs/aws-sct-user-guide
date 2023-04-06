@@ -57,17 +57,17 @@ To edit SQL Server Data Warehouse to Amazon Redshift conversion settings, choose
 SQL Server Data Warehouse to Amazon Redshift conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To set the maximum number of tables that AWS SCT can apply to your target Amazon Redshift cluster\.
 
-  For **Maximum number of tables for target Amazon Redshift cluster**, choose the number of tables that AWS SCT can apply to your Amazon Redshift cluster\.
+  For **The maximum number of tables for the target Amazon Redshift cluster**, choose the number of tables that AWS SCT can apply to your Amazon Redshift cluster\.
 
   Amazon Redshift has quotas that limit the use tables for different cluster node types\. If you choose **Auto**, AWS SCT determines the number of tables to apply to your target Amazon Redshift cluster depending on the node type\. Optionally, choose the value manually\. For more information, see [Quotas and limits in Amazon Redshift](https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html) in the *Amazon Redshift Cluster Management Guide*\.
 
   AWS SCT converts all your source tables, even if this is more than your Amazon Redshift cluster can store\. AWS SCT stores the converted code in your project and doesn't apply it to the target database\. If you reach the Amazon Redshift cluster quota for the tables when you apply the converted code, then AWS SCT displays a warning message\. Also, AWS SCT applies tables to your target Amazon Redshift cluster until the number of tables reaches the limit\.
-+ To migrate partitions of the source table to separate tables in Amazon Redshift\. To do so, select **Use Union all view** and enter the maximum number of target tables that AWS SCT can create for a single source table\.
++ To migrate partitions of the source table to separate tables in Amazon Redshift\. To do so, select **Use the UNION ALL view** and enter the maximum number of target tables that AWS SCT can create for a single source table\.
 
   Amazon Redshift doesn't support table partitioning\. To emulate this behavior and make queries run faster, AWS SCT can migrate each partition of your source table to a separate table in Amazon Redshift\. Then, AWS SCT creates a view that includes data from all these tables\.
 

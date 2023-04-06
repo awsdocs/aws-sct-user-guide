@@ -11,7 +11,7 @@ AWS SCT supports as a source Db2 LUW versions 9\.1, 9\.5, 9\.7, 10\.1, 10\.5, 11
 
 ## Privileges for Db2 LUW as a source<a name="CHAP_Source.DB2LUW.Permissions"></a>
 
-The privileges needed to connect to a Db2 LUW database, to check available privileges and read schema metadata for a source are listed following: 
+The privileges needed to connect to a Db2 LUW database, to check available privileges and read schema metadata for a source are as follows: 
 + Privilege needed to establish a connection:
   + CONNECT ON DATABASE
 + Privilege needed to run SQL statements:

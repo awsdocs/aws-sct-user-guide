@@ -294,7 +294,7 @@ You can monitor the AWS DMS agent logs by choosing **Show log**\. The log detail
 
 ## Permissions for running AWS DMS tasks<a name="agents.dms.Permissions"></a>
 
-To create, run, and manage AWS DMS tasks in AWS SCT, make sure that you grant the following required permissions to your IAM user:
+To create, run, and manage AWS DMS tasks in AWS SCT, make sure that you grant the following required permissions to your user:
 + `dms:CreateEndpoint` – to create an endpoint using the provided settings\.
 + `dms:CreateReplicationTask` – to create a replication task using the specified parameters\.
 + `dms:DeleteReplicationTask` – to delete the specified replication task\.
@@ -312,7 +312,7 @@ To create, run, and manage AWS DMS tasks in AWS SCT, make sure that you grant th
 + `logs:FilterLogEvents` – to filter the log events from the specified log group\.
 + `logs:GetLogEvents` – to see the log events from the specified log group\.
 
-The following code example shows you how to grant these permissions to your IAM user\.
+The following code example shows you how to grant these permissions to your user\.
 
 ```
 {

@@ -49,7 +49,7 @@ To edit Oracle to PostgreSQL conversion settings, choose **Settings** in AWS SCT
 Oracle to PostgreSQL conversion settings in AWS SCT include options for the following:
 + To limit the number of comments with action items in the converted code\.
 
-  For **How detailed should comments be in the converted SQL**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
+  For **Add comments in the converted code for the action items of selected severity and higher**, choose the severity of action items\. AWS SCT adds comments in the converted code for action items of the selected severity and higher\.
 
   For example, to minimize the number of comments in your converted code, choose **Errors only**\. To include comments for all action items in your converted code, choose **All messages**\.
 + To allow AWS SCT to convert Oracle materialized views to tables or materialized views on PostgreSQL\. For **Materialized view conversion as**, choose how to convert your source materialized views\.

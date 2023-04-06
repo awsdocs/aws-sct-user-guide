@@ -20,7 +20,7 @@ You can use AWS SCT to create an assessment report for the migration of schemas,
 
 ## Privileges for Microsoft SQL Server as a source<a name="CHAP_Source.SQLServer.Permissions"></a>
 
-The privileges required for Microsoft SQL Server as a source are listed following: 
+The privileges required for Microsoft SQL Server as a source are as follows: 
 + VIEW DEFINITION
 + VIEW DATABASE STATE
 

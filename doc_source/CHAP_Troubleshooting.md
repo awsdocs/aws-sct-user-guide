@@ -27,7 +27,7 @@ grant select any dictionary to min_privs;
 
 ## Assessment report warning message<a name="CHAP_Troubleshooting.WarningMessage"></a>
 
-To assess the complexity of converting to another database engine, AWS SCT requires access to objects in your source database\. When SCT can’t perform an assessment because problems were encountered during scanning, a warning message is issued that indicates overall conversion percentage is reduced\. Following are reasons why AWS SCT might encounter problems during scanning:
-+ The user account connected to the database doesn’t have access to all of the needed objects\. For more information about SCT required security permissions and privileges for your database, see [Sources for AWS SCT](CHAP_Source.md) for the appropriate source database section in this guide\.
+To assess the complexity of converting to another database engine, AWS SCT requires access to objects in your source database\. When AWS SCT encounters problems during scanning and can’t perform an assessment, a warning message is issued\. This message indicates that the overall conversion percentage is reduced\. Following are reasons why AWS SCT might encounter problems during scanning:
++ Your database user doesn’t have access to all of the needed objects\. For more information about AWS SCT required security permissions and privileges for your database, see [Sources for AWS SCT](CHAP_Source.md) for the appropriate source database section in this guide\.
 + An object cited in the schema no longer exists in the database\. To help resolve the issue, you can connect with SYSDBA permissions and check if the object is present in the database\. 
 + SCT is trying to assess an object that is encrypted\. 
