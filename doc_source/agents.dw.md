@@ -17,7 +17,7 @@ The following diagram shows the supported scenario\.
 ![\[Extraction agent architecture\]](http://docs.aws.amazon.com/SchemaConversionTool/latest/userguide/images/extraction-agents-art.png)
 
 Data extraction agents are currently supported for the following source data warehouses:
-+ Azure SQL Data Warehouse \(Azure Synapse\)
++ Azure Synapse Analytics
 + BigQuery
 + Greenplum Database \(version 4\.3\)
 + Microsoft SQL Server \(version 2008 and later\)

@@ -28,15 +28,15 @@ AWS SCT supports the following data warehouse conversions\.
 | Source data warehouse | Target data warehouse | 
 | --- | --- | 
 |  Amazon Redshift  |  Amazon Redshift  For more information, see [Using Amazon Redshift as a source](CHAP_Source.Redshift.md)\.   | 
-|  Azure Synapse Analytics \(version 10\)  |  Amazon Redshift  For more information, see [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)\.   | 
+|  Azure Synapse Analytics  |  Amazon Redshift  For more information, see [Using Azure Synapse Analytics as a source](CHAP_Source.AzureSynapse.md)\.   | 
 |  BigQuery  |  Amazon Redshift  For more information, see [Using BigQuery as a source](CHAP_Source.BigQuery.md)\.   | 
 |  Greenplum Database \(versions 4\.3 and 6\.21\)  |  Amazon Redshift  For more information, see [Using Greenplum Database as a source](CHAP_Source.Greenplum.md)\.   | 
 |  Microsoft SQL Server \(version 2008 and later\)  |  Amazon Redshift  For more information, see [Using SQL Server Data Warehouse as a source](CHAP_Source.SQLServerDW.md)\.   | 
 |  Netezza \(version 7\.0\.3 and later\)  |  Amazon Redshift  For more information, see [Using Netezza as a source](CHAP_Source.Netezza.md)\.   | 
 |  Oracle \(version 10\.1 and later\)  |  Amazon Redshift  For more information, see [Using Oracle Data Warehouse as a source](CHAP_Source.OracleDW.md)\.   | 
-|  Teradata \(version 13 and later\)  |  Amazon Redshift  For more information, see [Using Teradata as a source](CHAP_Source.Teradata.md)\.   | 
-|  Vertica \(version 9\.1 and 11\.0\)  |  Amazon Redshift  For more information, see [Using Vertica as a source](CHAP_Source.Vertica.md)\.   | 
 |  Snowflake \(version 3\)  |  Amazon Redshift  For more information, see [Using Snowflake as a source](CHAP_Source.Snowflake.md)\.   | 
+|  Teradata \(version 13 and later\)  |  Amazon Redshift  For more information, see [Using Teradata as a source](CHAP_Source.Teradata.md)\.   | 
+|  Vertica \(version 7\.2\.2 and later\)  |  Amazon Redshift  For more information, see [Using Vertica as a source](CHAP_Source.Vertica.md)\.   | 
 
 AWS SCT supports the following data NoSQL database conversions\. 
 

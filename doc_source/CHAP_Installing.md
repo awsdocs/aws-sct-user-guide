@@ -69,9 +69,9 @@ In order to detect any errors that could have been introduced when downloading o
 
 **To verify the AWS SCT distribution file using a checksum**
 
-1. Download the AWS SCT distribution file using the links in the Installing section\.
+1. Download the AWS SCT distribution file using the links in the Installing section\. For more information, see [Installing AWS SCT](#CHAP_Installing.Procedure)\.
 
-1. Download the latest checksum file, called [sha256Check\.txt](https://d2fk11eyrwr7ob.cloudfront.net/sha256Check.txt)\. For example, the file can appear like the following:
+1. Download the latest checksum file, called [sha256Check\.txt](https://d2fk11eyrwr7ob.cloudfront.net/sha256Check.txt)\. This file includes the checksums for the latest AWS SCT version\. For example, the file can appear as follows:
 
    ```
    Fedora   b4f5f66f91bfcc1b312e2827e960691c269a9002cd1371cf1841593f88cbb5e6
@@ -79,13 +79,13 @@ In order to detect any errors that could have been introduced when downloading o
    Windows  6e29679a3c53c5396a06d8d50f308981e4ec34bd0acd608874470700a0ae9a23
    ```
 
-1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, the command to run on the Linux operating system is the following:
+1. Run the SHA256 validation command for your operating system in the directory that contains the distribution file\. For example, run the following command in Linux\.
 
    ```
    shasum -a 256 aws-schema-conversion-tool-1.0.latest.zip
    ```
 
-1. Compare the results of the command with the value shown in the sha256Check\.txt file\. The two values should match\.
+1. Compare the results of the command with the value shown in the sha256Check\.txt file\. If the checksums match, then it is safe to run the distribution file\. If the checksums don't match, then don't run the distribution file, and [contact AWS Support](https://aws.amazon.com/contact-us/)\. 
 
 ### Verifying the AWS SCT RPM files on Fedora<a name="CHAP_Installing.InstallValidation.RPM"></a>
 
